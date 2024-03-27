@@ -1,0 +1,52 @@
+/* CORPO PAGINA */
+.sezioneCorpo 
+{
+    float: left;
+    width: 20%;
+    display: flex;
+    flex-direction: column;
+}
+
+.corpo1 {
+    height: 50%;
+    flex-direction: row;
+}
+.corpo2 {
+    height: 50%;
+    flex-direction: row;
+}
+
+/* OPZIONI MENU */
+.icona
+{
+    width: 60%;
+    height: 30%;
+    margin-left: 20%;
+}
+
+.icona img
+{
+    width: 95%;
+    height: 95%;
+    margin-left: 2.5%;
+}
+
+.didascalia
+{
+    text-align: center;
+    font-size: 250%;
+    font-family: Arial;
+    margin-top: 5%;
+}
+
+.icona:hover
+{
+    border-style: ridge;
+    border-width: 10px;
+    border-color: aqua;
+}
+
+.didascalia:hover
+{
+    color: aqua;
+}

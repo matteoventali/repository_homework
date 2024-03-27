@@ -1,0 +1,131 @@
+*{
+    margin: 0%;
+    box-sizing: border-box;
+    overflow: auto;
+}
+
+body, html
+{
+    height: 100%;
+    background-image: url("../img/sfondo.png");
+    background-size:100%;
+    background-position-y: 100%;
+    color: white;
+}
+
+.header
+{
+    height: 15%;
+    border-bottom: solid aqua;
+    overflow: hidden;
+}
+
+.corpo
+{
+    height: 80%;
+    overflow: auto;
+}
+
+.footer
+{
+    height: 5%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-top: solid aqua;
+}
+
+.header::after, .corpo:after, .footer::after
+{
+    content: "";
+    display: table;
+    clear: both;
+}
+
+.sezioneLogo
+{
+    float: left;
+    width: 10%;  
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.sezioneControlli
+{
+    float: left;
+    width: 10%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.sezioneTitolo
+{
+    float: left;
+    width: 80%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.logo
+{
+    height: 80%;
+}
+
+.home
+{
+    height: 100%;
+    width: 100%;
+    display: flex;
+    align-items:center;
+    justify-content: center;
+}
+
+.home img
+{
+    width: 40%;
+    height: 50%;
+}
+
+.home img:hover
+{
+    width: 70%;
+    height: 80%;
+}
+
+.sezioneTitolo p
+{
+    font-size: 500%;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}
+
+/* Transizione per rotazione palla */
+
+.sezioneLogo {
+    animation-name: rotazioneInfinita;
+    animation-duration: 8000ms;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+}
+
+@keyframes rotazioneInfinita {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+
+
+
+
+
+
+

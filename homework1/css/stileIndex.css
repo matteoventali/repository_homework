@@ -1,0 +1,80 @@
+/* CORPO PAGINA */
+.sezioneCorpo 
+{
+    float: left;
+    width: 20%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    /* Animazione per apparizione in cascata */
+    opacity:0;          
+    animation:apparizione ease-in 1;    /* Slow start */
+    animation-fill-mode:forwards;       /* Mantiene lo stile raggiunto (non scompare) */
+    animation-duration:1s;            /* Durata animazione */
+}
+
+/* OPZIONI MENU */
+.icona
+{
+    width: 60%;
+    height: 30%;
+    margin-left: 20%;
+    margin-top:50%;
+}
+
+.icona img
+{
+    width: 95%;
+    height: 95%;
+    margin-left: 2.5%;
+}
+
+.didascalia
+{
+    text-align: center;
+    font-size: 250%;
+    font-family: Arial;
+    margin-top: 5%;
+}
+
+.icona:hover
+{
+    border-style: ridge;
+    border-width: 10px;
+    border-color: aqua;
+}
+
+.didascalia:hover
+{
+    color: aqua;
+}
+
+/* Transizione per apparizione elementi in cascata */
+
+/* Definizione animazione */
+@keyframes apparizione { 
+    from { 
+        opacity:0;     /* Inizialmente l'elemento non esiste */ 
+    } 
+    to { 
+        opacity:1;     /* Poi appare */
+    } 
+}
+
+/* Di seguito vengono definiti i ritardi per l'apparizione delle varie sezioni */
+
+.sezioneCorpo.uno {
+  animation-delay: 0.1s;
+}
+
+.sezioneCorpo.due {
+  animation-delay: .3s;
+}
+
+.sezioneCorpo.tre {
+  animation-delay: .6s;
+}
+
+.sezioneCorpo.quattro {
+  animation-delay: .9s;
+}
