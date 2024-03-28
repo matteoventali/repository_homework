@@ -3,43 +3,52 @@
 {
     float: left;
     width: 20%;
+    height: 100%;
     display: flex;
-    flex-direction: column;
+    flex-direction: column;  
 }
 
 .corpo1 {
     height: 50%;
     flex-direction: row;
+    padding-top: 2.5%;
+    
 }
 .corpo2 {
     height: 50%;
     flex-direction: row;
+    padding-top: 2.5%;
 }
 
 /* OPZIONI MENU */
 .icona
 {
-    width: 60%;
-    height: 30%;
-    margin-left: 20%;
+    width: 75%;
+    height: 75%;
+    margin-left: 12.5%;
+    display:flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 0.5em 1em black;
+    border-radius: 10%;
 }
 
 .icona img
 {
-    width: 95%;
-    height: 95%;
-    margin-left: 2.5%;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;    
 }
 
 .didascalia
 {
     text-align: center;
-    font-size: 250%;
+    font-size: 200%;
     font-family: Arial, Helvetica, sans-serif;
-    margin-top: 5%;
+    margin-top: 4%;
 }
 
-.icona:hover
+.icona img:hover
 {
     border-style: ridge;
     border-width: 10px;
