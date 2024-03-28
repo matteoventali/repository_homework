@@ -10,7 +10,7 @@
     opacity:0;          
     animation:apparizione ease-in 1;    /* Slow start */
     animation-fill-mode:forwards;       /* Mantiene lo stile raggiunto (non scompare) */
-    animation-duration:1s;            /* Durata animazione */
+    animation-duration: 0.3s;            /* Durata animazione */
 }
 
 /* OPZIONI MENU */
@@ -68,13 +68,13 @@
 }
 
 .sezioneCorpo.due {
-  animation-delay: .3s;
+  animation-delay: 0.2s;
 }
 
 .sezioneCorpo.tre {
-  animation-delay: .6s;
+  animation-delay: 0.4s;
 }
 
 .sezioneCorpo.quattro {
-  animation-delay: .9s;
+  animation-delay: 0.6s;
 }

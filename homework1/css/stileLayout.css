@@ -50,6 +50,11 @@ body, html
     display: flex;
     justify-content: center;
     align-items: center;
+    /* Transazione rotazione palla */
+    animation-name: rotazioneInfinita;
+    animation-duration: 8000ms;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
 }
 
 .sezioneControlli
@@ -101,17 +106,11 @@ body, html
 .sezioneTitolo p
 {
     font-size: 500%;
+    margin: auto;
     font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
 }
 
-/* Transizione per rotazione palla */
-
-.sezioneLogo {
-    animation-name: rotazioneInfinita;
-    animation-duration: 8000ms;
-    animation-timing-function: linear;
-    animation-iteration-count: infinite;
-}
+/* Definizione animazione per rotazione palla */
 
 @keyframes rotazioneInfinita {
     from {
