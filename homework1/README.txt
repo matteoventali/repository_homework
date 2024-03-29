@@ -4,6 +4,7 @@ I file dell'homework sono organizzati secondo la seguente struttura:
 - html/ ---> directory che contiene i file html del sito web;
 - css/ ----> directory che contiene i file css del sito web;
 - img/ ----> directory che contiene le immagini sfruttate per la realizzazione del sito web.
+Il file di partenza per avviare il sito web e' html/index.html .
 
 L'obiettivo dell'homework e' la realizzazione di un sito web riguardo un torneo calcistico ad 8 squadre
 denominato Champions League. Il torneo e' un campionato che prevede girone d'andata e ritorno.
