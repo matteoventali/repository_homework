@@ -26,6 +26,7 @@ form
 
 input[type="submit"], input[type="reset"]
 {
+    text-align: center;
     color: blue;
     padding: 15px 25px;
     border-radius: 100px;
@@ -36,6 +37,7 @@ input[type="submit"], input[type="reset"]
     cursor: pointer;
     font-size: 100%;
     font-family: Arial, Helvetica;
+    margin-right: 2%;
 }
 
 .contenutoForm
@@ -52,9 +54,9 @@ input[type="submit"]:hover, input[type="reset"]:hover
 
 .rigaBottoni
 {
-    text-align: right;
     margin-top: 5%;
     margin-right: 5%;
+    display: flex;
 }
 
 form p
@@ -73,7 +75,6 @@ form p
 {
     display: flex;
     justify-content: center;
-    
 }
 
 input[type="text"], input[type="password"]
@@ -84,4 +85,25 @@ input[type="text"], input[type="password"]
     height: 80%;
     width: 45%;
     font-size: 50%;
+}
+
+.sezioneBottoni
+{
+    height: 100%;
+    width: 40%;
+    margin-left: 10%;
+}
+
+.sezioneErrore
+{
+    font-size: 60%;
+    display: inline;
+    width: 60%;
+}
+
+.sezioneErrore p
+{
+    display: inline-block;
+    background-color: white;
+    width: 100%;
 }
