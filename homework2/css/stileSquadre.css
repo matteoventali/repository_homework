@@ -1,0 +1,61 @@
+/* CORPO PAGINA */
+.sezioneCorpo 
+{
+    float: left;
+    width: 20%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;  
+}
+
+.corpo1 {
+    height: 50%;
+    flex-direction: row;
+    padding-top: 2.5%;
+    
+}
+.corpo2 {
+    height: 50%;
+    flex-direction: row;
+    padding-top: 2.5%;
+}
+
+/* OPZIONI MENU */
+.icona
+{
+    width: 75%;
+    height: 75%;
+    margin-left: 12.5%;
+    display:flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 0.5em 1em black;
+    border-radius: 10%;
+}
+
+.icona img
+{
+    width: 100%;
+    height: 100%;
+    object-fit: contain;    
+}
+
+.didascalia
+{
+    text-align: center;
+    font-size: 200%;
+    font-family: Arial, Helvetica, sans-serif;
+    margin-top: 4%;
+}
+
+.icona img:hover
+{
+    border-style: ridge;
+    border-width: 10px;
+    border-color: aqua;
+}
+
+.didascalia:hover
+{
+    color: aqua;
+}

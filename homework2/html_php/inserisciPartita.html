@@ -1,0 +1,85 @@
+<?xml version = "1.0" encoding="ISO-8859-1"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+    <head>
+        <title> CHAMPIONS LEAGUE </title>
+        <link type="text/css" rel="stylesheet" href="../css/stileLayout.css" />
+        <link type="text/css" rel="stylesheet" href="../css/stileNuovaPartita.css" />
+        <link rel="icon" type="image/png" href="../img/favicon.png" />
+    </head>
+
+    <body>
+        <!-- CONTENUTO HEADER PAGINA -->
+        <div class="header">
+            <div class="sezioneLogo">
+                <img class="logo"  alt="champions logo" src="../img/champions.png" />
+            </div>
+            <div class="sezioneTitolo">
+                <p>CHAMPIONS LEAGUE</p>
+            </div>
+            <div class="sezioneControlli">
+                <a class="home" href="index.php">
+                    <img  alt="home logo" src="../img/home.png" />
+                </a>
+            </div>
+        </div>
+
+        <!-- CONTENUTO CORPO PAGINA -->
+        <div class="corpo">
+            <form method="get" action="">
+                <div class="contenutoForm">
+                    <div class="riga">
+                        <p>Data partita <input name="data_partita" type="date" /></p> <br />
+                    </div>
+
+                    <div>
+                        <p>
+                            Squadra casa
+                            <select name="squadra_casa">
+                                <option value="default">Scegli squadra</option>
+                                <option value="real_madrid">Real Madrid</option>
+                                <option value="milan">Milan</option>
+                                <option value="liverool">Liverpool</option>
+                                <option value="bayern_monaco">Bayern Monaco</option>
+                                <option value="barcellona">Barcellona</option>
+                                <option value="inter">Inter</option>
+                                <option value="manchester_united">Manchester United</option>
+                                <option value="juventus">Juventus</option>
+                            </select>
+                        </p>
+                        <p>Goal casa <input name="goal_casa" min="0" value="0" type="number"></p> <br />
+                    </div>
+
+                    <div>
+                        <p>
+                            Squadra ospite
+                            <select name="squadra_ospite">
+                                <option value="default">Scegli squadra</option>
+                                <option value="real_madrid">Real Madrid</option>
+                                <option value="milan">Milan</option>
+                                <option value="liverool">Liverpool</option>
+                                <option value="bayern_monaco">Bayern Monaco</option>
+                                <option value="barcellona">Barcellona</option>
+                                <option value="inter">Inter</option>
+                                <option value="manchester_united">Manchester United</option>
+                                <option value="juventus">Juventus</option>
+                            </select>
+                        </p>
+                        <p>Goal ospite <input name="goal_ospite" min="0" value="0" type="number"></p> <br />
+                    </div>
+                    
+                    <div class="rigaBottoni">
+                        <input type="reset" value="Cancella" />
+                        <input type="submit" value="Inserisci" />
+                    </div>
+                </div>
+            </form>
+        </div>
+
+        <!-- CONTENUTO FOOTER PAGINA -->
+        <div class="footer">
+            <p class="copyright">&copy; 2024 Matteo Ventali &amp; Stefano Rosso</p>
+        </div>
+    </body>
+</html>
