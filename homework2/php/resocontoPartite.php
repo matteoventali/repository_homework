@@ -21,7 +21,7 @@
                 <p>CHAMPIONS LEAGUE</p>
             </div>
             <div class="sezioneControlli">
-                <a class="home" href="index.php">
+                <a class="home" href="menu.php">
                     <img  alt="home logo" src="../img/home.png" />
                 </a>
             </div>
