@@ -8,7 +8,9 @@
     if ( isset($_SESSION["nome"]) )
         header("Location: menu.php"); 
     else if ( isset($_POST["nome"]) && isset($_POST["cognome"])
-                && isset($_POST["mail"]) && isset($_POST["password"]) )
+                && isset($_POST["mail"]) && isset($_POST["password"]) 
+                && strlen(trim($_POST["nome"])) > 0 && strlen(trim($_POST["cognome"]) > 0) 
+                && strlen(trim($_POST["mail"])) > 0 && strlen(trim($_POST["password"])) > 0)
     {
         // Elimino la sessione appena creata erroneamente
         session_destroy();
@@ -97,13 +99,13 @@
             <form method="post" action="<?php echo $_SERVER["PHP_SELF"] ?>">
                 <div class="contenutoForm">
                     <div class="riga">
-                        <p>Nome <input name="nome" type="text" required="required" value="<?php if($err) echo $_POST["nome"];?>" /></p> 
-                        <p>Cognome <input name="cognome" type="text" required="required" value="<?php if($err) echo $_POST["cognome"];?>"/></p>
+                        <p>Nome <input name="nome" type="text" value="<?php if($err) echo $_POST["nome"];?>" /></p> 
+                        <p>Cognome <input name="cognome" type="text" value="<?php if($err) echo $_POST["cognome"];?>"/></p>
                     </div>
 
                     <div class="riga">
-                        <p>e-mail <input name="mail" type="text" required="required" value="<?php if($err) echo $_POST["mail"];?>"/></p> 
-                        <p>Password <input name="password" type="password" required="required" /></p>
+                        <p>e-mail <input name="mail" type="text" value="<?php if($err) echo $_POST["mail"];?>"/></p> 
+                        <p>Password <input name="password" type="password" /></p>
                     </div>
 
                     <div class="rigaBottoni">
