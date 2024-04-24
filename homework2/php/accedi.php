@@ -1,10 +1,14 @@
 <?php
     session_start();
 
+    $ris = '';    
+
     if ( isset($_SESSION["nome"]) ) // Verifico se vi e' una sessione aperta
         header("Location: menu.php");
     else if ( isset($_POST["mail"]) && isset($_POST["password"]) ) // Richiesta di login pervenuta
     {
+        $ris = '<p style="color:red">Errore di comunicazione con il database</p>';
+        
         // Elimino la sessione appena creata erroneamente
         require_once 'cancellaSessione.php';
 
@@ -14,9 +18,9 @@
 
         if ( $connessione )
         {
-            $ris = '<p style="color:red">Errore nell\'esecuzione della query, ricontrollare i dati</p>';
-            
             // Prelevo i dati dal post e compongo la query
+            // Il controllo che i campi siano vuoti non e' necessario in quanto la query
+            // sicuramente fallira'
             $mail = $handleDB->real_escape_string($_POST["mail"]);
             $password = $handleDB->real_escape_string($_POST["password"]);
             $q = "select nome, cognome, tipologia from UTENTI where mail='$mail' and password=SHA2('$password', 256)";
@@ -38,6 +42,12 @@
                     // Vado sul menu
                     header("Location: menu.php");
                 }
+                else
+                {
+                    $err = true;
+                    $ris = '<p style="color:red">Credenziali errate, riprovare</p>';
+                }
+                    
             }
             catch (Exception $e)
             {
@@ -94,8 +104,13 @@
                     </div>
 
                     <div class="rigaBottoni">
-                        <input type="reset" value="Cancella" />
-                        <input type="submit" value="Accedi" />
+                        <div class="sezioneErrore">
+                            <?php echo $ris ?>
+                        </div>
+                        <div class="sezioneBottoni">
+                            <input type="reset" value="Cancella" />
+                            <input type="submit" value="Accedi" />
+                        </div>
                     </div>
                 </div>
             </form>
