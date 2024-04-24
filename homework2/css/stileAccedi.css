@@ -22,6 +22,7 @@ form
     overflow: auto;
     box-shadow: 0 0.5em 1em black;
     padding-left: 5%;
+    padding-top: 5%;
 }
 
 input[type="submit"], input[type="reset"]
@@ -54,7 +55,7 @@ input[type="submit"]:hover, input[type="reset"]:hover
 {
     text-align: right;
     margin-right: 5%;
-    margin-top: 8%;
+    margin-top: 5%;
 }
 
 form p
@@ -84,4 +85,26 @@ input[type="text"], input[type="password"]
     height: 80%;
     width: 45%;
     font-size: 50%;
+}
+
+#sezioneReg
+{
+    margin-top: 2%;
+    font-size: 70%;
+}
+
+#sezioneReg p
+{
+    display: block;
+}
+
+#sezioneReg p a
+{
+    color: white;
+}
+
+#sezioneReg p a:hover
+{
+    font-size: 120%;
+    color: aqua;
 }

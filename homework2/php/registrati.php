@@ -8,60 +8,62 @@
     if ( isset($_SESSION["nome"]) )
         header("Location: menu.php"); 
     else if ( isset($_POST["nome"]) && isset($_POST["cognome"])
-                && isset($_POST["mail"]) && isset($_POST["password"]) 
-                && strlen(trim($_POST["nome"])) > 0 && strlen(trim($_POST["cognome"]) > 0) 
-                && strlen(trim($_POST["mail"])) > 0 && strlen(trim($_POST["password"])) > 0)
+                && isset($_POST["mail"]) && isset($_POST["password"]) )
     {
-        // Elimino la sessione appena creata erroneamente
-        session_destroy();
-        setcookie(session_name(), '', time()-3600, '/');
-
-        // Se sono qui e' pervenuta una richiesta di registrazione
-        // Connessione al database
-        require_once 'connection.php';
-        
-        // Se la connessione e' andata a buon fine
-        if ( $connessione )
+        if (strlen(trim($_POST["nome"])) > 0 && strlen(trim($_POST["cognome"]) > 0) 
+                && strlen(trim($_POST["mail"])) > 0 && strlen(trim($_POST["password"])) > 0)
         {
-            $ris = '<p style="color:red">Errore nell\'esecuzione della query, ricontrollare i dati</p>'; 
+            // Elimino la sessione appena creata erroneamente
+            require_once 'cancellaSessione.php';
 
-            // Verifico che i dati siano corretti
-            // Regex: /^([a-z]+)(_|[.]|-){0,1}(([a-z]|\d)+)@([a-z])*[.]([a-z])*$/
-            $regex = '/^([a-z]+)(_|[.]|-){0,1}(([a-z]|\d)+)@([a-z])*[.]([a-z])*$/';
-            if ( preg_match($regex, $_POST["mail"]) )
+            // Se sono qui e' pervenuta una richiesta di registrazione
+            // Connessione al database
+            require_once 'connection.php';
+            
+            // Se la connessione e' andata a buon fine
+            if ( $connessione )
             {
-                // Prelevo i dati dal post
-                $nome = $handleDB->real_escape_string($_POST["nome"]);
-                $cognome = $handleDB->real_escape_string($_POST["cognome"]);
-                $mail = $handleDB->real_escape_string($_POST["mail"]);
-                $password = $handleDB->real_escape_string($_POST["password"]);
-                
-                // Compongo la query per l'esecuzione
-                $q = "insert into UTENTI(nome, cognome, mail, password) values ('$nome', '$cognome', '$mail', SHA2('$password', 256))";
+                $ris = '<p style="color:red">Errore nell\'esecuzione della query, ricontrollare i dati</p>'; 
 
-                // Esecuzione della query
-                try
+                // Verifico che i dati siano corretti
+                // Regex: /^([a-z]+)(_|[.]|-){0,1}(([a-z]|\d)+)@([a-z])*[.]([a-z])*$/
+                $regex = '/^([a-z]+)(_|[.]|-){0,1}(([a-z]|\d)+)@([a-z])*[.]([a-z])*$/';
+                if ( preg_match($regex, $_POST["mail"]) )
                 {
-                    $handleDB->query($q);
-                    $ris = '<p style="color:green">Registrazione avvenuta con successo</p>';
-                    $err = false;
-                }
-                catch (Exception $e)
-                {
-                    $err = true;
-                    if ($handleDB->errno == 1062 )
-                        $ris = '<p style="color:red">e-mail presente nel database</p>';
+                    // Prelevo i dati dal post
+                    $nome = $handleDB->real_escape_string($_POST["nome"]);
+                    $cognome = $handleDB->real_escape_string($_POST["cognome"]);
+                    $mail = $handleDB->real_escape_string($_POST["mail"]);
+                    $password = $handleDB->real_escape_string($_POST["password"]);
+                    
+                    // Compongo la query per l'esecuzione
+                    $q = "insert into UTENTI(nome, cognome, mail, password) values ('$nome', '$cognome', '$mail', SHA2('$password', 256))";
+
+                    // Esecuzione della query
+                    try
+                    {
+                        $handleDB->query($q);
+                        $ris = '<p style="color:green">Registrazione avvenuta con successo</p>';
+                        $err = false;
+                    }
+                    catch (Exception $e)
+                    {
+                        $err = true;
+                        if ($handleDB->errno == 1062 )
+                            $ris = '<p style="color:red">e-mail presente nel database</p>';
+                    }
                 }
             }
+            else
+                $ris = '<p style="color:red">Errore di comunicazione con il database</p>';
         }
         else
-            $ris = '<p style="color:red">Errore di comunicazione con il database</p>';
+            $ris = '<p style="color:red">Campi vuoti</p>';
     }
     else
     {
         // Elimino la sessione appena creata erroneamente
-        session_destroy();
-        setcookie(session_name(), '', time()-3600, '/');
+        require_once 'cancellaSessione.php';
         $err = false;
     }
     

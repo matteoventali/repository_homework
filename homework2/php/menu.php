@@ -1,14 +1,29 @@
 <?php
-    // Verifico modalita' di invocazione dello script
-    if ( isset($_POST["scelta"]) )
+    session_start();
+
+    $nome = ""; $cognome = "";
+    
+    // Se non è presente una sessione attiva distruggo quella appena creata
+    // e rimando l'utente alla pagina di login
+    if ( !isset($_SESSION["nome"]) )
     {
-        // Ridireziono l'utente sulla pagina corretta
-        $s = $_POST["scelta"];
-        if ( $s === "Accedi" )
-            header("Location: accedi.php");
-        else if ( $s === "Registrati" )
-            header("Location: registrati.php");
+        require_once 'cancellaSessione.php';
+        header("Location: accedi.php");
     }
+    else
+    {
+        $nome = $_SESSION["nome"];
+        $cognome = $_SESSION["cognome"];
+        
+        // Verifico modalita' di invocazione dello script
+        if ( isset($_POST["scelta"]) )
+        {
+            // Ridireziono l'utente sulla pagina corretta
+            $s = $_POST["scelta"];
+            if ( $s === "Logout" )
+                header("Location: logout.php");
+        }
+    }    
     
     echo '<?xml version = "1.0" encoding="ISO-8859-1"?>';
 ?>
@@ -32,9 +47,10 @@
                 <p>CHAMPIONS LEAGUE</p>
             </div>
             <div class="sezioneControlli">
+                <p> <?php echo $nome . " " . $cognome; ?> </p>
+            
                 <form method="post" action="<?php echo $_SERVER["PHP_SELF"]; ?>">
-                    <input type="submit" name="scelta" value="Accedi" />
-                    <input type="submit" name="scelta" value="Registrati" />
+                    <p><input type="submit" name="scelta" value="Logout" /></p>
                 </form>
             </div>
         </div>

@@ -30,6 +30,7 @@ create table UTENTI(
     cognome     varchar(50) not null,
     mail        varchar(50) not null,
     password    char(64) not null,
+    tipologia   char(1) default 'U',
     primary key (id),
     unique (mail)
 );
@@ -42,3 +43,4 @@ insert into SQUADRE(nome) values ('Barcellona');
 insert into SQUADRE(nome) values ('Juventus');
 insert into SQUADRE(nome) values ('Bayer Monaco');
 insert into SQUADRE(nome) values ('Liverpool');
+insert into UTENTI(nome, cognome, mail, password, tipologia) values ('admin', 'admin', 'admin@admin.it', SHA2('admin', 256), 'A');

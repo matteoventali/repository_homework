@@ -1,4 +1,56 @@
 <?php
+    session_start();
+
+    if ( isset($_SESSION["nome"]) ) // Verifico se vi e' una sessione aperta
+        header("Location: menu.php");
+    else if ( isset($_POST["mail"]) && isset($_POST["password"]) ) // Richiesta di login pervenuta
+    {
+        // Elimino la sessione appena creata erroneamente
+        require_once 'cancellaSessione.php';
+
+        // Se sono qui e' pervenuta una richiesta di login
+        // Connessione al database
+        require_once 'connection.php';
+
+        if ( $connessione )
+        {
+            $ris = '<p style="color:red">Errore nell\'esecuzione della query, ricontrollare i dati</p>';
+            
+            // Prelevo i dati dal post e compongo la query
+            $mail = $handleDB->real_escape_string($_POST["mail"]);
+            $password = $handleDB->real_escape_string($_POST["password"]);
+            $q = "select nome, cognome, tipologia from UTENTI where mail='$mail' and password=SHA2('$password', 256)";
+
+            // Esecuzione della query
+            try
+            {
+                $rs = $handleDB->query($q);
+                $err = false;
+
+                if ( $riga = $rs->fetch_row() ) // Corrispondenza trovata
+                {
+                    $err = false;
+                    session_start();
+                    $_SESSION["nome"] = $riga[0];
+                    $_SESSION["cognome"] = $riga[1];
+                    $_SESSION["tipologia"] = $riga[2];
+
+                    // Vado sul menu
+                    header("Location: menu.php");
+                }
+            }
+            catch (Exception $e)
+            {
+                $err = true;
+            }
+        }
+    }
+    else
+    {
+        // Elimino la sessione appena creata erroneamente
+        require_once 'cancellaSessione.php';
+    }
+
     echo '<?xml version = "1.0" encoding="ISO-8859-1"?>';
 ?>
 
@@ -21,7 +73,7 @@
             <div class="sezioneTitolo">
                 <p>CHAMPIONS LEAGUE</p>
             </div>
-            <div class="sezioneControlli">
+            <div style="display:none;" class="sezioneControlli">
                 <a class="home" href="menu.php">
                     <img  alt="home logo" src="../img/home.png" />
                 </a>
@@ -30,11 +82,15 @@
 
         <!-- CONTENUTO CORPO PAGINA -->
         <div class="corpo">
-            <form method="get" action="">
+            <form method="post" action="<?php echo $_SERVER["PHP_SELF"]?>">
                 <div class="contenutoForm">
                     <div class="riga">
                         <p>e-mail <input name="mail" type="text" /></p> 
                         <p>Password <input name="password" type="password" /></p>
+                    </div>
+
+                    <div class="riga" id="sezioneReg">
+                        <p> Non sei registrato? <a href="registrati.php"> Clicca qui </a> </p>   
                     </div>
 
                     <div class="rigaBottoni">
