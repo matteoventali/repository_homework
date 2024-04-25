@@ -76,3 +76,13 @@ create view SQUADRA_GOL_OSPITE as
     from SQUADRE s, PARTITE p       
     where s.id = p.squadra_ospite
     group by s.id;
+
+create view RESOCONTO_COMPLETO as
+    select s.id, s.nome, v.n_vinte, p.n_perse, par.n_pareggiate, 
+                        gc.gol_fatti as gol_fatti_casa, go.gol_fatti as gol_fatti_ospite,
+                        gc.gol_subiti as gol_subiti_casa, go.gol_subiti as gol_subiti_ospite
+    from SQUADRE s left outer join SQUADRA_PARTITE_VINTE v  on s.id = v.id
+            left outer join SQUADRA_PARTITE_PERSE p         on s.id = p.id
+            left outer join SQUADRA_PARTITE_PAREGGIATE par  on s.id = par.id
+            left outer join SQUADRA_GOL_CASA gc             on s.id = gc.id
+            left outer join SQUADRA_GOL_OSPITE go             on s.id = go.id;
