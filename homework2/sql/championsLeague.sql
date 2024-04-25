@@ -14,8 +14,8 @@ create table PARTITE(
     data            DATE not null,
     squadra_casa    integer not null,
     squadra_ospite  integer not null,
-    gol_casa        integer unsigned not null,
-    gol_ospite      integer unsigned not null,
+    goal_casa        integer unsigned not null,
+    goal_ospite      integer unsigned not null,
     primary key (id),
     unique (squadra_casa, squadra_ospite, data),
     constraint fk_partite_squadra_casa foreign key (squadra_casa)

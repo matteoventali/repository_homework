@@ -21,6 +21,7 @@ form
     border-radius: 2%;
     overflow: auto;
     box-shadow: 0 0.5em 1em black;
+    padding-left: 5%;
 }
 
 input[type="submit"], input[type="reset"]
@@ -33,8 +34,9 @@ input[type="submit"], input[type="reset"]
     box-shadow: 2px 19px 31px rgba(0, 0, 0, 0.2);
     font-weight: bold;
     cursor: pointer;
-    font-size: 100%;
+    font-size: 90%;
     font-family: Arial, Helvetica;
+    margin-right: 2%;
 }
 
 .contenutoForm
@@ -51,8 +53,9 @@ input[type="submit"]:hover, input[type="reset"]:hover
 
 .rigaBottoni
 {
-    text-align: right;
+    margin-right: 2%;
     margin-top: 5%;
+    display: flex;
 }
 
 form p
@@ -60,12 +63,14 @@ form p
     font-family: Arial, Helvetica;
     display: inline-block;
     width: 49%;
-    font-size: 150%;
+    font-size: 110%;
     text-align: left;
     margin-bottom: 2%;
+    text-align: center;
+    align-items: center;
 }
 
-input[type="date"], select
+select
 {
     width: 50%;
     border-radius: 7%;
@@ -73,12 +78,32 @@ input[type="date"], select
     text-align: center;
 }
 
-input[type="number"]
+input[type="text"]
 {
-    border-radius: 10%;
-    width: 15%;
-    font-size: 50%;
     text-align: center;
+    font-size: 50%;
+    border-radius: 10px;
+}
+
+.sezioneBottoni
+{
+    height: 100%;
+    width: 40%;
+    margin-left: 10%;
+}
+
+.sezioneErrore
+{
+    font-size: 60%;
+    display: inline;
+    width: 60%;
+}
+
+.sezioneErrore p
+{
+    display: inline-block;
+    background-color: white;
+    width: 100%;
 }
 
 

@@ -23,7 +23,7 @@
             // sicuramente fallira'
             $mail = $handleDB->real_escape_string($_POST["mail"]);
             $password = $handleDB->real_escape_string($_POST["password"]);
-            $q = "select nome, cognome, tipologia from UTENTI where mail='$mail' and password=SHA2('$password', 256)";
+            $q = "select nome, cognome, tipologia from $tb_utenti where mail='$mail' and password=SHA2('$password', 256)";
 
             // Esecuzione della query
             try
@@ -53,6 +53,8 @@
             {
                 $err = true;
             }
+
+            $handleDB->close();
         }
     }
     else

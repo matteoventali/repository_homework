@@ -1,7 +1,7 @@
 <?php
     session_start();
 
-    $nome = ""; $cognome = "";
+    $nome = ""; $cognome = ""; $stileOpt = "";
     
     // Se non è presente una sessione attiva distruggo quella appena creata
     // e rimando l'utente alla pagina di login
@@ -23,6 +23,12 @@
             if ( $s === "Logout" )
                 header("Location: logout.php");
         }
+
+        // Verifico la tipologia di utente per far apparire
+        // l'opzione di inserimento nuova partita
+        $t = $_SESSION["tipologia"];
+        if ( $t === "U" )
+            $stileOpt = 'style="display:none"';
     }    
     
     echo '<?xml version = "1.0" encoding="ISO-8859-1"?>';
@@ -33,7 +39,7 @@
     <head>
         <title> CHAMPIONS LEAGUE </title>
         <link type="text/css" rel="stylesheet" href="../css/stileLayout.css" />
-        <link type="text/css" rel="stylesheet" href="../css/stileIndex.css" />
+        <link type="text/css" rel="stylesheet" href="../css/stileMenu.css" />
         <link rel="icon" type="image/png" href="../img/favicon.png" />
     </head>
 
@@ -47,7 +53,7 @@
                 <p>CHAMPIONS LEAGUE</p>
             </div>
             <div class="sezioneControlli">
-                <p> <?php echo $nome . " " . $cognome; ?> </p>
+                <p><strong> <?php echo $nome . " " . $cognome; ?> </strong></p>
             
                 <form method="post" action="<?php echo $_SERVER["PHP_SELF"]; ?>">
                     <p><input type="submit" name="scelta" value="Logout" /></p>
@@ -57,7 +63,7 @@
 
         <!-- CONTENUTO CORPO PAGINA -->
         <div class="corpo">
-            <div id="riq1" class="sezioneCorpo uno" style="margin-left: 10%;">
+            <div id="riq1" class="sezioneCorpo uno" style="">
                 <a class="icona" href="classifica.php">
                     <img  alt="icona classifica" src="../img/classifica.png" />
                 </a>
@@ -71,7 +77,7 @@
                 <p class="didascalia"> RESOCONTO PARTITE </p>
             </div>
 
-            <div id="riq3" class="sezioneCorpo tre">
+            <div <?php echo $stileOpt; ?> id="riq3" class="sezioneCorpo tre">
                 <a class="icona" href="inserisciPartita.php">
                     <img  alt="icona nuova partita" src="../img/fischietto.png" />
                 </a>

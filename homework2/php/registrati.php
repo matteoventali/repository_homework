@@ -37,7 +37,7 @@
                     $password = $handleDB->real_escape_string($_POST["password"]);
                     
                     // Compongo la query per l'esecuzione
-                    $q = "insert into UTENTI(nome, cognome, mail, password) values ('$nome', '$cognome', '$mail', SHA2('$password', 256))";
+                    $q = "insert into $tb_utenti(nome, cognome, mail, password) values ('$nome', '$cognome', '$mail', SHA2('$password', 256))";
 
                     // Esecuzione della query
                     try
@@ -53,6 +53,8 @@
                             $ris = '<p style="color:red">e-mail presente nel database</p>';
                     }
                 }
+
+                $handleDB->close();
             }
             else
                 $ris = '<p style="color:red">Errore di comunicazione con il database</p>';
@@ -101,12 +103,12 @@
             <form method="post" action="<?php echo $_SERVER["PHP_SELF"] ?>">
                 <div class="contenutoForm">
                     <div class="riga">
-                        <p>Nome <input name="nome" type="text" value="<?php if($err) echo $_POST["nome"];?>" /></p> 
-                        <p>Cognome <input name="cognome" type="text" value="<?php if($err) echo $_POST["cognome"];?>"/></p>
+                        <p>Nome <input name="nome" type="text" <?php if($err) echo 'value="'. $_POST["nome"] . '"';?>" /></p> 
+                        <p>Cognome <input name="cognome" type="text" <?php if($err) echo 'value="'. $_POST["cognome"] . '"';?>"/></p>
                     </div>
 
                     <div class="riga">
-                        <p>e-mail <input name="mail" type="text" value="<?php if($err) echo $_POST["mail"];?>"/></p> 
+                        <p>e-mail <input name="mail" type="text" <?php if($err) echo 'value="'. $_POST["mail"] . '"';?>"/></p> 
                         <p>Password <input name="password" type="password" /></p>
                     </div>
 
