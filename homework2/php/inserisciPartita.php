@@ -34,6 +34,7 @@
         while ( $riga = $rs->fetch_row() )
             $contenutoTendine = $contenutoTendine . "<option value=\"$riga[0]\">$riga[1]</option>\n";
         
+        $rs->close();
         return $contenutoTendine;
     }
 

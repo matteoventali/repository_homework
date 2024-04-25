@@ -44,3 +44,35 @@ insert into SQUADRE(nome) values ('Juventus');
 insert into SQUADRE(nome) values ('Bayer Monaco');
 insert into SQUADRE(nome) values ('Liverpool');
 insert into UTENTI(nome, cognome, mail, password, tipologia) values ('admin', 'admin', 'admin@admin.it', SHA2('admin', 256), 'A');
+
+create view SQUADRA_PARTITE_VINTE as
+    select s.id, s.nome, COUNT(*) as n_vinte
+    from SQUADRE s, PARTITE p
+    where (s.id = p.squadra_casa and p.goal_casa > p.goal_ospite)
+        or ( s.id = p.squadra_ospite and p.goal_ospite > p.goal_casa)
+    group by s.id;
+
+create view SQUADRA_PARTITE_PERSE as
+    select s.id, s.nome, COUNT(*) as n_perse
+    from SQUADRE s, PARTITE p
+    where (s.id = p.squadra_casa and p.goal_casa < p.goal_ospite)
+        or ( s.id = p.squadra_ospite and p.goal_ospite < p.goal_casa)
+    group by s.id;
+
+create view SQUADRA_PARTITE_PAREGGIATE as
+    select s.id, s.nome, COUNT(*) as n_pareggiate
+    from SQUADRE s, PARTITE p
+    where (s.id = p.squadra_casa or s.id = p.squadra_ospite) and p.goal_ospite = p.goal_casa
+    group by s.id;
+
+create view SQUADRA_GOL_CASA as
+    select s.id, s.nome, sum(p.goal_casa) as gol_fatti, sum(p.goal_ospite) as gol_subiti
+    from SQUADRE s, PARTITE p       
+    where s.id = p.squadra_casa
+    group by s.id;
+
+create view SQUADRA_GOL_OSPITE as
+    select s.id, s.nome, sum(p.goal_ospite) as gol_fatti, sum(p.goal_casa) as gol_subiti
+    from SQUADRE s, PARTITE p       
+    where s.id = p.squadra_ospite
+    group by s.id;

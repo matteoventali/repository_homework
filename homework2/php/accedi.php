@@ -47,6 +47,8 @@
                     $err = true;
                     $ris = '<p style="color:red">Credenziali errate, riprovare</p>';
                 }
+
+                $rs->close();
                     
             }
             catch (Exception $e)
