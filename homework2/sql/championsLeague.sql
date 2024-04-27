@@ -85,4 +85,4 @@ create view RESOCONTO_COMPLETO as
             left outer join SQUADRA_PARTITE_PERSE p         on s.id = p.id
             left outer join SQUADRA_PARTITE_PAREGGIATE par  on s.id = par.id
             left outer join SQUADRA_GOL_CASA gc             on s.id = gc.id
-            left outer join SQUADRA_GOL_OSPITE go             on s.id = go.id;
+            left outer join SQUADRA_GOL_OSPITE go           on s.id = go.id;
