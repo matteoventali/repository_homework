@@ -1,7 +1,7 @@
 <?php
     session_start();
 
-    $ris = '';    
+    $ris = '';
 
     if ( isset($_SESSION["nome"]) ) // Verifico se vi e' una sessione aperta
         header("Location: menu.php");

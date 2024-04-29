@@ -4,6 +4,7 @@
     $tb_squadre = 'SQUADRE';
     $tb_utenti = 'UTENTI';
     $tb_partite = 'PARTITE';
+    $tb_classifica = 'CLASSIFICA';
 
     // Connessione al database
     $handleDB = new mysqli($ip_dbms, $user_dbms, $pass_dbms, $nome_db);

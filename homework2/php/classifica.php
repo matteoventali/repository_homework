@@ -1,4 +1,48 @@
 <?php
+    session_start();
+
+    $contenutoTab = "";
+
+    // Se non è presente una sessione attiva distruggo quella appena creata
+    // e rimando l'utente alla pagina di login
+    if ( !isset($_SESSION["nome"]) )
+    {
+        require_once 'cancellaSessione.php';
+        header("Location: accedi.php");
+    }
+    else // Sessione valida presente
+    {
+        // Connessione al database
+        require_once 'connection.php';
+
+        if ( $connessione )
+        {
+            // Query per ottenere i dati necessari alla classifica
+            $q = "select * from $tb_classifica";
+
+            // Eseguo la query
+            $rs = $handleDB->query($q);
+
+            // Popolo la tabella
+            $indice = 1;
+            while ( $riga = $rs->fetch_row() )
+            {
+                $stile = "";
+                if ( $indice == 1 )
+                    $stile = "style=\"background-color: rgb(248, 32, 32);\"";
+                else if ( $indice == 2 || $indice == 3 )
+                    $stile = "style=\"background-color: rgb(16, 156, 25);\"";
+                
+                $diff = $riga[1] - $riga[2];
+                $contenutoTab .= "<tr><td $stile>$indice</td><td>$riga[0]</td><td>$riga[3]</td><td>$riga[1]</td><td>$riga[2]</td><td>$diff</td></tr>";
+                $indice++;
+            }
+            
+            $rs->close();
+            $handleDB->close();
+        }
+    }
+
     echo '<?xml version = "1.0" encoding="ISO-8859-1"?>';
 ?>
 
@@ -28,7 +72,11 @@
             </div>
         </div>
 
-        <!-- CONTENUTO CORPO PAGINA -->
+        <!-- CONTENUTO CORPO PAGINA 
+            <td style="background-color: rgb(248, 32, 32);">1</td>
+            <td style="background-color: rgb(16, 156, 25);">2</td>
+            <td style="background-color: rgb(16, 156, 25);">3</td>
+        -->
         <div class="corpo">
             <div class="tabella">
             <table>
@@ -40,70 +88,7 @@
                     <th>Goal subiti</th>
                     <th>Diff. reti</th>
                 </tr>
-                <tr>
-                    <td style="background-color: rgb(248, 32, 32);">1</td>
-                    <td>Real Madrid</td>
-                    <td>15</td>
-                    <td>20</td>
-                    <td>13</td>
-                    <td>7</td>
-                </tr>
-                <tr>
-                    <td style="background-color: rgb(16, 156, 25);">2</td>
-                    <td>Bayern Monaco</td>
-                    <td>14</td>
-                    <td>18</td>
-                    <td>15</td>
-                    <td>3</td>
-                </tr>
-                <tr>
-                    <td style="background-color: rgb(16, 156, 25);">3</td>
-                    <td>Liverpool</td>
-                    <td>13</td>
-                    <td>11</td>
-                    <td>10</td>
-                    <td>1</td>
-                </tr>
-                <tr>
-                    <td>4</td>
-                    <td>Manchester United</td>
-                    <td>12</td>
-                    <td>15</td>
-                    <td>8</td>
-                    <td>7</td>
-                </tr>
-                <tr>
-                    <td>5</td>
-                    <td>Barcellona</td>
-                    <td>11</td>
-                    <td>15</td>
-                    <td>12</td>
-                    <td>3</td>
-                </tr>
-                <tr>
-                    <td>6</td>
-                    <td>Milan</td>
-                    <td>7</td>
-                    <td>8</td>
-                    <td>9</td>
-                    <td>-1</td>
-                </tr>
-                <tr>
-                    <td>7</td>
-                    <td>Juventus</td>
-                    <td>4</td>
-                    <td>7</td>
-                    <td>20</td>
-                    <td>-13</td>
-                </tr>
-                <tr>
-                    <td>8</td>
-                    <td>Inter</td>
-                    <td>3</td>
-                    <td>2</td>
-                    <td>9</td>
-                    <td>-7</td>
-                </tr>
+                <?php echo $contenutoTab; ?>
             </table>
             </div>
         </div>

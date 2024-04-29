@@ -41,7 +41,7 @@ insert into SQUADRE(nome) values ('Milan');
 insert into SQUADRE(nome) values ('Manchester United');
 insert into SQUADRE(nome) values ('Barcellona');
 insert into SQUADRE(nome) values ('Juventus');
-insert into SQUADRE(nome) values ('Bayer Monaco');
+insert into SQUADRE(nome) values ('Bayern Monaco');
 insert into SQUADRE(nome) values ('Liverpool');
 insert into UTENTI(nome, cognome, mail, password, tipologia) values ('admin', 'admin', 'admin@admin.it', SHA2('admin', 256), 'A');
 
@@ -86,3 +86,10 @@ create view RESOCONTO_COMPLETO as
             left outer join SQUADRA_PARTITE_PAREGGIATE par  on s.id = par.id
             left outer join SQUADRA_GOL_CASA gc             on s.id = gc.id
             left outer join SQUADRA_GOL_OSPITE go           on s.id = go.id;
+
+create view CLASSIFICA as
+    select nome, (ifnull(gol_fatti_casa, 0) + ifnull(gol_fatti_ospite, 0)) as gol_fatti,
+            (ifnull(gol_subiti_casa, 0) + ifnull(gol_subiti_ospite, 0)) as gol_subiti,
+            (3*ifnull(n_vinte, 0) + 1*ifnull(n_pareggiate, 0)) as punti
+    from RESOCONTO_COMPLETO
+    order by punti desc, (gol_fatti - gol_subiti) desc;
