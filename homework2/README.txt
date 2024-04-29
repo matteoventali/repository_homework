@@ -13,7 +13,7 @@ L'obiettivo dell'homework e' la realizzazione di un sito web riguardo un torneo 
 denominato Champions League. Il torneo e' un campionato che prevede girone d'andata e ritorno.
 Esistono due tipologie di account:
 1) classico;
-2) admin;
+2) admin.
 Le funzionalita' offerte dal sito web sono:
 1) visualizzazione della classifica del torneo, in accordo con le partite memorizzate;
 2) visualizzazione del resoconto partite disputate;
@@ -24,7 +24,7 @@ Per i nuovi utenti è possibile registrare un nuovo account di tipo classico.
 Gli account di tipo admin devono essere registrati nel database manualmente, dall'amministratore di sistema.
 Lo script di installazione del database prevede la creazione di un utente admin con le seguenti credenziali:
     email: admin@admin.it   password: admin
-Tutte le funzionalita' dell'applicazioni sono fornite previa autenticazione dell'utente.
+Tutte le funzionalita' dell'applicazione sono fornite previa autenticazione dell'utente.
 
 La repository GITHUB per i vari homework e' disponibile al seguente indirizzo:
 https://github.com/matteoventali/repository_homework.git
