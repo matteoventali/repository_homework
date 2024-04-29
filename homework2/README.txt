@@ -14,6 +14,7 @@ denominato Champions League. Il torneo e' un campionato che prevede girone d'and
 Esistono due tipologie di account:
 1) classico;
 2) admin.
+
 Le funzionalita' offerte dal sito web sono:
 1) visualizzazione della classifica del torneo, in accordo con le partite memorizzate;
 2) visualizzazione del resoconto partite disputate;
