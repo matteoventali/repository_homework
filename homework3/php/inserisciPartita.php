@@ -1,4 +1,6 @@
 <?php
+    require_once 'gestoriXMLDOM.php';
+    
     session_start();
 
     // Variabile paragrafo risultato operazione
@@ -6,15 +8,12 @@
 
     // Metodo per ottenere il codice HTML necessario a mostrare
     // l'elenco delle squadre nelle tendine.
-    // Riceve l'oggetto DOM che rappresenta le squadre.
-    function caricaSquadre($squadre)
+    // Riceve la lista delle squadre
+    function caricaSquadre($listaSquadre)
     {
         // Contenuto di default
         $contenutoTendine = "<option value=\"0\">Scegli squadra</option>\n";
         
-        $radice = $squadre->documentElement;
-        $listaSquadre = $radice->childNodes;
-
         // Per ogni squadra nella lista creo un'opzione della tendina
         for ( $i=0; $i < count($listaSquadre); $i++ )
         {
@@ -65,16 +64,16 @@
     }
     else if ( $_SESSION["tipologia"] === "A" ) // Sessione presente per un admin
     {
-        // Carico in memoria l'oggetto DOM per il file XML squadre
-        require_once 'loadXMLSquadre.php';
-
+        // Carico in memoria l'handler DOM per il file XML squadre
+        $handlerSquadre = new GestoreXMLDOMSquadre("../xml/squadre.xml");
+        
         // Carico in memoria l'oggetto DOM per il file XML partite
         /* ....... */
         
-        if ( $loadSquadre )
+        if ( $handlerSquadre->checkValidita() )
         {
             // Ottengo la lista delle squadre da mostrare nella pagina
-            $squadre = caricaSquadre($squadre);
+            $squadre = caricaSquadre($handlerSquadre->getListaSquadre());
 
             // Verifico richiesta inserimento partita
             if ( isset($_POST["data_partita"]) && isset($_POST["squadra_casa"]) && isset($_POST["goal_casa"])
@@ -110,7 +109,7 @@
             }
             else
                 $err = false;
-        }
+        }   
     }
     else
         header("Location: menu.php");
