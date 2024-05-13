@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE squadre SYSTEM "../xml/grammaticaSquadre.dtd">
+
+<squadre>
+    <squadra id="s1">Real Madrid</squadra>
+    <squadra id="s2">Milan</squadra>
+    <squadra id="s3">Inter</squadra>
+    <squadra id="s4">Juventus</squadra>
+    <squadra id="s5">Bayern Monaco</squadra>
+    <squadra id="s6">Liverpool</squadra>
+    <squadra id="s7">Barcellona</squadra>
+    <squadra id="s8">Manchester United</squadra>
+</squadre>

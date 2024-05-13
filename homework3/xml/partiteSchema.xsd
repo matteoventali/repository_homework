@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    
+    <!-- Elemento partite, radice del documento -->
+    <xsd:element name="partite">
+        <xsd:complexType> 
+            <xsd:sequence>
+                <xsd:element ref="partita" minOccurs="0" />
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+
+    <!-- Singola partita -->
+    <xsd:element name="partita">
+        <xsd:complexType>
+            <xsd:sequence>
+               <xsd:element type="xsd:string" name="squadraCasa" minOccurs="1" maxOccurs="1" />
+               <xsd:element type="xsd:string" name="squadraOspite" minOccurs="1" maxOccurs="1" />
+               <xsd:element type="xsd:unsignedInt" name="golCasa" minOccurs="1" maxOccurs="1" />
+               <xsd:element type="xsd:unsignedInt" name="golOspite" minOccurs="1" maxOccurs="1" />
+               <xsd:element type="xsd:string" name="data" minOccurs="1" maxOccurs="1" />
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+</xsd:schema>
