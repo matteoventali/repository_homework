@@ -11,22 +11,23 @@
         protected $errori = true;
 
         // Costruttore
-        function __construct($str)
+        function __construct($str, $modalita_valutazione)
         {
             // Tentativo di apertura del documento
             if ( file_exists($str) )
             {
                 $this->pathname = $str;
                 $xmlString = "";
-                foreach ( file($str) as $node ) 
+                foreach ( file($str) as $node )
                     $xmlString .= trim($node);
-                
+
                 // Istanziazione dell'oggetto DOM
                 $this->oggettoDOM = new DOMDocument();
                 $this->oggettoDOM->loadXML($xmlString);
 
                 // Validazione del contenuto XML
-                if ($this->oggettoDOM->validate())
+                if (($modalita_valutazione == 0 && $this->oggettoDOM->validate()) ||
+                        ($modalita_valutazione == 1 && $this->oggettoDOM->schemaValidate("../xml/partiteSchema.xsd")))
                     $this->errori = false;
             }
         }
@@ -63,9 +64,9 @@
     class GestoreXMLDOMSquadre extends GestoreXMLDOM
     {
         // Costruttore che fa riferimento alla superclasse
-        function __construct($str)
+        function __construct($str, $mod)
         {
-            parent::__construct($str);
+            parent::__construct($str, $mod);
         }
 
         // Metodo per ottenere la lista di squadre
@@ -78,6 +79,15 @@
             }
             else
                 return null;
+        }
+    }
+
+    class GestoreXMLDOMPartite extends GestoreXMLDOM
+    {
+        // Costruttore che fa riferimento alla superclasse
+        function __construct($str, $mod)
+        {
+            parent::__construct($str, $mod);
         }
     }
 ?>

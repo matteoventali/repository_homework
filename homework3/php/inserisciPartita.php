@@ -4,7 +4,22 @@
     session_start();
 
     // Variabile paragrafo risultato operazione
-    $ris = ''; $err = true;
+    $ris = ''; $err = true; $vet_err;
+
+    function convertiDataInInglese($data)
+    {   
+        $data_inglese = ""; // Risultato conversione
+        
+        // Regex di controllo
+        $regData = '/^(\d{2})\/(\d{2})\/(\d{4})$/';
+        
+        // Controllo pattern e conversione
+        $esito = preg_match($regData, $data, $matches);
+        if ( $esito )
+            $data_inglese = $matches[3] . "-" . $matches[2] . "-" . $matches[1];
+
+        return $data_inglese;
+    }
 
     // Metodo per ottenere il codice HTML necessario a mostrare
     // l'elenco delle squadre nelle tendine.
@@ -28,31 +43,67 @@
     function controllaInput()
     {
         // Risultato del controllo
-        $ris = false;
+        $flag = false;
+        global $vet_err;
+        $vet_err = array("err_goal_casa" => 0, "err_goal_ospite" => 0, "err_squadra_casa" => 0, "err_squadra_ospite" => 0, "err_squadre_uguali" => 0 ,"err_data" => 0);
+        
+        // Acquisizione dati
         $goal_casa  = $_POST["goal_casa"];
         $goal_ospite = $_POST["goal_ospite"];
         $squadra_casa = $_POST["squadra_casa"];
         $squadra_ospite = $_POST["squadra_ospite"];
         $data = $_POST["data_partita"];
-
-        settype($squadra_casa, "int");
-        settype($squadra_ospite, "int");
-
+        
         // Regex di controllo
         $regGoal = '/^\d{1,2}$/';
 
-        // Controllo sui dati
-        if ( preg_match($regGoal, $goal_casa) && preg_match($regGoal, $goal_ospite)
-                && $data != "" && $squadra_casa != $squadra_ospite
-                && $squadra_casa > 0 && $squadra_ospite > 0)
-        {
-            // Verifico coerenza campi data
-            $info_data = explode("-", $data);
-            if ( checkdate($info_data[1], $info_data[2], $info_data[0]))
-                $ris = true;
-        }
+        // Conversione data
+        $data_eng = convertiDataInInglese($data);
 
-        return $ris;
+        // Controlli
+        if (!preg_match($regGoal, $goal_casa))
+            $vet_err["err_goal_casa"] = 1;
+        if (!preg_match($regGoal, $goal_ospite))
+            $vet_err["err_goal_ospite"] = 1;
+        if ( $squadra_casa == "0" )
+            $vet_err["err_squadra_casa"] = 1;
+        if ( $squadra_ospite == "0" )
+            $vet_err["err_squadra_ospite"] = 1;
+        if ( $vet_err["err_squadra_casa"] == 0 && $vet_err["err_squadra_ospite"] == 0 && $squadra_casa == $squadra_ospite )
+            $vet_err["err_squadre_uguali"] = 1;
+        
+        $info_data = explode("-", $data_eng);
+            if ( $data_eng == "" || !checkdate($info_data[1], $info_data[2], $info_data[0]))
+                $vet_err["err_data"] = 1;
+
+        if ( array_sum($vet_err) == 0 )
+            $flag = true;
+
+        return $flag;
+    }
+
+    function generaStringaErrore()
+    {
+        // Stringa di errore
+        $str = '<p style="color:red">';
+        global $vet_err;
+
+        // Per ogni errore aggiungo la descrizione
+        if ( $vet_err["err_goal_casa"] )
+            $str .= 'Goal casa non validi <br />';
+        if ( $vet_err["err_goal_ospite"] )
+            $str .= 'Goal casa non validi <br />';
+        if ( $vet_err["err_squadra_casa"] )
+            $str .= 'Squadra casa non inserita <br />';
+        if ( $vet_err["err_squadra_ospite"] )
+            $str .= 'Squadra ospite non inserita <br />';
+        if ( $vet_err["err_squadre_uguali"] )
+            $str .= 'Squadre inserite uguali <br />';
+        if ( $vet_err["err_data"] )
+            $str .= 'Data inserita non valida <br />';
+
+        $str .= '</p>';
+        return $str;
     }
     
     // Se non è presente una sessione attiva distruggo quella appena creata
@@ -65,12 +116,14 @@
     else if ( $_SESSION["tipologia"] === "A" ) // Sessione presente per un admin
     {
         // Carico in memoria l'handler DOM per il file XML squadre
-        $handlerSquadre = new GestoreXMLDOMSquadre("../xml/squadre.xml");
+        // Validazione con DTD (modalita' 0)
+        $handlerSquadre = new GestoreXMLDOMSquadre("../xml/squadre.xml", 0);
         
         // Carico in memoria l'oggetto DOM per il file XML partite
-        /* ....... */
+        // Validazione con schema (modalita' 1)
+        $handlerPartite = new GestoreXMLDOMPartite("../xml/partite.xml", 1);
         
-        if ( $handlerSquadre->checkValidita() )
+        if ( $handlerSquadre->checkValidita() && $handlerPartite->checkValidita() )
         {
             // Ottengo la lista delle squadre da mostrare nella pagina
             $squadre = caricaSquadre($handlerSquadre->getListaSquadre());
@@ -78,16 +131,13 @@
             // Verifico richiesta inserimento partita
             if ( isset($_POST["data_partita"]) && isset($_POST["squadra_casa"]) && isset($_POST["goal_casa"])
                 && isset($_POST["squadra_ospite"]) && isset($_POST["goal_ospite"]) )
-                
             {
                 // Verifico che il form sia compilato
                 if (strlen(trim($_POST["data_partita"])) > 0 && strlen(trim($_POST["squadra_casa"])) > 0
                             && strlen(trim($_POST["goal_casa"])) > 0 && strlen(trim($_POST["goal_ospite"])) > 0
                             && strlen(trim($_POST["squadra_ospite"])) > 0)
                 {
-                    $ris = '<p style="color:red">Errore nell\'esecuzione della query, ricontrollare i dati</p>'; 
-                    
-                    // Effettuo il controllo sui dati pervenuti
+                    // Controllo sui dati
                     if ( controllaInput() )
                     {   
                         $goal_casa = $_POST["goal_casa"];
@@ -102,14 +152,16 @@
                         //$ris = '<p style="color:red">La partita &egrave; gi&agrave; registrata</p>';
                     }
                     else
-                        $ris = '<p style="color:red">Informazioni inserite non valide</p>';     
+                        $ris = generaStringaErrore();
                 }
                 else
                     $ris = '<p style="color:red">Campi vuoti</p>'; 
             }
             else
                 $err = false;
-        }   
+        }
+        else
+            $ris = '<p style="color:red">Errore validazione file XML</p>'; 
     }
     else
         header("Location: menu.php");
@@ -147,7 +199,7 @@
             <form method="post" action="<?php echo $_SERVER["PHP_SELF"]; ?>">
                 <div class="contenutoForm">
                     <div class="riga">
-                        <p style="width:100%;">Data partita (gg/mm/aaaa) <input name="data_partita" type="text" <?php if($err) echo 'value="'. $_POST["data_partita"] . '"';?>/></p> <br />
+                        <p style="width:100%;">Data partita (gg/mm/aaaa) <input name="data_partita" type="text" <?php if($vet_err["err_data"] == 0) echo 'value="'. $_POST["data_partita"] . '"';?>/></p> <br />
                     </div>
 
                     <div class="riga">
@@ -157,7 +209,7 @@
                                 <?php if ( isset($squadre) ) echo $squadre; ?>
                             </select>
                         </p>
-                        <p>Goal casa <input name="goal_casa" style="width: 15%;" type="text" <?php if($err) echo 'value="'. $_POST["goal_casa"] . '"';?>/></p> <br />
+                        <p>Goal casa <input name="goal_casa" style="width: 15%;" type="text" <?php if($vet_err["err_goal_casa"] == 0) echo 'value="'. $_POST["goal_casa"] . '"';?>/></p> <br />
                     </div>
 
                     <div class="riga">
@@ -167,7 +219,7 @@
                                 <?php if ( isset($squadre) ) echo $squadre; ?>
                             </select>
                         </p>
-                        <p>Goal ospite <input name="goal_ospite" style="width: 15%;" type="text" <?php if($err) echo 'value="'. $_POST["goal_ospite"] . '"';?>/></p> <br />
+                        <p>Goal ospite <input name="goal_ospite" style="width: 15%;" type="text" <?php if($vet_err["err_goal_ospite"] == 0) echo 'value="'. $_POST["goal_ospite"] . '"';?>/></p> <br />
                     </div>
                     
                     <div class="rigaBottoni">
