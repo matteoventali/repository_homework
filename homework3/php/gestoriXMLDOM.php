@@ -80,6 +80,17 @@
             else
                 return null;
         }
+
+        // Metodo per ottenere nome della squadra a partire dall'id
+        function getNomeSquadra($id)
+        {
+            if ( $this->checkValidita() && strlen($id) > 0 )
+            {
+                return $this->getOggettoDOM()->getElementById($id)->textContent;
+            }
+            else
+                return "";
+        }
     }
 
     class GestoreXMLDOMPartite extends GestoreXMLDOM
@@ -88,6 +99,63 @@
         function __construct($str, $mod)
         {
             parent::__construct($str, $mod);
+        }
+
+        // Metodo per ricercare una partita nel file XML
+        // Ritorna un valore booleano
+        function ricercaPartita($sq_casa, $sq_ospite, $data)
+        {
+            $esito = false;
+
+            // Elenco di partite
+            $partite = $this->oggettoDOM->documentElement->childNodes;
+
+            // Ciclo di ricerca
+            for ( $i=0; $i < count($partite) && !$esito; $i++ )
+            {
+                // Ottengo i campi dalla partita
+                $p = $partite[$i];
+                $sc = $p->firstChild;
+                $so = $sc->nextSibling;
+                $d = $p->lastChild->textContent;
+
+                if ( $sq_casa == $sc->textContent && $sq_ospite == $so->textContent && $d == $data )
+                    $esito = true;
+            }
+            
+            return $esito;
+        }
+
+        // Metodo per inserire una partita nel file XML
+        // Ritorna un valore booleano
+        function inserisciPartita($sq_casa, $sq_ospite, $goal_casa, $goal_ospite, $data)
+        {
+            $esito = false;
+            
+            // Verifico validita oggetto DOM e mantengo vincolo di unicita' della partita
+            if ( $this->checkValidita() && !$this->ricercaPartita($sq_casa, $sq_ospite, $data) )
+            {
+                // Creazione nuova partita
+                $nuova_partita = $this->oggettoDOM->createElement("partita");
+                $nuova_sqcasa = $this->oggettoDOM->createElement("squadraCasa", $sq_casa);
+                $nuova_sqosp = $this->oggettoDOM->createElement("squadraOspite", $sq_ospite);
+                $nuova_golcasa = $this->oggettoDOM->createElement("golCasa", $goal_casa);
+                $nuova_golosp = $this->oggettoDOM->createElement("golOspite", $goal_ospite);
+                $nuova_data = $this->oggettoDOM->createElement("data", $data);
+
+                // Creazione della struttura gerarchica
+                $nuova_partita->appendChild($nuova_sqcasa);
+                $nuova_partita->appendChild($nuova_sqosp);
+                $nuova_partita->appendChild($nuova_golcasa);
+                $nuova_partita->appendChild($nuova_golosp);
+                $nuova_partita->appendChild($nuova_data);
+
+                // Aggancio della partita
+                $this->oggettoDOM->documentElement->appendChild($nuova_partita);
+                $esito = true;
+            }
+
+            return $esito;
         }
     }
 ?>

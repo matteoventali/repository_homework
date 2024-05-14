@@ -140,16 +140,23 @@
                     // Controllo sui dati
                     if ( controllaInput() )
                     {   
+                        $squadra_ospite = $handlerSquadre->getNomeSquadra($_POST["squadra_ospite"]);
+                        $squadra_casa = $handlerSquadre->getNomeSquadra($_POST["squadra_casa"]);
                         $goal_casa = $_POST["goal_casa"];
                         $goal_ospite = $_POST["goal_ospite"];
-                        $squadra_casa = $_POST["squadra_casa"];
-                        $squadra_ospite = $_POST["squadra_ospite"];
                         $data = $_POST["data_partita"];
 
                         // Aggiorno il file XML
-                        
-                        //$ris = '<p style="color:green">Inserimento avvenuto con successo</p>';
-                        //$ris = '<p style="color:red">La partita &egrave; gi&agrave; registrata</p>';
+                        $esito = $handlerPartite->inserisciPartita($squadra_casa, $squadra_ospite, $goal_casa, $goal_ospite, $data);
+                        $handlerPartite->salvaXML(""); // Salvataggio sul file partite.xml
+
+                        if ( $esito )
+                        {
+                            $ris = '<p style="color:green">Inserimento avvenuto con successo</p>';
+                            $err = false;
+                        }
+                        else
+                            $ris = '<p style="color:red">La partita &egrave; gi&agrave; registrata</p>';
                     }
                     else
                         $ris = generaStringaErrore();
@@ -199,7 +206,7 @@
             <form method="post" action="<?php echo $_SERVER["PHP_SELF"]; ?>">
                 <div class="contenutoForm">
                     <div class="riga">
-                        <p style="width:100%;">Data partita (gg/mm/aaaa) <input name="data_partita" type="text" <?php if($vet_err["err_data"] == 0) echo 'value="'. $_POST["data_partita"] . '"';?>/></p> <br />
+                        <p style="width:100%;">Data partita (gg/mm/aaaa) <input name="data_partita" type="text" <?php if($err && $vet_err["err_data"] == 0) echo 'value="'. $_POST["data_partita"] . '"';?>/></p> <br />
                     </div>
 
                     <div class="riga">
@@ -209,7 +216,7 @@
                                 <?php if ( isset($squadre) ) echo $squadre; ?>
                             </select>
                         </p>
-                        <p>Goal casa <input name="goal_casa" style="width: 15%;" type="text" <?php if($vet_err["err_goal_casa"] == 0) echo 'value="'. $_POST["goal_casa"] . '"';?>/></p> <br />
+                        <p>Goal casa <input name="goal_casa" style="width: 15%;" type="text" <?php if($err && $vet_err["err_goal_casa"] == 0) echo 'value="'. $_POST["goal_casa"] . '"';?>/></p> <br />
                     </div>
 
                     <div class="riga">
@@ -219,7 +226,7 @@
                                 <?php if ( isset($squadre) ) echo $squadre; ?>
                             </select>
                         </p>
-                        <p>Goal ospite <input name="goal_ospite" style="width: 15%;" type="text" <?php if($vet_err["err_goal_ospite"] == 0) echo 'value="'. $_POST["goal_ospite"] . '"';?>/></p> <br />
+                        <p>Goal ospite <input name="goal_ospite" style="width: 15%;" type="text" <?php if($err && $vet_err["err_goal_ospite"] == 0) echo 'value="'. $_POST["goal_ospite"] . '"';?>/></p> <br />
                     </div>
                     
                     <div class="rigaBottoni">

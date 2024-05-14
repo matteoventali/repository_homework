@@ -5,7 +5,7 @@
     <xsd:element name="partite">
         <xsd:complexType> 
             <xsd:sequence>
-                <xsd:element ref="partita" minOccurs="0" />
+                <xsd:element ref="partita" minOccurs="0" maxOccurs="unbounded" />
             </xsd:sequence>
         </xsd:complexType>
     </xsd:element>
