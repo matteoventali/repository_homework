@@ -1,7 +1,36 @@
 <?php
     session_start();
 
-    $contenutoTab = "";
+    require_once 'gestoriXMLDOM.php';
+
+    $contenutoTabella = "";
+
+    // Metodo per ottenere il codice HTML necessario a mostrare l'elenco delle partite nella tabella relativa
+    // Riceve la lista delle partite
+    function caricaPartite($listaPartite)
+    {
+        // Contenuto di default (tabella vuota)
+        $contenutoTabella = "";
+
+        // Per ogni partita bisogna creare una riga della tabella
+        for ( $i=0; $i < count($listaPartite); $i++ )
+        {
+            // Estraggo la partita
+            $partita = $listaPartite[$i];
+            $squadraCasa = $partita->firstChild;
+            $squadraOspite = $squadraCasa->nextSibling;
+            $goalCasa = $squadraOspite->nextSibling;
+            $goalOspite = $goalCasa->nextSibling;
+            $data = $partita->lastChild;
+
+            // Aggiungo una riga a quelle già esistenti
+            $contenutoTabella = $contenutoTabella . "<tr><td>$data->textContent</td><td>$squadraCasa->textContent</td>
+            <td>$squadraOspite->textContent</td><td>$goalCasa->textContent - $goalOspite->textContent</td></tr>\n";
+        }
+
+        // Restituisco il contenuto della tabella
+        return $contenutoTabella;
+    }
 
     // Se non è presente una sessione attiva distruggo quella appena creata
     // e rimando l'utente alla pagina di login
@@ -12,25 +41,13 @@
     }
     else // Sessione valida presente
     {
-        // Connessione al database
-        require_once 'connection.php';
+        
+        // Carico in memoria l'handler DOM per la gestione delle partite (modalità validazione 1)
+        $handlerPartite = new GestoreXMLDOMPartite("../xml/partite.xml", 1);
 
-        if ( $connessione )
-        {
-            // Query per ottenere il resoconto delle partite
-            $q = "select casa.nome, ospite.nome, DATE_FORMAT(p.data, '%d/%m/%Y'), p.goal_casa, p.goal_ospite 
-                    from $tb_squadre casa, $tb_squadre ospite, $tb_partite p where p.squadra_casa = casa.id and p.squadra_ospite = ospite.id";
+        // Ottengo la lista delle partite da mostrare nella pagina
+        $partite = caricaPartite($handlerPartite->getListaPartite());
 
-            // Eseguo la query
-            $rs = $handleDB->query($q);
-
-            // Popolo la tabella
-            while ( $riga=$rs->fetch_row() )
-                $contenutoTab .= "<tr>\n<td>$riga[2]</td>\n<td>$riga[0]</td>\n<td>$riga[1]</td>\n<td>$riga[3] - $riga[4]</td>\n</tr>";
-            
-            $rs->close();
-            $handleDB->close();
-        }
     }
     
     echo '<?xml version = "1.0" encoding="ISO-8859-1"?>';
@@ -71,7 +88,7 @@
                     <th>Ospite</th>
                     <th>Risultato</th>
                 </tr>
-                <?php echo $contenutoTab; ?>
+                <?php echo $partite; ?>
             </table>
             </div>
         </div>

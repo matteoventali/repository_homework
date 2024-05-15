@@ -157,5 +157,18 @@
 
             return $esito;
         }
+
+        // Metodo per ottenere la lista delle partite
+        function getListaPartite()
+        {
+            // Verifico oggetto DOM
+            if ( $this->checkValidita() )
+            {
+                return $this->getOggettoDOM()->documentElement->childNodes;
+            }
+            else
+                return null;
+        }
+
     }
 ?>
