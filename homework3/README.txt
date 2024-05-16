@@ -6,7 +6,7 @@ I file dell'homework sono organizzati secondo la seguente struttura:
 - css/ ----> directory che contiene i file css del sito web;
 - img/ ----> directory che contiene le immagini sfruttate per la realizzazione del sito web;
 - sql/ ----> directory che contiene il file sql sfruttato per la creazione del database.
-- xml/ ----> directory che contiene i file xml per la gestione dei dati relative a squadre e partite;
+- xml/ ----> directory che contiene i file xml per la gestione dei dati relativi a squadre e partite;
 Inoltre e' presente lo script index.php utile all'avvio automatico dell'applicazione
 quando si richiede la risorsa http://...qualche_dominio.../homework3
 
