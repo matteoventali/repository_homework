@@ -1,0 +1,231 @@
+\documentclass[a4paper, 14pt]{article}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[italian]{babel}
+\usepackage{geometry}
+\usepackage{imakeidx}
+\usepackage{hyperref}
+\usepackage{graphicx}
+\pagestyle{myheadings}
+\usepackage{titling}
+\usepackage[fontsize=12pt]{fontsize}
+\usepackage{chngcntr}
+\usepackage{float}
+\counterwithin{figure}{section}
+\graphicspath{ {./img/} }
+
+% Info documento
+\date{A.A. 2023/2024}
+\pagestyle{headings}
+\geometry{a4paper, top=3cm, bottom=3cm, left=2.2cm, right=2.2cm}
+\makeindex
+\hypersetup{
+	colorlinks,
+	citecolor=black,
+	filecolor=black,
+	linkcolor=black,
+	urlcolor=black
+}
+
+
+\title{\Huge {\textbf{UNITECNO}}}
+\author{\Large Matteo Ventali, Stefano Rosso \\ \Large Ingegneria dell'Informazione (Sede di Latina) \\ \Large Università La Sapienza Roma }
+
+
+% Inizio documento
+\begin{document}
+	% Intestazione
+	\begin{figure}[t]
+		\includegraphics[width=60mm]{logo.png}
+	\end{figure}
+	
+	\maketitle	
+	
+	% Pagina che contiene l'indice del documento
+	\newpage
+	%\tableofcontents
+	\tableofcontents
+	
+	% Inizio corpo documento
+	\newpage
+	\begin{flushleft}
+		
+	% Sezione 1
+	\section{Introduzione e descrizione dei dati}
+		\subsection{Introduzione}
+			L'applicazione web UNITECNO ha come obiettivo la realizzazione di un negozio virtuale finalizzato alla vendita di dispositivi tecnologici, tramite un processo di fidelizzazione dei clienti.
+			
+			Il sito web offre un catalogo di prodotti, divisi per categoria,
+			e documentati da immagini che ne riportano le specifiche tecniche, una breve descrizione e il prezzo. 
+			La valuta all'interno del sistema è costituita dai \textit{crediti}.
+			Il catalogo è fruibile da ogni utente del sito e può essere visionato secondo diversi criteri:
+			\begin{itemize}
+				\item prezzo;
+				\item marca;
+				\item modello.
+			\end{itemize}
+			
+			\subsubsection{Categorie di dispositivi}
+			Le categorie dei dispositivi sono:
+			\begin{itemize}
+				\item informatica;
+				\item telefonia;
+				\item TV e home;
+				\item elettrodomestici;
+				\item tempo libero;
+			\end{itemize}
+		
+			\bigskip \textbf{Categoria informatica} \\ \smallskip
+			Nella categoria informatica rientrano i seguenti dispositivi:
+				\begin{itemize}
+					\item computer portatili;
+					\item computer fissi;
+					\item tablet;
+					\item stampanti;
+					\item accessori.
+				\end{itemize}
+			
+			\bigskip \textbf{Categoria telefonia} \\ \smallskip
+			Nella categoria telefonia rientrano i seguenti dispositivi:
+			\begin{itemize}
+				\item smartphone e cellulari;
+				\item telefoni fissi;
+				\item accessori.
+			\end{itemize}
+				
+			\bigskip \textbf{Categoria TV e home} \\ \smallskip
+			Nella categoria TV e home rientrano i seguenti dispositivi:
+			\begin{itemize}
+				\item televisori;
+				\item accessori.
+			\end{itemize}
+			
+			\bigskip \textbf{Categoria elettrodomestici} \\ \smallskip
+			Nella categoria elettrodomestici rientrano i seguenti dispositivi:
+			\begin{itemize}
+				\item lavatrici;
+				\item frigoriferi;
+				\item lavastoviglie;
+				\item piani cottura;
+				\item forni;
+				\item condizionatori;
+				\item accessori.
+			\end{itemize}			
+			
+			\bigskip \textbf{Categoria tempo libero} \\ \smallskip
+			Nella categoria tempo libero rientrano i seguenti dispositivi:
+			\begin{itemize}
+				\item cuffie e auricolari;
+				\item fotocamere e videocamere;
+				\item console da gioco;
+				\item accessori.
+			\end{itemize}			
+			
+			
+			
+			\subsubsection{Categorie di utenti}
+			Gli utenti si dividono in:
+			\begin{itemize}
+				\item non registrati, da qui in avanti denominati \textit{visitatori};
+				\item registrati, da qui in avanti denominati \textit{clienti};
+				\item \textit{gestori};
+				\item amministratori, da qui in avanti denominati \textit{admin}.
+			\end{itemize}
+			
+			\bigskip \textbf{Visitatori} \\ \smallskip
+			L'utente visitatore può:
+			\begin{itemize}
+				\item accedere al catalogo;
+				\item accedere alla sezione contatti;
+				\item visionare le FAQ;
+				\item registrarsi.
+			\end{itemize}
+			
+			\bigskip \textbf{Clienti} \\ \smallskip
+			Ogni cliente usufruisce di due portafogli:
+			\begin{itemize}
+				\item \underline{portafoglio standard}, ricaricabile;
+				\item \underline{portafoglio bonus}, alimentato a seguito di acquisti effettuati.
+			\end{itemize}
+			
+			L'utente cliente può:
+			\begin{itemize}
+				\item fare tutto quello che è permesso al visitatore, ma non può registrarsi;
+				\item accedere al profilo, visionare gli acquisti effettuati, quelli in corso, il portafoglio
+				standard e quello bonus, la propria reputazione e può vedere e gestire i propri dati personali;
+				\item acquistare dal catalogo, inserendo i prodotti nel carrello;
+				\item scrivere recensioni, domande e risposte;
+				\item giudicare gli interventi degli altri clienti;
+				\item ricaricare il portafoglio standard attraverso una richiesta all'admin.
+				L’indirizzo di consegna è di default quello indicato dall’utente nel profilo, ma può essere
+				modificato prima di finalizzare l’acquisto.
+			\end{itemize}
+		
+			\bigskip \textbf{Gestori} \\ \smallskip
+			L'utente gestore può:
+			\begin{itemize}
+				\item aggiungere, eliminare, modificare prodotti in catalogo;
+				\item definire gli sconti sui prodotti;
+				\item consultare il profilo dei clienti;
+				\item moderare e dare un giudizio ai contributi dei clienti;
+				\item rispondere alle domande;
+				\item aggiungere domande e risposte alle FAQ;
+				\item elevare una domanda dei clienti alle FAQ, con la risposta migliore.
+			\end{itemize}
+		
+			\bigskip \textbf{Admin} \\ \smallskip
+			L'utente admin può:
+			\begin{itemize}
+				\item visionare e modificare i dati anagrafici e di accesso degli utenti;
+				\item bannare e attivare i clienti;
+				\item accettare o rifiutare le richieste di ricarica dei clienti;
+				\item aggiungere domande e risposte alle FAQ;
+				\item elevare una domanda dei clienti alle FAQ, con la risposta migliore.
+			\end{itemize}
+		
+		\subsection{Note}
+			\subsubsection{Portafogli}
+				Nell'applicazione, associati ad ogni cliente, verranno gestiti due portafogli:
+				\begin{itemize}
+					\item \underline{portafoglio standard};
+					\item \underline{portafoglio bonus}.
+				\end{itemize}
+
+				\bigskip \textbf{Portafoglio standard} \\ \smallskip			
+				Il portafoglio standard viene ricaricato attraverso l’acquisto dei crediti mediante richiesta tramite form.
+				L’utente può scegliere tra dei tagli ben definiti: nella form sarà presente un menù a tendina in cui poter selezionare il l'entità del versamento da effettuare.
+				
+				\bigskip \textbf{Portafoglio bonus} \\ \smallskip
+				Il portafoglio bonus si alimenta in due diversi modi:
+				\begin{itemize}
+				\item ottenendo una quota di crediti da ciascun acquisto effettuato (\textit{bonus fisso});
+				\item ottenendo crediti bonus per ogni acquisto relativo ad un prodotto in offerta speciale (\textit{bonus speciale}).
+				\end{itemize}
+			
+			\subsubsection{Sconti e offerte}
+				Uno sconto è una percentuale di riduzione del prezzo e può essere di tre tipi:
+				\begin{itemize}
+					\item \underline{offerta speciale}, per uno specifico prodotto in un determinato periodo temporale;
+					\item \underline{fisso}, calcolato sulla base delle transazioni effettuate dall’utente;
+					\item \underline{variabile}, in base alle scelte effettuate dal cliente sull’utilizzo dei crediti bonus (disponibili nel suo portafoglio bonus).
+				\end{itemize}
+			
+				
+				\bigskip \textbf{Offerta speciale} \\ \smallskip
+				L'offerta speciale viene creata da un gestore che ne definisce il prodotto target e la sua durata temporale.
+				Lo sconto in oggetto, se presente, blocca la possibilità al cliente di godere dello sconto fisso e variabile.
+				
+				\bigskip \textbf{Sconto fisso} \\ \smallskip
+				Lo sconto fisso si basa sull'analisi degli acquisti effettuati dal cliente. \\
+				In fase di analisi si tiene conto dei seguenti parametri:
+				\begin{itemize}
+					\item ammontare N dei crediti spesi dal cliente;
+					\item ammontare M dei crediti spesi dal cliente nell'anno solare corrente;
+					\item reputazione del cliente;
+					\item periodo decorso dall'iscrizione del cliente.
+				\end{itemize}
+				La funzione per calcolare lo sconto fisso è:
+				
+				
+	\end{flushleft}
+\end{document}
