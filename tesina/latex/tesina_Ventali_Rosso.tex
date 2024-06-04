@@ -11,6 +11,7 @@
 \usepackage[fontsize=12pt]{fontsize}
 \usepackage{chngcntr}
 \usepackage{float}
+\usepackage{eurosym}
 \counterwithin{figure}{section}
 \graphicspath{ {./img/} }
 
@@ -157,9 +158,9 @@
 				\item scrivere recensioni, domande e risposte;
 				\item giudicare gli interventi degli altri clienti;
 				\item ricaricare il portafoglio standard attraverso una richiesta all'admin.
-				L’indirizzo di consegna è di default quello indicato dall’utente nel profilo, ma può essere
-				modificato prima di finalizzare l’acquisto.
 			\end{itemize}
+			L’indirizzo di consegna è di default quello indicato dall’utente nel profilo, ma può essere
+			modificato prima di finalizzare l’acquisto.
 		
 			\bigskip \textbf{Gestori} \\ \smallskip
 			L'utente gestore può:
@@ -193,12 +194,20 @@
 
 				\bigskip \textbf{Portafoglio standard} \\ \smallskip			
 				Il portafoglio standard viene ricaricato attraverso l’acquisto dei crediti mediante richiesta tramite form.
-				L’utente può scegliere tra dei tagli ben definiti: nella form sarà presente un menù a tendina in cui poter selezionare il l'entità del versamento da effettuare.
+				L’utente può scegliere tra dei tagli ben definiti: nella form sarà presente un menù a tendina in cui poter selezionare l'entità del versamento da effettuare.
+				I tagli disponibili sono:
+				\begin{itemize}
+					\item 25\euro \> $\rightarrow$ 5 crediti;
+					\item 50\euro \> $\rightarrow$ 10 crediti;
+					\item 100\euro \> $\rightarrow$ 20 crediti;
+					\item 200\euro \> $\rightarrow$ 40 crediti;
+					\item 500\euro \> $\rightarrow$ 100 crediti;
+				\end{itemize}
 				
 				\bigskip \textbf{Portafoglio bonus} \\ \smallskip
 				Il portafoglio bonus si alimenta in due diversi modi:
 				\begin{itemize}
-				\item ottenendo una quota di crediti da ciascun acquisto effettuato (\textit{bonus fisso});
+				\item ottenendo una quota di crediti pari all'1.5\% sull'importo totale dell'acquisto effettuato (\textit{bonus fisso});
 				\item ottenendo crediti bonus per ogni acquisto relativo ad un prodotto in offerta speciale (\textit{bonus speciale}).
 				\end{itemize}
 			
@@ -210,9 +219,8 @@
 					\item \underline{variabile}, in base alle scelte effettuate dal cliente sull’utilizzo dei crediti bonus (disponibili nel suo portafoglio bonus).
 				\end{itemize}
 			
-				
 				\bigskip \textbf{Offerta speciale} \\ \smallskip
-				L'offerta speciale viene creata da un gestore che ne definisce il prodotto target e la sua durata temporale.
+				L'offerta speciale viene creata da un gestore che ne definisce il prodotto target, la sua durata temporale e la ricompensa in crediti bonus.
 				Lo sconto in oggetto, se presente, blocca la possibilità al cliente di godere dello sconto fisso e variabile.
 				
 				\bigskip \textbf{Sconto fisso} \\ \smallskip
@@ -221,11 +229,80 @@
 				\begin{itemize}
 					\item ammontare N dei crediti spesi dal cliente;
 					\item ammontare M dei crediti spesi dal cliente nell'anno solare corrente;
-					\item reputazione del cliente;
-					\item periodo decorso dall'iscrizione del cliente.
+					\item reputazione R del cliente;
+					\item periodo A decorso dall'iscrizione del cliente, misurato in anni.
 				\end{itemize}
 				La funzione per calcolare lo sconto fisso è:
+				\begin{center}
+					$ y = 0.5 \cdot A + 0.01 \cdot N + 0.03 \cdot M + 0.1 \cdot R $
+				\end{center}
+				Lo sconto fisso ha un limite massimo del 20\%.
 				
+				\bigskip \textbf{Sconto variabile} \\ \smallskip
+				Per poter utilizzare i crediti presenti nel portafoglio bonus, si fa riferimento
+				al periodo di acquisizione di tali crediti. In base all’anno in cui vengono maturati, essi hanno
+				un peso diverso:
+				\begin{itemize}
+					\item coefficiente anno corrente $ = 0.8 $
+					\item coefficiente anno corrente $ - 1 = 0.9 $
+					\item coefficiente anno corrente $ - 2 = 1 $
+					\item coefficiente anno corrente $ - 3 $ e oltre $ = 2 $
+				\end{itemize}
+				La funzione utilizzata per lo sconto variabile è: \\
+				 \begin{center}
+				 	$ s = q \div coefficienti[j] $
+				 \end{center}
+				\newpage in cui:
+				\begin{itemize}
+					\item j è l’anno di riferimento;
+					\item q è l’ammontare dei crediti bonus riferiti all’anno j-esimo;
+					\item coefficienti[j] è il peso conferito ai crediti bonus (vedi sopra).
+				\end{itemize}
+
+				Supponendo che un cliente voglia impegnare N crediti e ne abbia N1 nell'anno corrente, N2
+				l'anno scorso ed N3 due anni fa, lo sconto sarà così calcolato: 
+				\begin{center}
+					$ s = N1\div0.8 + N2\div0.9 + N3\div1 $\\
+				\end{center}
+				Il sistema provvederà in modo automatico a consumare prima i crediti bonus meno recenti.
+				Lo sconto variabile ha un limite massimo del 20\% sul totale dell'acquisto effettuato.
+				
+			\subsubsection{Reputazione e post}
+				Un cliente può postare domande e recensioni. Le risposte alle domande possono essere pubblicate da un altro cliente oppure
+				da un admin o gestore.
+				Ciascuno di questi post può essere valutato dagli altri utenti (non visitatori).
+				La valutazione può essere fatta una sola volta. L'applicazione permetterà all'utente di visualizzare la propria valutazione.
+				La valutazione non può essere fatta sui propri post.\\
+				Alcune domande e risposte possono essere selezionate da un admin o gestore a far parte delle FAQ.
+				Se nessuna risposta è attendibile, per una determinata domanda, l'admin o il gestore aggiungono una risposta per completare la FAQ.
+				
+				\bigskip \textbf{Reputazione di un cliente} \\ \smallskip
+				La reputazione del cliente è un indicatore compreso tra 1 e 100.\\
+				Inizialmente, il cliente ha una reputazione pari a 1.\\
+				La reputazione di un cliente è calcolata in base ai giudizi che i suoi post hanno ricevuto.\\
+				
+				
+				\bigskip \textbf{Pesi e valutazione} \\ \smallskip				
+				I giudizi hanno peso diverso a seconda della reputazione di chi li emette (nel momento in cui li emette). I giudizi di admin e gestori hanno un peso maggiore di quello dei clienti:
+				\begin{itemize}
+					\item admin e gestori hanno peso 200\%;
+					\item i clienti hanno peso percentuale dato dalla reputazione (quindi da 1\% a 100\%)
+				\end{itemize}
+				
+				Un post viene valutato tramite una scala da 1 (disprezzo) a 5 (grande apprezzamento). Precisamente:
+				\begin{itemize}
+					\item 1 stellina $\rightarrow$ decremento di 4 punti;
+					\item 2 stelline $\rightarrow$ decremento di 2 punti;
+					\item 3 stelline $\rightarrow$ punteggio intatto;
+					\item 4 stelline $\rightarrow$ incremento di 2 punti;
+					\item 5 stelline $\rightarrow$ incremento di 4 punti;
+				\end{itemize}
+			
+				Detto P il punteggio definito dalla scala precedente e W il peso dell'utente che emette il giudizio, quest'ultimo viene calcolato tramite la seguente funzione:
+				\begin{center}
+					$ g = P \cdot \frac{W}{100} $
+				\end{center}
+
 				
 	\end{flushleft}
 \end{document}

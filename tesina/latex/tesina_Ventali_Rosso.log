@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.24 (TeX Live 2022/Debian) (preloaded format=pdflatex 2023.12.5)  3 JUN 2024 18:47
+This is pdfTeX, Version 3.141592653-2.6-1.40.24 (TeX Live 2022/Debian) (preloaded format=pdflatex 2023.12.5)  4 JUN 2024 16:08
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -362,12 +362,16 @@ Package: float 2001/11/08 v1.3d Float enhancements (AL)
 \@float@everytoks=\toks23
 \@floatcapt=\box98
 )
+(/usr/share/texlive/texmf-dist/tex/latex/eurosym/eurosym.sty
+Package: eurosym 1998/08/06 v1.1 European currency symbol ``Euro''
+\@eurobox=\box99
+)
 \tesina_Ventali_Rosso@idxfile=\write3
 \openout3 = `tesina_Ventali_Rosso.idx'.
 
 
 Writing index file tesina_Ventali_Rosso.idx
-Package hyperref Info: Option `colorlinks' set `true' on input line 28.
+Package hyperref Info: Option `colorlinks' set `true' on input line 29.
 
 LaTeX Warning: Unused global option(s):
     [14pt].
@@ -375,26 +379,26 @@ LaTeX Warning: Unused global option(s):
 (./tesina_Ventali_Rosso.aux)
 \openout1 = `tesina_Ventali_Rosso.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 36.
-LaTeX Font Info:    ... okay on input line 36.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 36.
-LaTeX Font Info:    ... okay on input line 36.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 36.
-LaTeX Font Info:    ... okay on input line 36.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 36.
-LaTeX Font Info:    ... okay on input line 36.
-LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 36.
-LaTeX Font Info:    ... okay on input line 36.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 36.
-LaTeX Font Info:    ... okay on input line 36.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 36.
-LaTeX Font Info:    ... okay on input line 36.
-LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 36.
-LaTeX Font Info:    ... okay on input line 36.
-LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 36.
-LaTeX Font Info:    ... okay on input line 36.
-LaTeX Info: Redefining \it@ocap on input line 36.
-LaTeX Info: Redefining \it@ccap on input line 36.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 37.
+LaTeX Font Info:    ... okay on input line 37.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 37.
+LaTeX Font Info:    ... okay on input line 37.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 37.
+LaTeX Font Info:    ... okay on input line 37.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 37.
+LaTeX Font Info:    ... okay on input line 37.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 37.
+LaTeX Font Info:    ... okay on input line 37.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 37.
+LaTeX Font Info:    ... okay on input line 37.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 37.
+LaTeX Font Info:    ... okay on input line 37.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 37.
+LaTeX Font Info:    ... okay on input line 37.
+LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 37.
+LaTeX Font Info:    ... okay on input line 37.
+LaTeX Info: Redefining \it@ocap on input line 37.
+LaTeX Info: Redefining \it@ccap on input line 37.
 
 *geometry* driver: auto-detecting
 *geometry* detected driver: pdftex
@@ -439,7 +443,7 @@ File: color.cfg 2016/01/02 v1.6 sample color configuration
 Package color Info: Driver file: pdftex.def on input line 149.
 
 (/usr/share/texlive/texmf-dist/tex/latex/graphics/mathcolor.ltx))
-Package hyperref Info: Link coloring ON on input line 36.
+Package hyperref Info: Link coloring ON on input line 37.
 
 (./tesina_Ventali_Rosso.out) (./tesina_Ventali_Rosso.out)
 \@outlinefile=\write4
@@ -450,7 +454,7 @@ Package hyperref Info: Link coloring ON on input line 36.
 [Loading MPS to PDF converter (version 2006.09.02).]
 \scratchcounter=\count292
 \scratchdimen=\dimen165
-\scratchbox=\box99
+\scratchbox=\box100
 \nofMPsegments=\count293
 \nofMParguments=\count294
 \everyMPshowfont=\toks24
@@ -468,19 +472,19 @@ Package epstopdf-base Info: Redefining graphics rule for `.eps' on input line 4
 File: epstopdf-sys.cfg 2010/07/13 v1.3 Configuration of (r)epstopdf for TeX Liv
 e
 ))
-<./img//logo.png, id=32, 2730.2pt x 1134.2375pt>
+<./img//logo.png, id=36, 2730.2pt x 1134.2375pt>
 File: ./img//logo.png Graphic file (type png)
 <use ./img//logo.png>
-Package pdftex.def Info: ./img//logo.png  used on input line 39.
+Package pdftex.def Info: ./img//logo.png  used on input line 40.
 (pdftex.def)             Requested size: 170.71652pt x 70.90697pt.
-LaTeX Font Info:    Calculating math sizes for size <14.39996> on input line 42
+LaTeX Font Info:    Calculating math sizes for size <14.39996> on input line 43
 .
 LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <14.39996> on input line 42.
+(Font)              <14.39996> on input line 43.
 LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <10.07993> on input line 42.
+(Font)              <10.07993> on input line 43.
 LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <7.19998> on input line 42.
+(Font)              <7.19998> on input line 43.
 
 [1
 
@@ -496,17 +500,17 @@ LaTeX Font Info:    External font `cmex10' loaded for size
 \tf@toc=\write5
 \openout5 = `tesina_Ventali_Rosso.toc'.
 
- [2] [3] [4] [5] [6] [7]
+ [2] [3] [4] [5] [6] [7] [8] [9]
 (./tesina_Ventali_Rosso.aux)
 Package rerunfilecheck Info: File `tesina_Ventali_Rosso.out' has not changed.
-(rerunfilecheck)             Checksum: 72AD46911B1122CF1DCE7546F427E5CF;1055.
+(rerunfilecheck)             Checksum: 54032A4D9CEFA3FE9C62B707629C458C;1218.
  ) 
 Here is how much of TeX's memory you used:
- 11203 strings out of 478040
- 179989 string characters out of 5840467
+ 11284 strings out of 478040
+ 181389 string characters out of 5840467
  1859330 words of memory out of 5000000
- 31144 multiletter control sequences out of 15000+600000
- 525490 words of font info for 57 fonts, out of 8000000 for 9000
+ 31217 multiletter control sequences out of 15000+600000
+ 525607 words of font info for 58 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
  75i,7n,77p,285b,612s stack positions out of 10000i,1000n,20000p,200000b,200000s
  </home/matteo/.texlive2022/texmf-var/fonts/pk/ljfour/jknappen/ec/tcrm1200.60
@@ -519,11 +523,16 @@ csl1200.600pk> </home/matteo/.texlive2022/texmf-var/fonts/pk/ljfour/jknappen/ec
 /ecrm1200.600pk> </home/matteo/.texlive2022/texmf-var/fonts/pk/ljfour/jknappen/
 ec/ecrm1440.600pk> </home/matteo/.texlive2022/texmf-var/fonts/pk/ljfour/jknappe
 n/ec/ecrm1728.600pk> </home/matteo/.texlive2022/texmf-var/fonts/pk/ljfour/jknap
-pen/ec/ecbx2986.600pk>
-Output written on tesina_Ventali_Rosso.pdf (7 pages, 166815 bytes).
+pen/ec/ecbx2986.600pk></usr/share/texlive/texmf-dist/fonts/type1/public/amsfont
+s/cm/cmmi12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/c
+mmi8.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pf
+b></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb></usr/
+share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/share/
+texlive/texmf-dist/fonts/type1/public/eurosym/feymr10.pfb>
+Output written on tesina_Ventali_Rosso.pdf (9 pages, 229773 bytes).
 PDF statistics:
- 319 PDF objects out of 1000 (max. 8388607)
- 110 compressed objects within 2 object streams
- 16 named destinations out of 1000 (max. 500000)
- 62 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 376 PDF objects out of 1000 (max. 8388607)
+ 140 compressed objects within 2 object streams
+ 19 named destinations out of 1000 (max. 500000)
+ 70 words of extra memory for PDF output out of 10000 (max. 10000000)
 

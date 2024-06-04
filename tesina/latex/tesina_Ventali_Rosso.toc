@@ -6,4 +6,5 @@
 \contentsline {subsubsection}{\numberline {1.1.2}Categorie di utenti}{4}{subsubsection.1.1.2}%
 \contentsline {subsection}{\numberline {1.2}Note}{6}{subsection.1.2}%
 \contentsline {subsubsection}{\numberline {1.2.1}Portafogli}{6}{subsubsection.1.2.1}%
-\contentsline {subsubsection}{\numberline {1.2.2}Sconti e offerte}{6}{subsubsection.1.2.2}%
+\contentsline {subsubsection}{\numberline {1.2.2}Sconti e offerte}{7}{subsubsection.1.2.2}%
+\contentsline {subsubsection}{\numberline {1.2.3}Reputazione e post}{8}{subsubsection.1.2.3}%
