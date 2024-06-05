@@ -122,8 +122,6 @@
 				\item accessori.
 			\end{itemize}			
 			
-			
-			
 			\subsubsection{Categorie di utenti}
 			Gli utenti si dividono in:
 			\begin{itemize}
@@ -171,7 +169,7 @@
 				\item moderare e dare un giudizio ai contributi dei clienti;
 				\item rispondere alle domande;
 				\item aggiungere domande e risposte alle FAQ;
-				\item elevare una domanda dei clienti alle FAQ, con la risposta migliore.
+				\item elevare una domanda dei clienti alle FAQ, con relativa risposta.
 			\end{itemize}
 		
 			\bigskip \textbf{Admin} \\ \smallskip
@@ -181,7 +179,7 @@
 				\item bannare e attivare i clienti;
 				\item accettare o rifiutare le richieste di ricarica dei clienti;
 				\item aggiungere domande e risposte alle FAQ;
-				\item elevare una domanda dei clienti alle FAQ, con la risposta migliore.
+				\item elevare una domanda dei clienti alle FAQ, con relativa risposta.
 			\end{itemize}
 		
 		\subsection{Note}
@@ -375,7 +373,7 @@
 			\end{itemize}
 		
 			\bigskip
-			\subsubsection{Recensioni e domande}
+			\subsubsection{Recensioni}
 			\textbf{Precondizioni}
 			\begin{itemize}
 				\item l'utente ha effettuato il login come cliente;
@@ -383,24 +381,42 @@
 			\end{itemize}
 			\textbf{Eventi}
 			\begin{enumerate}
-				\item il cliente raggiunge la sezione \textit{Recensioni} o la sezione \textit{Domande};
-				\item il cliente inserisce la recensione o la domanda.
+				\item il cliente raggiunge la sezione \textit{Recensioni} nella pagina del prodotto;
+				\item il cliente inserisce la recensione.
 			\end{enumerate}
 			\textbf{Postcondizioni}
 			\begin{itemize}
-				\item la recensione o la domanda saranno visibili sulla pagina del prodotto in oggetto.
+				\item la recensione sarà visibile sulla pagina del prodotto in oggetto.
 			\end{itemize}
 			
 			\bigskip
-			\subsubsection{Risposte}
+			\subsubsection{Inserimento domanda}
 			\textbf{Precondizioni}
 			\begin{itemize}
-				\item l'utente ha effettuato il login come admin/gestore/cliente;
-				\item l'utente ha selezionato un prodotto dal catalogo.
+				\item l'utente ha effettuato il login come cliente;
+				\item il cliente ha acceduto alla sezione \textit{Domande}.
 			\end{itemize}
 			\textbf{Eventi}
 			\begin{enumerate}
-				\item l'utente raggiunge la sezione \textit{Domande};
+				\item il cliente clicca sul bottone per aggiungere una domanda;
+				\item il cliente viene reindirizzato in una pagina con una form da compilare;
+				\item il cliente compila la form con la propria domanda;
+				\item il cliente sottomette la domanda.
+			\end{enumerate}
+			\textbf{Postcondizioni}
+			\begin{itemize}
+				\item la domanda viene resa visibile a tutti.
+			\end{itemize}
+			
+			\bigskip
+			\subsubsection{Inserimento risposta}
+			\textbf{Precondizioni}
+			\begin{itemize}
+				\item l'utente ha effettuato il login come admin/gestore/cliente;
+				\item l'utente ha acceduto alla sezione \textit{Domande}.
+			\end{itemize}
+			\textbf{Eventi}
+			\begin{enumerate}
 				\item l'utente seleziona la domanda a cui rispondere;
 				\item l'utente viene reindirizzato in una pagina specifica e visualizza la domanda e le eventuali risposte già presenti;
 				\item l'utente inserisce tramite form la propria risposta.
@@ -408,14 +424,14 @@
 			\textbf{Postcondizioni}
 			\begin{itemize}
 				\item la risposta viene resa visibile insieme a quelle eventualmente presenti.
-			\end{itemize}		
+			\end{itemize}
 			
 			\bigskip
 			\subsubsection{Valutazione interventi}
 			\textbf{Precondizioni}
 			\begin{itemize}
 				\item l'utente ha effettuato il login come admin/gestore/cliente;
-				\item l'utente raggiunge la sezione \textit{Recensioni} o \textit{Domande}.
+				\item l'utente raggiunge la sezione \textit{Recensioni} di un prodotto o la sezione \textit{Domande}.
 			\end{itemize}
 			\textbf{Eventi}
 			\begin{enumerate}
@@ -508,6 +524,67 @@
 			\begin{itemize}
 				\item il prodotto è visibile nel catalogo al prezzo scontato.
 			\end{itemize}
+		
+			\bigskip
+			\subsubsection{Gestione clienti}
+			\textbf{Precondizioni}
+			\begin{itemize}
+				\item l'utente ha effettuato il login come gestore/admin;
+			\end{itemize}
+			\textbf{Eventi}
+			\begin{enumerate}
+				\item l'utente accede all'elenco degli utenti;
+				\item l'utente seleziona il cliente che intende visualizzare;
+				\item l'utente viene reindirizzato alla pagina specifica del cliente dove visiona i suoi dati.
+					  L'admin ha facoltà di bannare (o riattivare se già bannato) il cliente in oggetto.
+					  L'admin ha facoltà di modificare i dati del cliente;
+				\item in caso di modifica dei dati, l'admin viene reindirizzato ad una pagina con una form precompilata
+					  da modificare;
+				\item in caso di modifica dei dati, l'admin sottomette le modifiche.
+			\end{enumerate}
+			\textbf{Postcondizioni}
+			\begin{itemize}
+				\item in caso di ban (riattivazione) il cliente non può effettuare il login (può effettuare il login);
+				\item in caso di modifica il cliente visualizzerà i suoi dati aggiornati.
+			\end{itemize}
 			
+			\bigskip
+			\subsubsection{Inserimento FAQ}
+			\textbf{Precondizioni}
+			\begin{itemize}
+				\item l'utente ha effettuato il login come gestore/admin;
+				\item l'utente accede alla sezione \textit{FAQ}.
+			\end{itemize}
+			\textbf{Eventi}
+			\begin{enumerate}
+				\item l'utente clicca sul bottone per inserire una nuova FAQ;
+				\item l'utente viene reindirizzato ad una pagina con una form da compilare;
+				\item l'utente compila la form con domanda e risposta;
+				\item l'utente sottomette la nuova FAQ.
+			\end{enumerate}
+			\textbf{Postcondizioni}
+			\begin{itemize}
+				\item la FAQ è visibile nella sezione del sito dedicata.
+			\end{itemize}
+		
+			\bigskip
+			\subsubsection{Elevazione a FAQ}
+			\textbf{Precondizioni}
+			\begin{itemize}
+				\item l'utente ha effettuato il login come gestore/admin;
+				\item l'utente si trova sulla pagina relativa ad una domanda.
+			\end{itemize}
+			\textbf{Eventi}
+			\begin{enumerate}
+				\item l'utente clicca il bottone per elevare la domanda ad una FAQ;
+				\item l'utente viene reindirizzato ad una pagina in cui ha la facoltà di scegliere la risposta
+					  migliore o scriverne una propria (entrambe le cose non sono ammesse);
+				\item l'utente sottomette la nuova FAQ.
+			\end{enumerate}
+			\textbf{Postcondizioni}
+			\begin{itemize}
+				\item la FAQ è visibile nella sezione del sito dedicata.
+			\end{itemize}
+		
 	\end{flushleft}
 \end{document}
