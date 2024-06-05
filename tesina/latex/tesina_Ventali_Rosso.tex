@@ -303,6 +303,211 @@
 					$ g = P \cdot \frac{W}{100} $
 				\end{center}
 
-				
+		\subsection{Casi d'uso}
+			\subsubsection{Registrazione}
+				\textbf{Precondizioni}
+				\begin{itemize}
+					\item il visitatore è collegato alla homepage del sito.
+				\end{itemize}
+				\textbf{Eventi}
+				\begin{enumerate}
+					\item il visitatore clicca sul bottone di registrazione;
+					\item il visitatore viene reindirizzato alla pagina di registrazione in cui è presente una form da compilare;
+					\item il visitatore compila la form con i propri dati personali e le credenziali;
+					\item il visitatore clicca sul bottone di invio richiesta.
+				\end{enumerate}
+				\textbf{Postcondizioni}
+				\begin{itemize}
+					\item se la registrazione è avvenuta con successo il visitatore è diventato un cliente. Viene reindirizzato alla homepage del sito;
+					\item se la registrazione non è avvenuta con successo vengono notificati gli errori. Si ritorna alla fase 2.
+				\end{itemize}
+			
+			
+			\bigskip
+			\subsubsection{Accesso e gestione profilo}
+			\textbf{Precondizioni}
+			\begin{itemize}
+				\item l'utente ha effettuato il login come admin/gestore/cliente.
+			\end{itemize}
+			\textbf{Eventi}
+			\begin{enumerate}
+				\item l'utente accede alla propria area personale;
+				\item l'utente visualizza:
+					\begin{itemize}
+						\item i dati personali;
+						\item gli acquisti effettuati;
+						\item gli acquisti in corso; 
+						\item il saldo del portafoglio standard;
+						\item il saldo del portafoglio bonus; 
+						\item la propria reputazione.
+					\end{itemize} 
+				\item l'utente ha facoltà di modificare i propri dati personali. Viene reindirizzato 
+					  in una pagina con una form precompilata in cui può modificare i campi voluti.
+			\end{enumerate}
+			\textbf{Postcondizioni}
+			\begin{itemize}
+				\item in caso di modifica dei dati personali avvenuta con successo l'utente ritorna alla fase 2;
+				\item in caso di modifica dei dati personali non avvenuta con successo vengono notificati gli errori. L'utente rimane nella fase 3.
+			\end{itemize}
+		
+			\bigskip
+			\subsubsection{Acquisto}
+			\textbf{Precondizioni}
+			\begin{itemize}
+				\item l'utente ha effettuato il login come cliente;
+				\item il cliente ha acceduto al catalogo dei prodotti.
+			\end{itemize}
+			\textbf{Eventi}
+			\begin{enumerate}
+				\item il cliente seleziona il prodotto desiderato dal catalogo e viene reindirizzato alla pagina del prodotto;
+				\item il cliente aggiunge il prodotto suddetto al carrello;
+				\item il cliente ripete le fasi 1-2 per tutti i prodotti desiderati;
+				\item il cliente accede al carrello;
+				\item il cliente sceglie l'ammontare di crediti bonus (se possibile) da utilizzare per usufruire dello sconto aggiuntivo
+				      sul totale del carrello (senza prendere in considerazione i prodotti in offerta speciale);
+				\item il cliente modifica eventualmente l'indirizzo di consegna;
+				\item il cliente finalizza l'acquisto.
+			\end{enumerate}
+			\textbf{Postcondizioni}
+			\begin{itemize}
+				\item in caso di acquisto effettuato con successo l'utente viene reindirizzato in una pagina di riepilogo;
+				\item in caso di acquisto non effettuato con successo l'utente ritorna alla fase 4;
+			\end{itemize}
+		
+			\bigskip
+			\subsubsection{Recensioni e domande}
+			\textbf{Precondizioni}
+			\begin{itemize}
+				\item l'utente ha effettuato il login come cliente;
+				\item il cliente ha selezionato un prodotto dal catalogo.
+			\end{itemize}
+			\textbf{Eventi}
+			\begin{enumerate}
+				\item il cliente raggiunge la sezione \textit{Recensioni} o la sezione \textit{Domande};
+				\item il cliente inserisce la recensione o la domanda.
+			\end{enumerate}
+			\textbf{Postcondizioni}
+			\begin{itemize}
+				\item la recensione o la domanda saranno visibili sulla pagina del prodotto in oggetto.
+			\end{itemize}
+			
+			\bigskip
+			\subsubsection{Risposte}
+			\textbf{Precondizioni}
+			\begin{itemize}
+				\item l'utente ha effettuato il login come admin/gestore/cliente;
+				\item l'utente ha selezionato un prodotto dal catalogo.
+			\end{itemize}
+			\textbf{Eventi}
+			\begin{enumerate}
+				\item l'utente raggiunge la sezione \textit{Domande};
+				\item l'utente seleziona la domanda a cui rispondere;
+				\item l'utente viene reindirizzato in una pagina specifica e visualizza la domanda e le eventuali risposte già presenti;
+				\item l'utente inserisce tramite form la propria risposta.
+			\end{enumerate}
+			\textbf{Postcondizioni}
+			\begin{itemize}
+				\item la risposta viene resa visibile insieme a quelle eventualmente presenti.
+			\end{itemize}		
+			
+			\bigskip
+			\subsubsection{Valutazione interventi}
+			\textbf{Precondizioni}
+			\begin{itemize}
+				\item l'utente ha effettuato il login come admin/gestore/cliente;
+				\item l'utente raggiunge la sezione \textit{Recensioni} o \textit{Domande}.
+			\end{itemize}
+			\textbf{Eventi}
+			\begin{enumerate}
+				\item l'utente seleziona l'intervento che desidera valutare;
+				\item l'utente viene reindirizzato alla pagina dell'intervento selezionato;
+				\item l'utente giudica l'intervento mediante le stelline. In caso di admin o gestore ha la facoltà di eliminare l'intervento.
+				\item l'utente sottomette la valutazione o procede all'eliminazione.
+			\end{enumerate}
+			\textbf{Postcondizioni}
+			\begin{itemize}
+				\item la valutazione complessiva dell'intervento viene aggiornata o l'intervento non è più visibile.
+			\end{itemize}
+		
+			\bigskip
+			\subsubsection{Ricarica portafoglio standard}
+			\textbf{Precondizioni}
+			\begin{itemize}
+				\item l'utente ha effettuato il login come cliente;
+				\item il cliente ha acceduto alla sua area personale.
+			\end{itemize}
+			\textbf{Eventi}
+			\begin{enumerate}
+				\item il cliente seleziona l'opzione di ricarica accanto al saldo del portafoglio standard;
+				\item il cliente viene reindirizzato alla pagina di ricarica in cui è mostrata una form da compilare;
+				\item il cliente compila la form selezionando il taglio di ricarica desiderato;
+				\item il cliente sottomette la richiesta di ricarica.
+			\end{enumerate}
+			\textbf{Postcondizioni}
+			\begin{itemize}
+				\item il cliente viene reindirizzato alla sua area personale;
+				\item la richiesta di ricarica è visibile agli admin per accettazione/diniego.
+			\end{itemize}
+		
+			\bigskip
+			\subsubsection{Inserimento prodotti}
+			\textbf{Precondizioni}
+			\begin{itemize}
+				\item l'utente ha effettuato il login come gestore;
+				\item il gestore ha acceduto al catalogo.
+			\end{itemize}
+			\textbf{Eventi}
+			\begin{enumerate}
+				\item il gestore seleziona l'opzione di inserimento prodotto;
+				\item il gestore viene reindirizzato ad una pagina con una form da compilare;
+				\item il gestore compila la form con i dettagli del prodotto;
+				\item il gestore sottomette l'inserimento del prodotto.
+			\end{enumerate}
+			\textbf{Postcondizioni}
+			\begin{itemize}
+				\item il prodotto è visibile nel catalogo.
+			\end{itemize}
+			
+			\bigskip
+			\subsubsection{Gestione prodotti}
+			\textbf{Precondizioni}
+			\begin{itemize}
+				\item l'utente ha effettuato il login come gestore;
+				\item il gestore ha acceduto al catalogo.
+			\end{itemize}
+			\textbf{Eventi}
+			\begin{enumerate}
+				\item il gestore seleziona il prodotto da gestire;
+				\item il gestore viene reindirizzato alla pagina del prodotto;
+				\item il gestore sceglie l'opzione di eliminazione o modifica del prodotto;
+				\item in caso di modifica, il gestore viene reindirizzato ad una pagina con una form precompilata con i dettagli del prodotto;
+				\item in caso di modifica, il gestore apporta le modifiche desiderate;
+				\item in caso di modifica, il gestore sottomette le modifiche apportate.
+			\end{enumerate}
+			\textbf{Postcondizioni}
+			\begin{itemize}
+				\item il prodotto non è visibile nel catalogo. In caso di modifica il prodotto è visibile con le modifiche apportate.
+			\end{itemize}
+		
+			\bigskip
+			\subsubsection{Inserimento sconti}
+			\textbf{Precondizioni}
+			\begin{itemize}
+				\item l'utente ha effettuato il login come gestore;
+				\item il gestore ha acceduto al catalogo e selezionato un prodotto;
+				\item non vi è uno sconto attivo sul prodotto selezionato.
+			\end{itemize}
+			\textbf{Eventi}
+			\begin{enumerate}
+				\item il gestore seleziona l'opzione di inserimento sconto per il prodotto;
+				\item il gestore viene reindirizzato ad una pagina con una form da compilare;
+				\item il gestore compila la form con i dettagli dello sconto;
+				\item il gestore sottomette lo sconto.
+			\end{enumerate}
+			\textbf{Postcondizioni}
+			\begin{itemize}
+				\item il prodotto è visibile nel catalogo al prezzo scontato.
+			\end{itemize}
+			
 	\end{flushleft}
 \end{document}
