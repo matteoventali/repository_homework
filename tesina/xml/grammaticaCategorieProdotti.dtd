@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!ELEMENT categorie (categoria)+>
+
+<!ELEMENT categoria (nome, tipi_dispositivo)>
+<!ATTLIST categoria id CDATA #REQUIRED>
+
+<!ELEMENT nome (#PCDATA)>
+
+<!ELEMENT tipi_dispositivo (tipo)+>
+
+<!ELEMENT tipo (#PCDATA)>
+<!ATTLIST tipo id CDATA #REQUIRED>

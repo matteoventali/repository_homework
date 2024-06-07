@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE tagli SYSTEM "./grammaticaTagliRicarica.dtd">
+<tagli> 
+    <taglio importo="25" crediti="5" />
+    <taglio importo="50" crediti="10" />
+    <taglio importo="100" crediti="20" />
+    <taglio importo="200" crediti="40" />
+    <taglio importo="500" crediti="100" />
+</tagli>

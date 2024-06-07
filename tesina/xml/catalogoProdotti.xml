@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<catalogo xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:noNamespaceSchemaLocation="./schemaCatalogoProdotti.xsd">
+
+    <prodotto id="1" id_categoria="1" id_tipo="1">
+        <nome>APPLE MacBook Air</nome>
+        <prezzo_listino>170</prezzo_listino>
+        <percorso_immagine>../img/immagine_mac</percorso_immagine>
+        <specifiche>
+            Risoluzione: 2560 x 1600 Pixel
+            Touchscreen: No
+            Diagonale schermo (pollici): 13.3 pollici
+            Tipo di schermo: LED
+            Dimensione memoria RAM: 8 GB
+            Memoria massima supportata: 8 GB
+            Processore: M1 CPU 8-core
+        </specifiche>
+        <descrizione>
+            Macbook Air supera ogni sfida con leggerezza.
+            E con il chip M3, il notebook piu' amato al mondo diventa ancora piu' potente.
+        </descrizione>
+    </prodotto>
+
+    <prodotto id="2" id_categoria="3" id_tipo="1">
+        <nome>Samsung TV UE50CU7090UXZT</nome>
+        <prezzo_listino>74</prezzo_listino>
+        <percorso_immagine>../img/immagine_tvSamsung</percorso_immagine>
+        <specifiche>
+            Dimensioni schermo: 50 Pollici
+            Marchio: Samsung
+            Tecnologia dello schermo: LED
+            Risoluzione: 4K
+            Frequenza di aggiornamento: 60 Hz
+            Caratteristica speciale: Built-In Speaker
+            Componenti inclusi: 1x Smart TV, 1x Remote
+            Tecnologia di connettivita': Bluetooth, Wi-Fi, USB, Ethernet, HDMI
+            Dimensioni del prodotto: 111P x 22,1l x 70,3H cm
+            Servizi Internet supportati: Netflix, Disney Plus, Prime Video, YouTube
+        </specifiche> 
+        <descrizione>
+            Processore Crystal 4K con risoluzione 4K per sfumature di colore vivide e realistiche. 
+            Tecnologia PurColor per una resa cromatica precisa con una vasta gamma di colori. 
+            Design elegante e raffinato senza cornice su 3 lati.
+        </descrizione>
+        <offerta_speciale percentuale="10" crediti="2">
+            <data_inizio>2024-06-01</data_inizio>
+            <data_fine>2024-06-30</data_fine>
+        </offerta_speciale>
+    </prodotto>
+</catalogo>

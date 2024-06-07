@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+
+    <xsd:element name="catalogo">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element ref="prodotto" minOccurs="1" maxOccurs="unbounded" />  
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+
+    <xsd:element name="prodotto">
+        <xsd:complexType>
+            <xsd:sequence>
+               <xsd:element ref="nome" minOccurs="1" maxOccurs="1"/>
+               <xsd:element ref="prezzo_listino" minOccurs="1" maxOccurs="1"/>
+               <xsd:element ref="percorso_immagine" minOccurs="1" maxOccurs="1"/>
+               <xsd:element ref="specifiche" minOccurs="1" maxOccurs="1"/>
+               <xsd:element ref="descrizione" minOccurs="1" maxOccurs="1"/>
+               <xsd:element ref="offerta_speciale" minOccurs="0" maxOccurs="1" />
+            </xsd:sequence>
+
+            <xsd:attribute name="id_tipo" type="xsd:integer" use="required"/>
+            <xsd:attribute name="id_categoria" type="xsd:integer" use="required"/>
+            <xsd:attribute name="id" type="xsd:integer" use="required"/>
+        </xsd:complexType>
+    </xsd:element>
+
+    <xsd:element name="offerta_speciale">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element ref="data_inizio" minOccurs="1" maxOccurs="1" />
+                <xsd:element ref="data_fine" minOccurs="1" maxOccurs="1" />
+            </xsd:sequence>
+
+            <xsd:attribute name="percentuale" type="xsd:integer" use="required" />
+            <xsd:attribute name="crediti" type="xsd:integer" use="required" />
+        </xsd:complexType>
+    </xsd:element>
+
+    <xsd:element name="nome" type="xsd:string"/>
+    <xsd:element name="descrizione" type="xsd:string"/>
+    <xsd:element name="specifiche" type="xsd:string"/>
+    <xsd:element name="percorso_immagine" type="xsd:string"/>
+    <xsd:element name="prezzo_listino" type="xsd:float"/>
+    <xsd:element name="data_inizio" type="xsd:date" />
+    <xsd:element name="data_fine" type="xsd:date" />
+</xsd:schema>
