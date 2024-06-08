@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+
+    <xsd:element name="recensioni">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element ref="recensione" minOccurs="0" maxOccurs="unbounded" />  
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+
+    <xsd:element name="recensione">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element ref="contenuto" minOccurs="1" maxOccurs="1" />
+                <xsd:element ref="valutazione" minOccurs="0" maxOccurs="unbounded" />
+            </xsd:sequence>
+
+            <xsd:attribute name="id_cliente" type="xsd:integer" use="required" />
+            <xsd:attribute name="id_prodotto" type="xsd:integer" use="required" />
+            <xsd:attribute name="data" type="xsd:date" use="required" />
+        </xsd:complexType>
+    </xsd:element>
+
+    <xsd:element name="contenuto" type="xsd:string"/>
+
+    <xsd:element name="valutazione">
+        <xsd:complexType>
+            <xsd:attribute name="rating" type="tipoRating" use="required" />
+            <xsd:attribute name="id_utente" type="xsd:integer" use="required" />
+        </xsd:complexType>
+    </xsd:element>
+
+    <xsd:simpleType name="tipoRating">
+            <xsd:restriction base="xsd:integer">
+                <xsd:minInclusive value="1" />
+                <xsd:maxInclusive value="5" />
+            </xsd:restriction>
+    </xsd:simpleType>
+</xsd:schema>

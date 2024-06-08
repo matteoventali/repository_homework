@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+
+    <xsd:element name="transazioni">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element ref="transazione" minOccurs="0" maxOccurs="unbounded" />  
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+
+    <xsd:element name="transazione">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element ref="prodotti" minOccurs="1" maxOccurs="1" />
+                <xsd:element ref="indirizzo_consegna" minOccurs="1" maxOccurs="1" />
+            </xsd:sequence>
+
+            <xsd:attribute name="id" type="xsd:integer" use="required" />
+            <xsd:attribute name="id_cliente" type="xsd:integer" use="required" />
+            <xsd:attribute name="data" type="xsd:date" use="required" />
+            <xsd:attribute name="crediti_bonus_ricevuti" type="xsd:integer" use="required" />
+            <xsd:attribute name="crediti_bonus_utilizzati" type="xsd:integer" />
+        </xsd:complexType>
+    </xsd:element>
+
+    <xsd:element name="prodotti">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element ref="prodotto" minOccurs="1" maxOccurs="unbounded"/>
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+
+    <xsd:element name="prodotto">
+        <xsd:complexType>
+            <xsd:attribute name="id_prodotto" type="xsd:integer" use="required" />
+            <xsd:attribute name="prezzo" type="xsd:integer" use="required" />
+        </xsd:complexType>
+    </xsd:element>
+
+    <xsd:element name="indirizzo_consegna" type="xsd:string" />
+
+</xsd:schema>

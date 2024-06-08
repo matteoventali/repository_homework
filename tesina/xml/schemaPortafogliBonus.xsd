@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    
+    <xsd:element name="portafogli">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element ref="portafoglio" minOccurs="0" maxOccurs="unbounded" />
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+
+    <xsd:element name="portafoglio">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element ref="saldo" minOccurs="1" maxOccurs="unbounded"></xsd:element>
+            </xsd:sequence>
+            <xsd:attribute name="id_cliente" type="xsd:integer" use="required"></xsd:attribute>
+            <xsd:attribute name="totale" type="xsd:integer" use="required"></xsd:attribute>
+        </xsd:complexType>
+    </xsd:element>
+
+    <xsd:element name="saldo">
+        <xsd:complexType>
+            <xsd:simpleContent>
+                <xsd:extension base="xsd:integer">
+                  <xsd:attribute name="anno" type="xsd:integer"/>
+                </xsd:extension>
+            </xsd:simpleContent>
+        </xsd:complexType>
+    </xsd:element>
+</xsd:schema>

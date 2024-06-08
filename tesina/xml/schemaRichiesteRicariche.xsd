@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    
+    <xsd:element name="richieste">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element ref="ricarica" minOccurs="0" maxOccurs="unbounded" />
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+
+    <xsd:element name="ricarica">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element ref="data_richiesta" minOccurs="1" maxOccurs="1"/>
+                <xsd:element ref="crediti_richiesti" minOccurs="1" maxOccurs="1"/>
+                <xsd:element ref="data_valutazione" minOccurs="0" maxOccurs="1"/>
+            </xsd:sequence>
+
+            <xsd:attribute name="id" type="xsd:integer" use="required"></xsd:attribute>
+            <xsd:attribute name="id_cliente" type="xsd:integer" use="required"></xsd:attribute>
+            <xsd:attribute name="id_admin" type="xsd:integer" use="optional"></xsd:attribute>
+            <xsd:attribute name="stato" type="tipoStato" use="required"></xsd:attribute>
+        </xsd:complexType>
+    </xsd:element>
+
+    <xsd:simpleType name="tipoStato">
+        <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="W"></xsd:enumeration>
+            <xsd:enumeration value="R"></xsd:enumeration>
+            <xsd:enumeration value="A"></xsd:enumeration>
+        </xsd:restriction>
+    </xsd:simpleType>
+
+    <xsd:element name="data_richiesta" type="xsd:string"/>
+    <xsd:element name="data_valutazione" type="xsd:string"/>
+    <xsd:element name="crediti_richiesti" type="xsd:string"/>
+
+</xsd:schema>

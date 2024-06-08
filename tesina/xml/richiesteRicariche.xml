@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<richieste xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:noNamespaceSchemaLocation="./schemaRichiesteRicariche.xsd">
+
+    <ricarica id="1" id_cliente="1" stato="A" id_admin="1">
+        <data_richiesta>2024-06-03</data_richiesta>
+        <crediti_richiesti>100</crediti_richiesti>
+        <data_valutazione>2024-06-04</data_valutazione>
+    </ricarica>
+
+    <ricarica id="2" id_cliente="1" stato="A" id_admin="1">
+        <data_richiesta>2024-06-03</data_richiesta>
+        <crediti_richiesti>100</crediti_richiesti>
+        <data_valutazione>2024-06-04</data_valutazione>
+    </ricarica>
+
+    <ricarica id="3" id_cliente="15" stato="W">
+        <data_richiesta>2024-06-08</data_richiesta>
+        <crediti_richiesti>40</crediti_richiesti>
+    </ricarica>
+
+    <ricarica id="3" id_cliente="32" stato="R" id_admin="1">
+        <data_richiesta>2024-06-15</data_richiesta>
+        <crediti_richiesti>10</crediti_richiesti>
+        <data_valutazione>2024-06-15</data_valutazione>
+    </ricarica>
+</richieste>

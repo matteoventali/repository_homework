@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<risposte xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:noNamespaceSchemaLocation="./schemaRisposte.xsd">
+
+    <risposta id_domanda="1" id_utente="1" faq="false" data="2024-06-07">
+        <contenuto>
+            L'azienda non ha una sede fisica: opera esclusivamente online.
+        </contenuto>
+    </risposta>
+
+    <risposta id_domanda="2" id_utente="14" faq="true" data="2024-06-07">
+        <contenuto>
+            Puoi inserire un indirizzo di consegna diverso prima di ultimare l'acquisto.
+        </contenuto>
+        <valutazione id_utente="1" rating="5"/>
+        <valutazione id_utente="2" rating="5"/>
+        <valutazione id_utente="17" rating="5"/>
+    </risposta>
+</risposte>
