@@ -13,7 +13,7 @@
         <xsd:complexType>
             <xsd:sequence>
                 <xsd:element ref="contenuto" minOccurs="1" maxOccurs="1" />
-                <xsd:element ref="valutazione" minOccurs="0" maxOccurs="unbounded" />
+                <xsd:element ref="valutazioni" minOccurs="1" maxOccurs="1" />
             </xsd:sequence>
 
             <xsd:attribute name="id_cliente" type="xsd:integer" use="required" />
@@ -24,10 +24,19 @@
 
     <xsd:element name="contenuto" type="xsd:string"/>
 
+    <xsd:element name="valutazioni">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element ref="valutazione" minOccurs="0" maxOccurs="unbounded"></xsd:element>
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+
     <xsd:element name="valutazione">
         <xsd:complexType>
             <xsd:attribute name="rating" type="tipoRating" use="required" />
             <xsd:attribute name="id_utente" type="xsd:integer" use="required" />
+            <xsd:attribute name="peso" type="tipoPeso" use="required" />
         </xsd:complexType>
     </xsd:element>
 
@@ -35,6 +44,13 @@
             <xsd:restriction base="xsd:integer">
                 <xsd:minInclusive value="1" />
                 <xsd:maxInclusive value="5" />
+            </xsd:restriction>
+    </xsd:simpleType>
+
+    <xsd:simpleType name="tipoPeso">
+            <xsd:restriction base="xsd:integer">
+                <xsd:minInclusive value="1" />
+                <xsd:maxInclusive value="200" />
             </xsd:restriction>
     </xsd:simpleType>
 </xsd:schema>

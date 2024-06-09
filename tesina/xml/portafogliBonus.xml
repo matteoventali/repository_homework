@@ -2,7 +2,7 @@
 <portafogli xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:noNamespaceSchemaLocation="./schemaPortafogliBonus.xsd">
 
-    <portafoglio id_cliente="1" totale="4">
+    <portafoglio id_cliente="10" totale="4">
         <saldo anno="2023">1</saldo>
         <saldo anno="2024">3</saldo>
     </portafoglio>
