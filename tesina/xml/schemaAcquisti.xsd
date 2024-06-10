@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema">
 
-    <xsd:element name="transazioni">
+    <xsd:element name="acquisti">
         <xsd:complexType>
             <xsd:sequence>
-                <xsd:element ref="transazione" minOccurs="0" maxOccurs="unbounded" />  
+                <xsd:element ref="acquisto" minOccurs="0" maxOccurs="unbounded" />  
             </xsd:sequence>
         </xsd:complexType>
     </xsd:element>
 
-    <xsd:element name="transazione">
+    <xsd:element name="acquisto">
         <xsd:complexType>
             <xsd:sequence>
                 <xsd:element ref="prodotti" minOccurs="1" maxOccurs="1" />

@@ -1,26 +1,26 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<transazioni xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-        xsi:noNamespaceSchemaLocation="schemaTransazioni.xsd" >
+<acquisti xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="schemaAcquisti.xsd" >
        
-    <transazione id="1" id_cliente="10" data="2024-06-08" crediti_bonus_ricevuti="3">
+    <acquisto id="1" id_cliente="10" data="2024-06-08" crediti_bonus_ricevuti="3">
         <prodotti>
             <prodotto id_prodotto="1" prezzo="170"/>
         </prodotti>
         <indirizzo_consegna>Via Rossi 15 Latina 04100</indirizzo_consegna>
-    </transazione>
+    </acquisto>
     
-    <transazione id="2" id_cliente="50" data="2024-06-10" crediti_bonus_ricevuti="3">
+    <acquisto id="2" id_cliente="50" data="2024-06-10" crediti_bonus_ricevuti="3">
         <prodotti>
             <prodotto id_prodotto="2" prezzo="67"/>
         </prodotti>
         <indirizzo_consegna>Via Verdi 1 Roma 00042</indirizzo_consegna>
-    </transazione>
+    </acquisto>
 
-    <transazione id="3" id_cliente="23" data="2024-06-15" crediti_bonus_ricevuti="6">
+    <acquisto id="3" id_cliente="23" data="2024-06-15" crediti_bonus_ricevuti="6">
         <prodotti>
             <prodotto id_prodotto="1" prezzo="170"/>
             <prodotto id_prodotto="2" prezzo="67"/>
         </prodotti>
         <indirizzo_consegna>Via Neri 78 Aosta 11100</indirizzo_consegna>
-    </transazione>
-</transazioni>
+    </acquisto>
+</acquisti>

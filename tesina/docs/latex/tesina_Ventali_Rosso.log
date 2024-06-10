@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.24 (TeX Live 2022/Debian) (preloaded format=pdflatex 2023.12.5)  9 JUN 2024 11:45
+This is pdfTeX, Version 3.141592653-2.6-1.40.24 (TeX Live 2022/Debian) (preloaded format=pdflatex 2023.12.5)  10 JUN 2024 15:23
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -534,35 +534,35 @@ LaTeX Font Info:    External font `cmex10' loaded for size
  [2] [3] [4] [5] [6] [7] [8] [9] [10] [11] [12]
 [13] [14] [15]
 LaTeX Font Info:    Trying to load font information for T1+cmtt on input line 6
-55.
+56.
  (/usr/share/texlive/texmf-dist/tex/latex/base/t1cmtt.fd
 File: t1cmtt.fd 2022/07/10 v2.5l Standard LaTeX font definitions
 )
 [16]
 Package hyperref Info: bookmark level for unknown lstlisting defaults to 0 on i
-nput line 679.
+nput line 680.
  (../../xml/categorieProdotti.xml [17])
 (../../xml/grammaticaCategorieProdotti.dtd) (../../xml/tagliRicarica.xml)
 (../../xml/grammaticaTagliRicarica.dtd) [18] (../../xml/catalogoProdotti.xml
 [19]) (../../xml/schemaCatalogoProdotti.xsd [20]) (../../xml/domande.xml)
 (../../xml/schemaDomande.xsd [21]) [22] (../../xml/risposte.xml)
 (../../xml/schemaRisposte.xsd [23]) [24] (../../xml/recensioni.xml)
-(../../xml/schemaRecensioni.xsd [25]) (../../xml/transazioni.xml [26])
-(../../xml/schemaTransazioni.xsd [27]) (../../xml/portafogliBonus.xml)
+(../../xml/schemaRecensioni.xsd [25]) (../../xml/acquisti.xml [26])
+(../../xml/schemaAcquisti.xsd [27]) (../../xml/portafogliBonus.xml)
 (../../xml/schemaPortafogliBonus.xsd [28]) (../../xml/richiesteRicariche.xml
 [29]) (../../xml/schemaRichiesteRicariche.xsd [30]) [31] [32] [33] [34]
 (./tesina_Ventali_Rosso.aux)
 Package rerunfilecheck Info: File `tesina_Ventali_Rosso.out' has not changed.
-(rerunfilecheck)             Checksum: 07E345CE83C4ACCBD02ED66DFFC53B99;6542.
+(rerunfilecheck)             Checksum: FE638CB68EE72A5D58C177342AFBD28B;6575.
  ) 
 Here is how much of TeX's memory you used:
  14205 strings out of 478040
- 223011 string characters out of 5840467
+ 222975 string characters out of 5840467
  1989330 words of memory out of 5000000
  33299 multiletter control sequences out of 15000+600000
  527456 words of font info for 61 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
- 75i,7n,77p,348b,2335s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 75i,7n,77p,367b,2335s stack positions out of 10000i,1000n,20000p,200000b,200000s
  </home/matteo/.texlive2022/texmf-var/fonts/pk/ljfour/jknappen/ec/ectt1095.60
 0pk> </home/matteo/.texlive2022/texmf-var/fonts/pk/ljfour/jknappen/ec/ecrm0600.
 600pk> </home/matteo/.texlive2022/texmf-var/fonts/pk/ljfour/jknappen/ec/tcrm120
@@ -581,7 +581,7 @@ cm/cmmi8.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr1
 2.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb></
 usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/sh
 are/texlive/texmf-dist/fonts/type1/public/eurosym/feymr10.pfb>
-Output written on tesina_Ventali_Rosso.pdf (34 pages, 360936 bytes).
+Output written on tesina_Ventali_Rosso.pdf (34 pages, 361010 bytes).
 PDF statistics:
  1697 PDF objects out of 1728 (max. 8388607)
  1296 compressed objects within 13 object streams

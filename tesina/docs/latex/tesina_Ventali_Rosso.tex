@@ -118,7 +118,7 @@
 				\item telefonia;
 				\item TV e home;
 				\item elettrodomestici;
-				\item tempo libero;
+				\item tempo libero.
 			\end{itemize}
 		
 			\bigskip \textbf{Categoria informatica} \\ \smallskip
@@ -180,7 +180,7 @@
 			L'utente visitatore può:
 			\begin{itemize}
 				\item accedere al catalogo;
-				\item accedere alla sezione contatti;
+				\item accedere alla sezione \textit{contatti};
 				\item visionare le FAQ;
 				\item registrarsi.
 			\end{itemize}
@@ -221,7 +221,7 @@
 			L'utente admin può:
 			\begin{itemize}
 				\item visionare e modificare i dati anagrafici e di accesso degli utenti;
-				\item bannare e attivare i clienti;
+				\item bannare e riattivare i clienti;
 				\item accettare o rifiutare le richieste di ricarica dei clienti;
 				\item aggiungere domande e risposte alle FAQ;
 				\item elevare una domanda dei clienti alle FAQ, con relativa risposta.
@@ -244,7 +244,7 @@
 					\item 50\euro \> $\rightarrow$ 10 crediti;
 					\item 100\euro \> $\rightarrow$ 20 crediti;
 					\item 200\euro \> $\rightarrow$ 40 crediti;
-					\item 500\euro \> $\rightarrow$ 100 crediti;
+					\item 500\euro \> $\rightarrow$ 100 crediti.
 				\end{itemize}
 				
 				\bigskip \textbf{Portafoglio bonus} \\ \smallskip \label{PortBonus}
@@ -282,6 +282,7 @@
 				Lo sconto fisso ha un limite massimo del 20\%.
 				
 				\bigskip \textbf{Sconto variabile} \\ \smallskip
+				Lo sconto variabile si basa sull'utilizzo dei crediti bonus disponibili nel portafoglio bonus del cliente.
 				Per poter utilizzare i crediti presenti nel portafoglio bonus, si fa riferimento
 				al periodo di acquisizione di tali crediti. In base all’anno in cui vengono maturati, essi hanno
 				un peso diverso:
@@ -330,7 +331,7 @@
 				I giudizi hanno peso diverso a seconda della reputazione di chi li emette (nel momento in cui li emette). I giudizi di admin e gestori hanno un peso maggiore di quello dei clienti:
 				\begin{itemize}
 					\item admin e gestori hanno peso 200\%;
-					\item i clienti hanno peso percentuale dato dalla reputazione (quindi da 1\% a 100\%)
+					\item i clienti hanno peso percentuale dato dalla reputazione (quindi da 1\% a 100\%).
 				\end{itemize}
 				
 				Un post viene valutato tramite una scala da 1 (disprezzo) a 5 (grande apprezzamento). Precisamente:
@@ -339,7 +340,7 @@
 					\item 2 stelline $\rightarrow$ decremento di 2 punti;
 					\item 3 stelline $\rightarrow$ punteggio intatto;
 					\item 4 stelline $\rightarrow$ incremento di 2 punti;
-					\item 5 stelline $\rightarrow$ incremento di 4 punti;
+					\item 5 stelline $\rightarrow$ incremento di 4 punti.
 				\end{itemize}
 			
 				Detto P il punteggio definito dalla scala precedente e W il peso dell'utente che emette il giudizio, quest'ultimo viene calcolato tramite la seguente funzione:
@@ -415,11 +416,11 @@
 			\textbf{Postcondizioni}
 			\begin{itemize}
 				\item in caso di acquisto effettuato con successo l'utente viene reindirizzato in una pagina di riepilogo;
-				\item in caso di acquisto non effettuato con successo l'utente ritorna alla fase 4;
+				\item in caso di acquisto non effettuato con successo l'utente ritorna alla fase 4.
 			\end{itemize}
 		
 			\bigskip
-			\subsubsection{Recensioni}
+			\subsubsection{Inserimento recensione}
 			\textbf{Precondizioni}
 			\begin{itemize}
 				\item l'utente ha effettuato il login come cliente;
@@ -557,7 +558,7 @@
 			\begin{itemize}
 				\item l'utente ha effettuato il login come gestore;
 				\item il gestore ha acceduto al catalogo e selezionato un prodotto;
-				\item non vi è uno sconto attivo sul prodotto selezionato.
+				\item non vi è un'offerta speciale attiva sul prodotto selezionato.
 			\end{itemize}
 			\textbf{Eventi}
 			\begin{enumerate}
@@ -575,7 +576,7 @@
 			\subsubsection{Gestione clienti}
 			\textbf{Precondizioni}
 			\begin{itemize}
-				\item l'utente ha effettuato il login come gestore/admin;
+				\item l'utente ha effettuato il login come gestore/admin.
 			\end{itemize}
 			\textbf{Eventi}
 			\begin{enumerate}
@@ -710,11 +711,11 @@ create table UTENTI(
 					\lstinputlisting[language=XML]{../../xml/recensioni.xml}
 					\bigskip \textbf{Grammatica}\\
 					\lstinputlisting[language=XML, backgroundcolor=\color{coloreSfondoGrammatiche}]{../../xml/schemaRecensioni.xsd}
-				\subsubsection{Transazioni}
+				\subsubsection{Acquisti}
 					\textbf{Esempio}\\ 
-					\lstinputlisting[language=XML]{../../xml/transazioni.xml}
+					\lstinputlisting[language=XML]{../../xml/acquisti.xml}
 					\bigskip \textbf{Grammatica}\\
-					\lstinputlisting[language=XML, backgroundcolor=\color{coloreSfondoGrammatiche}]{../../xml/schemaTransazioni.xsd}
+					\lstinputlisting[language=XML, backgroundcolor=\color{coloreSfondoGrammatiche}]{../../xml/schemaAcquisti.xsd}
 				\subsubsection{Portafogli bonus}
 					\textbf{Esempio}\\ 
 					\lstinputlisting[language=XML]{../../xml/portafogliBonus.xml}
@@ -731,7 +732,7 @@ create table UTENTI(
 			\subsubsection{Categorie prodotti}
 				\begin{itemize}
 					\item \textbf{categorie $\rightarrow$ categoria} l'elemento categoria all'interno dell'elemento categorie permette di definire una macro-categoria di dispositivo (\ref{Introduzione});
-					\item \textbf{categorie $\rightarrow$ categoria $\rightarrow$ tipi\_dispositivo } l'elemento tipi\_dispositivo all'interno dell'elemento categoria permette di definire la lista di tipi specifici per ogni macro-categoria di dispositivo (\ref{CategorieDisp});
+					\item \textbf{categorie $\rightarrow$ categoria $\rightarrow$ tipi\_dispositivo } l'elemento tipi\_dispositivo all'interno dell'elemento categoria permette di definire la lista di tipi specifici per ogni macro-categoria di dispositivo (\ref{CategorieDisp}).
 				\end{itemize}
 			\smallskip
 			\subsubsection{Tagli di ricarica} 
@@ -739,7 +740,7 @@ create table UTENTI(
 					\item \textbf{tagli $\rightarrow$ taglio[importo] } l'attributo importo dell'elemento taglio 
 					permette di definire l'entità della ricarica in euro disponibile (\ref{PortSTD});
 					\item \textbf{tagli $\rightarrow$ taglio[crediti] } l'attributo crediti dell'elemento taglio 
-					permette di definire il corrispettivo, misurato in crediti, della ricarica in euro disponibile (\ref{PortSTD});
+					permette di definire il corrispettivo, misurato in crediti, della ricarica in euro disponibile (\ref{PortSTD}).
 				\end{itemize}
 			\smallskip
 			\subsubsection{Catalogo prodotti} 
@@ -750,7 +751,7 @@ create table UTENTI(
 					\item \textbf{catalogo $\rightarrow$ prodotto $\rightarrow$ offerta\_speciale } l'elemento offerta\_speciale dell'elemento prodotto permette di definire un'eventuale offerta speciale associata al prodotto
 					(\ref{OffSpec});
 					\item \textbf{catalogo $\rightarrow$ prodotto $\rightarrow$ offerta\_speciale[percentuale] } l'attributo percentuale dell'elemento offerta\_speciale permette di definire la percentuale di sconto da applicare al prezzo di listino (espresso in crediti) del prodotto (\ref{OffSpec});
-					\item \textbf{catalogo $\rightarrow$ prodotto $\rightarrow$ offerta\_speciale[crediti] } l'attributo crediti dell'elemento offerta\_speciale permette di definire la ricompensa di crediti bonus erogata al cliente che acquista il prodotto durante l'offerta speciale (\ref{OffSpec});
+					\item \textbf{catalogo $\rightarrow$ prodotto $\rightarrow$ offerta\_speciale[crediti] } l'attributo crediti dell'elemento offerta\_speciale permette di definire la ricompensa di crediti bonus erogata al cliente che acquista il prodotto durante il periodo di validità dell'offerta speciale (\ref{OffSpec}).
 				\end{itemize}
 			\smallskip
 			
@@ -761,7 +762,7 @@ create table UTENTI(
 					\item \textbf{domande $\rightarrow$ domanda $\rightarrow$ valutazioni } l'elemento valutazioni dell'elemento domanda permette di specificare la lista di valutazioni (eventualmente vuota) associate alla domanda (\ref{RepPost});
 					\item \textbf{domande $\rightarrow$ domanda $\rightarrow$ valutazioni $\rightarrow$ valutazione[id\_utente]} l'attributo id\_utente dell'elemento valutazione permette di specificare l'utente che ha effettuato la valutazione alla domanda (\ref{RepPost});
 					\item \textbf{domande $\rightarrow$ domanda $\rightarrow$ valutazioni $\rightarrow$ valutazione[peso]} l'attributo peso dell'elemento valutazione permette di specificare la reputazione dell'utente nel momento in cui ha effettuato la valutazione alla domanda (\ref{PesiVal});
-					\item \textbf{domande $\rightarrow$ domanda $\rightarrow$ valutazioni $\rightarrow$ valutazione[rating]} l'attributo rating dell'elemento valutazione permette di specificare il punteggio assegnato alla domanda dall'utente (\ref{PesiVal});			
+					\item \textbf{domande $\rightarrow$ domanda $\rightarrow$ valutazioni $\rightarrow$ valutazione[rating]} l'attributo rating dell'elemento valutazione permette di specificare il punteggio assegnato alla domanda dall'utente (\ref{PesiVal}).		
 				\end{itemize}
 			\smallskip
 			\subsubsection{Risposte} 
@@ -771,7 +772,7 @@ create table UTENTI(
 					\item \textbf{risposte $\rightarrow$ risposta $\rightarrow$ valutazioni } l'elemento valutazioni dell'elemento risposta permette di specificare la lista di valutazioni (eventualmente vuota) associate alla risposta (\ref{RepPost});
 					\item \textbf{risposte $\rightarrow$ risposta $\rightarrow$ valutazioni $\rightarrow$ valutazione[id\_utente]} l'attributo id\_utente dell'elemento valutazione permette di specificare l'utente che ha effettuato la valutazione alla risposta (\ref{RepPost});
 					\item \textbf{risposte $\rightarrow$ risposta $\rightarrow$ valutazioni $\rightarrow$ valutazione[peso]} l'attributo peso dell'elemento valutazione permette di specificare la reputazione dell'utente nel momento in cui ha effettuato la valutazione alla risposta (\ref{PesiVal});
-					\item \textbf{risposte $\rightarrow$ risposta $\rightarrow$ valutazioni $\rightarrow$ valutazione[rating]} l'attributo rating dell'elemento valutazione permette di specificare il punteggio assegnato alla risposta dall'utente (\ref{PesiVal});			
+					\item \textbf{risposte $\rightarrow$ risposta $\rightarrow$ valutazioni $\rightarrow$ valutazione[rating]} l'attributo rating dell'elemento valutazione permette di specificare il punteggio assegnato alla risposta dall'utente (\ref{PesiVal}).		
 				\end{itemize}
 			\smallskip
 			\subsubsection{Recensioni} 
@@ -781,24 +782,24 @@ create table UTENTI(
 					\item \textbf{recensioni $\rightarrow$ recensione $\rightarrow$ valutazioni } l'elemento valutazioni dell'elemento recensione permette di specificare la lista di valutazioni (eventualmente vuota) associate alla recensione (\ref{RepPost});
 					\item \textbf{recensioni $\rightarrow$ recensione $\rightarrow$ valutazioni $\rightarrow$ valutazione[id\_utente]} l'attributo id\_utente dell'elemento valutazione permette di specificare l'utente che ha effettuato la valutazione alla recensione (\ref{RepPost});
 					\item \textbf{recensioni $\rightarrow$ recensione $\rightarrow$ valutazioni $\rightarrow$ valutazione[peso]} l'attributo peso dell'elemento valutazione permette di specificare la reputazione dell'utente nel momento in cui ha effettuato la valutazione alla recensione (\ref{PesiVal});
-					\item \textbf{recensioni $\rightarrow$ recensione $\rightarrow$ valutazioni $\rightarrow$ valutazione[rating]} l'attributo rating dell'elemento valutazione permette di specificare il punteggio assegnato alla recensione dall'utente (\ref{PesiVal});			
+					\item \textbf{recensioni $\rightarrow$ recensione $\rightarrow$ valutazioni $\rightarrow$ valutazione[rating]} l'attributo rating dell'elemento valutazione permette di specificare il punteggio assegnato alla recensione dall'utente (\ref{PesiVal}).			
 				\end{itemize}
 			\smallskip
-			\subsubsection{Transazioni} 
+			\subsubsection{Acquisti}
 			\begin{itemize}
-				\item \textbf{transazioni $\rightarrow$ transazione[id\_cliente] } l'attributo id\_cliente dell'elemento transazione permette di specificare il cliente che ha effettuato la transazione (\ref{Introduzione});
-				\item \textbf{transazioni $\rightarrow$ transazione[crediti\_bonus\_ricevuti] } l'attributo crediti\_bonus\_ricevuti dell'elemento transazione permette di specificare l'ammontare di crediti bonus ricevuti dal cliente dopo la transazione (\ref{PortBonus});
-				\item \textbf{transazioni $\rightarrow$ transazione $\rightarrow$ prodotti } l'elemento prodotti dell'elemento transazione permette di specificare la lista di prodotti (con almeno un prodotto) coinvolti nella transazione (\ref{Introduzione});
-				\item \textbf{transazioni $\rightarrow$ transazione $\rightarrow$ indirizzo\_consegna } l'elemento indirizzo\_consegna dell'elemento transazione permette di specificare l'indirizzo di consegna relativo alla transazione (sezione Clienti di \ref{CategorieUtenti});
+				\item \textbf{acquisti $\rightarrow$ acquisto[id\_cliente] } l'attributo id\_cliente dell'elemento acquisto permette di specificare il cliente che ha effettuato l'acquisto (\ref{Introduzione});
+				\item \textbf{acquisti $\rightarrow$ acquisto[crediti\_bonus\_ricevuti] } l'attributo crediti\_bonus\_ricevuti dell'elemento acquisto permette di specificare l'ammontare di crediti bonus ricevuti dal cliente dopo l'acquisto (\ref{PortBonus});
+				\item \textbf{acquisti $\rightarrow$ acquisto $\rightarrow$ prodotti } l'elemento prodotti dell'elemento acquisto permette di specificare la lista di prodotti (con almeno un prodotto) coinvolti nell'acquisto (\ref{Introduzione});
+				\item \textbf{acquisti $\rightarrow$ acquisto $\rightarrow$ indirizzo\_consegna } l'elemento indirizzo\_consegna dell'elemento acquisto permette di specificare l'indirizzo di consegna relativo all'acquisto (sezione Clienti di \ref{CategorieUtenti}).
 			\end{itemize}
 			\smallskip
 			\subsubsection{Portafogli bonus} 
 			\begin{itemize}
 				\item \textbf{portafogli $\rightarrow$ portafoglio[id\_cliente] } l'attributo id\_cliente dell'elemento portafoglio permette di specificare il cliente a cui è associato il portafoglio (\ref{Portafogli});
-				\item \textbf{portafogli $\rightarrow$ portafoglio[totale] } l'attributo totale dell'elemento portafoglio permette di specificare l'ammontare di crediti bonus posseduti dal cliente(\ref{Portafogli});
-				\item \textbf{portafogli $\rightarrow$ portafoglio $\rightarrow$ saldo } l'elemento saldo dell'elemento portafoglio permette di specificare la l'ammontare di crediti bonus posseduti dal cliente riferiti ad un determinato anno di acquisizione (sezione Sconto variabile di \ref{Sconti});
+				\item \textbf{portafogli $\rightarrow$ portafoglio[totale] } l'attributo totale dell'elemento portafoglio permette di specificare l'ammontare di crediti bonus posseduti dal cliente (\ref{Portafogli});
+				\item \textbf{portafogli $\rightarrow$ portafoglio $\rightarrow$ saldo } l'elemento saldo dell'elemento portafoglio permette di specificare l'ammontare di crediti bonus posseduti dal cliente riferiti ad un determinato anno di acquisizione (sezione Sconto variabile di \ref{Sconti});
 				\item \textbf{portafogli $\rightarrow$ portafoglio $\rightarrow$ saldo[anno] } l'attributo anno dell'elemento saldo permette di specificare l'anno
-				a cui il saldo si riferisce (sezione Sconto variabile di \ref{Sconti});
+				a cui il saldo si riferisce (sezione Sconto variabile di \ref{Sconti}).
 			\end{itemize}
 			\smallskip
 
@@ -813,7 +814,7 @@ create table UTENTI(
 					\item accepted (A) $\rightarrow$ la richiesta è stata accettata da un admin;
 					\item rejected (R) $\rightarrow$ la richiesta è stata rifiutata da un admin.
 				\end{itemize}
-				\item \textbf{richieste $\rightarrow$ ricarica $\rightarrow$ data\_valutazione } l'attributo data\_valutazione dell'elemento ricarica permette di specificare, se presente, la data in cui è stata effettuata la valutazione da un admin (sezione Admin, operazione 3 di \ref{CategorieUtenti});
+				\item \textbf{richieste $\rightarrow$ ricarica $\rightarrow$ data\_valutazione } l'attributo data\_valutazione dell'elemento ricarica permette di specificare, se presente, la data in cui è stata effettuata la valutazione da un admin (sezione Admin, operazione 3 di \ref{CategorieUtenti}).
 			\end{itemize}
 
 	\end{flushleft}
