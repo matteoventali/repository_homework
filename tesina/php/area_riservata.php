@@ -8,19 +8,20 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <link rel="stylesheet" href="../css/stileLayout.css" type="text/css" />
         <link rel="stylesheet" href="../css/stileSlider.css" type="text/css" />
-        <link rel="icon" type="image/x-icon" href="../img/logo.png">
+        <link rel="icon" type="image/x-icon" href="../img/logo.png" />
+        <script type="text/javascript" src="../js/utility.js"></script>
         <title>UNI-TECNO</title>
     </head>
 
-    <body>
+    <body onload="scegliSfondoCasuale();">
         <?php 
             // Import della navbar
             $nav = file_get_contents("../html/strutturaNavbarClienti.html");
             echo $nav ."\n";
             
-            // Import dello slider del frammento di accesso al catalogo
-            $slider = file_get_contents("../html/frammentoAccessoCatalogo.html");
-            echo $slider . "\n";
+            // Import del frammento di accesso al catalogo
+            $cat = file_get_contents("../html/frammentoAccessoCatalogo.html");
+            echo $cat . "\n";
         ?>
-    </body> 
+    </body>
 </html>
