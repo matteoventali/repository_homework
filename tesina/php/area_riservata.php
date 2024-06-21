@@ -17,7 +17,7 @@
     <body onload="scegliSfondoCasuale();">
         <?php 
             // Import della navbar
-            $nav = file_get_contents("../html/strutturaNavbarClienti.html");
+            $nav = file_get_contents("../html/strutturaNavbarUtenti.html");
             echo $nav ."\n";
             
             // Import del frammento di accesso al catalogo

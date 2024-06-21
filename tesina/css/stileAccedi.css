@@ -1,0 +1,67 @@
+#sezioneLogin
+{
+    border-style: solid;
+    width: 100%;
+    height: 85%;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+}
+
+#sezioneLogin form
+{
+    width: 50%;
+    height: 40%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    border-style: solid;
+    overflow: scroll;
+    background-color: #11999E;
+    box-shadow: 21px 27px 31px -2px black;
+    color:white;
+    gap: 1%;
+}
+
+#sezioneLogin form span 
+{
+    display: flex;
+    flex-direction: row;
+    height: 25%;
+    width: 80%;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    border-style: solid;
+    box-shadow: 21px 27px 31px -2px black;
+}
+
+#sezioneLogin form span p
+{
+    display: inline-block;
+    font-size: 200%;
+    width: 50%;
+    text-align: center;
+}
+
+#sezioneLogin form span input[type="text"],
+#sezioneLogin form span input[type="password"]
+{
+    display: inline-block;
+    height: 50%;
+    width: 45%;
+    font-size: 150%;
+    text-align: center;
+}
+
+#sezioneLogin form span input[type="submit"],
+#sezioneLogin form span input[type="reset"]
+{
+    display: inline-block;
+    margin-left: 5%;
+    margin-right: 5%;
+    font-size: 150%;
+}
