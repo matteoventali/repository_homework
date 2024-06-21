@@ -16,7 +16,7 @@ button, input[type="submit"]
   text-align: center;
   text-decoration: none;
   display: inline-block;
-  font-size: 150%;
+  font-size: 100%;
   border-radius: 30px;
   box-shadow: 5px 5px;
 }
@@ -37,6 +37,7 @@ button:hover, input[type="submit"]:hover
     height: 15%;
     background-color: #11999E;
     align-items: center;
+    box-shadow: 5px 10px;
 }
 
 .navbar div
@@ -51,19 +52,7 @@ button:hover, input[type="submit"]:hover
 .opzioneMenu
 {
     flex: 1;
-}
-
-.opzioneMenu button
-{
-    width: 30%;
-    display: flex;
-    justify-content: center;
-}
-
-.opzioneMenu button img
-{
-    width: 40px;
-    height: 40px;
+    font-size: 30px;
 }
 
 .opzioneLogo
