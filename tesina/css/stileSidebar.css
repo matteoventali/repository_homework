@@ -8,6 +8,7 @@
     box-shadow: 5px 10px;
     border-top: solid;
     left: -25%;
+    transition: left 0.5s;
 }
 
 #btnSidebar1
