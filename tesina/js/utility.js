@@ -31,3 +31,16 @@ function gestisciSidebar(param)
         btn2.style.display = "none";
     }
 }
+
+function nascondiPopup()
+{
+    // Prendo il riferimento alla finestra popup
+    popup = document.getElementById("popupErrore");
+
+    // Nascondo la finestra
+    popup.style.right = "-25%";
+    
+    // Tolgo la finestra del popup dalla pagina
+    // (faccio terminare l'animazione)
+    setTimeout(function(){popup.style.display="none";}, 300);
+}
