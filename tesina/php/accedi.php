@@ -12,7 +12,7 @@
         <link rel="stylesheet" href="../css/stileCatalogo.css" type="text/css" />
         <link rel="stylesheet" href="../css/stileSidebar.css" type="text/css" />
         <link rel="stylesheet" href="../css/stileAccedi.css" type="text/css" />
-        <link rel="icon" type="image/x-icon" href="../img/logo.png">
+        <link rel="icon" type="image/x-icon" href="../img/logo.png" />
         <script type="text/javascript" src="../js/utility.js"></script>
         <title>UNI-TECNO</title>
     </head>
@@ -36,13 +36,13 @@
 
         <!-- FORM DI LOGIN !-->
         <div id="sezioneLogin">
-            <form id="formLogin" action="<?php echo $_SERVER["PHP_SELF"] ?>" method="post"">
-                <span><p>Username:</p><input type="text" name="nome"/></span>
-                <span><p>Password:</p><input type="text" name="nome"/></span>
-                <span>
+            <form id="formLogin" action="<?php echo $_SERVER["PHP_SELF"] ?>" method="post">
+                <fieldset><p>Username:</p><input type="text" name="nome"/></fieldset>
+                <fieldset><p>Password:</p><input type="password" name="nome"/></fieldset>
+                <fieldset>
                     <input type="reset" value="Cancella" />
                     <input type="submit" value="Login" name="btnAccedi" />
-                </span>
+                </fieldset>                
             </form>
         </div>
     </body>

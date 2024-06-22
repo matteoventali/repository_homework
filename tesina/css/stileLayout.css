@@ -7,6 +7,11 @@ html, body
     width: 100%;
 }
 
+fieldset
+{
+    border-style: none;
+}
+
 button, input[type="submit"], input[type="reset"]
 {
   background-color: #30e3ca;

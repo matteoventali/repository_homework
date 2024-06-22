@@ -19,8 +19,13 @@
   height: 100%;
 }
 
-#sezioneCatalogo input
+#sezioneCatalogo fieldset
 {
   width: 25%;
   font-size: 200%;
+}
+
+#sezioneCatalogo input
+{
+  width: 100%;
 }
