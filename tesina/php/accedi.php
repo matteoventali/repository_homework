@@ -3,7 +3,7 @@
 
     $margine_popup = $margine_popup_mostra;
     $background_popup = $colore_background_popup_verde;
-    $display_popup = $opzione_display_popup_mostra;
+    $display_popup = $opzione_display_popup_nascondi;
     
     // Verifico se c'è da gestire una richiesta di registrazione o meno
     echo '<?xml version = "1.0" encoding="UTF-8"?>';
@@ -37,18 +37,20 @@
             $sidebar = file_get_contents("../html/strutturaSidebar.html");
             $sidebar = str_replace("%OPERAZIONI_UTENTE%", "", $sidebar);
             echo $sidebar . "\n";
-
-            // Import del popup per comunicare errore o meno
-            // I settings della finestra sono ottenuti preliminarmente a seconda della richiesta pervenuta
-            $popup = file_get_contents("../html/popupErrore.html");
-            $popup = str_replace("%OPZIONE_DISPLAY_POPUP%", $display_popup, $popup);
-            $popup = str_replace("%MARGINE_DESTRO_POPUP%", $margine_popup, $popup);
-            $popup = str_replace("%COLORE_SFONDO_POPUP%", $background_popup, $popup);
-            echo $popup . "\n";
         ?>
 
         <!-- FORM DI LOGIN !-->
         <div id="sezioneLogin">
+            <?php
+                // Import del popup per comunicare errore o meno
+                // I settings della finestra sono ottenuti preliminarmente a seconda della richiesta pervenuta
+                $popup = file_get_contents("../html/popupErrore.html");
+                $popup = str_replace("%OPZIONE_DISPLAY_POPUP%", $display_popup, $popup);
+                $popup = str_replace("%MARGINE_DESTRO_POPUP%", $margine_popup, $popup);
+                $popup = str_replace("%COLORE_SFONDO_POPUP%", $background_popup, $popup);
+                echo $popup . "\n";
+            ?>
+
             <form id="formLogin" action="<?php echo $_SERVER["PHP_SELF"] ?>" method="post">
                 <fieldset><p>Username:</p><input type="text" name="nome"/></fieldset>
                 <fieldset><p>Password:</p><input type="password" name="nome"/></fieldset>
