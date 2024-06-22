@@ -5,7 +5,7 @@
     height: 85%;
     width: 20%;
     background-color: #11999E;
-    box-shadow: 5px 10px;
+    box-shadow: 21px 27px 31px -2px black;
     border-top: solid;
     left: -25%;
     transition: left 0.5s;
@@ -42,6 +42,7 @@ li
     justify-content: center;
     text-align: center;
     align-items: center;
+    border-bottom: solid 2px;
     width: 100%;
 }
 
