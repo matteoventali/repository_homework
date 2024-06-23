@@ -1,4 +1,6 @@
 <?php
+    require_once "libreria.php";
+
     echo '<?xml version = "1.0" encoding="UTF-8"?>';
 ?>
 
@@ -22,6 +24,7 @@
             
             // Import del frammento di accesso al catalogo
             $cat = file_get_contents("../html/frammentoAccessoCatalogo.html");
+            $cat = str_replace("%URL_SFONDO_CASUALE%", ottieniURLSfondo(), $cat);
             echo $cat . "\n";
 
             // Import della sidebar e mostro le opzioni per l'utente loggato

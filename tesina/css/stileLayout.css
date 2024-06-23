@@ -43,6 +43,7 @@ button:hover, input[type="submit"]:hover, input[type="reset"]:hover
     background-color: #11999E;
     align-items: center;
     box-shadow: 21px 27px 31px -2px black;
+    overflow: hidden;
 }
 
 .navbar div

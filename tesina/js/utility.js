@@ -1,13 +1,3 @@
-function scegliSfondoCasuale()
-{
-    nome_file = ["smartphone.jpg", "console.jpg", "elettrodomestici.jpg", "laptop.png", "televisore.jpg"];
-    scelta_casuale = Math.floor(Math.random() * 5);
-
-    // Set del background tra quelli disponibili
-    cat = document.getElementById("sezioneCatalogo");
-    cat.style.backgroundImage="url('../img/background/" + nome_file[scelta_casuale] + "')";
-}
-
 function gestisciSidebar(param)
 {
     // Prendo il riferimento alla sidebar

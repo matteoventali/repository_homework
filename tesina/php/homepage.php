@@ -1,4 +1,6 @@
 <?php
+    require_once "libreria.php";
+    
     echo '<?xml version = "1.0" encoding="UTF-8"?>';
 ?>
 
@@ -14,7 +16,7 @@
         <title>UNI-TECNO</title>
     </head>
 
-    <body onload="scegliSfondoCasuale();">
+    <body onload="">
         <?php
             // Import della navbar
             // Mostro il bottone per accedere alla pagina di registrazione e per quella di login
@@ -25,6 +27,7 @@
 
             // Import del frammento di accesso al catalogo
             $cat = file_get_contents("../html/frammentoAccessoCatalogo.html");
+            $cat = str_replace("%URL_SFONDO_CASUALE%", ottieniURLSfondo(), $cat);
             echo $cat . "\n";
 
             // Import della sidebar e mostro solo le opzioni del visitatore
