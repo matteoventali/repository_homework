@@ -1,11 +1,93 @@
 <?php
-    require_once 'parametriStile.php';
+    require_once 'libreria.php';
+    
+    // Variabile per verificare se il popup vada mostrato
+    $mostraPopup = false;
 
-    $margine_popup = $margine_popup_mostra;
-    $background_popup = $colore_background_popup_rosso;
-    $display_popup = $opzione_display_popup_mostra;
+    // Variabili utili all'identificazione dell'errore
+    $msg = ''; $err = true;
 
-    // Verifico se c'è da gestire una richiesta di registrazione o meno
+    // Verifico se l'utente e' già loggato
+    session_start();
+    if (isset($_SESSION["nome"]))
+        header("Location: area_riservata.php");    // Se sì, viene ridirezionato nell'area personale
+    else if( isset($_POST["nome"]) && isset($_POST["cognome"]) && isset($_POST["citta"]) 
+            && isset($_POST["indirizzo"]) && isset($_POST["mail"]) && isset($_POST["username"])
+             && isset($_POST["password"])) // Vi e' una richiesta di registrazioone
+    {   
+        $mostraPopup = true;
+
+        // Verifico che i campi siano stati riempiti
+        if ( strlen(trim($_POST["nome"])) > 0 && strlen(trim($_POST["cognome"])) > 0 &&
+            strlen(trim($_POST["indirizzo"])) > 0 && strlen(trim($_POST["citta"])) > 0 &&
+            strlen(trim($_POST["mail"])) > 0 && strlen(trim($_POST["username"])) > 0 &&
+            strlen(trim($_POST["password"])) > 0)
+        {
+            // Arrivato qui, ho la certezza che i campi non sono vuoti
+            // Elimino la sessione appena creata erroneamente
+            require_once 'cancellaSessione.php';
+
+            // Effettuo la connessione al database
+            require_once 'connection.php';
+
+            // Verifico che la connessione sia andata a buon fine
+            if ( $connessione )
+            {
+                $msg = 'Errore nell\'esecuzione della query, ricontrollare i dati'; 
+
+                // Verifico che i dati siano corretti
+
+                // Regex per il controllo della mail
+                $regex = '/^([a-z]+)(_|[.]|-){0,1}(([a-z]|\d)+)@([a-z])*[.]([a-z])*$/';
+                if ( preg_match($regex, $_POST["mail"]) )
+                {
+                    // Prelevo i dati dal post
+                    $nome = $handleDB->real_escape_string($_POST["nome"]);
+                    $cognome = $handleDB->real_escape_string($_POST["cognome"]);
+                    $indirizzo = $handleDB->real_escape_string($_POST["indirizzo"]);
+                    $citta = $handleDB->real_escape_string($_POST["citta"]);
+                    $mail = $handleDB->real_escape_string($_POST["mail"]);
+                    $username = $handleDB->real_escape_string($_POST["username"]);
+                    $password = $handleDB->real_escape_string($_POST["password"]);
+
+                    // Compongo la query per l'esecuzione
+                    $q = "insert into $tb_utenti(nome, cognome, indirizzo, citta, cap, data_registrazione, 
+                    username, mail, password, saldo_standard) values ('$nome', '$cognome', '$indirizzo', '$citta', 
+                    '00000', DATE(NOW()), '$username', '$mail', SHA2('$password', 256), 0)";
+
+                    // Esecuzione della query
+                    try
+                    {
+                        $handleDB->query($q);
+                        $msg = 'Registrazione avvenuta con successo';
+                        $err = false;
+                    }
+                    catch (Exception $e)
+                    {
+                        $err = true;
+                        if ($handleDB->errno == 1062 )
+                            $msg = 'E-mail o username gi&agrave; presente nel database';
+                    }
+                }
+                else
+                    $msg = 'E-mail non valida';
+
+                // Chiusura della connessione al database
+                $handleDB->close();
+            }
+            else 
+                $msg = 'Errore di comunicazione con il database';
+        }
+        else {
+            $msg = 'Campi vuoti';   // Se qualche campo risulta vuoto, lo segnalo
+        }
+    }
+    else // Elimino la sessione appena creata erronamente poiche' non vi sono richieste di registrazione
+    {
+        require_once 'cancellaSessione.php';
+        $err = false;
+    }
+
     echo '<?xml version = "1.0" encoding="UTF-8" ?>';
 ?>
 
@@ -39,26 +121,21 @@
             echo $sidebar . "\n";
         ?>
 
-        <!-- FORM DI REGISTRAZIONE !-->
+        <!-- FORM DI REGISTRAZIONE -->
         <div id="sezioneRegistrazione">
-            <?php
-                // Import del popup per comunicare errore o meno
-                // I settings della finestra sono ottenuti preliminarmente a seconda della richiesta pervenuta
-                $popup = file_get_contents("../html/popupErrore.html");
-                $popup = str_replace("%OPZIONE_DISPLAY_POPUP%", $display_popup, $popup);
-                $popup = str_replace("%MARGINE_DESTRO_POPUP%", $margine_popup, $popup);
-                $popup = str_replace("%COLORE_SFONDO_POPUP%", $background_popup, $popup);
-                echo $popup . "\n";
+            <?php 
+                // Stampo il popup se necessario
+                echo creaPopup($mostraPopup, $msg, $err) . "\n";
             ?>
 
-            <form id="formRegistrazione" action="<?php echo $_SERVER["PHP_SELF"] ?>" method="post">
-                <fieldset>  <p>Nome:        </p>  <input type="text" name="nome"/>    </fieldset>
-                <fieldset>  <p>Cognome:     </p>  <input type="text" name="cognome"/> </fieldset>
-                <fieldset>  <p>Indirizzo:   </p>  <input type="text" name="nome"/>    </fieldset>
-                <fieldset>  <p>Citt&agrave;:</p>  <input type="text" name="nome"/>    </fieldset>
-                <fieldset>  <p>Username:    </p>  <input type="text" name="nome"/>    </fieldset>
-                <fieldset>  <p>Mail:        </p>  <input type="text" name="nome"/>    </fieldset>
-                <fieldset>  <p>Password:    </p>  <input type="password" name="nome"/>    </fieldset>
+            <form id="formRegistrazione" method="post" action="<?php echo $_SERVER["PHP_SELF"] ?>">
+                <fieldset>  <p>Nome:        </p>  <input type="text" name="nome" <?php if($err) echo 'value="'. $_POST["nome"] . '"';?>/>    </fieldset>
+                <fieldset>  <p>Cognome:     </p>  <input type="text" name="cognome" <?php if($err) echo 'value="'. $_POST["cognome"] . '"';?>/> </fieldset>
+                <fieldset>  <p>Indirizzo:   </p>  <input type="text" name="indirizzo" <?php if($err) echo 'value="'. $_POST["indirizzo"] . '"';?>/>    </fieldset>
+                <fieldset>  <p>Citt&agrave;:</p>  <input type="text" name="citta" <?php if($err) echo 'value="'. $_POST["citta"] . '"';?>/>    </fieldset>
+                <fieldset>  <p>Username:    </p>  <input type="text" name="username" <?php if($err) echo 'value="'. $_POST["username"] . '"';?>/>    </fieldset>
+                <fieldset>  <p>Mail:        </p>  <input type="text" name="mail" <?php if($err) echo 'value="'. $_POST["mail"] . '"';?>/>    </fieldset>
+                <fieldset>  <p>Password:    </p>  <input type="password" name="password"/>    </fieldset>
                 
                 <fieldset> <input type="reset" value="Cancella" />
                 <input type="submit" value="Invia" name="btnRegistrati" /> </fieldset>

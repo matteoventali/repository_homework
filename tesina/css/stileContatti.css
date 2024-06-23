@@ -1,0 +1,88 @@
+#sezioneContatti
+{
+  height: 85%;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
+
+#presentazione
+{
+  width: 100%;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding-top: 30px;
+}
+
+#profili
+{
+   height: 80%;
+   display: flex;
+   text-align: center;
+   flex-direction: row;
+   gap: 5%;
+   justify-content: center;
+   padding: 40px;
+}
+
+.profilo
+{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  overflow: auto;
+  box-shadow: 19px 25px 31px 0px black;
+  background-color: #11999E;
+  padding: 10px;
+  width: 30%;
+  height: 75%;
+}
+
+.profilo:hover
+{
+  background-color: #30e3ca;
+}
+
+.profilo:hover p, .profilo:hover h2
+{
+  color: black;
+}
+
+.imgProfilo
+{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+
+.imgProfilo img
+{
+  width: 40%;
+}
+
+.descrizione
+{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  font-size: 130%;
+}
+
+.descrizione h2
+{
+  margin-bottom: 0;
+  color: white;
+}
+
+.descrizione p
+{
+  color: white;
+  text-align: left;
+}
+

@@ -30,9 +30,9 @@
             $cat = str_replace("%URL_SFONDO_CASUALE%", ottieniURLSfondo(), $cat);
             echo $cat . "\n";
 
-            // Import della sidebar e mostro solo le opzioni del visitatore
+            // Import della sidebar e le opzioni del visitatore
             $sidebar = file_get_contents("../html/strutturaSidebar.html");
-            $sidebar = str_replace("%OPERAZIONI_UTENTE%", "", $sidebar);
+            $sidebar = str_replace("%OPERAZIONI_UTENTE%", ottieniOpzioniMenu('V'), $sidebar);
             echo $sidebar . "\n";
         ?>
     </body>

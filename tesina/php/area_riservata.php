@@ -16,7 +16,7 @@
         <title>UNI-TECNO</title>
     </head>
 
-    <body onload="scegliSfondoCasuale();">
+    <body onload="">
         <?php 
             // Import della navbar
             $nav = file_get_contents("../html/strutturaNavbarUtenti.html");
@@ -28,8 +28,9 @@
             echo $cat . "\n";
 
             // Import della sidebar e mostro le opzioni per l'utente loggato
+            // Il ruolo dell'utente e' prelevato dalle variabili di sessione
             $sidebar = file_get_contents("../html/strutturaSidebar.html");
-            //$sidebar = str_replace("%OPERAZIONI_UTENTE%", "", $sidebar);
+            $sidebar = str_replace("%OPERAZIONI_UTENTE%", ottieniOpzioniMenu('A'), $sidebar);
             echo $sidebar . "\n";
         ?>
     </body>
