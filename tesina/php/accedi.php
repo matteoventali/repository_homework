@@ -1,10 +1,89 @@
 <?php
-    require_once 'parametriStile.php';
-
-    $margine_popup = $margine_popup_mostra;
-    $background_popup = $colore_background_popup_verde;
-    $display_popup = $opzione_display_popup_nascondi;
+    require_once 'libreria.php';
     
+    // Variabile per verificare se il popup vada mostrato
+    $mostraPopup = true;
+    
+    // Variabili utili all'identificazione dell'errore
+    $msg = ''; $err = true;
+
+    // Verifico se vi e' una sessione aperta per account attivo
+    require_once 'verificaSessioneAttiva.php';
+    
+    if ( $sessione_attiva )
+        header("Location: area_riservata.php");
+    else if ( isset($_POST["username"]) && isset($_POST["password"]) ) // Richiesta di login pervenuta
+    {
+        $msg = 'Errore di comunicazione con il database';
+        
+        // Elimino la sessione appena creata erroneamente
+        require_once 'cancellaSessione.php';
+
+        // Connessione al database
+        require_once 'connection.php';
+
+        if ( $connessione )
+        {
+            // Prelevo i dati dal post e compongo la query
+            // Il controllo che i campi siano vuoti non e' necessario in quanto la query
+            // sicuramente fallira'
+            $username = $handleDB->real_escape_string($_POST["username"]);
+            $password = $handleDB->real_escape_string($_POST["password"]);
+            $q = "select * from $tb_utenti where username='$username' and password=SHA2('$password', 256)";
+
+            // Esecuzione della query
+            try
+            {
+                $rs = $handleDB->query($q);
+
+                if ( $riga = $rs->fetch_row() ) // Corrispondenza trovata
+                {
+                    // Il login e' eseguito se l'account e' attivo
+                    if ( $riga[8] != 'B' )
+                    {
+                        session_start();
+                        $_SESSION["id_utente"]          = $riga[0];
+                        $_SESSION["nome"]               = $riga[1];
+                        $_SESSION["cognome"]            = $riga[2];
+                        $_SESSION["indirizzo"]          = $riga[3];
+                        $_SESSION["citta"]              = $riga[4];
+                        $_SESSION["cap"]                = $riga[5];
+                        $_SESSION["reputazione"]        = $riga[6];
+                        $_SESSION["data_registrazione"] = $riga[7];
+                        $_SESSION["username"]           = $riga[9];
+                        $_SESSION["mail"]               = $riga[10];
+                        $_SESSION["ruolo"]              = $riga[12];
+                        $_SESSION["saldo_standard"]     = $riga[13];
+                        header("Location: area_riservata.php");
+                        $err = false;
+                        $mostraPopup = false;
+                    }
+                    else // Account bannato
+                        $msg = 'Account disattivato. Contattare l\'admin';    
+                }
+                else
+                    $msg = 'Credenziali errate, riprovare';
+                
+                $rs->close();
+            }
+            catch (Exception $e){}
+
+            $handleDB->close();
+        }
+    }
+    else if ( $sessione_esistente ) // Elimino la sessione esistente per l'account disattivato
+    {
+        require_once 'cancellaSessione.php';
+        $msg = 'Account disattivato. Contattare l\'admin';    
+    }
+    else
+    {
+        // Elimino la sessione appena creata erroneamente
+        require_once 'cancellaSessione.php';
+        $err = false;
+        $mostraPopup = false;
+    }
+
     // Verifico se c'è da gestire una richiesta di registrazione o meno
     echo '<?xml version = "1.0" encoding="UTF-8"?>';
 ?>
@@ -40,19 +119,14 @@
 
         <!-- FORM DI LOGIN !-->
         <div id="sezioneLogin">
-            <?php
-                // Import del popup per comunicare errore o meno
-                // I settings della finestra sono ottenuti preliminarmente a seconda della richiesta pervenuta
-                $popup = file_get_contents("../html/popupErrore.html");
-                $popup = str_replace("%OPZIONE_DISPLAY_POPUP%", $display_popup, $popup);
-                $popup = str_replace("%MARGINE_DESTRO_POPUP%", $margine_popup, $popup);
-                $popup = str_replace("%COLORE_SFONDO_POPUP%", $background_popup, $popup);
-                echo $popup . "\n";
+            <?php 
+                // Stampo il popup se necessario
+                echo creaPopup($mostraPopup, $msg, $err) . "\n";
             ?>
 
             <form id="formLogin" action="<?php echo $_SERVER["PHP_SELF"] ?>" method="post">
-                <fieldset><p>Username:</p><input type="text" name="nome"/></fieldset>
-                <fieldset><p>Password:</p><input type="password" name="nome"/></fieldset>
+                <fieldset><p>Username:</p><input type="text" name="username"/></fieldset>
+                <fieldset><p>Password:</p><input type="password" name="password"/></fieldset>
                 <fieldset>
                     <input type="reset" value="Cancella" />
                     <input type="submit" value="Login" name="btnAccedi" />

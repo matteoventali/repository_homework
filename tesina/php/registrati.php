@@ -2,21 +2,20 @@
     require_once 'libreria.php';
     
     // Variabile per verificare se il popup vada mostrato
-    $mostraPopup = false;
+    $mostraPopup = true;
 
     // Variabili utili all'identificazione dell'errore
     $msg = ''; $err = true;
 
-    // Verifico se l'utente e' già loggato
-    session_start();
-    if (isset($_SESSION["nome"]))
-        header("Location: area_riservata.php");    // Se sì, viene ridirezionato nell'area personale
+    // Verifico se vi e' una sessione aperta per account attivo
+    require_once 'verificaSessioneAttiva.php';
+    
+    if ( $sessione_attiva )
+        header("Location: area_riservata.php");
     else if( isset($_POST["nome"]) && isset($_POST["cognome"]) && isset($_POST["citta"]) 
             && isset($_POST["indirizzo"]) && isset($_POST["mail"]) && isset($_POST["username"])
              && isset($_POST["password"])) // Vi e' una richiesta di registrazioone
     {   
-        $mostraPopup = true;
-
         // Verifico che i campi siano stati riempiti
         if ( strlen(trim($_POST["nome"])) > 0 && strlen(trim($_POST["cognome"])) > 0 &&
             strlen(trim($_POST["indirizzo"])) > 0 && strlen(trim($_POST["citta"])) > 0 &&
@@ -82,10 +81,17 @@
             $msg = 'Campi vuoti';   // Se qualche campo risulta vuoto, lo segnalo
         }
     }
-    else // Elimino la sessione appena creata erronamente poiche' non vi sono richieste di registrazione
+    else if ( $sessione_esistente ) // Elimino la sessione esistente per l'account disattivato
     {
         require_once 'cancellaSessione.php';
+        $msg = 'Account disattivato. Contattare l\'admin';    
+    }
+    else
+    {
+        // Elimino la sessione appena creata erroneamente
+        require_once 'cancellaSessione.php';
         $err = false;
+        $mostraPopup = false;
     }
 
     echo '<?xml version = "1.0" encoding="UTF-8" ?>';

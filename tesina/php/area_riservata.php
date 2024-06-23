@@ -1,6 +1,16 @@
 <?php
     require_once "libreria.php";
 
+    // Verifico se vi e' una sessione esistente per un account attivo
+    // In caso positivo l'utente rimane nella sua area riservata
+    // altrimenti viene reindirizzato alla homepage
+    require_once 'verificaSessioneAttiva.php';
+    if ( !$sessione_attiva )
+    {
+        require_once 'cancellaSessione.php';
+        header("Location: homepage.php");
+    }
+        
     echo '<?xml version = "1.0" encoding="UTF-8"?>';
 ?>
 
@@ -20,6 +30,7 @@
         <?php 
             // Import della navbar
             $nav = file_get_contents("../html/strutturaNavbarUtenti.html");
+            $nav = str_replace("%NOME_UTENTE%", $_SESSION["nome"] . " " . $_SESSION["cognome"], $nav);
             echo $nav ."\n";
             
             // Import del frammento di accesso al catalogo
