@@ -33,3 +33,40 @@ function nascondiPopup()
     // Tolgo la sezione errore al termine dell'animazione
     setTimeout(function(){popup.style.display = "none";}, 300);
 }
+
+function mostraRispostaFaq(id_domanda)
+{
+    // Compongo l'id del container relativo alla risposta da mostrare
+    id_risposta = "risp_" + id_domanda;
+
+    // Mostro il container
+    container = document.getElementById(id_risposta);
+    container.style.display = "block";
+    container.scrollIntoView();
+    
+    // Cambio il contenuto del paragrafo contenente il simbolo della freccia
+    simbolo = document.getElementById(id_domanda);
+    simbolo.innerHTML = "&#x25B2";
+
+    // Cambio l'evento di onclick
+    nuovo_evento = "nascondiRispostaFaq(" + id_domanda + ")";
+    simbolo.setAttribute('onclick', nuovo_evento);
+}
+
+function nascondiRispostaFaq(id_domanda)
+{
+    // Compongo l'id del container relativo alla risposta da nascondere
+    id_risposta = "risp_" + id_domanda;
+
+    // Mostro il container
+    container = document.getElementById(id_risposta);
+    container.style.display = "none";
+
+    // Cambio il contenuto del paragrafo contenente il simbolo della freccia
+    simbolo = document.getElementById(id_domanda);
+    simbolo.innerHTML = "&#x25BC;";
+
+    // Cambio l'evento di onclick
+    nuovo_evento = "mostraRispostaFaq(" + id_domanda + ")";
+    simbolo.setAttribute('onclick', nuovo_evento);
+}

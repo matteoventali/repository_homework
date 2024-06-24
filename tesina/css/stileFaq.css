@@ -1,0 +1,76 @@
+#sezioneFaq
+{
+    width: 100%;
+    height: 85%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#parteCentrale
+{
+    width: 80%;
+    max-height: 90%;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border-style: solid;
+    background-color: #11999E;
+    box-shadow: 21px 27px 31px -2px black;
+    color:white;
+    gap: 30px;
+    padding: 20px;   
+    border-radius: 15px;
+}
+
+.faq
+{
+    display:flex;
+    flex-direction: column;
+    width: 90%;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    border-radius: 20px;
+    border-style: ridge;
+    border-color: white;
+}
+
+.domanda
+{
+    display:flex;
+    justify-content: space-between;
+    padding: 0px 20px;
+    border-radius: 20px;
+}
+
+p:nth-child(2)
+{
+    border-style: solid;
+    padding: 0;
+}
+
+p:nth-child(2):hover
+{
+    cursor:pointer;
+}
+
+.risposta
+{
+    display:flex;
+    justify-content: space-between;
+    padding: 0px 20px;
+    border-radius: 20px;
+    background-color: #30E3CA;
+    color:black;
+}
+
+.parteButton
+{
+    width: 90%;
+    text-align: right;
+}
+
+.parteButton input[type="submit"]
+{
+    margin:4px;
+}
