@@ -44,6 +44,7 @@ li
     align-items: center;
     border-bottom: solid 2px;
     width: 100%;
+    overflow: auto;
 }
 
 li:hover

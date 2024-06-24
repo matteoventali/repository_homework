@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.24 (TeX Live 2022/Debian) (preloaded format=pdflatex 2023.12.5)  10 JUN 2024 15:23
+This is pdfTeX, Version 3.141592653-2.6-1.40.24 (TeX Live 2022/Debian) (preloaded format=pdflatex 2023.12.5)  24 JUN 2024 09:47
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -534,13 +534,13 @@ LaTeX Font Info:    External font `cmex10' loaded for size
  [2] [3] [4] [5] [6] [7] [8] [9] [10] [11] [12]
 [13] [14] [15]
 LaTeX Font Info:    Trying to load font information for T1+cmtt on input line 6
-56.
+57.
  (/usr/share/texlive/texmf-dist/tex/latex/base/t1cmtt.fd
 File: t1cmtt.fd 2022/07/10 v2.5l Standard LaTeX font definitions
 )
 [16]
 Package hyperref Info: bookmark level for unknown lstlisting defaults to 0 on i
-nput line 680.
+nput line 681.
  (../../xml/categorieProdotti.xml [17])
 (../../xml/grammaticaCategorieProdotti.dtd) (../../xml/tagliRicarica.xml)
 (../../xml/grammaticaTagliRicarica.dtd) [18] (../../xml/catalogoProdotti.xml

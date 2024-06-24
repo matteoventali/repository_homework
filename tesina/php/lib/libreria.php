@@ -20,8 +20,30 @@
     */
     function ottieniOpzioniMenu($ruolo)
     {
-        /*Da implementare*/
-        return "";
+        $ris = "";
+        
+        switch($ruolo)
+        {
+            case 'V':
+                $ris = ""; break;
+            
+            case 'A':
+                $ris = '<li><a href="gestioneClienti.php">Gestione clienti</a>' .
+                            '</li><li><a href="gestioneRicariche.php">Gestione ricariche</a></li>';
+                break;
+            
+            case 'G':
+                $ris = '<li><a href="gestioneClienti.php">Visualizza clienti</a>';
+                break;
+            
+            case 'C':
+                $ris = '<li><a href="areaPersonale.php">Area personale</a>' .
+                            '</li><li><a href="carrello.php">Carrello</a></li>' .
+                            '</li><li><a href="richiestaRicarica.php">Richiesta ricarica</a></li>';
+                break;
+        }
+
+        return $ris;
     }
 
     // Funzione che predispone il popup

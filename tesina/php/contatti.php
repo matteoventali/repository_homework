@@ -1,5 +1,5 @@
 <?php
-    require_once "libreria.php";
+    require_once "lib/libreria.php";
     
     echo '<?xml version = "1.0" encoding="UTF-8"?>';
 ?>

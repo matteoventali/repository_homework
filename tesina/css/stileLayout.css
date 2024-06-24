@@ -4,7 +4,8 @@ html, body
     background-color: #E4F9F5;
     font-family: Arial, Verdana, Helvetica;
     height: 100%;
-    width: 100%;    
+    width: 100%;
+    overflow: hidden;
 }
 
 fieldset

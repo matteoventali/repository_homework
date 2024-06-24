@@ -1,5 +1,5 @@
 <?php
-    require_once 'libreria.php';
+    require_once 'lib/libreria.php';
     
     // Variabile per verificare se il popup vada mostrato
     $mostraPopup = true;
@@ -8,7 +8,7 @@
     $msg = ''; $err = true;
 
     // Verifico se vi e' una sessione aperta per account attivo
-    require_once 'verificaSessioneAttiva.php';
+    require_once 'lib/verificaSessioneAttiva.php';
     
     if ( $sessione_attiva )
         header("Location: area_riservata.php");
@@ -17,10 +17,10 @@
         $msg = 'Errore di comunicazione con il database';
         
         // Elimino la sessione appena creata erroneamente
-        require_once 'cancellaSessione.php';
+        require_once 'lib/cancellaSessione.php';
 
         // Connessione al database
-        require_once 'connection.php';
+        require_once 'lib/connection.php';
 
         if ( $connessione )
         {
@@ -73,13 +73,13 @@
     }
     else if ( $sessione_esistente ) // Elimino la sessione esistente per l'account disattivato
     {
-        require_once 'cancellaSessione.php';
+        require_once 'lib/cancellaSessione.php';
         $msg = 'Account disattivato. Contattare l\'admin';    
     }
     else
     {
         // Elimino la sessione appena creata erroneamente
-        require_once 'cancellaSessione.php';
+        require_once 'lib/cancellaSessione.php';
         $err = false;
         $mostraPopup = false;
     }

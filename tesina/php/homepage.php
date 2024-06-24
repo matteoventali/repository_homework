@@ -1,15 +1,15 @@
 <?php
-    require_once "libreria.php";
+    require_once "lib/libreria.php";
 
     // Verifico se vi e' una sessione esistente per un account attivo
     // In caso positivo l'utente va nella sua area riservata
     // altrimenti rimane nella homepage
-    require_once 'verificaSessioneAttiva.php';
+    require_once 'lib/verificaSessioneAttiva.php';
 
     if ( $sessione_attiva )
         header("Location: area_riservata.php");
     else 
-        require_once 'cancellaSessione.php';
+        require_once 'lib/cancellaSessione.php';
     
     echo '<?xml version = "1.0" encoding="UTF-8"?>';
 ?>
