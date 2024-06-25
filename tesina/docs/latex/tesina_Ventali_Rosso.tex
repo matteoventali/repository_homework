@@ -597,6 +597,24 @@
 			\end{itemize}
 			
 			\bigskip
+			
+			\subsubsection{Gestione ricariche}
+			\textbf{Precondizioni}
+			\begin{itemize}
+				\item l'utente ha effettuato il login come admin.
+			\end{itemize}
+			\textbf{Eventi}
+			\begin{enumerate}
+				\item l'admin accede alla sezione di gestione ricariche;
+				\item l'admin viene reindirizzato alla pagina di riepilogo per le richieste di ricarica non ancora gestite;
+				\item l'admin ha facoltà di accettare/rifiutare una richiesta di ricarica.
+			\end{enumerate}
+			\textbf{Postcondizioni}
+			\begin{itemize}
+				\item il cliente vede aggiornato il saldo del suo portafoglio standard in caso di accettazione.
+			\end{itemize}
+			
+			\bigskip
 			\subsubsection{Inserimento FAQ}
 			\textbf{Precondizioni}
 			\begin{itemize}
@@ -633,7 +651,7 @@
 			\begin{itemize}
 				\item la FAQ è visibile nella sezione del sito dedicata.
 			\end{itemize}
-		\newpage
+
 		\subsection{Strutture dati}
 			\subsubsection{Utenti}
 				I dati degli utenti registrati (clienti, gestori, admin) vengono memorizzati in una tabella SQL con i seguenti campi:
@@ -675,21 +693,17 @@ create table UTENTI(
 	unique (username)
 );
 				\end{lstlisting}
-				\newpage
+
 				\subsubsection{Categorie prodotti}
 					\textbf{Esempio}\\ 
 					\lstinputlisting[language=XML]{../../xml/categorieProdotti.xml}
 					\bigskip \textbf{Grammatica}\\
 					\lstinputlisting[language=XML, backgroundcolor=\color{coloreSfondoGrammatiche}]{../../xml/grammaticaCategorieProdotti.dtd}
-				
-				
 				\subsubsection{Tagli di ricarica}
 					\textbf{Esempio}\\ 
 						\lstinputlisting[language=XML]{../../xml/tagliRicarica.xml}
 					\bigskip \textbf{Grammatica}\\
 						\lstinputlisting[language=XML, backgroundcolor=\color{coloreSfondoGrammatiche}]{../../xml/grammaticaTagliRicarica.dtd}
-						
-				\newpage
 				\subsubsection{Catalogo prodotti}
 					\textbf{Esempio}\\ 
 					\lstinputlisting[language=XML]{../../xml/catalogoProdotti.xml}
@@ -700,7 +714,6 @@ create table UTENTI(
 					\lstinputlisting[language=XML]{../../xml/domande.xml}
 					\bigskip \textbf{Grammatica}\\
 					\lstinputlisting[language=XML, backgroundcolor=\color{coloreSfondoGrammatiche}]{../../xml/schemaDomande.xsd}
-				\newpage
 				\subsubsection{Risposte}
 					\textbf{Esempio}\\ 
 					\lstinputlisting[language=XML]{../../xml/risposte.xml}
@@ -727,6 +740,11 @@ create table UTENTI(
 					\lstinputlisting[language=XML]{../../xml/richiesteRicariche.xml}
 					\bigskip \textbf{Grammatica}\\
 					\lstinputlisting[language=XML, backgroundcolor=\color{coloreSfondoGrammatiche}]{../../xml/schemaRichiesteRicariche.xsd}
+				\subsubsection{Carrelli}
+				\textbf{Esempio}\\ 
+				\lstinputlisting[language=XML]{../../xml/carrelli.xml}
+				\bigskip \textbf{Grammatica}\\
+				\lstinputlisting[language=XML, backgroundcolor=\color{coloreSfondoGrammatiche}]{../../xml/schemaCarrelli.xsd}
 		\bigskip
 		
 		\subsection{Analisi di alcuni elementi/attributi} \hypersetup{linkcolor=blue}
@@ -817,6 +835,11 @@ create table UTENTI(
 				\end{itemize}
 				\item \textbf{richieste $\rightarrow$ ricarica $\rightarrow$ data\_valutazione } l'attributo data\_valutazione dell'elemento ricarica permette di specificare, se presente, la data in cui è stata effettuata la valutazione da un admin (sezione Admin, operazione 3 di \ref{CategorieUtenti}).
 			\end{itemize}
-
+			
+			\subsubsection{Carrelli} 
+			\begin{itemize}
+				\item \textbf{carrelli $\rightarrow$ carrello[id\_cliente] } l'attributo id\_cliente dell'elemento carrello permette di specificare il cliente a cui si riferisce il carrello (sezione Clienti di \ref{CategorieUtenti});
+				\item \textbf{carrelli $\rightarrow$ carrello $\rightarrow$ prodotto} l'elemento prodotto dell'elemento carrello permette di specificare il prodotto inserito nel carrello (sezione Clienti di \ref{CategorieUtenti});
+			\end{itemize}
 	\end{flushleft}
 \end{document}

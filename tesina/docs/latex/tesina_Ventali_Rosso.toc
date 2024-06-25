@@ -1,46 +1,49 @@
 \babel@toc {italian}{}\relax 
 \babel@toc {italian}{}\relax 
-\contentsline {section}{\numberline {1}Introduzione e descrizione dei dati}{3}{section.1}%
-\contentsline {subsection}{\numberline {1.1}Introduzione}{3}{subsection.1.1}%
-\contentsline {subsubsection}{\numberline {1.1.1}Categorie di dispositivi}{3}{subsubsection.1.1.1}%
-\contentsline {subsubsection}{\numberline {1.1.2}Categorie di utenti}{4}{subsubsection.1.1.2}%
-\contentsline {subsection}{\numberline {1.2}Note}{6}{subsection.1.2}%
-\contentsline {subsubsection}{\numberline {1.2.1}Portafogli}{6}{subsubsection.1.2.1}%
-\contentsline {subsubsection}{\numberline {1.2.2}Sconti e offerte}{7}{subsubsection.1.2.2}%
-\contentsline {subsubsection}{\numberline {1.2.3}Reputazione e post}{8}{subsubsection.1.2.3}%
-\contentsline {subsection}{\numberline {1.3}Casi d'uso}{9}{subsection.1.3}%
-\contentsline {subsubsection}{\numberline {1.3.1}Registrazione}{9}{subsubsection.1.3.1}%
-\contentsline {subsubsection}{\numberline {1.3.2}Accesso e gestione profilo}{9}{subsubsection.1.3.2}%
-\contentsline {subsubsection}{\numberline {1.3.3}Acquisto}{10}{subsubsection.1.3.3}%
-\contentsline {subsubsection}{\numberline {1.3.4}Inserimento recensione}{11}{subsubsection.1.3.4}%
-\contentsline {subsubsection}{\numberline {1.3.5}Inserimento domanda}{11}{subsubsection.1.3.5}%
-\contentsline {subsubsection}{\numberline {1.3.6}Inserimento risposta}{11}{subsubsection.1.3.6}%
-\contentsline {subsubsection}{\numberline {1.3.7}Valutazione interventi}{12}{subsubsection.1.3.7}%
-\contentsline {subsubsection}{\numberline {1.3.8}Ricarica portafoglio standard}{12}{subsubsection.1.3.8}%
-\contentsline {subsubsection}{\numberline {1.3.9}Inserimento prodotti}{13}{subsubsection.1.3.9}%
-\contentsline {subsubsection}{\numberline {1.3.10}Gestione prodotti}{13}{subsubsection.1.3.10}%
-\contentsline {subsubsection}{\numberline {1.3.11}Inserimento sconti}{14}{subsubsection.1.3.11}%
-\contentsline {subsubsection}{\numberline {1.3.12}Gestione clienti}{14}{subsubsection.1.3.12}%
-\contentsline {subsubsection}{\numberline {1.3.13}Inserimento FAQ}{15}{subsubsection.1.3.13}%
-\contentsline {subsubsection}{\numberline {1.3.14}Elevazione a FAQ}{15}{subsubsection.1.3.14}%
-\contentsline {subsection}{\numberline {1.4}Strutture dati}{16}{subsection.1.4}%
-\contentsline {subsubsection}{\numberline {1.4.1}Utenti}{16}{subsubsection.1.4.1}%
-\contentsline {subsubsection}{\numberline {1.4.2}Categorie prodotti}{17}{subsubsection.1.4.2}%
-\contentsline {subsubsection}{\numberline {1.4.3}Tagli di ricarica}{18}{subsubsection.1.4.3}%
-\contentsline {subsubsection}{\numberline {1.4.4}Catalogo prodotti}{19}{subsubsection.1.4.4}%
-\contentsline {subsubsection}{\numberline {1.4.5}Domande}{21}{subsubsection.1.4.5}%
-\contentsline {subsubsection}{\numberline {1.4.6}Risposte}{23}{subsubsection.1.4.6}%
-\contentsline {subsubsection}{\numberline {1.4.7}Recensioni}{25}{subsubsection.1.4.7}%
-\contentsline {subsubsection}{\numberline {1.4.8}Acquisti}{26}{subsubsection.1.4.8}%
-\contentsline {subsubsection}{\numberline {1.4.9}Portafogli bonus}{28}{subsubsection.1.4.9}%
-\contentsline {subsubsection}{\numberline {1.4.10}Richieste ricariche}{29}{subsubsection.1.4.10}%
-\contentsline {subsection}{\numberline {1.5}Analisi di alcuni elementi/attributi}{31}{subsection.1.5}%
-\contentsline {subsubsection}{\numberline {1.5.1}Categorie prodotti}{31}{subsubsection.1.5.1}%
-\contentsline {subsubsection}{\numberline {1.5.2}Tagli di ricarica}{31}{subsubsection.1.5.2}%
-\contentsline {subsubsection}{\numberline {1.5.3}Catalogo prodotti}{31}{subsubsection.1.5.3}%
-\contentsline {subsubsection}{\numberline {1.5.4}Domande}{32}{subsubsection.1.5.4}%
-\contentsline {subsubsection}{\numberline {1.5.5}Risposte}{32}{subsubsection.1.5.5}%
-\contentsline {subsubsection}{\numberline {1.5.6}Recensioni}{33}{subsubsection.1.5.6}%
-\contentsline {subsubsection}{\numberline {1.5.7}Acquisti}{33}{subsubsection.1.5.7}%
-\contentsline {subsubsection}{\numberline {1.5.8}Portafogli bonus}{33}{subsubsection.1.5.8}%
-\contentsline {subsubsection}{\numberline {1.5.9}Richieste ricariche}{34}{subsubsection.1.5.9}%
+\contentsline {section}{\numberline {1}Introduzione e descrizione dei dati}{4}{section.1}%
+\contentsline {subsection}{\numberline {1.1}Introduzione}{4}{subsection.1.1}%
+\contentsline {subsubsection}{\numberline {1.1.1}Categorie di dispositivi}{4}{subsubsection.1.1.1}%
+\contentsline {subsubsection}{\numberline {1.1.2}Categorie di utenti}{5}{subsubsection.1.1.2}%
+\contentsline {subsection}{\numberline {1.2}Note}{7}{subsection.1.2}%
+\contentsline {subsubsection}{\numberline {1.2.1}Portafogli}{7}{subsubsection.1.2.1}%
+\contentsline {subsubsection}{\numberline {1.2.2}Sconti e offerte}{8}{subsubsection.1.2.2}%
+\contentsline {subsubsection}{\numberline {1.2.3}Reputazione e post}{9}{subsubsection.1.2.3}%
+\contentsline {subsection}{\numberline {1.3}Casi d'uso}{10}{subsection.1.3}%
+\contentsline {subsubsection}{\numberline {1.3.1}Registrazione}{10}{subsubsection.1.3.1}%
+\contentsline {subsubsection}{\numberline {1.3.2}Accesso e gestione profilo}{10}{subsubsection.1.3.2}%
+\contentsline {subsubsection}{\numberline {1.3.3}Acquisto}{11}{subsubsection.1.3.3}%
+\contentsline {subsubsection}{\numberline {1.3.4}Inserimento recensione}{12}{subsubsection.1.3.4}%
+\contentsline {subsubsection}{\numberline {1.3.5}Inserimento domanda}{12}{subsubsection.1.3.5}%
+\contentsline {subsubsection}{\numberline {1.3.6}Inserimento risposta}{12}{subsubsection.1.3.6}%
+\contentsline {subsubsection}{\numberline {1.3.7}Valutazione interventi}{13}{subsubsection.1.3.7}%
+\contentsline {subsubsection}{\numberline {1.3.8}Ricarica portafoglio standard}{13}{subsubsection.1.3.8}%
+\contentsline {subsubsection}{\numberline {1.3.9}Inserimento prodotti}{14}{subsubsection.1.3.9}%
+\contentsline {subsubsection}{\numberline {1.3.10}Gestione prodotti}{14}{subsubsection.1.3.10}%
+\contentsline {subsubsection}{\numberline {1.3.11}Inserimento sconti}{15}{subsubsection.1.3.11}%
+\contentsline {subsubsection}{\numberline {1.3.12}Gestione clienti}{15}{subsubsection.1.3.12}%
+\contentsline {subsubsection}{\numberline {1.3.13}Gestione ricariche}{16}{subsubsection.1.3.13}%
+\contentsline {subsubsection}{\numberline {1.3.14}Inserimento FAQ}{16}{subsubsection.1.3.14}%
+\contentsline {subsubsection}{\numberline {1.3.15}Elevazione a FAQ}{16}{subsubsection.1.3.15}%
+\contentsline {subsection}{\numberline {1.4}Strutture dati}{17}{subsection.1.4}%
+\contentsline {subsubsection}{\numberline {1.4.1}Utenti}{17}{subsubsection.1.4.1}%
+\contentsline {subsubsection}{\numberline {1.4.2}Categorie prodotti}{18}{subsubsection.1.4.2}%
+\contentsline {subsubsection}{\numberline {1.4.3}Tagli di ricarica}{19}{subsubsection.1.4.3}%
+\contentsline {subsubsection}{\numberline {1.4.4}Catalogo prodotti}{20}{subsubsection.1.4.4}%
+\contentsline {subsubsection}{\numberline {1.4.5}Domande}{22}{subsubsection.1.4.5}%
+\contentsline {subsubsection}{\numberline {1.4.6}Risposte}{24}{subsubsection.1.4.6}%
+\contentsline {subsubsection}{\numberline {1.4.7}Recensioni}{26}{subsubsection.1.4.7}%
+\contentsline {subsubsection}{\numberline {1.4.8}Acquisti}{27}{subsubsection.1.4.8}%
+\contentsline {subsubsection}{\numberline {1.4.9}Portafogli bonus}{29}{subsubsection.1.4.9}%
+\contentsline {subsubsection}{\numberline {1.4.10}Richieste ricariche}{30}{subsubsection.1.4.10}%
+\contentsline {subsubsection}{\numberline {1.4.11}Carrelli}{32}{subsubsection.1.4.11}%
+\contentsline {subsection}{\numberline {1.5}Analisi di alcuni elementi/attributi}{33}{subsection.1.5}%
+\contentsline {subsubsection}{\numberline {1.5.1}Categorie prodotti}{33}{subsubsection.1.5.1}%
+\contentsline {subsubsection}{\numberline {1.5.2}Tagli di ricarica}{33}{subsubsection.1.5.2}%
+\contentsline {subsubsection}{\numberline {1.5.3}Catalogo prodotti}{33}{subsubsection.1.5.3}%
+\contentsline {subsubsection}{\numberline {1.5.4}Domande}{33}{subsubsection.1.5.4}%
+\contentsline {subsubsection}{\numberline {1.5.5}Risposte}{34}{subsubsection.1.5.5}%
+\contentsline {subsubsection}{\numberline {1.5.6}Recensioni}{34}{subsubsection.1.5.6}%
+\contentsline {subsubsection}{\numberline {1.5.7}Acquisti}{35}{subsubsection.1.5.7}%
+\contentsline {subsubsection}{\numberline {1.5.8}Portafogli bonus}{35}{subsubsection.1.5.8}%
+\contentsline {subsubsection}{\numberline {1.5.9}Richieste ricariche}{36}{subsubsection.1.5.9}%
+\contentsline {subsubsection}{\numberline {1.5.10}Carrelli}{36}{subsubsection.1.5.10}%
