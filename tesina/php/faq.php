@@ -72,7 +72,7 @@
                     
                     // Carico le FAQ dai file XML
                     $lista_faq = "";
-                    for ( $i=0; $i<8; $i++ )
+                    for ( $i=1; $i<15; $i++ )
                     {
                         // Per ogni assegno un id progressivo
                         $faq_piena = str_replace("%DOMANDA%", "Domanda" . $i, $faq_vuota);

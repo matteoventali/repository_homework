@@ -42,7 +42,6 @@ function mostraRispostaFaq(id_domanda)
     // Mostro il container
     container = document.getElementById(id_risposta);
     container.style.display = "block";
-    container.scrollIntoView();
     
     // Cambio il contenuto del paragrafo contenente il simbolo della freccia
     simbolo = document.getElementById(id_domanda);
@@ -69,4 +68,17 @@ function nascondiRispostaFaq(id_domanda)
     // Cambio l'evento di onclick
     nuovo_evento = "mostraRispostaFaq(" + id_domanda + ")";
     simbolo.setAttribute('onclick', nuovo_evento);
+}
+
+function azzeraFormRegistrazione()
+{
+    // Azzeramento campi form
+    document.getElementsByName('nome')[0].value   = "";
+    document.getElementsByName('cognome')[0].value   = "";
+    document.getElementsByName('citta')[0].value   = "";
+    document.getElementsByName('cap')[0].value   = "";
+    document.getElementsByName('indirizzo')[0].value   = "";
+    document.getElementsByName('username')[0].value   = "";
+    document.getElementsByName('mail')[0].value   = "";
+    document.getElementsByName('password')[0].value   = "";
 }

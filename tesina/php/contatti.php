@@ -1,5 +1,6 @@
 <?php
     require_once "lib/libreria.php";
+    require_once "lib/verificaSessioneAttiva.php";
     
     echo '<?xml version = "1.0" encoding="UTF-8"?>';
 ?>
@@ -18,18 +19,36 @@
 
     <body onload="">
         <?php
-            // Import della navbar
-            // Mostro il bottone per accedere alla pagina di registrazione e per quella di login
-            $nav = file_get_contents("../html/strutturaNavbarVisitatori.html");
-            $nav = str_replace("%OPZIONE_DISPLAY_REGISTRATI%", "block", $nav);
-            $nav = str_replace("%OPZIONE_DISPLAY_ACCEDI%", "block", $nav);
-            echo $nav ."\n";
+            // Bisogna controllare se l'utente è loggato oppure no
+            // In base a questo avrà diversi tipi di visualizzazione
+            if($sessione_attiva)
+            {
+                // In questo caso l'utente è loggato
 
-            // Import della sidebar e mostro le opzioni per l'utente loggato
-            // Il ruolo dell'utente e' prelevato dalle variabili di sessione
-            $sidebar = file_get_contents("../html/strutturaSidebar.html");
-            $sidebar = str_replace("%OPERAZIONI_UTENTE%", ottieniOpzioniMenu('A'), $sidebar);
-            echo $sidebar . "\n";
+                // Import della navbar
+                // Visualizzo nome dell'utente e il tasto "Logout"
+                $nav = file_get_contents("../html/strutturaNavbarUtenti.html");
+                $nav = str_replace("%NOME_UTENTE%", $_SESSION["nome"] . " " . $_SESSION["cognome"], $nav);
+                echo $nav ."\n";
+
+                // Import della sidebar e mostro solo le opzioni del visitatore
+                $sidebar = file_get_contents("../html/strutturaSidebar.html");
+                $sidebar = str_replace("%OPERAZIONI_UTENTE%", ottieniOpzioniMenu($_SESSION["ruolo"]), $sidebar);
+                echo $sidebar . "\n";
+            }
+            else 
+            {
+                // Qui l'utente non è loggato
+
+                // Import della navbar
+                $nav = file_get_contents("../html/strutturaNavbarVisitatori.html");
+                echo $nav ."\n";
+
+                // Import della sidebar e mostro solo le opzioni del visitatore
+                $sidebar = file_get_contents("../html/strutturaSidebar.html");
+                $sidebar = str_replace("%OPERAZIONI_UTENTE%", ottieniOpzioniMenu('V'), $sidebar);
+                echo $sidebar . "\n";
+            }
         ?>
 
         <div id="sezioneContatti">
@@ -44,7 +63,7 @@
                     </div>
                     <div class="descrizione">
                         <h2> Matteo Ventali </h2>
-                        <p> Fondatore di UNI-TECNO <br> Telefono: 3463462160 <br> Email: ventali.1985026@studenti.uniroma1.it</p>
+                        <p> Fondatore di UNI-TECNO <br> Telefono: 3463462160 <br> Email: ventali@unitecno.it</p>
                     </div>
                 </div>
                 <div class="profilo">
@@ -53,7 +72,7 @@
                     </div>
                     <div class="descrizione">
                         <h2> Stefano Rosso </h2>
-                        <p> Fondatore di UNI-TECNO <br> Telefono: 3801932038 <br> Email: rosso.2001015@studenti.uniroma1.it</p>
+                        <p> Fondatore di UNI-TECNO <br> Telefono: 3801932038 <br> Email: rosso@unitecno.it</p>
                     </div>
                 </div>
             </div>

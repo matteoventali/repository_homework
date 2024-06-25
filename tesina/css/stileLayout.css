@@ -13,7 +13,7 @@ fieldset
     border-style: none;
 }
 
-button, input[type="submit"], input[type="reset"]
+button, input[type="submit"], input[type="reset"], input[type="button"]
 {
   background-color: #30e3ca;
   border: solid #E4F9F5;
