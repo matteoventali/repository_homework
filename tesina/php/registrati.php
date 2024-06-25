@@ -1,5 +1,7 @@
 <?php
     require_once 'lib/libreria.php';
+    require_once 'gestoriXML/gestoreCarrelli.php';
+    require_once 'gestoriXML/gestorePortafogliBonus.php';
     
     // Variabile per verificare se il popup vada mostrato
     $mostraPopup = true;
@@ -65,6 +67,14 @@
                         $handleDB->query($q);
                         $msg = 'Registrazione avvenuta con successo';
                         $err = false;
+
+                        // Creazione del carrello per il nuovo utente nel file xml
+                        $gestore_carrelli = new GestoreCarrelli();
+                        $gestore_carrelli->aggiungiNuovoCarrello($handleDB->insert_id);
+                        
+                        // Creazione del portafoglio bonus per il nuovo utente
+                        $gestore_portafogli_bonus = new GestorePortafogliBonus();
+                        $gestore_portafogli_bonus->aggiungiNuovoPortafoglioBonus($handleDB->insert_id);
                     }
                     catch (Exception $e)
                     {

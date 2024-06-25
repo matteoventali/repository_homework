@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.24 (TeX Live 2022/Debian) (preloaded format=pdflatex 2023.12.5)  25 JUN 2024 16:06
+This is pdfTeX, Version 3.141592653-2.6-1.40.24 (TeX Live 2022/Debian) (preloaded format=pdflatex 2023.12.5)  25 JUN 2024 19:50
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -550,17 +550,17 @@ nput line 699.
 (../../xml/schemaRecensioni.xsd [26]) (../../xml/acquisti.xml [27])
 (../../xml/schemaAcquisti.xsd [28]) (../../xml/portafogliBonus.xml)
 (../../xml/schemaPortafogliBonus.xsd [29]) (../../xml/richiesteRicariche.xml
-[30]) (../../xml/schemaRichiesteRicariche.xsd [31]) (../../xml/carrelli.xml)
+[30]) (../../xml/schemaRichiesteRicariche.xsd) [31] (../../xml/carrelli.xml)
 (../../xml/schemaCarrelli.xsd) [32] [33] [34] [35] [36]
 (./tesina_Ventali_Rosso.aux)
 Package rerunfilecheck Info: File `tesina_Ventali_Rosso.out' has not changed.
 (rerunfilecheck)             Checksum: 8E0CDAF41DC317E3093E6C39BFE4A292;6955.
  ) 
 Here is how much of TeX's memory you used:
- 14264 strings out of 478040
- 223962 string characters out of 5840467
+ 14243 strings out of 478040
+ 223639 string characters out of 5840467
  1972330 words of memory out of 5000000
- 33308 multiletter control sequences out of 15000+600000
+ 33307 multiletter control sequences out of 15000+600000
  527456 words of font info for 61 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
  75i,7n,77p,367b,2340s stack positions out of 10000i,1000n,20000p,200000b,200000s
@@ -582,10 +582,10 @@ cm/cmmi8.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr1
 2.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb></
 usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/sh
 are/texlive/texmf-dist/fonts/type1/public/eurosym/feymr10.pfb>
-Output written on tesina_Ventali_Rosso.pdf (36 pages, 366604 bytes).
+Output written on tesina_Ventali_Rosso.pdf (36 pages, 365868 bytes).
 PDF statistics:
- 1770 PDF objects out of 2073 (max. 8388607)
- 1366 compressed objects within 14 object streams
- 822 named destinations out of 1000 (max. 500000)
+ 1747 PDF objects out of 2073 (max. 8388607)
+ 1343 compressed objects within 14 object streams
+ 802 named destinations out of 1000 (max. 500000)
  382 words of extra memory for PDF output out of 10000 (max. 10000000)
 
