@@ -127,7 +127,7 @@
             <form id="formLogin" action="<?php echo $_SERVER["PHP_SELF"] ?>" method="post">
                 <fieldset><p>Username:</p><input type="text" name="username"/></fieldset>
                 <fieldset><p>Password:</p><input type="password" name="password"/></fieldset>
-                <fieldset>
+                <fieldset style="border-style: none; box-shadow: none;">
                     <input type="reset" value="Cancella" />
                     <input type="submit" value="Login" name="btnAccedi" />
                 </fieldset>                

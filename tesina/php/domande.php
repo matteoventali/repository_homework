@@ -2,8 +2,7 @@
     require_once 'lib/libreria.php';
     require_once 'lib/verificaSessioneAttiva.php';
     require_once 'gestoriXML/gestoreDomande.php';
-    require_once 'gestoriXML/gestoreRisposte.php';
-
+    
     // Verifico se c'e' da gestire una richiesta di registrazione o meno
     echo '<?xml version = "1.0" encoding="UTF-8"?>';
 ?>
@@ -14,7 +13,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <link rel="stylesheet" href="../css/stileLayout.css" type="text/css" />
         <link rel="stylesheet" href="../css/stileSidebar.css" type="text/css" />
-        <link rel="stylesheet" href="../css/stileFaq.css" type="text/css" />
+        <link rel="stylesheet" href="../css/stileDomande.css" type="text/css" />
         <link rel="icon" type="image/x-icon" href="../img/logo.png" />
         <script type="text/javascript" src="../js/utility.js"></script>
         <title>UNI-TECNO</title>
@@ -42,9 +41,9 @@
                 $sidebar = str_replace("%OPERAZIONI_UTENTE%", ottieniOpzioniMenu($_SESSION["ruolo"]), $sidebar);
                 echo $sidebar . "\n";
 
-                // L'opzione di aggiungere una nuova faq deve essere fornita
-                // esclusivamente ad admin e gestori
-                if ( $_SESSION["ruolo"] == "A" || $_SESSION["ruolo"] == "G" )
+                // L'opzione di aggiungere una nuova domanda deve essere fornita
+                // esclusivamente al cliente
+                if ( $_SESSION["ruolo"] == "C" )
                     $visibilita_bottone = "block";
             }
             else 
@@ -62,42 +61,37 @@
             }
         ?>
 
-        <div id="sezioneFaq">
+        <div id="sezioneDomande">
             <div id="parteCentrale">
                 <div class="parteButton" style="display: <?php echo $visibilita_bottone; ?>">
-                    <input type="submit" value="Inserisci nuova FAQ" name="btnInserisci" />
+                    <input type="submit" value="Inserisci nuova domanda" name="btnInserisci" />
                 </div>
                 
                 <?php
-                    // Contenuto di una faq vuota
-                    $faq_vuota = file_get_contents("../html/frammentoFaq.html");
+                    // Contenuto di una domanda vuota
+                    $domanda_vuota = file_get_contents("../html/frammentoDomanda.html");
                     
                     // Gestori file XML
                     $gestore_domande = new GestoreDomande();
-                    $gestore_risposte = new GestoreRisposte();
                     
-                    // Carico le FAQ dai file XML
-                    $contenuto_faq = "";
+                    // Carico le domande dai file XML
+                    $contenuto_domande = "";
                     
-                    $lista_faq = $gestore_domande->ottieniDomande("true"); // Ottengo solo le domande FAQ
-                    $dim_lista = count($lista_faq);
+                    $lista_domande = $gestore_domande->ottieniDomande("false");
+                    $dim_lista = count($lista_domande);
 
                     for ( $i=0; $i<$dim_lista; $i++ )
                     {
-                        $id_domanda = $lista_faq[$i]->id;
+                        $id_domanda = $lista_domande[$i]->id;
                         
-                        $faq_piena = str_replace("%DOMANDA%", $lista_faq[$i]->contenuto, $faq_vuota);
-                        $faq_piena = str_replace("%ID_DOMANDA%", $id_domanda, $faq_piena);
+                        $domanda_piena = str_replace("%DOMANDA%", $lista_domande[$i]->contenuto, $domanda_vuota);
+                        $domanda_piena = str_replace("%ID_DOMANDA%", $id_domanda, $domanda_piena);
 
-                        // Ottengo la risposta associata alla domanda FAQ
-                        $risposta = $gestore_risposte->ottieniRisposte($id_domanda, "true");
-                        $faq_piena = str_replace("%RISPOSTA%", $risposta[0]->contenuto, $faq_piena);
-
-                        $contenuto_faq .= $faq_piena . "\n";
+                        $contenuto_domande .= $domanda_piena . "\n";
                     }
                     
-                    // Mostro la lista delle faq
-                    echo $contenuto_faq . "\n";
+                    // Mostro la lista delle domande
+                    echo $contenuto_domande . "\n";
                 ?>
             </div>
         </div>

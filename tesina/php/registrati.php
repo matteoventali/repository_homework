@@ -172,7 +172,7 @@
                 <fieldset>  <p>Mail:        </p>  <input type="text" name="mail" <?php if($err) echo 'value="'. $_POST["mail"] . '"';?>/>    </fieldset>
                 <fieldset>  <p>Password:    </p>  <input type="password" name="password"/>    </fieldset>
                 
-                <fieldset> <input type="button" value="Cancella" name="btnCancella" onclick="azzeraFormRegistrazione();" />
+                <fieldset style="border-style: none; box-shadow: none;"> <input type="button" value="Cancella" name="btnCancella" onclick="azzeraFormRegistrazione();" />
                 <input type="submit" value="Invia" name="btnRegistrati" /> </fieldset>
             </form>
         </div>

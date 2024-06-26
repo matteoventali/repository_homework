@@ -82,3 +82,11 @@ function azzeraFormRegistrazione()
     document.getElementsByName('mail')[0].value   = "";
     document.getElementsByName('password')[0].value   = "";
 }
+
+function vaiDettaglioDomanda(id_domanda)
+{
+    // Costruisco l'url per ridirezionare l'utente
+    // alla pagina dove visualizzare in dettaglio la domanda
+    url = 'dettaglioDomanda.php?id_domanda=' + id_domanda;
+    window.location.href = url;
+}

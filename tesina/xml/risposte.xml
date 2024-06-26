@@ -18,4 +18,11 @@
             <valutazione peso="55"  id_utente="17" rating="5"/>
         </valutazioni>
     </risposta>
+
+    <risposta id="3" id_domanda="1" id_utente="1" faq="true" data="2024-06-07">
+        <contenuto>
+            Da visualizzare.
+        </contenuto>
+        <valutazioni></valutazioni>
+    </risposta>
 </risposte>

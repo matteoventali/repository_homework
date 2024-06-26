@@ -1,7 +1,7 @@
 <?php
     require_once 'gestoreXMLDOM.php';
 
-    // Gestore XML DOM per il file carrello.xml
+    // Gestore XML DOM per il file portafogliBonus.xml
     class GestorePortafogliBonus extends GestoreXMLDOM
     {
         // Costruttore che chiama quello della classe padre
