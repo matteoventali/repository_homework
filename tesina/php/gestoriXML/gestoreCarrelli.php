@@ -8,7 +8,7 @@
         function __construct()
         {
             // Apertura del file carrelli con validazione tramite schema
-            parent::__construct("../xml/carrelli.xml", 1, "../xml/schemaCarrelli.xsd");
+            parent::__construct("../xml/documenti/carrelli.xml", 1, "../xml/schema/schemaCarrelli.xsd");
         }
 
         // Metodo per creare un nuovo carrello vuoto nel file

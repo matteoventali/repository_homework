@@ -23,7 +23,7 @@
         function __construct()
         {
             // Apertura del file domande con validazione tramite schema
-            parent::__construct("../xml/domande.xml", 1, "../xml/schemaDomande.xsd");
+            parent::__construct("../xml/documenti/domande.xml", 1, "../xml/schema/schemaDomande.xsd");
         }
 
         // Metodo per ottenere le domande

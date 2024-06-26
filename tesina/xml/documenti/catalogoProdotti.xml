@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<catalogo xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="./schemaCatalogoProdotti.xsd">
+<catalogo xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../schema/schemaCatalogoProdotti.xsd">
 
     <prodotto id="1" id_categoria="1" id_tipo="1">
         <nome>APPLE MacBook Air</nome>

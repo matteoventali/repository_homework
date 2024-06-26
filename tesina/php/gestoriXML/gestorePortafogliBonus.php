@@ -8,7 +8,7 @@
         function __construct()
         {
             // Apertura del file portafogli bonus con validazione tramite schema
-            parent::__construct("../xml/portafogliBonus.xml", 1, "../xml/schemaPortafogliBonus.xsd");
+            parent::__construct("../xml/documenti/portafogliBonus.xml", 1, "../xml/schema/schemaPortafogliBonus.xsd");
         }
 
         // Metodo per creare un nuovo portafoglio bonus vuoto nel file

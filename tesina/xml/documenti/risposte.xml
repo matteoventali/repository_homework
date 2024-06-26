@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<risposte xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="./schemaRisposte.xsd">
+<risposte xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../schema/schemaRisposte.xsd">
 
     <risposta id="1" id_domanda="1" id_utente="1" faq="false" data="2024-06-07">
         <contenuto>
@@ -17,12 +17,5 @@
             <valutazione peso="200" id_utente="2" rating="5"/>
             <valutazione peso="55"  id_utente="17" rating="5"/>
         </valutazioni>
-    </risposta>
-
-    <risposta id="3" id_domanda="1" id_utente="1" faq="true" data="2024-06-07">
-        <contenuto>
-            Da visualizzare.
-        </contenuto>
-        <valutazioni></valutazioni>
     </risposta>
 </risposte>

@@ -23,7 +23,7 @@
         function __construct()
         {
             // Apertura del file risposte con validazione tramite schema
-            parent::__construct("../xml/risposte.xml", 1, "../xml/schemaRisposte.xsd");
+            parent::__construct("../xml/documenti/risposte.xml", 1, "../xml/schema/schemaRisposte.xsd");
         }
 
         // Metodo per ottenere le risposte relative ad una domanda

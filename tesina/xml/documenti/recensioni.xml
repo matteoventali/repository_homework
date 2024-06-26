@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<recensioni xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="./schemaRecensioni.xsd">
+<recensioni xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../schema/schemaRecensioni.xsd">
 
     <recensione id_cliente="10" id_prodotto="1" data="2024-06-07">
         <contenuto>
