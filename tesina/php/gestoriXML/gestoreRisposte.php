@@ -84,5 +84,46 @@
 
             return $lista_risposte;
         }
+                
+        // Metodo per inserire una risposta
+        // Riceve il contenuto, l'utente che effettua la risposta,
+        // l'id della domanda e se la risposta e' quella da mostrare nelle faq
+        function inserisciRisposta($cont, $id_utente, $faq, $id_domanda)
+        {
+            // Verifico se posso usare il file
+            if ( !$this->checkValidita() )
+                return null;
+
+            // Ottengo l'id dell'ultimo figlio della radice, ovvero dell'ultima risposta
+            $id_nuova_risposta = 1;
+            $ultima = $this->oggettoDOM->documentElement->lastElementChild;
+            if ( $ultima != null ) // Ci sono altre domande
+            {
+                $id_ultima = $ultima->getAttribute('id');
+                $id_ultima = intval($id_ultima);
+                $id_nuova_risposta = ++$id_ultima;
+                $id_nuova_risposta = strval($id_nuova_risposta);
+            }
+
+            // Creazione della nuova risposta
+            $nuova_risposta = $this->oggettoDOM->createElement("risposta");
+            $nuova_risposta->setAttribute("id", $id_nuova_risposta);
+            $nuova_risposta->setAttribute("faq", $faq);
+            $nuova_risposta->setAttribute("data", date("Y-m-d"));
+            $nuova_risposta->setAttribute("id_utente", $id_utente);
+            $nuova_risposta->setAttribute("id_domanda", $id_domanda);
+            $contenuto_nuova_risposta = $this->oggettoDOM->createElement("contenuto", $cont);
+            $lista_valutazioni_nuova_risposta = $this->oggettoDOM->createElement("valutazioni");
+
+            // Inserisco il contenuto e la lista vuota di valutazioni come figli della risposta
+            $nuova_risposta->appendChild($contenuto_nuova_risposta);
+            $nuova_risposta->appendChild($lista_valutazioni_nuova_risposta);
+
+            // Aggancio della risposta
+            $this->oggettoDOM->documentElement->appendChild($nuova_risposta); 
+
+            // Salvo i cambiamenti sul file
+            $this->salvaXML($this->pathname);
+        }
     }
 ?>

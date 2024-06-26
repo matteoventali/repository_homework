@@ -11,13 +11,12 @@
         return $url;
     }
 
-    /*  Funzione per ottenere elenco operazioni da includere nella sidebar
-        Riceve:
-        - V -> visitatore
-        - C -> cliente
-        - A -> admin
-        - G -> gestore
-    */
+    // Funzione per ottenere elenco operazioni da includere nella sidebar
+    // Riceve:
+    // - V -> visitatore
+    // - C -> cliente
+    // - A -> admin
+    // - G -> gestore
     function ottieniOpzioniMenu($ruolo)
     {
         $ris = "";

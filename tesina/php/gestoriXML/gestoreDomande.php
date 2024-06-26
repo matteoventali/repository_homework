@@ -83,5 +83,48 @@
 
             return $lista_domande;
         }
+
+        // Metodo per inserire una domanda
+        // Riceve il contenuto, l'utente che effettua la domanda
+        // e se la domanda fa parte delle faq o meno.
+        // Ritorna l'id della domanda appena inserita o altrimenti null in caso di errore
+        function inserisciDomanda($cont, $id_utente, $faq)
+        {
+            // Verifico se posso usare il file
+            if ( !$this->checkValidita() )
+                return null;
+
+            // Ottengo l'id dell'ultimo figlio della radice, ovvero dell'ultima domanda
+            $id_nuova_domanda = 1;
+            $ultima = $this->oggettoDOM->documentElement->lastElementChild;
+            if ( $ultima != null ) // Ci sono altre domande
+            {
+                $id_ultima = $ultima->getAttribute('id');
+                $id_ultima = intval($id_ultima);
+                $id_nuova_domanda = ++$id_ultima;
+                $id_nuova_domanda = strval($id_nuova_domanda);
+            }
+
+            // Creazione della nuova domanda
+            $nuova_domanda = $this->oggettoDOM->createElement("domanda");
+            $nuova_domanda->setAttribute("id", $id_nuova_domanda);
+            $nuova_domanda->setAttribute("faq", $faq);
+            $nuova_domanda->setAttribute("data", date("Y-m-d"));
+            $nuova_domanda->setAttribute("id_utente", $id_utente);
+            $contenuto_nuova_domanda = $this->oggettoDOM->createElement("contenuto", $cont);
+            $lista_valutazioni_nuova_domanda = $this->oggettoDOM->createElement("valutazioni");
+
+            // Inserisco il contenuto e la lista vuota di valutazioni come figli della domanda
+            $nuova_domanda->appendChild($contenuto_nuova_domanda);
+            $nuova_domanda->appendChild($lista_valutazioni_nuova_domanda);
+
+            // Aggancio della domanda
+            $this->oggettoDOM->documentElement->appendChild($nuova_domanda); 
+
+            // Salvo i cambiamenti sul file
+            $this->salvaXML($this->pathname);
+
+            return $id_nuova_domanda;
+        }
     } 
 ?>
