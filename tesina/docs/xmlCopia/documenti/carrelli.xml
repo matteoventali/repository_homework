@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<carrelli xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="schemaCarrelli.xsd">
+<carrelli xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../schema/schemaCarrelli.xsd">
     <carrello id_cliente="15">
         <prodotto id_prodotto="1" />
         <prodotto id_prodotto="2" />

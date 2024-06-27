@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<richieste xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="./schemaRichiesteRicariche.xsd">
+<richieste xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../schema/schemaRichiesteRicariche.xsd">
 
     <ricarica id="1" id_cliente="10" stato="A" id_admin="1">
         <data_richiesta>2024-06-03</data_richiesta>

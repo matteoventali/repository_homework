@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<domande xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="./schemaDomande.xsd">
+<domande xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../schema/schemaDomande.xsd">
 
     <domanda id="1" id_utente="10" faq="false" data="2024-06-07">
         <contenuto>
