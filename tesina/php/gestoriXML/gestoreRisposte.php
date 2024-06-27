@@ -125,5 +125,32 @@
             // Salvo i cambiamenti sul file
             $this->salvaXML($this->pathname);
         }
+
+        // Funzione che permette di capire se esiste una risposta appartenente alle faq 
+        // per la domanda passata (appartenente anch'essa alle faq)
+        function verificaPresenzaRispostaFaq($id_domanda)
+        {
+            // Verifico se posso usare il file
+            if ( !$this->checkValidita() )
+                return null;
+
+            // Variabile per il risultato da restituire, inizialmente a false
+            $esito = false;
+
+            // Utilizzo la funzione sopra scritta per ottenere la lista di risposte
+            // con attributo faq = "true"
+            // Tra quelle devo vedere se ne esiste una con id_domanda uguale a quello passato
+            $risposte = $this->ottieniRisposte($id_domanda, "true");
+            $dim_lista = count($risposte);
+            
+            // Tramite la dimensione della lista riesco a capire se la risposta
+            // alla faq esiste
+            if($dim_lista > 0)
+            {
+                $esito = true;
+            }
+
+            return $esito;
+        }
     }
 ?>

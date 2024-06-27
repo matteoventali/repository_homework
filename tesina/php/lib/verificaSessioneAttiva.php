@@ -20,7 +20,7 @@
         
         // Connessione al database per prendere lo stato
         // dell'account loggato
-        require_once 'connection.php';
+        require 'connection.php';
 
         if ( $connessione )
         {

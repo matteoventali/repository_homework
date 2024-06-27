@@ -37,7 +37,7 @@ function nascondiPopup()
 function mostraRispostaFaq(id_domanda)
 {
     // Compongo l'id del container relativo alla risposta da mostrare
-    id_risposta = "risp_" + id_domanda;
+    id_risposta = id_domanda.replace('dom', 'risp');
 
     // Mostro il container
     container = document.getElementById(id_risposta);
@@ -48,14 +48,14 @@ function mostraRispostaFaq(id_domanda)
     simbolo.innerHTML = "&#x25B2";
 
     // Cambio l'evento di onclick
-    nuovo_evento = "nascondiRispostaFaq(" + id_domanda + ")";
+    nuovo_evento = "nascondiRispostaFaq('" + id_domanda + "')";
     simbolo.setAttribute('onclick', nuovo_evento);
 }
 
 function nascondiRispostaFaq(id_domanda)
 {
     // Compongo l'id del container relativo alla risposta da nascondere
-    id_risposta = "risp_" + id_domanda;
+    id_risposta = id_domanda.replace('dom', 'risp');
 
     // Mostro il container
     container = document.getElementById(id_risposta);
@@ -66,7 +66,7 @@ function nascondiRispostaFaq(id_domanda)
     simbolo.innerHTML = "&#x25BC;";
 
     // Cambio l'evento di onclick
-    nuovo_evento = "mostraRispostaFaq(" + id_domanda + ")";
+    nuovo_evento = "mostraRispostaFaq('" + id_domanda + "')";
     simbolo.setAttribute('onclick', nuovo_evento);
 }
 

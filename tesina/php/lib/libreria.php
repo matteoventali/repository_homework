@@ -1,5 +1,25 @@
 <?php
-    /* Funzioni di libreria da utilizzare al bisogno */
+    $stellina_vuota = " &#9734";
+    $stellina_piena = " &#9733";
+
+    class Utente
+    {
+        public $id_utente            = "";
+        public $nome                 = "";
+        public $cognome              = "";
+        public $indirizzo            = "";
+        public $citta                = "";
+        public $cap                  = "";
+        public $reputazione          = "";
+        public $data_registrazione   = "";
+        public $stato                = "";
+        public $username             = "";
+        public $mail                 = "";
+        public $ruolo                = "";
+        public $saldo_standard       = "";
+    }
+    
+    // Funzioni di libreria da utilizzare al bisogno
 
     // Funzione per url sfondo tra quelli disponibili
     function ottieniURLSfondo()
@@ -70,5 +90,25 @@
                 $popup = str_replace("%COLORE_SFONDO_POPUP%", $colore_background_popup_verde, $popup);
         }
         return $popup;
+    }
+
+    // Funzione per ottenere la media dei rating
+    // riceve una lista di valutazioni associata ad un intervento
+    function calcolaMediaRating($lista_valutazioni)
+    {
+        // Scansione della lista per calcolo media aritmetica
+        $media = 0;
+        $lung = count($lista_valutazioni);
+        for ( $i=0; $i<$lung; $i++ )
+        {
+            // Estraggo il rating dalla valutazione i-esima
+            $rating = intval($lista_valutazioni[$i]->rating);
+            $media += $rating;
+        }
+
+        if ( $lung > 0 )
+            $media = $media / $lung;
+
+        return $media;
     }
 ?>

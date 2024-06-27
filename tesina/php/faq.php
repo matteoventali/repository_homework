@@ -64,7 +64,7 @@
 
         <div id="sezioneFaq">
             <div id="parteCentrale">
-                <form class="parteButton" action="inserisciFaq.php" method="POST">
+                <form class="parteButton" action="inserisciFaq.php" method="post">
                     <div style="display: <?php echo $visibilita_bottone; ?>">
                         <input type="submit" value="Inserisci nuova FAQ" name="btnInserisci" />
                     </div>

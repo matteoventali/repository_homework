@@ -53,7 +53,7 @@
 
         <div id="sezioneContatti">
             <div id="presentazione">
-                <h1>UNI-TECNO <br> Negozio virtuale per la vendita di dispositivi tecnologici</h1>
+                <h1>UNI-TECNO <br /> Negozio virtuale per la vendita di dispositivi tecnologici</h1>
             </div>
 
             <div id="profili">
@@ -63,7 +63,7 @@
                     </div>
                     <div class="descrizione">
                         <h2> Matteo Ventali </h2>
-                        <p> Fondatore di UNI-TECNO <br> Telefono: 3463462160 <br> Email: ventali@unitecno.it</p>
+                        <p> Fondatore di UNI-TECNO <br /> Telefono: 3463462160 <br /> Email: ventali@unitecno.it</p>
                     </div>
                 </div>
                 <div class="profilo">
@@ -72,7 +72,7 @@
                     </div>
                     <div class="descrizione">
                         <h2> Stefano Rosso </h2>
-                        <p> Fondatore di UNI-TECNO <br> Telefono: 3801932038 <br> Email: rosso@unitecno.it</p>
+                        <p> Fondatore di UNI-TECNO <br /> Telefono: 3801932038 <br /> Email: rosso@unitecno.it</p>
                     </div>
                 </div>
             </div>
