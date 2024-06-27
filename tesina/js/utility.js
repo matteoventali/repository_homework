@@ -90,3 +90,34 @@ function vaiDettaglioDomanda(id_domanda)
     url = 'dettaglioDomanda.php?id_domanda=' + id_domanda;
     window.location.href = url;
 }
+
+function coloraStellina(nome_stelle, stella)
+{
+    // Prendo il vettore di stelle su cui si e' verificato l'evento
+    stelle = document.getElementsByName(nome_stelle);
+
+    // Coloro le stelle finche' non raggiungo quella passata
+    finito = false;
+    for ( i=0; i<5 && !finito; i++ )
+    {
+        // Coloro la stella corrente
+        stelle[i].innerHTML = '&#9733;';
+        stelle[i].style.color = 'yellow';
+
+        if ( stelle[i] == stella )
+            finito = true;
+    }
+}
+
+function decoloraStelline(nome_stelle)
+{   
+    // Prendo il vettore di stelle su cui si e' verificato l'evento
+    stelle = document.getElementsByName(nome_stelle);
+
+    // Coloro le stelle finche' non raggiungo quella passata
+    for ( i=0; i<5; i++ )
+    {
+        // Coloro la stella corrente
+        stelle[i].innerHTML = '&#9734;';
+    }
+}

@@ -83,26 +83,94 @@
         <div id="sezioneCentrale">
             <div id="sezioneDomanda">
                 <?php
+                    // Mi connetto al database per estrarre successivamente le informazioni
+                    // degli utenti
+                    require 'lib/connection.php';
+                    
                     // Prelevo un frammento di intervento vuoto
                     $frammento_vuoto = file_get_contents('../html/frammentoIntervento.html');
-
+                    
                     // Struttura per contenere le info di un utente
-                    $utente = ottieniUtente($domanda->id_utente);
+                    $utente = ottieniUtente($domanda->id_utente, $handleDB);
 
-                    // Popolo la sezione domande
+                    // Inizializzo le stelline
+                    $id_intervento = 1; $container_padre = 'int_' . $id_intervento;
+                    $frammento_stelline_statiche = initStelline(calcolaMediaRating($domanda->valutazioni), 'blue', false, $container_padre);
+                    $frammento_stelline_dinamiche = initStelline(0, 'blue', true, $container_padre);
+
+                    // Popolo la sezione domande (intervento 1 della pagina)
                     $domanda_html = str_replace("%CONTENUTO%", $domanda->contenuto, $frammento_vuoto);
                     $domanda_html = str_replace("%DATA_INTERVENTO%", date('d-m-Y', strtotime($domanda->data)), $domanda_html);
                     $domanda_html = str_replace("%USERNAME%", $utente->username, $domanda_html);
+                    $domanda_html = str_replace("%STELLINE_STATICHE%", $frammento_stelline_statiche, $domanda_html);
+                    $domanda_html = str_replace("%STELLINE_DINAMICHE%", $frammento_stelline_dinamiche, $domanda_html);
+                    $domanda_html = str_replace("%ID_INTERVENTO%", $id_intervento, $domanda_html);
+                    $id_intervento++;
+
+                    // Le stelline dinamiche per valutare la domanda sono visibili
+                    // se l'utente e' loggato e non e' il proprietario della domanda
+                    $opt_display_dinamiche = "none";
+                    if ( $sessione_attiva && $_SESSION["id_utente"] != $domanda->id_utente )
+                        $opt_display_dinamiche = "block";
+                    $domanda_html = str_replace("%VISUALIZZA_DINAMICHE%", $opt_display_dinamiche, $domanda_html);
+                    
                     echo $domanda_html . "\n";
+
+                    // Popolo la sezione delle risposte
+                    $risposte_html = "";
+                    $n_risp = count($risposte);
+                    if ( $n_risp == 0 )
+                    {
+                        $risposte_html = "<p style='font-size: 150%'>Nessuna risposta presente</p>";
+                        $gap = 'gap: 0px;';
+                    }
+                    else
+                    {
+                        for ( $i=0; $i<$n_risp; $i++ )
+                        {
+                            $utente = ottieniUtente($risposte[$i]->id_utente, $handleDB);
+                            $container_padre = 'int_' . $id_intervento;
+                            $frammento_stelline_statiche = initStelline(calcolaMediaRating($risposte[$i]->valutazioni), '#00FFFF', false, $container_padre);
+                            $frammento_stelline_dinamiche = initStelline(0, '#00FFFF', true, $container_padre);
+                            
+                            // Replace
+                            $risposta_html = str_replace("%CONTENUTO%", $risposte[$i]->contenuto, $frammento_vuoto);
+                            $risposta_html = str_replace("%DATA_INTERVENTO%", date('d-m-Y', strtotime($risposte[$i]->data)), $risposta_html);
+                            $risposta_html = str_replace("%USERNAME%", $utente->username, $risposta_html);
+                            $risposta_html = str_replace("%STELLINE_STATICHE%", $frammento_stelline_statiche, $risposta_html);
+                            $risposta_html = str_replace("%STELLINE_DINAMICHE%", $frammento_stelline_dinamiche, $risposta_html);
+                            $risposta_html = str_replace("%ID_INTERVENTO%", $id_intervento, $risposta_html);
+
+                            // Le stelline dinamiche per valutare la risposta sono visibili
+                            // se l'utente e' loggato e non e' il proprietario della risposta
+                            $opt_display_dinamiche = "none";
+                            if ( $sessione_attiva && $_SESSION["id_utente"] != $risposte[$i]->id_utente )
+                                $opt_display_dinamiche = "block";
+                            $risposta_html = str_replace("%VISUALIZZA_DINAMICHE%", $opt_display_dinamiche, $risposta_html);
+
+                            $id_intervento++;
+
+                            $risposte_html .= $risposta_html . "\n";
+                        }
+
+                        $gap = 'gap: 30px;';
+                    }
                 ?>
             </div>
 
-            <div id="sezioneRisposte">
+            <div id="sezioneRisposte" style="<?php echo $gap; ?>">
                 <form class="parteButton" action="inserisciRisposta.php" method="post">
                     <div style="display: <?php echo $visibilita_bottone; ?>">
                         <input type="submit" value="Inserisci nuova risposta" name="btnInserisci" />
                     </div>
                 </form>
+                
+                <?php
+                    echo $risposte_html . "\n";
+
+                    // Chiudo la connessione col database
+                    $handleDB->close();
+                ?>
             </div>
         </div>
     </body>

@@ -1,6 +1,6 @@
 <?php
-    $stellina_vuota = " &#9734";
-    $stellina_piena = " &#9733";
+    $stellina_vuota = " &#9734;";
+    $stellina_piena = " &#9733;";
 
     class Utente
     {
@@ -110,5 +110,54 @@
             $media = $media / $lung;
 
         return $media;
+    }
+
+    // Funzione per inizializzare un frammento di stelline
+    // a seconda della media passata. Riceve un float
+    // e lo arrotonda, il colore delle stelline, se le stelline
+    // devono essere statiche o dinamiche e l'id del container padre
+    function initStelline($media, $colore, $modalita, $padre)
+    {
+        global $stellina_piena; global $stellina_vuota;
+        
+        // Prelevo un frammento stelline vuoto
+        $frammento = file_get_contents('../html/frammentoStelline.html');
+
+        // Funzioni js da inserire a seconda se stelline statiche o dinamiche
+        $funzione_over = ''; $funzione_out = '';
+        if ( $modalita )
+        {
+            $funzione_over = "coloraStellina('stella[$padre]', this)";
+            $funzione_out = "decoloraStelline('stella[$padre]')";
+        }
+        
+        // Arrotondo la media
+        $num_stelline = round($media);
+
+        // Coloro le stelline in maniera adeguata
+        for ( $i=1; $i<=$num_stelline; $i++ )
+        {
+            // Genero il contenuto da sostituire nel frammento
+            $da_sostituire = "%STELLA_" . $i ."%";
+            $frammento = str_replace($da_sostituire, $stellina_piena, $frammento);
+            $da_sostituire = "%COLORE_" . $i ."%";
+            $frammento = str_replace($da_sostituire, $colore, $frammento);
+            $frammento = str_replace("%FUNZIONE_OVER%", $funzione_over, $frammento);
+            $frammento = str_replace("%FUNZIONE_OUT%", $funzione_out, $frammento);
+            $frammento = str_replace("%ID_PADRE%", $padre, $frammento);
+        }
+        for ( $j=5; $j>$num_stelline; $j--)
+        {
+            // Genero il contenuto da sostituire nel frammento
+            $da_sostituire = "%STELLA_" . $j ."%";
+            $frammento = str_replace($da_sostituire, $stellina_vuota, $frammento);
+            $da_sostituire = "%COLORE_" . $j ."%";
+            $frammento = str_replace($da_sostituire, $colore, $frammento);
+            $frammento = str_replace("%FUNZIONE_OVER%", $funzione_over, $frammento);
+            $frammento = str_replace("%FUNZIONE_OUT%", $funzione_out, $frammento);
+            $frammento = str_replace("%ID_PADRE%", $padre, $frammento);
+        }
+        
+        return $frammento;
     }
 ?>

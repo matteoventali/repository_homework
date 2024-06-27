@@ -20,7 +20,6 @@
     border-style: solid;
     background-color: #30E3CA;
     box-shadow: 21px 27px 31px -2px black;
-    color:black;
     gap: 30px;
     padding: 20px;   
     border-radius: 15px;
@@ -37,7 +36,6 @@
     background-color: #11999E;
     box-shadow: 21px 27px 31px -2px black;
     color:white;
-    gap: 30px;
     padding: 20px;   
     border-radius: 15px;
     font-size: 130%;
@@ -50,6 +48,7 @@
     overflow-y: auto;
     gap: 20px;
     padding: 10px;
+    border-radius: 20px;
 }
 
 .intervento p
@@ -62,12 +61,11 @@
     display:flex;
     flex-direction: column;
     width: 90%;
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-    border-radius: 20px;
-    border-style: ridge;
-    border-color: white;
     font-size: 130%;
-    padding: 0px 20px;
+    padding: 25px;
+    border-color: white;
+    border-style: ridge;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 
 .parteButton
