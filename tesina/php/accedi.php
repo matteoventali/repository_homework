@@ -11,7 +11,7 @@
     require_once 'lib/verificaSessioneAttiva.php';
     
     if ( $sessione_attiva )
-        header("Location: area_riservata.php");
+        header("Location: areaRiservata.php");
     else if ( isset($_POST["username"]) && isset($_POST["password"]) ) // Richiesta di login pervenuta
     {
         $msg = 'Errore di comunicazione con il database';
@@ -54,7 +54,7 @@
                         $_SESSION["mail"]               = $riga[10];
                         $_SESSION["ruolo"]              = $riga[12];
                         $_SESSION["saldo_standard"]     = $riga[13];
-                        header("Location: area_riservata.php");
+                        header("Location: areaRiservata.php");
                         $err = false;
                         $mostraPopup = false;
                     }

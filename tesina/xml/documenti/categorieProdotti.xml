@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE categorie SYSTEM "../grammatiche/grammaticaCategorieProdotti.dtd" >
+<!DOCTYPE categorie SYSTEM "../xml/grammatiche/grammaticaCategorieProdotti.dtd" >
 
 <categorie>
     <categoria id="1">

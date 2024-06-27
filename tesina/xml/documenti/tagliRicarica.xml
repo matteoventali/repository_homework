@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE tagli SYSTEM "../grammatiche/grammaticaTagliRicarica.dtd">
+<!DOCTYPE tagli SYSTEM "../xml/grammatiche/grammaticaTagliRicarica.dtd">
 <tagli> 
     <taglio importo="25" crediti="5" />
     <taglio importo="50" crediti="10" />

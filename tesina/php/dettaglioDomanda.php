@@ -8,7 +8,7 @@
     // Recupero il numero della domanda, utile per cercarla nel file
     $id_domanda = null;
     if ( isset($_GET["id_domanda"]))
-        $id_domanda = $_GET["id_domanda"];  
+        $id_domanda = $_GET["id_domanda"];
 
     // Gestori per domande e risposte
     $gestore_domande = new GestoreDomande();
@@ -61,8 +61,9 @@
                 echo $sidebar . "\n";
 
                 // L'opzione di aggiungere una nuova risposta deve essere fornita
-                // all'utente loggato
-                $visibilita_bottone = "block";
+                // all'utente loggato che non sia proprietario della domanda
+                if ( $_SESSION['id_utente'] != $domanda->id_utente )
+                    $visibilita_bottone = "block";
             }
             else 
             {
@@ -105,6 +106,8 @@
                     $domanda_html = str_replace("%STELLINE_STATICHE%", $frammento_stelline_statiche, $domanda_html);
                     $domanda_html = str_replace("%STELLINE_DINAMICHE%", $frammento_stelline_dinamiche, $domanda_html);
                     $domanda_html = str_replace("%ID_INTERVENTO%", $id_intervento, $domanda_html);
+                    $domanda_html = str_replace("%ID_INTERVENTO_XML%", $domanda->id, $domanda_html);
+                    $domanda_html = str_replace("%TIPO_INTERVENTO%", 'domanda', $domanda_html);
                     $id_intervento++;
 
                     // Le stelline dinamiche per valutare la domanda sono visibili
@@ -140,6 +143,8 @@
                             $risposta_html = str_replace("%STELLINE_STATICHE%", $frammento_stelline_statiche, $risposta_html);
                             $risposta_html = str_replace("%STELLINE_DINAMICHE%", $frammento_stelline_dinamiche, $risposta_html);
                             $risposta_html = str_replace("%ID_INTERVENTO%", $id_intervento, $risposta_html);
+                            $risposta_html = str_replace("%ID_INTERVENTO_XML%", $risposte[$i]->id, $risposta_html);
+                            $risposta_html = str_replace("%TIPO_INTERVENTO%", 'risposta', $risposta_html);
 
                             // Le stelline dinamiche per valutare la risposta sono visibili
                             // se l'utente e' loggato e non e' il proprietario della risposta
@@ -153,7 +158,7 @@
                             $risposte_html .= $risposta_html . "\n";
                         }
 
-                        $gap = 'gap: 30px;';
+                        $gap = 'gap: 30px;'; // Il gap deve essere visualizzato solo in caso di risposte presenti
                     }
                 ?>
             </div>
@@ -166,6 +171,7 @@
                 </form>
                 
                 <?php
+                    // Mostro le risposte nella pagina
                     echo $risposte_html . "\n";
 
                     // Chiudo la connessione col database

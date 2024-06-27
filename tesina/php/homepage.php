@@ -7,7 +7,7 @@
     require_once 'lib/verificaSessioneAttiva.php';
 
     if ( $sessione_attiva )
-        header("Location: area_riservata.php");
+        header("Location: areaRiservata.php");
     else 
         require_once 'lib/cancellaSessione.php';
     

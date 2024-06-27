@@ -57,7 +57,7 @@
             
             case 'C':
                 $ris = '<li><a href="areaPersonale.php">Area personale</a>' .
-                            '</li><li><a href="carrello.php">Carrello</a></li>' .
+                            '</li><li><a href="carrello.php">Carrello</a>' .
                             '</li><li><a href="richiestaRicarica.php">Richiesta ricarica</a></li>';
                 break;
         }
@@ -124,37 +124,47 @@
         $frammento = file_get_contents('../html/frammentoStelline.html');
 
         // Funzioni js da inserire a seconda se stelline statiche o dinamiche
-        $funzione_over = ''; $funzione_out = '';
+        $funzione_over = ''; $funzione_out = ''; $funzione_onclick = ''; $funzione_onclick_vuota = '';
         if ( $modalita )
         {
             $funzione_over = "coloraStellina('stella[$padre]', this)";
-            $funzione_out = "decoloraStelline('stella[$padre]')";
+            $funzione_out = "decoloraStelline('stella[$padre]', '$colore')";
+            $funzione_onclick_vuota = "inserisciValutazione('$padre', %INDICE_STELLA_i%)";
         }
         
         // Arrotondo la media
         $num_stelline = round($media);
 
+        // Variabile d'appoggio per tipo stella
+        $stella = "";
+
         // Coloro le stelline in maniera adeguata
-        for ( $i=1; $i<=$num_stelline; $i++ )
+        for ( $i=1; $i<=5; $i++ )
         {
             // Genero il contenuto da sostituire nel frammento
             $da_sostituire = "%STELLA_" . $i ."%";
-            $frammento = str_replace($da_sostituire, $stellina_piena, $frammento);
+            
+            // Verifico se la stella i-esima sia da riempire o meno
+            if ( $i <= $num_stelline )
+                $stella = $stellina_piena;
+            else
+                $stella = $stellina_vuota;    
+            $frammento = str_replace($da_sostituire, $stella, $frammento);
+
+            // Costruzione funzione onclick in modo da passargli l'id del container
+            // da cui pare la richiesta e l'indice della stella che e' stata cliccata
+            if ( $modalita )
+            {
+                $app = str_replace("%INDICE_STELLA_i%", "%INDICE_STELLA_" . $i ."%", $funzione_onclick_vuota);
+                $funzione_onclick = str_replace("%INDICE_STELLA_" . $i ."%", $i, $app);
+            }
+                
+            // Set del colore e funzioni per gestire gli eventi lato client
             $da_sostituire = "%COLORE_" . $i ."%";
             $frammento = str_replace($da_sostituire, $colore, $frammento);
             $frammento = str_replace("%FUNZIONE_OVER%", $funzione_over, $frammento);
             $frammento = str_replace("%FUNZIONE_OUT%", $funzione_out, $frammento);
-            $frammento = str_replace("%ID_PADRE%", $padre, $frammento);
-        }
-        for ( $j=5; $j>$num_stelline; $j--)
-        {
-            // Genero il contenuto da sostituire nel frammento
-            $da_sostituire = "%STELLA_" . $j ."%";
-            $frammento = str_replace($da_sostituire, $stellina_vuota, $frammento);
-            $da_sostituire = "%COLORE_" . $j ."%";
-            $frammento = str_replace($da_sostituire, $colore, $frammento);
-            $frammento = str_replace("%FUNZIONE_OVER%", $funzione_over, $frammento);
-            $frammento = str_replace("%FUNZIONE_OUT%", $funzione_out, $frammento);
+            $frammento = str_replace("%FUNZIONE_ONCLICK_" . $i . "%", $funzione_onclick, $frammento);
             $frammento = str_replace("%ID_PADRE%", $padre, $frammento);
         }
         

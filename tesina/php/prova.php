@@ -1,10 +1,7 @@
 <?php
-    require 'gestoriXML/gestoreDomande.php';
-    require 'gestoriXML/gestoreRisposte.php';
+    require 'gestoriXML/gestoreTagliRicarica.php';
 
-    $g = new GestoreDomande();
-    $g1 = new GestoreRisposte();
+    $g = new GestoreTagliRicarica();
 
-    $id_d = $g->inserisciDomanda('Nuova Domanda?', "1", "true");
-    $g1->inserisciRisposta('Si', "1", "true", $id_d);
+    var_dump($g->ottieniTagliRicarica());
 ?>

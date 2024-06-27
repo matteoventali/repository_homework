@@ -94,7 +94,7 @@ function vaiDettaglioDomanda(id_domanda)
 function coloraStellina(nome_stelle, stella)
 {
     // Prendo il vettore di stelle su cui si e' verificato l'evento
-    stelle = document.getElementsByName(nome_stelle);
+    stelle = document.getElementsByClassName(nome_stelle);
 
     // Coloro le stelle finche' non raggiungo quella passata
     finito = false;
@@ -109,15 +109,32 @@ function coloraStellina(nome_stelle, stella)
     }
 }
 
-function decoloraStelline(nome_stelle)
+function decoloraStelline(nome_stelle, colore_reset)
 {   
     // Prendo il vettore di stelle su cui si e' verificato l'evento
-    stelle = document.getElementsByName(nome_stelle);
+    stelle = document.getElementsByClassName(nome_stelle);
 
     // Coloro le stelle finche' non raggiungo quella passata
     for ( i=0; i<5; i++ )
     {
         // Coloro la stella corrente
         stelle[i].innerHTML = '&#9734;';
+        stelle[i].style.color = colore_reset;
     }
+}
+
+function inserisciValutazione(id_intervento, stella_premuta)
+{
+    // Prelevo il riferimento all'intervento nella pagina per ottenere
+    // l'id dell'intervento nei file XML e il tipo di intervento
+    intervento = document.getElementById(id_intervento);
+    id_intervento = intervento.children[3].innerHTML;
+    tipo_intervento = intervento.children[4].innerHTML;
+    
+    alert("Inserimento valutazione per intervento " + id_intervento + " rating " + stella_premuta + "\nNel file XML id="
+        + id_intervento + "e tipo:" + tipo_intervento );
+
+    // AGGIUNGERE LE INFORMAZIONI DELL'UTENTE CHE EFFETTUA LA RICHIESTA DI VALUTAZIONE
+    // (CIOE' L'UTENTE LOGGATO) OVVERO ID_UTENTE E REPUTAZIONE
+    // NELLA PAGINA IN MANIERA NASCOSTA (p display none)
 }
