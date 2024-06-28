@@ -159,14 +159,15 @@
                 $funzione_onclick = str_replace("%INDICE_STELLA_" . $i ."%", $i, $app);
             }
                 
-            // Set del colore e funzioni per gestire gli eventi lato client
-            $da_sostituire = "%COLORE_" . $i ."%";
-            $frammento = str_replace($da_sostituire, $colore, $frammento);
-            $frammento = str_replace("%FUNZIONE_OVER%", $funzione_over, $frammento);
-            $frammento = str_replace("%FUNZIONE_OUT%", $funzione_out, $frammento);
+            // I parametri della funzione di onclick dipendono dall'indice della stellina
             $frammento = str_replace("%FUNZIONE_ONCLICK_" . $i . "%", $funzione_onclick, $frammento);
-            $frammento = str_replace("%ID_PADRE%", $padre, $frammento);
         }
+
+        // Set del colore e funzioni per gestire gli eventi lato client
+        $frammento = str_replace("%COLORE%", $colore, $frammento);
+        $frammento = str_replace("%FUNZIONE_OVER%", $funzione_over, $frammento);
+        $frammento = str_replace("%FUNZIONE_OUT%", $funzione_out, $frammento);
+        $frammento = str_replace("%ID_PADRE%", $padre, $frammento);
         
         return $frammento;
     }
