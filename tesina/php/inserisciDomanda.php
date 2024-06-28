@@ -76,7 +76,7 @@
             <form id="parteCentrale" action="<?php echo $_SERVER["PHP_SELF"]; ?>" method="post">
                 <fieldset>
                     <p>Domanda:</p>
-                    <textarea name="domanda"><?php if($err) echo $domanda;?></textarea>
+                    <textarea rows="6" cols="45" name="domanda"><?php if($err) echo $domanda;?></textarea>
                 </fieldset>
                     
                 <div class="parteButton">

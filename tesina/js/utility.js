@@ -128,13 +128,18 @@ function inserisciValutazione(id_intervento, stella_premuta)
     // Prelevo il riferimento all'intervento nella pagina per ottenere
     // l'id dell'intervento nei file XML e il tipo di intervento
     intervento = document.getElementById(id_intervento);
-    id_intervento = intervento.children[3].innerHTML;
+    id_intervento_xml = intervento.children[3].innerHTML;
     tipo_intervento = intervento.children[4].innerHTML;
     
-    alert("Inserimento valutazione per intervento " + id_intervento + " rating " + stella_premuta + "\nNel file XML id="
-        + id_intervento + "e tipo:" + tipo_intervento );
+    // Prelevo le informazioni dell'utente che effettua la valutazione nascoste nella pagina
+    id_utente = document.getElementById('id_utente').innerHTML;
+    reputazione_utente = document.getElementById('reputazione_utente').innerHTML;
 
-    // AGGIUNGERE LE INFORMAZIONI DELL'UTENTE CHE EFFETTUA LA RICHIESTA DI VALUTAZIONE
-    // (CIOE' L'UTENTE LOGGATO) OVVERO ID_UTENTE E REPUTAZIONE
-    // NELLA PAGINA IN MANIERA NASCOSTA (p display none)
+    // Eseguo l'inserimento della valutazione in modalita' asincrona
+    
+    // Refresh della pagina
+
+    alert("Valutazione effettuata dall'utente: " + id_utente + " con reputazione: " + reputazione_utente);
+    alert("La valutazione e' sull'intervento con id:" + id_intervento_xml + " che e' una " + tipo_intervento);
+    alert("Rating: " + stella_premuta);
 }

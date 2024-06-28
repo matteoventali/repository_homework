@@ -64,6 +64,19 @@
                 // all'utente loggato che non sia proprietario della domanda
                 if ( $_SESSION['id_utente'] != $domanda->id_utente )
                     $visibilita_bottone = "block";
+
+                // Genero due paragrafi nascosti per memorizzare nella pagina
+                // l'id dell'utente e la sua reputazione in modo da effettuare la valutazione
+                // La reputazione potrebbe essere cambiata dal momento in cui l'utente si e' loggato
+                // pertanto e' opportuno effettuare una nuova query al database
+                require 'lib/connection.php';
+                if ( $connessione )
+                {
+                    $utente = ottieniUtente($_SESSION['id_utente'], $handleDB);
+                    echo '<p style="display:none;" id="id_utente">' . $_SESSION['id_utente'] . '</p>' . "\n";
+                    echo '<p style="display:none;" id="reputazione_utente">' . $utente->reputazione . '</p>' . "\n";
+                    $handleDB->close();
+                }
             }
             else 
             {
@@ -167,6 +180,8 @@
                 <form class="parteButton" action="inserisciRisposta.php" method="post">
                     <div style="display: <?php echo $visibilita_bottone; ?>">
                         <input type="submit" value="Inserisci nuova risposta" name="btnInserisci" />
+                        <input type="hidden" name="id_domanda" value="<?php echo $_GET['id_domanda']; ?>" />
+                        <input type="hidden" name="contenuto_domanda" value="<?php echo $domanda->contenuto; ?>" />
                     </div>
                 </form>
                 
