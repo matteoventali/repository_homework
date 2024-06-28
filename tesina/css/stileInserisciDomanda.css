@@ -1,0 +1,44 @@
+#sezioneForm
+{
+    width: 100%;
+    height: 85%;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    overflow: auto;
+}
+
+#parteCentrale
+{
+    max-height: 85%;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border-style: solid;
+    background-color: #11999E;
+    box-shadow: 21px 27px 31px -2px black;
+    color:white;
+    border-radius: 15px;
+    padding: 30px;
+    font-size: 150%;
+}
+
+.parteButton
+{
+    width: 90%;
+    text-align: right;
+}
+
+.parteButton input[type="submit"]
+{
+    margin:4px;
+}
+
+textarea
+{
+    width: 700px;
+    height: 200px;
+    font-size: 130%;
+}

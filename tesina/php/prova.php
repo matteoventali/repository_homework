@@ -1,7 +1,7 @@
 <?php
-    require 'gestoriXML/gestoreTagliRicarica.php';
+    require 'gestoriXML/gestoreRichiesteRicariche.php';
 
-    $g = new GestoreTagliRicarica();
+    $g = new GestoreRichiesteRicariche();
 
-    var_dump($g->ottieniTagliRicarica());
+    var_dump($g->ottieniRichiestiRicaricheDaGestire());
 ?>

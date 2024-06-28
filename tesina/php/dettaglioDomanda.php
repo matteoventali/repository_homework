@@ -55,7 +55,7 @@
                 $nav = str_replace("%NOME_UTENTE%", $_SESSION["nome"] . " " . $_SESSION["cognome"], $nav);
                 echo $nav ."\n";
 
-                // Import della sidebar e mostro solo le opzioni del visitatore
+                // Import della sidebar
                 $sidebar = file_get_contents("../html/strutturaSidebar.html");
                 $sidebar = str_replace("%OPERAZIONI_UTENTE%", ottieniOpzioniMenu($_SESSION["ruolo"]), $sidebar);
                 echo $sidebar . "\n";
