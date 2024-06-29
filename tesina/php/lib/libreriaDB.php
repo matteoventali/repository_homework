@@ -1,5 +1,22 @@
 <?php
     require_once 'configurazione.php';
+
+    class Utente
+    {
+        public $id_utente            = "";
+        public $nome                 = "";
+        public $cognome              = "";
+        public $indirizzo            = "";
+        public $citta                = "";
+        public $cap                  = "";
+        public $reputazione          = "";
+        public $data_registrazione   = "";
+        public $stato                = "";
+        public $username             = "";
+        public $mail                 = "";
+        public $ruolo                = "";
+        public $saldo_standard       = "";
+    }
     
     // Funzione per ottenere i dati dell'utente dal database
     // riceve il suo id e l'handle per il database

@@ -2,23 +2,6 @@
     $stellina_vuota = " &#9734;";
     $stellina_piena = " &#9733;";
 
-    class Utente
-    {
-        public $id_utente            = "";
-        public $nome                 = "";
-        public $cognome              = "";
-        public $indirizzo            = "";
-        public $citta                = "";
-        public $cap                  = "";
-        public $reputazione          = "";
-        public $data_registrazione   = "";
-        public $stato                = "";
-        public $username             = "";
-        public $mail                 = "";
-        public $ruolo                = "";
-        public $saldo_standard       = "";
-    }
-    
     // Funzioni di libreria da utilizzare al bisogno
 
     // Funzione per url sfondo tra quelli disponibili
