@@ -143,3 +143,13 @@ function inserisciValutazione(id_intervento, stella_premuta)
     alert("La valutazione e' sull'intervento con id:" + id_intervento_xml + " che e' una " + tipo_intervento);
     alert("Rating: " + stella_premuta);
 }
+
+function vaiDettaglioUtente(container)
+{
+    // Tramite il container accedo al form nascosto al suo interno
+    // 3 figlio
+    form = container.children[2];
+
+    // Eseguo il submit del form
+    form.submit();
+}

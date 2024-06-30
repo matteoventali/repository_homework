@@ -1,2 +1,2 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<portafogli xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../schema/schemaPortafogliBonus.xsd"><portafoglio totale="0" id_cliente="3"><saldo anno="2024">0</saldo></portafoglio><portafoglio totale="0" id_cliente="4"><saldo anno="2024">0</saldo></portafoglio></portafogli>
+<portafogli xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../schema/schemaPortafogliBonus.xsd"><portafoglio totale="0" id_cliente="3"><saldo anno="2024">0</saldo></portafoglio><portafoglio totale="0" id_cliente="4"><saldo anno="2024">0</saldo></portafoglio><portafoglio totale="0" id_cliente="5"><saldo anno="2024">0</saldo></portafoglio></portafogli>

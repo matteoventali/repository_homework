@@ -1,7 +1,7 @@
 <?php
-    require 'gestoriXML/gestoreRichiesteRicariche.php';
+    require 'lib/libreriaDB.php';
+    require 'lib/connection.php';
 
-    $g = new GestoreRichiesteRicariche();
-
-    var_dump($g->ottieniRichiestiRicaricheDaGestire());
+    $lista = ottieniClienti($handleDB, false, false, 're');
+    var_dump($lista);
 ?>

@@ -1,0 +1,125 @@
+#sezioneClienti
+{
+    width: 100%;
+    height: 80%;
+    margin-top: 2%;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    gap: 5%;
+    padding-bottom: 50px;
+}
+
+#parteControlli
+{
+    width: 90%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#parteTessere
+{
+    width: 90%;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    flex-wrap: wrap;
+    align-items: center;
+    border-style: solid;
+    background-color: #11999E;
+    box-shadow: 21px 27px 31px -2px black;
+    color:white;
+    gap: 50px;
+    padding: 20px;   
+    border-radius: 15px;
+}
+
+#parteControlli form
+{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    border-style: solid;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    font-size: 170%;
+    background-color: #11999E;
+    box-shadow: 21px 27px 31px -2px black;
+    color:white;
+    border-radius: 15px;
+    padding-left: 20px;
+    padding-right: 20px;
+}
+
+fieldset
+{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: 2%;
+    flex: 5;
+}
+
+fieldset:nth-child(1), fieldset:nth-child(2)
+{
+    flex: 2.5;
+}
+
+fieldset:nth-child(3)
+{
+    flex: 10;
+}
+
+fieldset input[type="text"]
+{
+    width: 100%;
+    font-size: 100%;
+    text-align: center;
+}
+
+fieldset input[type="checkbox"]
+{
+    width: 25px;
+    height: 25px;
+}
+
+.tesseraUtente
+{
+    display: flex;
+    flex-direction: column;
+    font-size: 180%;
+    border-style: solid;
+    background-color: #11999E;
+    box-shadow: 21px 27px 31px -2px black;
+    color:white;
+    border-radius: 15px;
+    padding: 5px;
+    overflow: auto;
+    flex: 1;
+    justify-content: center;
+    align-items: center;
+}
+
+.tesseraUtente > span
+{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: 50px;
+}
+
+.tesseraUtente:hover
+{
+    background-color: #30E3CA;
+    cursor: pointer;
+    color: black;
+}
+
+
+
+

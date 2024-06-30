@@ -28,9 +28,7 @@
 
     if ( $connessione )
     {
-        // Prelevo i dati dal get e compongo la query
-        $id_cliente = $_GET["id_cliente"];
-
+        $id_cliente = $_POST["id_cliente"];
         $cliente = ottieniUtente($id_cliente, $handleDB);
 
         // Se l'account non appartiene ad un cliente, ridireziono sulla homepage
@@ -71,12 +69,12 @@
             echo $sidebar . "\n";
 
             // Lo stato sara' verde se l'utente e' attivo, altrimenti rosso
-            if ($cliente->stato == "A")
+            if ( $cliente->stato == "A" )
             {
                 $stato = "ATTIVO";
                 $coloreStato = "#7CFC00";
             }
-            else  
+            else if ( $cliente->stato == 'B' ) 
             {
                 $stato = "BANNATO";
                 $coloreStato = "red";
