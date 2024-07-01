@@ -76,7 +76,7 @@
 
         <div id="sezioneClienti">
             <div id="parteControlli">
-                <form id="ricerca" action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post">
+                <form id="ricercaClienti" action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post">
                     <fieldset><p>Attivi</p><input type="checkbox" 
                                 <?php if($flag_attivi) echo 'checked="checked"'; ?> name="attivi" value="si" /> </fieldset>
                     <fieldset><p>Bannati</p><input type="checkbox" 
@@ -84,6 +84,7 @@
                     <fieldset><p>Utente</p><input type="text" name="contenutoRicerca"
                                     value="<?php if ($mostraContenuto) echo $_POST["contenutoRicerca"]; ?>" /></fieldset>
                     <fieldset><input type="submit" name="btnRicerca" value="Cerca &#128269;" /></fieldset>
+                    <fieldset><input type="reset" name="btnIndietro" onclick="azzeraRicercaClienti();" value="Reset &#8634;" /></fieldset>
                 </form>
             </div>
 
@@ -117,6 +118,9 @@
 
                         $contenuto_html .= $nuova_tessera . "\n";
                     }
+
+                    if ( $n_clienti == 0 )
+                        $contenuto_html = '<p>Nessun cliente soddisfa i criteri di ricerca</p>';
 
                     echo $contenuto_html . "\n";
                 ?>

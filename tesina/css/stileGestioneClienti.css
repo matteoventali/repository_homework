@@ -21,12 +21,7 @@
 #parteTessere
 {
     width: 90%;
-    overflow-y: auto;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-evenly;
-    flex-wrap: wrap;
-    align-items: center;
+    overflow: auto;
     border-style: solid;
     background-color: #11999E;
     box-shadow: 21px 27px 31px -2px black;
@@ -34,6 +29,13 @@
     gap: 50px;
     padding: 20px;   
     border-radius: 15px;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+}
+
+#parteTessere > p
+{
+    font-size: 150%;
 }
 
 #parteControlli form
@@ -61,11 +63,6 @@ fieldset
     justify-content: center;
     align-items: center;
     gap: 2%;
-    flex: 5;
-}
-
-fieldset:nth-child(1), fieldset:nth-child(2)
-{
     flex: 2.5;
 }
 
@@ -92,25 +89,25 @@ fieldset input[type="checkbox"]
     display: flex;
     flex-direction: column;
     font-size: 180%;
+    height: 250px;
     border-style: solid;
     background-color: #11999E;
     box-shadow: 21px 27px 31px -2px black;
     color:white;
     border-radius: 15px;
-    padding: 5px;
     overflow: auto;
     flex: 1;
     justify-content: center;
     align-items: center;
 }
 
-.tesseraUtente > span
+.tesseraUtente > div
 {
     display: flex;
     flex-direction: row;
-    justify-content: center;
+    justify-content: space-between;
     align-items: center;
-    gap: 50px;
+    gap: 20px;
 }
 
 .tesseraUtente:hover
@@ -120,6 +117,21 @@ fieldset input[type="checkbox"]
     color: black;
 }
 
+.tesseraUtente > div:nth-child(2)
+{
+    display: flex;
+    justify-content: center;
+    width: 90%;
+}
 
+.tesseraUtente > div:nth-child(2) > p
+{
+    flex: 1;
+    text-align: center;
+    font-size: 80%;
+}
 
-
+.tesseraUtente form
+{
+    display: none;
+}

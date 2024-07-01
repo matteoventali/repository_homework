@@ -1,14 +1,16 @@
 <div class="tesseraUtente" onclick="vaiDettaglioUtente(this)">
-    <span>
+    <div>
         <img src="../img/persona.png" alt="icona persona" />
         <p><strong>%NOME_COGNOME%</strong></p>
-    </span>
-    <span>
+    </div>
+    <div>
         <p><i>%USERNAME%</i></p>
         <p>Stato: <span style="color: %COLORE_STATO%">%STATO%</span></p>
-    </span>
+    </div>
 
     <form action="dettaglioCliente.php" method="post">
-        <input type="hidden" name="id_cliente" value="%ID_CLIENTE%" />
+        <fieldset>
+            <input type="hidden" name="id_cliente" value="%ID_CLIENTE%" />
+        </fieldset>
     </form>
 </div>

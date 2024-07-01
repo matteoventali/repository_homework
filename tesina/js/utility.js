@@ -153,3 +153,20 @@ function vaiDettaglioUtente(container)
     // Eseguo il submit del form
     form.submit();
 }
+
+function azzeraRicercaClienti()
+{
+    // Riferimento al form
+    form = document.getElementById('ricercaClienti');
+
+    // Azzero i campi
+    checkboxAttivi = document.getElementsByName('attivi')[0];
+    checkboxBannati = document.getElementsByName('bannati')[0];
+    contenutoRic = document.getElementsByName('contenutoRicerca')[0];
+    checkboxAttivi.checked = '';
+    checkboxBannati.checked = '';
+    contenutoRic.innerHTML = '';
+
+    // Refresh della pagina
+    form.submit();
+}
