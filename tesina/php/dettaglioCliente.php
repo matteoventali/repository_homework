@@ -18,7 +18,7 @@
     if ( $_SESSION["ruolo"] == "A" )
         $visibilita_bottone = "display:block";
     else
-        $visibilita_bottone = "visibility:hidden";
+        $visibilita_bottone = "display:none";
     
     // Nel get trovo l'id del cliente con cui eseguire la ricerca nel DB
     // Se l'utente non viene trovato, ridireziono alla homepage
@@ -123,8 +123,8 @@
                         </div>
                     </div>
 
-                    <div class="riquadro" style="<?php echo $visibilita_bottone; ?>">
-                        <form action="" method="post">
+                    <div class="riquadro" >
+                        <form action="" method="post" style="<?php echo $visibilita_bottone; ?>">
                             <fieldset>
                             <?php 
                                 if($stato == "ATTIVO")
@@ -134,6 +134,9 @@
                             ?>
                             </fieldset>
                             <fieldset><input type="submit" value="Modifica dati" name="btnModifica" /></fieldset>
+                        </form>
+                        <form action="gestioneClienti.php" method="post">
+                            <fieldset><input type="submit" value="Indietro &#8617;" name="btnIndietro" /></fieldset>
                         </form>
                     </div>
                 </div>
