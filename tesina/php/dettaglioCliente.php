@@ -132,8 +132,8 @@
                                 else
                                     echo "<input type=\"submit\" value=\"Riattiva account\" name=\"btnRiattiva\" />" ."\n";
                             ?>
+                            <input type="submit" value="Modifica dati" name="btnModifica" />
                             </fieldset>
-                            <fieldset><input type="submit" value="Modifica dati" name="btnModifica" /></fieldset>
                         </form>
                         <form action="gestioneClienti.php" method="post">
                             <fieldset><input type="submit" value="Indietro &#8617;" name="btnIndietro" /></fieldset>
