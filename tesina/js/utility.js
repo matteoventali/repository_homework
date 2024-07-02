@@ -123,44 +123,6 @@ function decoloraStelline(nome_stelle, colore_reset)
     }
 }
 
-function inserisciValutazione(id_intervento, stella_premuta)
-{
-    // Prelevo il riferimento all'intervento nella pagina per ottenere
-    // l'id dell'intervento nei file XML e il tipo di intervento
-    intervento = document.getElementById(id_intervento);
-    id_intervento_xml = intervento.children[3].innerHTML;
-    tipo_intervento = intervento.children[4].innerHTML;
-    
-    // Prelevo le informazioni dell'utente che effettua la valutazione nascoste nella pagina
-    id_utente = document.getElementById('id_utente').innerHTML;
-    reputazione_utente = document.getElementById('reputazione_utente').innerHTML;
-
-    // Eseguo l'inserimento della valutazione in modalita' asincrona
-    // Compongo la query string da passare allo script
-    $query_string = "id_utente=" + id_utente + "&reputazione_utente=" + reputazione_utente + 
-                            "&id_intervento_xml=" + id_intervento_xml + "&tipo_intervento=" + tipo_intervento;
-    
-    alert($query_string);
-
-    // Oggetto per connessione mediante tecnologia AJAX
-    /*xhr = new XMLHttpRequest();
-    xhr.open("POST", "inserisciValutazione.php");
-    xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-    xhr.onload = callbackValutazione;
-    xhr.send(query_string);*/
-
-    
-    
-    alert("Valutazione effettuata dall'utente: " + id_utente + " con reputazione: " + reputazione_utente);
-    alert("La valutazione e' sull'intervento con id:" + id_intervento_xml + " che e' una " + tipo_intervento);
-    alert("Rating: " + stella_premuta);
-}
-
-function callbackValutazione()
-{
-    alert("CIAO");
-}
-
 function vaiDettaglioUtente(container)
 {
     // Tramite il container accedo al form nascosto al suo interno
@@ -186,4 +148,41 @@ function azzeraRicercaClienti()
 
     // Refresh della pagina
     form.submit();
+}
+
+function inserisciValutazione(id_intervento, stella_premuta)
+{
+    // Prelevo il riferimento all'intervento nella pagina per ottenere
+    // l'id dell'intervento nei file XML e il tipo di intervento
+    intervento = document.getElementById(id_intervento);
+    id_intervento_xml = intervento.children[3].innerHTML;
+    tipo_intervento = intervento.children[4].innerHTML;
+    
+    // Prelevo le informazioni dell'utente che effettua la valutazione nascoste nella pagina
+    id_utente = document.getElementById('id_utente').innerHTML;
+    reputazione_utente = document.getElementById('reputazione_utente').innerHTML;
+
+    // Eseguo l'inserimento della valutazione in modalita' asincrona
+    // Compongo la query string da passare allo script
+    query_string = "id_utente=" + id_utente + "&reputazione_utente=" + reputazione_utente
+                            + "&id_intervento_xml=" + id_intervento_xml + "&tipo_intervento=" + tipo_intervento
+                            + "&stella_premuta=" + stella_premuta;
+    
+    // Oggetto per connessione mediante tecnologia AJAX
+    xhr = new XMLHttpRequest();
+    xhr.open("POST", "lib/inserisciValutazione.php");
+    xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+    xhr.onload = function(){ callbackValutazione(xhr) }; // Definisco una funzione di callback implicita che chiama quella sotto
+    xhr.send(query_string);
+}
+
+function callbackValutazione(xhr)
+{
+    // Ricevo vero o falso a seconda della riuscita dell'operazione
+    // In caso di errore emetto un alert per notificarlo
+    if ( !xhr.responseText )
+        alert("Inserimento valutazione fallito");
+    
+    // A prescindere si effettua il refresh della pagina
+    location.reload();
 }
