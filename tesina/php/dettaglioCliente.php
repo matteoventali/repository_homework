@@ -3,6 +3,7 @@
     require_once 'lib/libreriaDB.php';
     require_once 'lib/verificaSessioneAttiva.php';
     require_once 'lib/parametriStile.php';
+    require_once 'gestoriXML/gestorePortafogliBonus.php';
 
     // A questa pagina possono accedervi solo gli admin e i gestori
     // I gestori, pero', possono solo consultare la pagina
@@ -34,6 +35,10 @@
         // Se l'account non appartiene ad un cliente, ridireziono sulla homepage
         if( $cliente->id_utente == "" || $cliente->ruolo != "C")
             header("Location: homepage.php");
+
+        // Prelevo dal file xml il saldo del portafoglio bonus
+        $gestore_portafogli_bonus = new GestorePortafogliBonus();
+        $saldo_bonus = $gestore_portafogli_bonus->ottieniSaldoPortafoglioBonus($cliente->id_utente);
             
         $handleDB->close();
     }
@@ -107,7 +112,7 @@
                                 <strong> <span> <?php echo $cliente->saldo_standard;?> </span> </strong>
                             </p>
                             <p>Saldo portafoglio bonus: 
-                                <strong> <span> <?php echo $cliente->saldo_standard;?> </span> </strong>
+                                <strong> <span> <?php echo $saldo_bonus;?> </span> </strong>
                             </p>
                         </div>
                     </div>

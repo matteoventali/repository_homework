@@ -136,12 +136,29 @@ function inserisciValutazione(id_intervento, stella_premuta)
     reputazione_utente = document.getElementById('reputazione_utente').innerHTML;
 
     // Eseguo l'inserimento della valutazione in modalita' asincrona
+    // Compongo la query string da passare allo script
+    $query_string = "id_utente=" + id_utente + "&reputazione_utente=" + reputazione_utente + 
+                            "&id_intervento_xml=" + id_intervento_xml + "&tipo_intervento=" + tipo_intervento;
     
-    // Refresh della pagina
+    alert($query_string);
 
+    // Oggetto per connessione mediante tecnologia AJAX
+    /*xhr = new XMLHttpRequest();
+    xhr.open("POST", "inserisciValutazione.php");
+    xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+    xhr.onload = callbackValutazione;
+    xhr.send(query_string);*/
+
+    
+    
     alert("Valutazione effettuata dall'utente: " + id_utente + " con reputazione: " + reputazione_utente);
     alert("La valutazione e' sull'intervento con id:" + id_intervento_xml + " che e' una " + tipo_intervento);
     alert("Rating: " + stella_premuta);
+}
+
+function callbackValutazione()
+{
+    alert("CIAO");
 }
 
 function vaiDettaglioUtente(container)

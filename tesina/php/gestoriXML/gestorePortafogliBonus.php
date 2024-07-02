@@ -46,5 +46,33 @@
 
             return $esito;
         }
+
+        // Metodo per ricevere il saldo del portafoglio bonus di un utente
+        function ottieniSaldoPortafoglioBonus($id_cliente)
+        {
+            // Saldo del portafoglio
+            $saldo = 0;
+            
+            // Verifico che il file sia utilizzabile
+            if ( !$this->checkValidita() )
+                return $saldo;
+
+            // Ottengo la lista di figli della radice, ovvero la lista dei portafogli
+            $figli = $this->oggettoDOM->documentElement->childNodes;
+            $n_figli = $this->oggettoDOM->documentElement->childElementCount;
+
+            // Scorro il file finche' non raggiungo il portafoglio da aggiornare
+            $trovata = false;
+            for ( $i=0; $i<$n_figli && !$trovata; $i++ )
+            {
+                if ( $figli[$i]->getAttribute('id_cliente') == $id_cliente )
+                {
+                    $trovata = true;
+                    $saldo = $figli[$i]->firstChild->textContent;
+                }
+            }
+
+            return $saldo;
+        }
     }
 ?>

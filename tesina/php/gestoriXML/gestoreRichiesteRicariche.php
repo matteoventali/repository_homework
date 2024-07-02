@@ -1,5 +1,6 @@
 <?php
     require_once 'gestoreXMLDOM.php';
+    require_once 'lib/libreriaDB.php';
 
     class RichiestaDiRicarica
     {
@@ -122,13 +123,30 @@
             // Aggiorno le informazioni della richiesta se trovata
             if ( $trovata )
             {
+                $i--;
+                
                 // Calcolo del nuovo stato
                 if ( $flag )
+                {
                     $stato = 'A';
+
+                    // Aggiorno il portafoglio standard del cliente che ha effettuato la richiesta
+                    // Prelevo l'id del cliente dalla richiesta in oggetto e l'ammontare di crediti richiesti
+                    $id_cliente = $figli[$i]->getAttribute('id_cliente');
+                    $crediti_richiesti = $figli[$i]->firstChild->nextSibling->textContent;
+
+                    // Mi connetto al database
+                    require 'lib/configurazione.php';
+                    require 'lib/connection.php';
+                    if ( $connessione )
+                    {
+                        incrementaSaldoStandard($handleDB, $id_cliente, $crediti_richiesti);
+                        $handleDB->close();
+                    }
+                }
                 else
                     $stato = 'R';
                 
-                $i--;
                 $figli[$i]->setAttribute('id_admin', $id_admin);
                 $figli[$i]->setAttribute('stato', $stato);
 

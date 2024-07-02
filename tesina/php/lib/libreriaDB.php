@@ -130,4 +130,38 @@
 
         return $lista_utenti;
     }
+
+    // Funzione per incrementare il saldo standard del portafoglio di un cliente
+    function incrementaSaldoStandard($handleDB, $id_utente, $incremento)
+    {
+        global $tb_utenti;
+        
+        // Creo la query per ottenere il saldo standard corrente
+        $q_saldo = "select saldo_standard from $tb_utenti where id=" . $id_utente;
+
+        // Esecuzione della query
+        try
+        {
+            // Eseguo la query per il saldo
+            $rs = $handleDB->query($q_saldo);
+
+            if ( $riga = $rs->fetch_row() )  // Se ho trovato una corrispondenza continuo con la computazione
+            {
+                $saldo_corrente = floatval($riga[0]);
+
+                // Calcolo il nuovo saldo
+                $nuovo_saldo = $saldo_corrente + floatval($incremento);
+                $nuovo_saldo = strval($nuovo_saldo);
+
+                // Query per aggiornare il saldo
+                $q_saldo = "update $tb_utenti set saldo_standard=$nuovo_saldo where id=$id_utente";
+
+                // Eseguo la query
+                $handleDB->query($q_saldo);
+            }
+            
+            $rs->close();
+        }
+        catch (Exception $e){}
+    }
 ?>
