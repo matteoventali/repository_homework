@@ -164,4 +164,28 @@
         }
         catch (Exception $e){}
     }
+
+    // Funzione per cambiare lo stato dell'account di un cliente
+    function cambiaStato($handleDB, $id_utente, $nuovo_stato)
+    {
+        global $tb_utenti;
+        $esito = false;
+
+        // Se ricevo uno stato nullo o non valido l'operazione fallisce
+        if ( $nuovo_stato == "" || ($nuovo_stato != 'B' && $nuovo_stato != 'A') )
+            return $esito;
+
+        // Creo la query per cambiare lo stato
+        $q = "update $tb_utenti set stato='$nuovo_stato' where id=$id_utente and ruolo='C'";
+
+        // Esecuzione della query
+        try
+        {
+            // Eseguo la query
+            $esito = $handleDB->query($q);
+        }
+        catch (Exception $e){}
+
+        return $esito;
+    }
 ?>

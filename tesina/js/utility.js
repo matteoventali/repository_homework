@@ -186,3 +186,28 @@ function callbackValutazione(xhr)
     // A prescindere si effettua il refresh della pagina
     location.reload();
 }
+
+function cambiaStatoAccount(operazione, id_utente)
+{
+    // Operazione 1=ban 2=id_utente
+    // Compongo la query string da passare allo script
+    query_string = "id_utente=" + id_utente + "&operazione=" + operazione;
+                            
+    // Oggetto per connessione mediante tecnologia AJAX
+    xhr = new XMLHttpRequest();
+    xhr.open("POST", "lib/cambiaStatoCliente.php");
+    xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+    xhr.onload = function(){ callbackCambiaStatoAccount(xhr) }; // Definisco una funzione di callback implicita che chiama quella sotto
+    xhr.send(query_string);
+}
+
+function callbackCambiaStatoAccount(xhr)
+{
+    // Ricevo vero o falso a seconda della riuscita dell'operazione
+    // In caso di errore emetto un alert per notificarlo
+    if ( !xhr.responseText )
+        alert("Cambio stato fallito");
+    
+    // A prescindere si effettua il refresh della pagina
+    location.reload();
+}

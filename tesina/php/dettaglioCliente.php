@@ -132,10 +132,13 @@
                         <form action="" method="post" style="<?php echo $visibilita_bottone; ?>">
                             <fieldset>
                             <?php 
+                                // Questi bottoni non effettuano il submit del form
+                                // Alla funzione di onclick passano 1 per eseguire il ban o altrimenti 2 per eseguire la riattivazione dell'account
+                                // e l'id dell'utente su cui effettuare l'operazione
                                 if($stato == "ATTIVO")
-                                    echo "<input type=\"submit\" value=\"Ban account\" name=\"btnBan\" />" ."\n";
+                                    echo "<input type=\"button\" onclick=\"cambiaStatoAccount(1,$id_cliente);\" value=\"Ban account\" name=\"btnBan\" />" ."\n";
                                 else
-                                    echo "<input type=\"submit\" value=\"Riattiva account\" name=\"btnRiattiva\" />" ."\n";
+                                    echo "<input type=\"button\" onclick=\"cambiaStatoAccount(2,$id_cliente);\" value=\"Riattiva account\" name=\"btnRiattiva\" />" ."\n";
                             ?>
                             <input type="submit" value="Modifica dati" name="btnModifica" />
                             </fieldset>
