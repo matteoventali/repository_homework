@@ -129,7 +129,7 @@
                     </div>
 
                     <div class="riquadro" >
-                        <form action="" method="post" style="<?php echo $visibilita_bottone; ?>">
+                        <form id="formOpzioni" action="modificaCliente.php" method="post" style="<?php echo $visibilita_bottone; ?>">
                             <fieldset>
                             <?php 
                                 // Questi bottoni non effettuano il submit del form
@@ -140,6 +140,7 @@
                                 else
                                     echo "<input type=\"button\" onclick=\"cambiaStatoAccount(2,$id_cliente);\" value=\"Riattiva account\" name=\"btnRiattiva\" />" ."\n";
                             ?>
+                            <input type="hidden" value="<?php echo $id_cliente; ?>" name="id_cliente" />
                             <input type="submit" value="Modifica dati" name="btnModifica" />
                             </fieldset>
                         </form>

@@ -204,12 +204,17 @@ function cambiaStatoAccount(operazione, id_utente)
 function callbackCambiaStatoAccount(xhr)
 {
     // Ricevo vero o falso a seconda della riuscita dell'operazione
-    // Notifica della riuscita dell'operazione
+    // Notifica tramite alert in caso di errore
     if ( !xhr.responseText )
         alert("Cambio stato fallito");
-    else
-        alert("Cambio stato effettuato");
     
-    // A prescindere torno nella pagina di gestione dei clienti
-    location.href = 'gestioneClienti.php';
+    // Per effettuare il refresh della pagina effettuo il submit del form
+    // che contiene il bottone per ban/riattivazione account.
+    // Cambio l'azione e imposto lo script dettaglioCliente.php in modo da ricaricare
+    // la pagina.
+    // Meccanismo implementato cosi per evitare la richiesta di alcuni browser 
+    // di reinviare la richiesta POST (es. Firefox)
+    form = document.getElementById('formOpzioni');
+    form.action = 'dettaglioCliente.php';
+    form.submit();
 }
