@@ -3,5 +3,5 @@
 
     $g = new GestoreDomande();
 
-    $g->ottieniValutazione(2,12);
+    $g->inserisciNuovaValutazione(2, 4, 150, 3);
 ?>

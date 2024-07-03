@@ -224,10 +224,56 @@
         }
 
         // Metodo per inserire una valutazione nel file domande
-        // Riceve l'utente che effettua la valutazione e la domanda di riferimento
-        function inserisciNuovaValutazione($id_domanda, $id_utente)
+        // Riceve l'utente che effettua la valutazione, la domanda di riferimento, il peso e il rating
+        function inserisciNuovaValutazione($id_domanda, $id_utente, $peso, $rating)
         {
+            // Esito dell'operazione
+            $esito = false;
+            
+            // Verifico se posso usare il file
+            if ( !$this->checkValidita() )
+                return $esito;
 
+            // Flag per indicare se ho raggiunto la domanda
+            $trovata = false;
+            
+            // Ottengo la lista di figli della radice, ovvero la lista delle domande
+            $figli = $this->oggettoDOM->documentElement->childNodes;
+            $n_figli = $this->oggettoDOM->documentElement->childElementCount;
+            for ( $i=0; $i<$n_figli && !$trovata; $i++ )
+            {
+                // Verifico se ho raggiunto la domanda
+                if ( $figli[$i]->getAttribute('id') == $id_domanda )
+                    $trovata = true;
+            }
+
+            // Se ho trovato la domanda
+            if ( $trovata )
+            {
+                $i--;
+
+                // Verifico che non vi sia una valutazione gia' inserita 
+                // dall'utente per la domanda trovata
+                if ( $this->ottieniValutazione($id_domanda, $id_utente) == null ) // Sono sicuro che non c'e'
+                {
+                    // Posso procedere all'inserimento della valutazione
+                    $esito = true;
+
+                    // Creo un nuovo elemento valutazione
+                    $nuova_valutazione = $this->oggettoDOM->createElement('valutazione');
+                    $nuova_valutazione->setAttribute('id_utente', $id_utente);
+                    $nuova_valutazione->setAttribute('peso', $peso);
+                    $nuova_valutazione->setAttribute('rating', $rating);
+
+                    // Aggiungo la nuova valutazione alla lista di valutazioni della domanda
+                    $figli[$i]->lastChild->appendChild($nuova_valutazione);
+
+                    // Salvo le modifiche sul file xml
+                    $this->salvaXML($this->pathname);
+                }
+            }
+
+            return $esito;
         }    
     }
 ?>

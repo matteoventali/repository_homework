@@ -14,6 +14,7 @@
     {
         public $peso;
         public $rating;
+        public $id_utente;
     }
 
     // Gestore XML DOM per il file risposte.xml
@@ -84,6 +85,67 @@
 
             return $lista_risposte;
         }
+
+        // Metodo per ottenere una risposta
+        // Riceve come parametro l'id della risposta
+        function ottieniRisposta($id_risposta)
+        {
+            // Verifico se posso usare il file
+            if ( !$this->checkValidita() )
+                return null;
+
+            // Inizialmente risposta e' vuota
+            $risposta = "";
+
+            // Variabile per ottimizzare il ciclo
+            $esito = false;
+
+            // Ottengo la lista di figli della radice, ovvero la lista delle risposte
+            $figli = $this->oggettoDOM->documentElement->childNodes;
+            $n_figli = $this->oggettoDOM->documentElement->childElementCount;
+
+            // Per ogni figlio, ovvero una risposta, verifico se l'id
+            // corrisponde a quello passato come parametro
+            for ( $i=0; $i<$n_figli && !$esito; $i++ )
+            {
+                // Verifico se l'id della domanda corrisponde
+                // a quello passato
+                $id = $figli[$i]->getAttribute("id");
+                if ( $id == $id_risposta )
+                {
+                    // Creo una nuova risposta
+                    $risposta = new Risposta();
+
+                    // Estraggo le informazioni dalla domanda
+                    $risposta->id = $figli[$i]->getAttribute("id");
+                    $risposta->data = $figli[$i]->getAttribute("data");
+                    $risposta->id_utente = $figli[$i]->getAttribute("id_utente");
+                    $risposta->contenuto = $figli[$i]->firstChild->textContent;
+                    
+                    // Estraggo le valutazioni dalla risposta
+                    $lista_valutazioni = [];
+                    $valutazioni = $figli[$i]->lastChild->childNodes;
+                    $n_valutazioni = $valutazioni->length;
+                    for ( $j=0; $j<$n_valutazioni; $j++ )
+                    {
+                        $nuova_valutazione = new ValutazioneRisposta();
+                        $nuova_valutazione->peso = $valutazioni[$j]->getAttribute('peso');
+                        $nuova_valutazione->rating = $valutazioni[$j]->getAttribute('rating');
+                        $nuova_valutazione->id_utente = $valutazioni[$j]->getAttribute('id_utente');
+
+                        // Aggiungo la valutazione alla lista delle valutazioni
+                        array_push($lista_valutazioni, $nuova_valutazione);
+                    }
+
+                    // Aggiungo la lista delle valutazioni alla domanda
+                    $risposta->valutazioni = $lista_valutazioni;
+
+                    $esito = true;
+                }
+            }
+
+            return $risposta;
+        }
                 
         // Metodo per inserire una risposta
         // Riceve il contenuto, l'utente che effettua la risposta,
@@ -148,6 +210,93 @@
             if($dim_lista > 0)
             {
                 $esito = true;
+            }
+
+            return $esito;
+        }
+
+        // Metodo per ottenere la valutazione associata ad una specifica risposta
+        // effettuata da un utente, se esiste. In caso negativo, restituisce null
+        function ottieniValutazione($id_risposta, $id_utente)
+        {
+            // Verifico se posso usare il file
+            if ( !$this->checkValidita() )
+                return null;
+
+            // Tento di ottenere la risposta tramite metodo opportuno gia' implementato
+            $risposta = $this->ottieniRisposta($id_risposta);
+
+            // Se la risposta esiste procedo
+            $val = null;
+            if ( $risposta != "" )
+            {
+                // Estraggo la lista delle valutazioni dalla risposta
+                $valutazioni = $risposta->valutazioni;
+                $n_valutazioni = count($valutazioni);
+                for ( $i=0; $i<$n_valutazioni && $val == null; $i++ )
+                {
+                    // Verifico se l'utente coincide
+                    if ( $valutazioni[$i]->id_utente == $id_utente)
+                    {
+                        // Alloco la nuova valutazione
+                        $val = new ValutazioneRisposta();
+                        $val->id_utente = $valutazioni[$i]->id_utente;
+                        $val->peso = $valutazioni[$i]->peso;
+                        $val->rating = $valutazioni[$i]->rating;
+                    }
+                }
+            }
+            return $val;
+        }
+
+        // Metodo per inserire una valutazione nel file rispsote
+        // Riceve l'utente che effettua la valutazione, la risposta di riferimento, il peso e il rating
+        function inserisciNuovaValutazione($id_risposta, $id_utente, $peso, $rating)
+        {
+            // Esito dell'operazione
+            $esito = false;
+            
+            // Verifico se posso usare il file
+            if ( !$this->checkValidita() )
+                return $esito;
+
+            // Flag per indicare se ho raggiunto la risposta
+            $trovata = false;
+            
+            // Ottengo la lista di figli della radice, ovvero la lista delle risposte
+            $figli = $this->oggettoDOM->documentElement->childNodes;
+            $n_figli = $this->oggettoDOM->documentElement->childElementCount;
+            for ( $i=0; $i<$n_figli && !$trovata; $i++ )
+            {
+                // Verifico se ho raggiunto la risposta
+                if ( $figli[$i]->getAttribute('id') == $id_risposta )
+                    $trovata = true;
+            }
+
+            // Se ho trovato la risposta
+            if ( $trovata )
+            {
+                $i--;
+
+                // Verifico che non vi sia una valutazione gia' inserita 
+                // dall'utente per la domanda trovata
+                if ( $this->ottieniValutazione($id_risposta, $id_utente) == null ) // Sono sicuro che non c'e'
+                {
+                    // Posso procedere all'inserimento della valutazione
+                    $esito = true;
+
+                    // Creo un nuovo elemento valutazione
+                    $nuova_valutazione = $this->oggettoDOM->createElement('valutazione');
+                    $nuova_valutazione->setAttribute('id_utente', $id_utente);
+                    $nuova_valutazione->setAttribute('peso', $peso);
+                    $nuova_valutazione->setAttribute('rating', $rating);
+
+                    // Aggiungo la nuova valutazione alla lista di valutazioni della domanda
+                    $figli[$i]->lastChild->appendChild($nuova_valutazione);
+
+                    // Salvo le modifiche sul file xml
+                    $this->salvaXML($this->pathname);
+                }
             }
 
             return $esito;

@@ -167,7 +167,6 @@
                             $risposta_html = str_replace("%DATA_INTERVENTO%", date('d-m-Y', strtotime($risposte[$i]->data)), $risposta_html);
                             $risposta_html = str_replace("%USERNAME%", $utente->username, $risposta_html);
                             $risposta_html = str_replace("%STELLINE_STATICHE%", $frammento_stelline_statiche, $risposta_html);
-                            $risposta_html = str_replace("%STELLINE_DINAMICHE%", $frammento_stelline_dinamiche, $risposta_html);
                             $risposta_html = str_replace("%ID_INTERVENTO%", $id_intervento, $risposta_html);
                             $risposta_html = str_replace("%ID_INTERVENTO_XML%", $risposte[$i]->id, $risposta_html);
                             $risposta_html = str_replace("%TIPO_INTERVENTO%", 'risposta', $risposta_html);
@@ -176,7 +175,20 @@
                             // se l'utente e' loggato e non e' il proprietario della risposta
                             $opt_display_dinamiche = "none";
                             if ( $sessione_attiva && $_SESSION["id_utente"] != $risposte[$i]->id_utente )
+                            {
+                                // Verifico se esiste gia' una valutazione effettuata da quell'utente
+                                $val = $gestore_risposte->ottieniValutazione($risposte[$i]->id, $_SESSION["id_utente"]);
+                                if ( $val != null ) // L'ho trovata
+                                {
+                                    $frammento_stelline_statiche = initStelline($val->rating, '#00FFFF', false, $container_padre);
+                                    $risposta_html = str_replace("%STELLINE_DINAMICHE%", $frammento_stelline_statiche, $risposta_html);
+                                }
+                                else
+                                    $risposta_html = str_replace("%STELLINE_DINAMICHE%", $frammento_stelline_dinamiche, $risposta_html);
+                                
                                 $opt_display_dinamiche = "block";
+                            }
+                                
                             $risposta_html = str_replace("%VISUALIZZA_DINAMICHE%", $opt_display_dinamiche, $risposta_html);
 
                             $id_intervento++;

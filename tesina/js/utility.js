@@ -170,7 +170,7 @@ function inserisciValutazione(id_intervento, stella_premuta)
     
     // Oggetto per connessione mediante tecnologia AJAX
     xhr = new XMLHttpRequest();
-    xhr.open("POST", "lib/inserisciValutazione.php");
+    xhr.open("POST", "inserisciValutazione.php");
     xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
     xhr.onload = function(){ callbackValutazione(xhr) }; // Definisco una funzione di callback implicita che chiama quella sotto
     xhr.send(query_string);

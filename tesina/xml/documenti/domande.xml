@@ -1,21 +1,2 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<domande xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../schema/schemaDomande.xsd">
-
-    <domanda id="1" id_utente="3" faq="false" data="2024-06-07">
-        <contenuto>
-            Avete una sede fisica?
-        </contenuto>
-        <valutazioni></valutazioni>
-    </domanda>
-
-    <domanda id="2" id_utente="4" faq="true" data="2024-06-06">
-        <contenuto>
-            Posso inserire un indirizzo di consegna diverso da quello presente nel profilo?
-        </contenuto>
-        <valutazioni>
-            <valutazione peso="40" id_utente="10" rating="5"/>
-            <valutazione peso="23" id_utente="3" rating="5"/>
-            <valutazione peso="1" id_utente="1" rating="4"/>
-        </valutazioni>
-    </domanda>
-</domande>
+<domande xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../schema/schemaDomande.xsd"><domanda id="1" id_utente="3" faq="false" data="2024-06-07"><contenuto>Avete una sede fisica?</contenuto><valutazioni><valutazione id_utente="1" peso="200" rating="3"/><valutazione id_utente="2" peso="200" rating="5"/></valutazioni></domanda><domanda id="2" id_utente="4" faq="true" data="2024-06-06"><contenuto>Posso inserire un indirizzo di consegna diverso da quello presente nel profilo?</contenuto><valutazioni><valutazione peso="40" id_utente="10" rating="5"/><valutazione peso="23" id_utente="12" rating="5"/><valutazione peso="1" id_utente="13" rating="4"/><valutazione id_utente="1" peso="200" rating="3"/></valutazioni></domanda></domande>
