@@ -204,10 +204,12 @@ function cambiaStatoAccount(operazione, id_utente)
 function callbackCambiaStatoAccount(xhr)
 {
     // Ricevo vero o falso a seconda della riuscita dell'operazione
-    // In caso di errore emetto un alert per notificarlo
+    // Notifica della riuscita dell'operazione
     if ( !xhr.responseText )
         alert("Cambio stato fallito");
+    else
+        alert("Cambio stato effettuato");
     
-    // A prescindere si effettua il refresh della pagina
-    location.reload();
+    // A prescindere torno nella pagina di gestione dei clienti
+    location.href = 'gestioneClienti.php';
 }
