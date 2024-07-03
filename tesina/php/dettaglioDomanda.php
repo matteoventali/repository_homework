@@ -108,7 +108,8 @@
                     $utente = ottieniUtente($domanda->id_utente, $handleDB);
 
                     // Inizializzo le stelline
-                    $id_intervento = 1; $container_padre = 'int_' . $id_intervento;
+                    $id_intervento = 1; 
+                    $container_padre = 'int_' . $id_intervento;
                     $frammento_stelline_statiche = initStelline(calcolaMediaRating($domanda->valutazioni), 'blue', false, $container_padre);
                     $frammento_stelline_dinamiche = initStelline(0, 'blue', true, $container_padre);
 
@@ -117,19 +118,31 @@
                     $domanda_html = str_replace("%DATA_INTERVENTO%", date('d-m-Y', strtotime($domanda->data)), $domanda_html);
                     $domanda_html = str_replace("%USERNAME%", $utente->username, $domanda_html);
                     $domanda_html = str_replace("%STELLINE_STATICHE%", $frammento_stelline_statiche, $domanda_html);
-                    $domanda_html = str_replace("%STELLINE_DINAMICHE%", $frammento_stelline_dinamiche, $domanda_html);
                     $domanda_html = str_replace("%ID_INTERVENTO%", $id_intervento, $domanda_html);
                     $domanda_html = str_replace("%ID_INTERVENTO_XML%", $domanda->id, $domanda_html);
                     $domanda_html = str_replace("%TIPO_INTERVENTO%", 'domanda', $domanda_html);
                     $id_intervento++;
 
                     // Le stelline dinamiche per valutare la domanda sono visibili
-                    // se l'utente e' loggato e non e' il proprietario della domanda
+                    // se l'utente e' loggato, non e' il proprietario della domanda e non ha gia' valutato la domanda
+                    // In caso l'utente non sia il proprietario ma ha valutato la domanda appaiono le stelline statiche
+                    // per mostrare la valutazione gia' effettuata
                     $opt_display_dinamiche = "none";
                     if ( $sessione_attiva && $_SESSION["id_utente"] != $domanda->id_utente )
+                    {
+                        // Verifico se esiste una valutazione dell'utente in oggetto
+                        $val = $gestore_domande->ottieniValutazione($domanda->id, $_SESSION["id_utente"]);
+                        if ( $val != null ) // Esiste gia' una valutazione
+                        {
+                            $frammento_stelline_statiche = initStelline($val->rating, 'blue', false, $container_padre);
+                            $domanda_html = str_replace("%STELLINE_DINAMICHE%", $frammento_stelline_statiche, $domanda_html);
+                        }
+                        else
+                            $domanda_html = str_replace("%STELLINE_DINAMICHE%", $frammento_stelline_dinamiche, $domanda_html);
+                        
                         $opt_display_dinamiche = "block";
+                    }
                     $domanda_html = str_replace("%VISUALIZZA_DINAMICHE%", $opt_display_dinamiche, $domanda_html);
-                    
                     echo $domanda_html . "\n";
 
                     // Popolo la sezione delle risposte
