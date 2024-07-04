@@ -60,12 +60,19 @@
     text-align: center;
 }
 
+#sezioneModifica form fieldset:last-child
+{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    overflow: auto;
+    gap: 5%;
+}
+
 #sezioneModifica form fieldset input[type="submit"],
 #sezioneModifica form fieldset input[type="reset"],
 #sezioneModifica form fieldset input[type="button"]
 {
     display: inline-block;
-    margin-left: 5%;
-    margin-right: 5%;
     font-size: 120%;
 }
