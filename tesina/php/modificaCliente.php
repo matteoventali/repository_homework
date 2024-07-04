@@ -5,6 +5,8 @@
 
     // Variabili utili all'identificazione dell'errore
     $mostraPopup = false; $msg = ''; $err = false;
+    
+    // Flag per tenere traccia dei controlli sulla lunghezza dei campi
     $flag_nome      = true;
     $flag_cognome   = true;
     $flag_indirizzo = true;
@@ -44,15 +46,13 @@
         if ( isset($_POST['btnSalvaModifica']) ) 
         {
             // A seguito della richiesta devo mostrare il popup
-            $primo_caricamento = false;
             $mostraPopup = true; $err = true;
 
             // Mi connetto al database
             require 'lib/connection.php';
-
             if ( $connessione )
             {
-                // Regex per controllo sui dati
+                // Regex per controllo sui dati cap e reputazione
                 $regex_cap = '/^\d\d\d\d\d$/';
                 $regex_reputazione = '/^[1-9][0-9]?$|^100$/';
                 
@@ -99,6 +99,9 @@
                         if (!$err)
                         {
                             $msg = 'Modifica avvenuta con successo';
+
+                            // Rieseguo la query per mostrare i dati dell'utente piu aggiornati, a seguito
+                            // della modifica
                             $cliente = ottieniUtente($id_cliente, $handleDB);
                         }
                         else 
