@@ -5,4 +5,11 @@
     <p>Pubblicato da: <strong>%USERNAME%</strong> il <strong>%DATA_INTERVENTO%</strong> con valutazione media %STELLINE_STATICHE%</p>
     <p style="display: none;">%ID_INTERVENTO_XML%</p>
     <p style="display: none;">%TIPO_INTERVENTO%</p>
+    <form style="display: %OPZIONE_DISPLAY_ELIMINA%" id="" onsubmit="eliminaIntervento(this); return false;" action="" method="post">
+        <fieldset>
+            <input type="hidden" name="id_intervento" value="%ID_INTERVENTO_XML%" />
+            <input type="hidden" name="tipo_intervento" value="%TIPO_INTERVENTO%" />
+        </fieldset>
+        <fieldset><input type="submit" name="btnEliminaIntervento" value="Elimina" /></fieldset>
+    </form>
 </div>

@@ -236,3 +236,31 @@ function tornaIndietroDallaModificaCliente(ruolo)
     // Eseguo il submit del form per tornare indietro
     form.submit();
 }
+
+function eliminaIntervento(form)
+{
+    // Id e tipo dell'intervento
+    id_intervento_xml = form.children[0].children[0].value;
+    tipo_intervento_xml = form.children[0].children[1].value;
+
+    // Composizione della query string
+    query_string = 'id_intervento=' + id_intervento_xml + "&tipo_intervento=" + tipo_intervento_xml;
+
+    // Richiesta AJAX per eliminare l'intervento
+    xhr = new XMLHttpRequest();
+    xhr.open("POST", "lib/eliminaIntervento.php");
+    xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+    xhr.onload = function(){ callbackEliminaIntervento(xhr) }; // Definisco una funzione di callback implicita che chiama quella sotto
+    xhr.send(query_string);
+}
+
+function callbackEliminaIntervento(xhr)
+{
+    // Ricevo vero o falso a seconda della riuscita dell'operazione
+    // Notifica tramite alert in caso di errore
+    if ( !xhr.responseText )
+        alert("Eliminazione intervento fallita");
+    
+    // A prescindere effettuo il refresh della pagina
+    location.reload();
+}

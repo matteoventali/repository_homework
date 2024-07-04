@@ -43,6 +43,10 @@
             // Parametro di visibilita' bottone aggiunta nuova faq
             $visibilita_bottone = "none";
 
+            // Parametro di visibilita' per visualizzare il bottone per eliminare
+            // un intervento (domanda o risposta)
+            $visibilita_elimina = "none";
+
             // Bisogna controllare se l'utente è loggato oppure no
             // In base a questo avrà diversi tipi di visualizzazione
             if($sessione_attiva)
@@ -77,8 +81,13 @@
                     echo '<p style="display:none;" id="reputazione_utente">' . $utente->reputazione . '</p>' . "\n";
                     $handleDB->close();
                 }
+
+                // Se il ruolo dell'utente e' gestore o admin fornisco la possibilita' di eliminare
+                // gli interventi
+                if ( $_SESSION['ruolo'] == 'A' || $_SESSION['ruolo'] == 'G' )
+                    $visibilita_elimina = 'block';
             }
-            else 
+            else
             {
                 // Qui l'utente non è loggato
 
@@ -93,7 +102,6 @@
             }
         ?>
 
-        <!-- FORM DI REGISTRAZIONE -->
         <div id="sezioneCentrale">
             <div id="sezioneDomanda">
                 <?php
@@ -121,6 +129,7 @@
                     $domanda_html = str_replace("%ID_INTERVENTO%", $id_intervento, $domanda_html);
                     $domanda_html = str_replace("%ID_INTERVENTO_XML%", $domanda->id, $domanda_html);
                     $domanda_html = str_replace("%TIPO_INTERVENTO%", 'domanda', $domanda_html);
+                    $domanda_html = str_replace("%OPZIONE_DISPLAY_ELIMINA%", $visibilita_elimina, $domanda_html);
                     $id_intervento++;
 
                     // Le stelline dinamiche per valutare la domanda sono visibili
@@ -170,6 +179,7 @@
                             $risposta_html = str_replace("%ID_INTERVENTO%", $id_intervento, $risposta_html);
                             $risposta_html = str_replace("%ID_INTERVENTO_XML%", $risposte[$i]->id, $risposta_html);
                             $risposta_html = str_replace("%TIPO_INTERVENTO%", 'risposta', $risposta_html);
+                            $risposta_html = str_replace("%OPZIONE_DISPLAY_ELIMINA%", $visibilita_elimina, $risposta_html);
 
                             // Le stelline dinamiche per valutare la risposta sono visibili
                             // se l'utente e' loggato e non e' il proprietario della risposta

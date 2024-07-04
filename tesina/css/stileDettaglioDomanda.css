@@ -78,3 +78,15 @@
 {
     margin:4px;
 }
+
+.intervento form
+{
+    display: flex;
+    text-align: right;
+    font-size: 70%;
+}
+
+.intervento form fieldset:nth-child(1)
+{
+    display:none;
+}

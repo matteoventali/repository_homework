@@ -1,5 +1,6 @@
 <?php
     require_once 'gestoreXMLDOM.php';
+    require_once 'gestoreRisposte.php';
 
     class Domanda
     {
@@ -274,6 +275,44 @@
             }
 
             return $esito;
-        }    
+        }
+        
+        // Metodo per rimuovere una domanda
+        function rimuoviDomanda($id_domanda)
+        {
+            // Verifico se posso usare il file
+            if ( !$this->checkValidita() )
+                return false;
+
+            // Variabile per ottimizzare il ciclo
+            $esito = false;
+
+            // Ottengo la lista di figli della radice, ovvero la lista delle domande
+            $figli = $this->oggettoDOM->documentElement->childNodes;
+            $n_figli = $this->oggettoDOM->documentElement->childElementCount;
+
+            // Per ogni figlio, ovvero una domanda, verifico se l'id
+            // corrisponde a quello passato come parametro
+            for ( $i=0; $i<$n_figli && !$esito; $i++ )
+            {
+                // Verifico se l'id della domanda corrisponde
+                // a quello passato
+                $id = $figli[$i]->getAttribute("id");
+                if ( $id == $id_domanda )
+                {
+                    // Elimino la domanda 
+                    $this->oggettoDOM->documentElement->removeChild($figli[$i]);
+
+                    // Rimuovo tutte le risposte associate alla domanda in oggetto
+                    $gestore_risposte = new GestoreRisposte();
+                    $gestore_risposte->rimuoviRisposte($id_domanda);
+                    
+                    $this->salvaXML($this->pathname);
+                    $esito = true;
+                }
+            }
+
+            return $esito;
+        }
     }
 ?>

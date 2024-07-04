@@ -301,5 +301,65 @@
 
             return $esito;
         }
+
+        // Metodo per rimuovere una risposta
+        function rimuoviRisposta($id_risposta)
+        {
+            // Verifico se posso usare il file
+            if ( !$this->checkValidita() )
+                return false;
+
+            // Variabile per ottimizzare il ciclo
+            $esito = false;
+
+            // Ottengo la lista di figli della radice, ovvero la lista delle risposte
+            $figli = $this->oggettoDOM->documentElement->childNodes;
+            $n_figli = $this->oggettoDOM->documentElement->childElementCount;
+
+            // Per ogni figlio, ovvero una risposta, verifico se l'id
+            // corrisponde a quello passato come parametro
+            for ( $i=0; $i<$n_figli && !$esito; $i++ )
+            {
+                // Verifico se l'id della risposta corrisponde
+                // a quello passato
+                $id = $figli[$i]->getAttribute("id");
+                if ( $id == $id_risposta )
+                {
+                    // Elimino la risposta 
+                    $this->oggettoDOM->documentElement->removeChild($figli[$i]);
+                    $this->salvaXML($this->pathname);
+                    $esito = true;
+                }
+            }
+
+            return $esito;
+        }
+
+        // Metodo per rimuovere le risposte associate ad una domanda
+        function rimuoviRisposte($id_domanda)
+        {
+            if ( !$this->checkValidita() )
+                return false;
+
+            // Ottengo la lista di figli della radice, ovvero la lista delle risposte
+            $figli = $this->oggettoDOM->documentElement->childNodes;
+            $n_figli = $this->oggettoDOM->documentElement->childElementCount;
+
+            // Per ogni figlio, ovvero una risposta, verifico se l'id della domanda
+            // corrisponde a quello passato come parametro
+            for ( $i=0; $i<$n_figli; $i++ )
+            {
+                // Verifico se l'id della domanda corrisponde
+                // a quello passato
+                $id = $figli[$i]->getAttribute("id_domanda");
+                if ( $id == $id_domanda )
+                    // Elimino la risposta associata alla domanda
+                    $this->oggettoDOM->documentElement->removeChild($figli[$i]);
+            }
+
+            // Salvo i cambiamenti sul file
+            $this->salvaXML($this->pathname);
+            return true;
+        }
     }
 ?>
