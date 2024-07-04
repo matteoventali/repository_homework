@@ -218,3 +218,21 @@ function callbackCambiaStatoAccount(xhr)
     form.action = 'dettaglioCliente.php';
     form.submit();
 }
+
+function tornaIndietroDallaModificaCliente(ruolo)
+{
+    // A seconda del ruolo scelgo in modo opportuno l'azione del form
+    // che corrisponde alla pagina su cui tornare dalla pagina di modifica
+    // del cliente
+    if ( ruolo == 'A' )
+        pagina_precedente = 'dettaglioCliente.php';
+    else if ( ruolo == 'C' )
+        pagina_precedente = 'areaPersonale.php';
+
+    // Prendo il riferimento al form
+    form = document.getElementById('formModifica');
+    form.action = pagina_precedente;
+
+    // Eseguo il submit del form per tornare indietro
+    form.submit();
+}

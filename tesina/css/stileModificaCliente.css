@@ -1,0 +1,71 @@
+#sezioneModifica
+{
+    width: 100%;
+    height: 85%;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+}
+
+#sezioneModifica form
+{
+    width: 85%;
+    height: 80%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    border-style: solid;
+    background-color: #11999E;
+    box-shadow: 21px 27px 31px -2px black;
+    color:white;
+    gap: 5%;
+    padding:20px;
+    overflow-y: auto;
+    border-radius: 15px;
+}
+
+#sezioneModifica form fieldset 
+{
+    display: flex;
+    flex-direction: row;
+    height: 10%;
+    width: 45%;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    border-radius: 20px;
+    border-style: ridge;
+    border-color: white;
+}
+
+#sezioneModifica form fieldset p
+{
+    display: inline-block;
+    font-size: 200%;
+    width: 50%;
+    text-align: center;
+}
+
+#sezioneModifica form fieldset input[type="text"],
+#sezioneModifica form fieldset input[type="password"]
+{
+    display: inline-block;
+    height: 40%;
+    width: 45%;
+    font-size: 130%;
+    text-align: center;
+}
+
+#sezioneModifica form fieldset input[type="submit"],
+#sezioneModifica form fieldset input[type="reset"],
+#sezioneModifica form fieldset input[type="button"]
+{
+    display: inline-block;
+    margin-left: 5%;
+    margin-right: 5%;
+    font-size: 120%;
+}

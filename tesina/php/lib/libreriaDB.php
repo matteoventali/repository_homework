@@ -188,4 +188,27 @@
 
         return $esito;
     }
+
+    // Funzione per cambiare i dati di un cliente
+    function modificaCliente($handleDB, $id_cliente, $nome, $cognome, $citta, $cap, $indirizzo, $reputazione, $ruolo_modificatore)
+    {
+        global $tb_utenti;
+        $esito = false;
+
+        // Creo la query per aggiornare i dati. Considero la reputazione se il modificatore e' admin
+        if ( $ruolo_modificatore == 'A' )
+            $q = "update $tb_utenti set nome='$nome', cognome='$cognome', citta='$citta', cap='$cap', indirizzo='$indirizzo', reputazione=$reputazione where id=$id_cliente and ruolo='C'";
+        else
+            $q = "update $tb_utenti set nome='$nome', cognome='$cognome', citta='$citta', cap='$cap', indirizzo='$indirizzo' where id=$id_cliente and ruolo='C'";
+
+        // Esecuzione della query
+        try
+        {
+            // Eseguo la query
+            $esito = $handleDB->query($q);
+        }
+        catch (Exception $e){}
+
+        return $esito;
+    }
 ?>
