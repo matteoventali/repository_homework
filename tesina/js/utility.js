@@ -248,19 +248,23 @@ function eliminaIntervento(form)
 
     // Richiesta AJAX per eliminare l'intervento
     xhr = new XMLHttpRequest();
-    xhr.open("POST", "lib/eliminaIntervento.php");
+    xhr.open("POST", "eliminaIntervento.php");
     xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-    xhr.onload = function(){ callbackEliminaIntervento(xhr) }; // Definisco una funzione di callback implicita che chiama quella sotto
+    xhr.onload = function(){ callbackEliminaIntervento(xhr, tipo_intervento_xml) }; // Definisco una funzione di callback implicita che chiama quella sotto
     xhr.send(query_string);
 }
 
-function callbackEliminaIntervento(xhr)
+function callbackEliminaIntervento(xhr, tipo)
 {
     // Ricevo vero o falso a seconda della riuscita dell'operazione
     // Notifica tramite alert in caso di errore
     if ( !xhr.responseText )
         alert("Eliminazione intervento fallita");
     
-    // A prescindere effettuo il refresh della pagina
-    location.reload();
+    // Se e' stata eliminata una domanda ritorno alla pagina di resoconto domande
+    // altrimenti refresh della pagina
+    if (tipo != 'domanda')
+        location.reload();
+    else
+        location.href = 'domande.php';
 }

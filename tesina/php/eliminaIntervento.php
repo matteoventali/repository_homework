@@ -3,16 +3,14 @@
     require_once 'gestoriXML/gestoreRisposte.php';
     require_once 'gestoriXML/gestoreRecensioni.php';
 
-    // Script per inserimento valutazione. Viene chiamato in maniera asincrona
+    // Script per eliminare un intervento. Viene chiamato in maniera asincrona
     // mediante tecnologia AJAX
     // Restituisce true o false a seconda dell'esito dell'operazione
     $esito_operazione = false;
 
     // Check dei parametri ricevuti per eseguire l'operazione
     // I parametri vengono ricevuti mediante richiesta HTTP POST
-    if ( isset($_POST["id_utente"]) && isset($_POST["reputazione_utente"]) 
-            && isset($_POST["id_intervento_xml"]) && isset($_POST["tipo_intervento"]) 
-            && isset($_POST["stella_premuta"]) )
+    if ( isset($_POST["id_intervento"]) && isset($_POST["tipo_intervento"]) )
     {
         // Verifico tramite il tipo di intervento dove inserire la valutazione
         $tipo = $_POST["tipo_intervento"];
@@ -21,10 +19,14 @@
         {
             case 'domanda':
                 $gestore = new GestoreDomande();
+                // Elimino la domanda che causa anche l'eliminazione delle risposte associate
+                $esito_operazione = $gestore->rimuoviDomanda($_POST["id_intervento"]);
                 break;
             
             case 'risposta':
                 $gestore = new GestoreRisposte();
+                // Elimino la risposta
+                $esito_operazione = $gestore->rimuoviRisposta($_POST["id_intervento"]);
                 break;
 
             case 'recensione':
@@ -32,14 +34,8 @@
                 break;
             
             default:
-                $gestore = null; break;
+                $path_xml = ''; $gestore = null; break;
         }
-
-        // Se ho un gestore
-        if ( $gestore != null )
-            // Chiamata al metodo di inserimento valutazione
-            $esito_operazione = $gestore->inserisciNuovaValutazione($_POST["id_intervento_xml"], $_POST["id_utente"], 
-                                                                                $_POST["reputazione_utente"], $_POST["stella_premuta"]);
     }
     else
         header("Location: homepage.php"); // Chiamata allo script in modo improprio
