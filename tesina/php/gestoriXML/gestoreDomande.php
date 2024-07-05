@@ -9,6 +9,7 @@
         public $id_utente;
         public $contenuto;
         public $valutazioni;
+        public $faq;
     }
 
     class ValutazioneDomanda
@@ -62,6 +63,7 @@
                     $domanda->id = $figli[$i]->getAttribute("id");
                     $domanda->data = $figli[$i]->getAttribute("data");
                     $domanda->id_utente = $figli[$i]->getAttribute("id_utente");
+                    $domanda->faq = $figli[$i]->getAttribute("faq");
                     $domanda->contenuto = $figli[$i]->firstChild->textContent;
                     
                     // Estraggo le valutazioni dalla domanda
@@ -121,6 +123,7 @@
                     $nuova_domanda->data = $figli[$i]->getAttribute("data");
                     $nuova_domanda->id_utente = $figli[$i]->getAttribute("id_utente");
                     $nuova_domanda->contenuto = $figli[$i]->firstChild->textContent;
+                    $nuova_domanda->faq = $f;
                     
                     // Estraggo le valutazioni dalla domanda
                     $lista_valutazioni = [];

@@ -28,7 +28,9 @@
 
 #sezioneRisposte
 {
+    max-height: 85%;
     width: 80%;
+    overflow-y: auto;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -36,57 +38,48 @@
     background-color: #11999E;
     box-shadow: 21px 27px 31px -2px black;
     color:white;
-    padding: 20px;   
     border-radius: 15px;
+    padding: 30px;
+    font-size: 150%;
+}
+
+#sezioneRisposte form
+{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+}
+
+#sezioneRisposte form fieldset:nth-child(1)
+{
+    width: 100%;
+    text-align: right;
+    padding-right: 30px;
+}
+
+textarea
+{
     font-size: 130%;
 }
 
-.intervento
-{
-    display: flex;
-    flex-direction: column;
-    overflow-y: auto;
-    gap: 20px;
-    padding: 10px;
-    border-radius: 20px;
-}
-
-.intervento p
-{
-    margin: 0;   
-}
-
-#sezioneRisposte .intervento
+.risposta
 {
     display:flex;
     flex-direction: column;
     width: 90%;
-    font-size: 130%;
-    padding: 25px;
-    border-color: white;
-    border-style: ridge;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    border-radius: 20px;
+    border-style: ridge;
+    border-color: white;
+    font-size: 100%;
+    padding: 0px 20px;
 }
 
-.parteButton
+input[type="radio"]
 {
-    width: 90%;
-    text-align: right;
-}
-
-.parteButton input[type="submit"]
-{
-    margin:4px;
-}
-
-.intervento div
-{
-    display: flex;
-    font-size: 70%;
-    justify-content: flex-end;
-}
-
-.intervento form fieldset:nth-child(1)
-{
-    display:none;
+    width: 25px;
+    height: 25px;
 }

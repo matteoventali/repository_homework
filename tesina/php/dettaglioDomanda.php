@@ -130,6 +130,13 @@
                     $domanda_html = str_replace("%ID_INTERVENTO_XML%", $domanda->id, $domanda_html);
                     $domanda_html = str_replace("%TIPO_INTERVENTO%", 'domanda', $domanda_html);
                     $domanda_html = str_replace("%OPZIONE_DISPLAY_ELIMINA%", $visibilita_elimina, $domanda_html);
+
+                    // Verifico se l'utente e' loggato come admin/gestore e che la domanda non sia elevata a faq
+                    if ( ($_SESSION["ruolo"] == "A" || $_SESSION["ruolo"] == "G") && $domanda->faq == "false")
+                        $domanda_html = str_replace("%OPZIONE_FAQ%", 'block', $domanda_html);
+                    else
+                        $domanda_html = str_replace("%OPZIONE_FAQ%", 'none', $domanda_html);
+
                     $id_intervento++;
 
                     // Le stelline dinamiche per valutare la domanda sono visibili
@@ -180,6 +187,7 @@
                             $risposta_html = str_replace("%ID_INTERVENTO_XML%", $risposte[$i]->id, $risposta_html);
                             $risposta_html = str_replace("%TIPO_INTERVENTO%", 'risposta', $risposta_html);
                             $risposta_html = str_replace("%OPZIONE_DISPLAY_ELIMINA%", $visibilita_elimina, $risposta_html);
+                            $risposta_html = str_replace("%OPZIONE_FAQ%", 'none', $risposta_html);
 
                             // Le stelline dinamiche per valutare la risposta sono visibili
                             // se l'utente e' loggato e non e' il proprietario della risposta
