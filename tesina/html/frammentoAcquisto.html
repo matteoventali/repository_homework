@@ -1,8 +1,7 @@
-<div class="acquisto">
-    <div class="panoramica"> <p> Data acquisto:<span> %DATA%</span> 
-        Crediti bonus ricevuti: <span> %CREDITI_BONUS_RICEVUTI%</span> 
-        Totale acquisto: <span> %CREDITI_SPESI%</span> </p>
-        
-        <p onclick="mostraDettaglioAcquisto('acq_%ID_ACQUISTO%');" id="acq_%ID_ACQUISTO%">&#x25BC;</p></div>
-    <div id="prod_%ID_ACQUISTO%" class="prodottI" style="display:none;"> %PRODOTTI%</div>
+<div class="acquisto" onclick="vaiDettaglioAcquisto('%ID_ACQUISTO%')">
+        <p> 
+            <span> <span>Data acquisto: </span>%DATA%</span> 
+            <span> <span>Crediti bonus ricevuti: </span>%CREDITI_BONUS_RICEVUTI%</span> 
+            <span> <span>Totale acquisto: </span>%CREDITI_SPESI%</span> 
+        </p>
 </div>

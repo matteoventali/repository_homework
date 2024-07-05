@@ -67,78 +67,77 @@
         ?>
 
         <div id="sezioneDati">
-            <div id="sezioneRiquadri">
-                    <div class="riquadroInformazioni">
-                        <div class="primaColonna">
-                            <p>Nome: <strong><span> <?php echo $cliente->nome;?></span> </strong>
-                            <p>Citt&agrave;: <span><strong><?php echo $cliente->citta;?></strong></span></p>
-                            <p>Reputazione: <strong> <span><?php echo $cliente->reputazione;?></span> </strong></p>
-                            <p>Username: <strong> <span> <?php echo $cliente->username;?> </span> </strong></p>
-                        </div>
+            <div class="riquadroInformazioni">
+                <div class="colonna">
+                    <p>Nome: <strong><span> <?php echo $cliente->nome;?></span> </strong></p>
+                    <p>Citt&agrave;: <span><strong><?php echo $cliente->citta;?></strong></span></p>
+                    <p>Reputazione: <strong> <span><?php echo $cliente->reputazione;?></span> </strong></p>
+                    <p>Username: <strong> <span> <?php echo $cliente->username;?> </span> </strong></p>
+                </div>
 
-                        <div class="secondaColonna">
-                            <p>Cognome: <strong><span><?php echo $cliente->cognome;?></span></strong></p>
-                            <p>Cap: <strong><span><?php echo $cliente->cap;?> </span></strong></p>
-                            <p> Saldo portafoglio standard: 
-                            <strong> <span> <?php echo $cliente->saldo_standard;?> </span> </strong> </p>
-                            <p>Mail: <strong> <span><?php echo $cliente->mail;?></span></strong></p>
-                        </div>
-                        <div class="terzaColonna">
-                            <p>Indirizzo: <span><strong><?php echo $cliente->indirizzo;?></strong></span></p>
-                            <p>Data registrazione: 
-                                <strong><span>
-                                    <?php echo date("d-m-Y", strtotime($cliente->data_registrazione));?>
-                                </span> </strong>
-                            </p>
-                            <p>Saldo portafoglio bonus: 
-                                <strong> <span> <?php echo $saldo_bonus;?> </span> </strong>
-                            </p>
-                        </div>
-                        <div class="parteButton">
-                            <form action="modificaCliente.php" method="post">
-                                <fieldset><input type="submit" value="Modifica dati" name="btnModifica" /></fieldset>
-                            </form>
-                        </div>
-                    </div>
-
-                    <div class="riquadroAcquisti" >
-                        <h4 style="text-decoration: underlined;">Acquisti effettuati</h4>
-                        <?php
-                            // Contenuto di un acquisto vuoto
-                            $acquisto_vuoto = file_get_contents("../html/frammentoAcquisto.html");
-                                
-                            // Gestori file XML
-                            $gestore_acquisti = new GestoreAcquisti();
-                                
-                            // Carico gli acquisti dai file XML
-                            $dettaglio_acquisti = "";
-
-                            $lista_acquisti = $gestore_acquisti->ottieniAcquistiCliente($id_cliente);
-                            $dim_lista = count($lista_acquisti);
-
-                            if($dim_lista == 0)
-                                echo "<p style=\"font-size: 100%;\"> Nessun acquisto effettuato </p>";
-
-                            for ( $i=0; $i<$dim_lista; $i++ )
-                            {
-                                $id_acquisto = $lista_acquisti[$i]->id;
-
-                                $tot = calcolaTotaleAcquisto($id_acquisto);
-                                
-                                $acquisto_pieno = str_replace("%DATA%", date("d-m-Y", strtotime($lista_acquisti[$i]->data)), $acquisto_vuoto);
-                                $acquisto_pieno = str_replace("%CREDITI_BONUS_RICEVUTI%", $lista_acquisti[$i]->crediti_bonus_ricevuti, $acquisto_pieno);
-                                $acquisto_pieno = str_replace("%CREDITI_SPESI%", $tot, $acquisto_pieno);
-
-                                // Popoliamo ora la parte relativa ai prodotti
-                                $dettaglio_acquisti .= $acquisto_pieno . "\n";
-                            }
-                                
-                                // Mostro la lista delle domande
-                                echo $dettaglio_acquisti . "\n";
-                            ?>
-
-                    </div>
+                <div class="colonna">
+                    <p>Cognome: <strong><span><?php echo $cliente->cognome;?></span></strong></p>
+                    <p>Cap: <strong><span><?php echo $cliente->cap;?> </span></strong></p>
+                    <p> Saldo portafoglio standard: 
+                    <strong> <span> <?php echo $cliente->saldo_standard;?> </span> </strong> </p>
+                    <p>Mail: <strong> <span><?php echo $cliente->mail;?></span></strong></p>
+                </div>
+                <div class="colonna">
+                    <p>Indirizzo: <span><strong><?php echo $cliente->indirizzo;?></strong></span></p>
+                    <p>Data registrazione: 
+                        <strong><span>
+                            <?php echo date("d-m-Y", strtotime($cliente->data_registrazione));?>
+                        </span> </strong>
+                    </p>
+                    <p>Saldo portafoglio bonus: 
+                        <strong> <span> <?php echo $saldo_bonus;?> </span> </strong>
+                    </p>
+                </div>
+                <div class="parteButton">
+                    <form action="modificaCliente.php" method="post">
+                        <fieldset><input type="submit" value="Modifica dati" name="btnModifica" /></fieldset>
+                    </form>
+                </div>
             </div>
+
+            <div class="riquadroAcquisti" >
+                <h4 style="text-decoration: underlined;">Acquisti effettuati</h4>
+                <?php
+                    // Contenuto di un acquisto vuoto
+                    $acquisto_vuoto = file_get_contents("../html/frammentoAcquisto.html");
+                        
+                    // Gestori file XML
+                    $gestore_acquisti = new GestoreAcquisti();
+                        
+                    // Carico gli acquisti dai file XML
+                    $dettaglio_acquisti = "";
+
+                    $lista_acquisti = $gestore_acquisti->ottieniAcquistiCliente($id_cliente);
+                    $dim_lista = count($lista_acquisti);
+
+                    if($dim_lista == 0)
+                        echo "<p style=\"font-size: 100%;\"> Nessun acquisto effettuato </p>";
+
+                    for ( $i=0; $i<$dim_lista; $i++ )
+                    {
+                        $id_acquisto = $lista_acquisti[$i]->id;
+
+                        $tot = calcolaTotaleAcquisto($id_acquisto);
+                        
+                        $acquisto_pieno = str_replace("%DATA%", date("d-m-Y", strtotime($lista_acquisti[$i]->data)), $acquisto_vuoto);
+                        $acquisto_pieno = str_replace("%CREDITI_BONUS_RICEVUTI%", $lista_acquisti[$i]->crediti_bonus_ricevuti, $acquisto_pieno);
+                        $acquisto_pieno = str_replace("%CREDITI_SPESI%", $tot, $acquisto_pieno);
+
+                        // Popoliamo ora la parte relativa ai prodotti
+                        $dettaglio_acquisti .= $acquisto_pieno . "\n";
+                    }
+                        
+                        // Mostro la lista delle domande
+                        echo $dettaglio_acquisti . "\n";
+                    ?>
+
+            </div>
+            
         </div>
     </body>
 </html>
