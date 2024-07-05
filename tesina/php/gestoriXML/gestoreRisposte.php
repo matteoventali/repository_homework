@@ -361,5 +361,38 @@
             $this->salvaXML($this->pathname);
             return true;
         }
+
+        // Metodo per elevare una risposta a FAQ
+        function elevaRisposta($id_risposta)
+        {
+            // Verifico se posso usare il file
+            if ( !$this->checkValidita() )
+                return false;
+
+            // Variabile per ottimizzare il ciclo
+            $esito = false;
+
+            // Ottengo la lista di figli della radice, ovvero la lista delle risposte
+            $figli = $this->oggettoDOM->documentElement->childNodes;
+            $n_figli = $this->oggettoDOM->documentElement->childElementCount;
+
+            // Per ogni figlio, ovvero una risposta, verifico se l'id
+            // corrisponde a quello passato come parametro
+            for ( $i=0; $i<$n_figli && !$esito; $i++ )
+            {
+                // Verifico se l'id della risposta corrisponde
+                // a quello passato
+                $id = $figli[$i]->getAttribute("id");
+                if ( $id == $id_risposta )
+                {
+                    // Elevo la domanda a FAQ
+                    $figli[$i]->setAttribute('faq', 'true');
+                    $esito = true;
+                    $this->salvaXML($this->pathname);
+                }
+            }
+
+            return $esito;
+        }
     }
 ?>

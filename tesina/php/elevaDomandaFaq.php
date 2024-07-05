@@ -39,8 +39,19 @@
             // Se i dati superano il controllo
             if ( $validi )
             {
+                // Elevo la domanda a FAQ
+                $gestore_domande->elevaDomanda($id_domanda);
+                
+                // Verifico se l'elevazione comporta l'inserimento di una nuova risposta
+                if ( isset($_POST['id_risposta_selezionata']) )
+                    // Mi limito solamente ad elevare la risposta gia' esistente
+                    $gestore_risposte->elevaRisposta($_POST['id_risposta_selezionata']);
+                else
+                    // Creo una nuova risposta gia' elevata a FAQ tramite apposito metodo
+                    $gestore_risposte->inserisciRisposta($risposta_text, $_SESSION['id_utente'], 'true', $id_domanda);
+                
+                // Riporto l'utente sul dettaglio della domanda appena elevata a FAQ
                 $err = false;
-
                 header("Location: dettaglioDomanda.php?id_domanda=$id_domanda");
             }
             else
@@ -123,9 +134,9 @@
 
                         echo $risposte_html . "\n";
                     ?>
-                    <fieldset>
+                    <fieldset class="risposta">
                         <p>Scrivi qui la risposta:</p>
-                        <textarea rows="6" cols="90" name="text_risposta"><?php if($err) echo $risposta;?></textarea>
+                        <textarea rows=10 name="text_risposta"><?php if($err) echo $risposta;?></textarea>
                         <input type="hidden" value="<?php echo $_POST["id_domanda"]; ?>" name="id_domanda" />
                     </fieldset>
                 </form>

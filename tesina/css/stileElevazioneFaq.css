@@ -60,11 +60,6 @@
     padding-right: 30px;
 }
 
-textarea
-{
-    font-size: 130%;
-}
-
 .risposta
 {
     display:flex;
@@ -83,3 +78,9 @@ input[type="radio"]
     width: 25px;
     height: 25px;
 }
+
+textarea
+{
+    font-size: 130%;
+}
+
