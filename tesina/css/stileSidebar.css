@@ -23,7 +23,7 @@
     font-size: 50px;
 }
 
-ul 
+.ulSidebar
 {
     list-style-type: none;
     margin: 0;
@@ -35,7 +35,7 @@ ul
     align-items: center;
 }
 
-li
+.liSidebar
 {
     height: 10%;
     display: flex;
@@ -47,7 +47,7 @@ li
     overflow: auto;
 }
 
-li:hover
+.liSidebar:hover
 {
     background-color: #30e3ca;
 }

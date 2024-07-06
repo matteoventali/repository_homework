@@ -14,7 +14,7 @@
         function __construct()
         {
             // Apertura del file tagliRicarica con validazione tramite dtd
-            parent::__construct("../xml/documenti/tagliRicarica.xml", 0, "../xml/grammatiche/grammaticaTagliRicarica.xsd");
+            parent::__construct("../xml/documenti/tagliRicarica.xml", 0, "../xml/grammatiche/grammaticaTagliRicarica.dtd");
         }
 
         // Metodo per ottenere i tagli di ricarica disponibili
@@ -47,5 +47,4 @@
             return $lista_tagli;
         }
     }
-
 ?>

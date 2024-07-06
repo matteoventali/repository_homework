@@ -268,3 +268,11 @@ function callbackEliminaIntervento(xhr, tipo)
     else
         location.href = 'domande.php';
 }
+
+function vaiDettaglioAcquisto(container) 
+{
+    // Eseguo il submit del form
+    // Il form e' il secondo figlio del container acquisto
+    form = container.children[1];
+    form.submit();
+}

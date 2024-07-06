@@ -127,6 +127,7 @@
                         $acquisto_pieno = str_replace("%DATA%", date("d-m-Y", strtotime($lista_acquisti[$i]->data)), $acquisto_vuoto);
                         $acquisto_pieno = str_replace("%CREDITI_BONUS_RICEVUTI%", $lista_acquisti[$i]->crediti_bonus_ricevuti, $acquisto_pieno);
                         $acquisto_pieno = str_replace("%CREDITI_SPESI%", $tot, $acquisto_pieno);
+                        $acquisto_pieno = str_replace("%ID_ACQUISTO%", $id_acquisto, $acquisto_pieno);
 
                         // Popoliamo ora la parte relativa ai prodotti
                         $dettaglio_acquisti .= $acquisto_pieno . "\n";

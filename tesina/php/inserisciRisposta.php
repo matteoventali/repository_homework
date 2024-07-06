@@ -24,7 +24,10 @@
             $gestore_risposte = new GestoreRisposte();
             $gestore_risposte->inserisciRisposta($risposta, $_SESSION["id_utente"], "false", $_POST['id_domanda']);
             $err = false;
-            $msg = 'Inserimento risposta avvenuto con successo';
+            
+            // Ridireziono l'utente sulla pagina del dettaglio domanda
+            $id_domanda = $_POST['id_domanda'];
+            header("Location: dettaglioDomanda.php?id_domanda=$id_domanda");
         }
     }
 

@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.24 (TeX Live 2022/Debian) (preloaded format=pdflatex 2023.12.5)  27 JUN 2024 09:14
+This is pdfTeX, Version 3.141592653-2.6-1.40.24 (TeX Live 2022/Debian) (preloaded format=pdflatex 2023.12.5)  6 JUL 2024 12:27
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -534,13 +534,13 @@ LaTeX Font Info:    External font `cmex10' loaded for size
  [3] [4] [5] [6] [7] [8] [9] [10] [11] [12]
 [13] [14] [15] [16]
 LaTeX Font Info:    Trying to load font information for T1+cmtt on input line 6
-75.
+76.
  (/usr/share/texlive/texmf-dist/tex/latex/base/t1cmtt.fd
 File: t1cmtt.fd 2022/07/10 v2.5l Standard LaTeX font definitions
 )
 [17]
 Package hyperref Info: bookmark level for unknown lstlisting defaults to 0 on i
-nput line 699.
+nput line 700.
  (../xmlCopia/documenti/categorieProdotti.xml [18])
 (../xmlCopia/grammatiche/grammaticaCategorieProdotti.dtd)
 (../xmlCopia/documenti/tagliRicarica.xml) [19]
@@ -588,7 +588,7 @@ cm/cmmi8.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr1
 2.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb></
 usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/sh
 are/texlive/texmf-dist/fonts/type1/public/eurosym/feymr10.pfb>
-Output written on tesina_Ventali_Rosso.pdf (36 pages, 366097 bytes).
+Output written on tesina_Ventali_Rosso.pdf (36 pages, 366129 bytes).
 PDF statistics:
  1751 PDF objects out of 2073 (max. 8388607)
  1347 compressed objects within 14 object streams

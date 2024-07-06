@@ -211,4 +211,55 @@
 
         return $esito;
     }
+
+    // Funzione per aggiornare la reputazione associata ad un cliente
+    // Riceve l'id del cliente, il rating della valutazione che provoca l'aggiornamento
+    // e il peso dell'utente che ha effettuato la valutazione
+    function aggiornaReputazione($handleDB, $id_cliente, $rating, $peso)
+    {
+        global $tb_utenti;
+        $esito = false;
+        
+        // Calcolo dell'incremento/decremento di reputazione
+        $incremento = 0;
+        switch ($rating)
+        {
+            case "1":
+                $incremento = -4; break;
+            case "2":
+                $incremento = -2; break;
+            case "3":
+                $incremento = 0; break;
+            case "4":
+                $incremento = 2; break;
+            case "5":
+                $incremento = 4; break;
+            default:
+                $incremento = 0; break;
+        }
+        $incremento = $incremento * intval($peso)/100;
+
+        // Ottengo le informazioni del cliente per ottenere la reputazione corrente
+        $cliente = ottieniUtente($id_cliente, $handleDB);
+
+        // Calcolo della nuova reputazione
+        $nuova_reputazione = round(intval($cliente->reputazione) + $incremento);
+        if ( $nuova_reputazione < 0 )
+            $nuova_reputazione = 1; // Valore minimo di reputazione
+        if ( $nuova_reputazione > 100 )
+            $nuova_reputazione = 100;
+
+        // Query di aggiornamento
+        $q = "update $tb_utenti set reputazione=$nuova_reputazione where id=$id_cliente and ruolo='C'";
+
+        // Esecuzione della query
+        try
+        {
+            // Eseguo la query
+            $esito = $handleDB->query($q);
+        }
+        catch (Exception $e){}
+ 
+        return $esito;
+    }
 ?>

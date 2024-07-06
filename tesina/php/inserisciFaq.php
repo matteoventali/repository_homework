@@ -30,7 +30,9 @@
             {
                 $gestore_risposte->inserisciRisposta($risposta, $_SESSION["id_utente"], "true", $id_domanda);
                 $err = false;
-                $msg = 'Inserimento FAQ avvenuto con successo';
+                
+                // Ridireziono l'utente sulla pagina delle FAQ
+                header("Location: faq.php");
             }
             else // Errore generico causato dai file XML
                 $msg = "Errore nell'inserimento della FAQ";

@@ -147,11 +147,10 @@
 
             return $lista_acquisti;
         }
-
     }
 
     // Funzione che permette di calcolare il totale dell'acquisto
-    // Riceve come parametro l'id dell'acquisto4
+    // Riceve come parametro l'id dell'acquisto
     function calcolaTotaleAcquisto($id_acquisto)
     {
         $totale = 0;

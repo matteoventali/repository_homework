@@ -1,6 +1,6 @@
 <?php
-    require 'gestoriXML/gestoreDomande.php';
+    require 'gestoriXML/gestoreCatalogoProdotti.php';
 
-    $g = new GestoreDomande();
-    $g->rimuoviDomanda(3);
+    $g = new GestoreCatalogoProdotti();
+    $g->ottieniProdotto(1);
 ?>
