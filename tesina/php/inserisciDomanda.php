@@ -29,7 +29,9 @@
             if ( $id_domanda != null )
             {
                 $err = false;
-                $msg = 'Inserimento domanda avvenuto con successo';
+                
+                // Ridireziono l'utente sulla pagina del prospetto domande
+                header("Location: domande.php");
             }
             else
                 $msg = "Errore nell'inserimento della domanda"; // Errore generico causato dai file XML

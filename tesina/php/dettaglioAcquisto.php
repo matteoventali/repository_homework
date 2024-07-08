@@ -91,7 +91,6 @@
                     $lista_html .= '</ul>' . "\n";
                     echo $lista_html . "\n";
                 ?>
-                <!-- IMPLEMENTARE IL GESTORE DEI PRODOTTI E RISOLVERE IL PROBLEMA ID ACQUISTO POST -->
             </div>
         </div>
     </body>
