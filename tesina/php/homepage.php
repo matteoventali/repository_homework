@@ -26,7 +26,7 @@
         <title>UNI-TECNO</title>
     </head>
 
-    <body onload="">
+    <body>
         <?php
             // Import della navbar
             // Mostro il bottone per accedere alla pagina di registrazione e per quella di login
