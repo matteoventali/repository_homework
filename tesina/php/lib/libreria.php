@@ -14,6 +14,32 @@
         return $url;
     }
 
+    // Funzione per ottenere il path della icona associata ad una categoria
+    function ottieniPathIcona($id_categoria)
+    {
+        $nome_file = '';
+        
+        // Switch sulla categoria per determinale il nome del file
+        switch ($id_categoria)
+        {
+            case "1":
+                $nome_file='laptop.png'; break;
+            case "2":
+                $nome_file='smartphone.png'; break;
+            case "3":
+                $nome_file='tv.png'; break;
+            case "4":
+                $nome_file='lavatrice.png'; break;
+            case "5":
+                $nome_file='console.png'; break;
+
+            default:
+                $nome_file = ''; break;
+        }
+
+        return '../img/icone/' . $nome_file;
+    }
+
     // Funzione per ottenere elenco operazioni da includere nella sidebar
     // Riceve:
     // - V -> visitatore

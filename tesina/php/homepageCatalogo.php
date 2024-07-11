@@ -61,11 +61,12 @@
             
         ?>
 
-        <div id="sezioneRicerca" style="background-image: url(<?php echo ottieniURLSfondo(); ?>);">
-                <form id="ricercaClienti" action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post">
+        <div id="sezioneCentrale">
+            <div id="sezioneRicerca">
+                <form id="ricercaProdotti" action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post">
                     <fieldset><p>Categoria</p>
-                        <select onchange="alert('ciao');" id="tendinaCategoria">
-                            <option name="categoria" selected="selected">Seleziona categoria</option>
+                        <select name="id_categoria" onchange="ottieniTipologie(this)">
+                            <option value='0' selected="selected">Seleziona categoria</option>
                             <?php
                                 // Stampa delle categorie disponibili
                                 $categorie = $gestoreCategorie->ottieniCategorie();
@@ -73,19 +74,43 @@
 
                                 // Popolo la tendina
                                 for ( $i=0; $i<$n_categorie; $i++ )
-                                    echo "<option name=\"categoria\">$categorie[$i]</option>";
+                                {
+                                    $nome_cat = $categorie[$i]->nome_categoria;
+                                    $id_cat = $categorie[$i]->id_categoria;
+                                    echo "<option value=\"$id_cat\">$nome_cat</option>" . "\n";
+                                }
                             ?>
                         </select>
                     </fieldset>
                     <fieldset><p>Tipologia</p>
-                        <select id="tendinaTipologia">
-                            <option name="tipologia" selected="selected">Seleziona categoria</option>
+                        <select name="id_tipologia" id="tendinaTipologia">
+                            <option  selected="selected">Seleziona tipologia</option>
                         </select> 
                     </fieldset>
                     <fieldset><p>Ricerca</p><input type="text" name="contenutoRicerca" /></fieldset>
                     <fieldset><input type="submit" name="btnRicerca" value="Cerca &#128269;" /></fieldset>
-                    <fieldset><input type="reset" name="btnIndietro" onclick="azzeraRicercaClienti();" value="Reset &#8634;" /></fieldset>
+                    <fieldset><input type="reset" name="btnIndietro" onclick="azzeraRicercaProdotti();" value="Reset &#8634;" /></fieldset>
                 </form>
+            </div>
+            <div id="sezioneCategorie">
+                <?php
+                    $categorie_html = '';
+
+                    // Frammento categoria vuoto
+                    $frammento_vuoto = file_get_contents('../html/frammentoCategoria.html');
+
+                    // Per ogni categoria creo un div
+                    for ( $i=0; $i<$n_categorie; $i++ )
+                    {
+                        $frammento_pieno = str_replace("%NOME_CATEGORIA%", $categorie[$i]->nome_categoria, $frammento_vuoto);
+                        $frammento_pieno = str_replace("%ID_CATEGORIA%", $categorie[$i]->id_categoria, $frammento_pieno);
+                        $frammento_pieno = str_replace("%PATH_ICONA%", ottieniPathIcona($categorie[$i]->id_categoria), $frammento_pieno);
+                        $categorie_html .= $frammento_pieno . "\n";
+                    }
+
+                    echo $categorie_html . "\n";
+                ?>
+            </div>
         </div>
     </body>
 </html>

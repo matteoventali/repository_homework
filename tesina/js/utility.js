@@ -276,3 +276,72 @@ function vaiDettaglioAcquisto(container)
     form = container.children[1];
     form.submit();
 }
+
+function svuotaTendinaTipologie()
+{
+    // Per ogni tipologia la elimino
+    tendina_tipologie = document.getElementById('tendinaTipologia');
+    while (tendina_tipologie.firstChild) 
+        tendina_tipologie.removeChild(tendina_tipologie.firstChild);
+    
+    // Rimetto l'opzione di default
+    opt_default = document.createElement('option');
+    opt_default.setAttribute('value', '0');
+    opt_default.innerHTML = 'Seleziona tipologia';
+    tendina_tipologie.appendChild(opt_default);
+}
+
+function ottieniTipologie(tendina_categoria)
+{
+    // Id della categoria
+    id_categoria = tendina_categoria.value;
+
+    // Se la categoria e' 0 non devo ottenere tipologie
+    // ma svuotare la tendina delle tipologie
+    if ( id_categoria != 0 )
+    {
+        // Composizione della query string
+        query_string = 'id_categoria=' + id_categoria;
+        
+        // Richiesta AJAX per ottenere le tipologie
+        xhr = new XMLHttpRequest();
+        xhr.open("POST", "ottieniTipologiePerCategoria.php");
+        xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+        xhr.onload = function(){ callbackPopolaTipologie(xhr) }; // Definisco una funzione di callback implicita che chiama quella sotto
+        xhr.send(query_string);
+    }
+    else
+        svuotaTendinaTipologie();
+}
+
+function callbackPopolaTipologie()
+{
+    // Ricevo dallo script lato client una risposta in JSON
+    // Effettuo il parsing della risposta per estrarre le tipologie
+    tipologie = JSON.parse(xhr.responseText);
+
+    // Per ogni tipologia creo una option all'interno della tendina
+    svuotaTendinaTipologie();
+    tendina_tipologie = document.getElementById('tendinaTipologia');
+    for ( i=0; i < tipologie.length; i++ )
+    {
+        // Creo la nuova option
+        nuova_option = document.createElement('option');
+        nuova_option.setAttribute('value', tipologie[i].id_tipo);
+        nuova_option.innerHTML = tipologie[i].nome_tipo;
+
+        // Aggancio la nuova option
+        tendina_tipologie.appendChild(nuova_option);
+    }
+}
+
+function azzeraRicercaProdotti()
+{
+    // Riferimento al form
+    form = document.getElementById('ricercaProdotti');
+
+    // Azzero i campi
+    contenutoRic = document.getElementsByName('contenutoRicerca')[0];
+    contenutoRic.innerHTML = '';
+    svuotaTendinaTipologie();
+}

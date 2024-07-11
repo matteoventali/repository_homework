@@ -1,18 +1,50 @@
-#sezioneRicerca
+#sezioneCentrale
 {
-    height: 85%;
     width: 100%;
+    height: 80%;
     display: flex;
     align-items: center;
-    justify-content: center;
     flex-direction: column;
-    background-position: center;
-    background-repeat: no-repeat; 
-    background-size: cover;
+    justify-content: center;
+    gap: 5%;
+    padding-bottom: 50px;
+}
+
+#sezioneRicerca
+{
+    width: 90%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#sezioneCategorie
+{
+    width: 90%;
+    overflow: auto;
+    border-style: solid;
+    background-color: #11999E;
+    box-shadow: 21px 27px 31px -2px black;
+    color:white;
+    gap: 50px;
+    border-radius: 15px;
+    padding: 20px;
+    overflow: auto;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+}
+
+#sezioneCategorie > p
+{
+    font-size: 150%;
 }
 
 #sezioneRicerca form
 {
+    width: 100%;
+    height: 100%;
     display: flex;
     border-style: solid;
     flex-direction: row;
@@ -25,6 +57,7 @@
     border-radius: 15px;
     padding-left: 20px;
     padding-right: 20px;
+    overflow-x: auto;
 }
 
 fieldset
@@ -46,10 +79,38 @@ fieldset input[type="text"]
 {
     width: 100%;
     font-size: 100%;
+    min-width: 150px;
     text-align: center;
 }
 
 fieldset select
 {
-    width: 150px;
+    font-size: 70%;
+    text-align: center;
+}
+
+.categoria
+{
+    border-style: solid;
+    font-size: 180%;
+    display: flex;
+    box-shadow: 21px 27px 31px -2px black;
+    color:white;
+    justify-content: space-evenly;
+    align-items: center;
+    border-radius: 15px;
+    flex: 0 0 30%;
+    
+}
+
+.categoria:hover
+{
+    background-color: #30E3CA;
+    cursor: pointer;
+    color: black;
+}
+
+.categoria form
+{
+    display: none;
 }
