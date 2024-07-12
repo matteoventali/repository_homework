@@ -104,7 +104,6 @@ body
 {
     display: flex;
     flex-direction: row;
-    align-items: center;
     justify-content: space-evenly;
     padding-bottom: 10px;
 }
@@ -112,9 +111,10 @@ body
 .tesseraProdotto
 {
     border-style: solid;
-    flex: 0 0 40%;
+    flex: 0 0 45%;
     flex-direction: row;
     display: flex;
+    justify-content: space-evenly;
     box-shadow: 21px 27px 31px -2px black;
     border-radius: 15px;
     gap: 15px;
@@ -147,14 +147,27 @@ body
 
 .tesseraProdotto div:nth-child(2)
 {
-    border-style: solid;
     display: flex;
     flex-direction: column;
     justify-content: center;
-    align-items: center;
 }
 
 .tesseraProdotto form
 {
     display: none;
 }
+
+.nomeProdotto
+{
+    color: black;
+    font-weight: bold;
+    font-size: 150%;
+    text-align: center;
+}
+
+.informazioni
+{
+    font-size: 125%;
+    
+}
+

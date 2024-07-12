@@ -109,7 +109,7 @@
                 $prodotto = new ProdottoCatalogo();
                 
                 // Fill della struttura prodotto
-                $prodotto->id = $figli[$i]->getAttribute('id_prodotto');
+                $prodotto->id = $figli[$i]->getAttribute('id');
                 $prodotto->id_tipo = $figli[$i]->getAttribute('id_tipo');
                 $prodotto->id_categoria = $figli[$i]->getAttribute('id_categoria');
                 $prodotto->nome = $figli[$i]->firstChild->textContent;
@@ -153,5 +153,4 @@
             return $lista_prodotti;
         }
     }
-
 ?>

@@ -8,7 +8,7 @@
         <indirizzo_consegna>Via Rossi 15 Latina 04100</indirizzo_consegna>
     </acquisto>
     
-    <acquisto id="2" id_cliente="4" data="2024-06-10" crediti_bonus_ricevuti="3">
+    <acquisto id="2" id_cliente="3" data="2024-06-10" crediti_bonus_ricevuti="3">
         <prodotti>
             <prodotto id_prodotto="2" prezzo="67"/>
         </prodotti>

@@ -2,6 +2,8 @@
     $stellina_vuota = " &#9734;";
     $stellina_piena = " &#9733;";
 
+    require_once 'gestoriXML/gestoreAcquisti.php';
+
     // Funzioni di libreria da utilizzare al bisogno
 
     // Funzione per url sfondo tra quelli disponibili
@@ -179,5 +181,47 @@
         $frammento = str_replace("%ID_PADRE%", $padre, $frammento);
         
         return $frammento;
+    }
+
+    // Funzione per ritornare l'importo dopo aver applicato lo sconto
+    function applicaSconto($importo, $sconto)
+    {
+        // Conversione dell'importo e dello sconto a tipo numerico
+        $importo = floatval($importo);
+        $sconto = floatval($sconto);
+
+        // Nuovo importo
+        $ris = round((100 - $sconto)/100 * $importo);
+        
+        return $ris;
+    }
+
+    // Funzione per calcolare lo sconto fisso. Riceve l'id del cliente
+    // la reputazione e la data di registrazione (dati dal database).
+    // Provvede a reperire gli altri parametri di calcolo ovvero:
+    // ammontare dei crediti spesi dal cliente;
+    // ammontare dei crediti spesi dal cliente quest'anno
+    function calcolaScontoFisso($id_cliente, $reputazione, $data_registrazione)
+    {
+        // Allocazione gestore acquisti per reperire le informazioni suddette
+        $gestore_acquisti = new GestoreAcquisti();
+
+        // Ottengo le statistiche suddette associate al cliente
+        $statistiche = $gestore_acquisti->ottieniStatistische($id_cliente);
+
+        // Calcolo del periodo decorso in anni dall'iscrizione dell'utente
+        $anno_corrente = date('Y');
+        $anno_reg = date('Y', strtotime($data_registrazione));
+        $periodo = $anno_corrente - $anno_reg;
+
+        // Applico la formula del documento per il calcolo dello sconto fisso
+        $sconto_fisso = 0.5 * $periodo + 0.01 * $statistiche[0] + 0.03 * $statistiche[1] + 0.1 * intval($reputazione) / 100;
+        $sconto_fisso = round($sconto_fisso);
+
+        // Lo sconto fisso non puo' superare il 20% 
+        if ( $sconto_fisso > 20 )
+            $sconto_fisso = 20;
+
+        return $sconto_fisso;
     }
 ?>

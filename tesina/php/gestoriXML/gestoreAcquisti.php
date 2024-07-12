@@ -147,6 +147,53 @@
 
             return $lista_acquisti;
         }
+
+        // Metodo per ottenere le statistiche relative ad un cliente
+        // in base ai suoi acquisti. Le statistiche sono:
+        // crediti n spesi dal cliente;
+        // crediti m spesi nell'anno solare
+        function ottieniStatistische($id_cliente)
+        {
+            // Verifico se posso usare il file
+            if ( !$this->checkValidita() )
+                return null;
+
+            $anno_corrente = date('Y');
+
+            // Ottengo la lista degli acquisti associata al cliente
+            $acquisti = $this->ottieniAcquistiCliente($id_cliente);
+            $n_acquisti = count($acquisti);
+
+            // Calcolo delle statistiche
+            $n = $m = 0;
+            for ( $i=0; $i < $n_acquisti; $i++ )
+            {
+                // Acquisto corrente
+                $acquisto = $acquisti[$i];
+                $totale = 0; // Totale riferito all'acquisto corrente
+                
+                // Estraggo i prodotti dall'acquisto
+                $lista_prodotti = $acquisto->prodotti;
+                $n_prodotti = count($lista_prodotti);
+                for ( $j=0; $j<$n_prodotti; $j++ )
+                {
+                    $somma = $lista_prodotti[$j]->prezzo;
+                    $totale = $totale + $somma;
+                }
+
+                // Incremento n e eventualmente anche m
+                $n += $totale;
+                if ( date('Y', strtotime($acquisto->data)) == $anno_corrente )
+                    $m += $totale;
+            }
+
+            // I valori vengono ritornati in una lista
+            $risultati = [];
+            array_push($risultati, $n);
+            array_push($risultati, $m);
+
+            return $risultati;
+        }
     }
 
     // Funzione che permette di calcolare il totale dell'acquisto
@@ -173,6 +220,5 @@
 
         // Restituisco il totale
         return $totale;
-
     }
 ?>

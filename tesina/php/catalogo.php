@@ -6,6 +6,7 @@
 
     // Gestore categorie
     $gestoreCategorie = new GestoreCategorie();
+    $categorie = $gestoreCategorie->ottieniCategorie();
 
     // Variabili utili all'identificazione dell'errore
     $mostraPopup = false; $msg = ''; $err = true;
@@ -154,20 +155,61 @@
                     <?php
                         // Composizione dei risultati della ricerca
                         $n_prodotti = count($lista_prodotti);
+                        $data_oggi = strtotime(date('Y-m-d'));
+
                         if ( $n_prodotti == 0 )
                             echo '<p style="font-size: 150%; width:100%; text-align:center;">Nessun prodotto soddisfa i criteri di ricerca</p>';
                         else
                         {
                             $contenuto_html = '';
                             $frammento_vuoto = file_get_contents('../html/frammentoTesseraProdotto.html');
+
+                            // Calcolo della percentuale di sconto fisso per il cliente (vedi documento)
+                            // In caso invece non siamo loggati o si utilizza un account gestore/admin
+                            // viene mostrato il prezzo di listino
+                            if ( $sessione_attiva && ($_SESSION["ruolo"] == 'A' || $_SESSION["ruolo"] == 'B')
+                                        || !$sessione_attiva )
+                                $sconto_fisso = 0;
+                            else
+                                $sconto_fisso = calcolaScontoFisso($_SESSION['id_utente'], $_SESSION['reputazione'], $_SESSION['data_registrazione']);
                             
                             // Creazione di una tessera per ogni prodotto
                             for ( $i=0; $i < $n_prodotti; $i++ )
                             {
+                                // Applico lo sconto fisso
+                                $prezzo = applicaSconto($lista_prodotti[$i]->prezzo_listino, $sconto_fisso);
+
                                 // Fill del frammento
+                                $cat = $lista_prodotti[$i]->id_categoria;
+                                $tipi = $gestoreCategorie->ottieniTipi($cat);
+
                                 $frammento_pieno = str_replace("%NOME_PRODOTTO%", $lista_prodotti[$i]->nome, $frammento_vuoto);
                                 $frammento_pieno = str_replace("%ID_PRODOTTO%", $lista_prodotti[$i]->id, $frammento_pieno);
+                                $frammento_pieno = str_replace("%PATH_IMMAGINE%", $lista_prodotti[$i]->percorso_immagine, $frammento_pieno);
+                                $frammento_pieno = str_replace("%CATEGORIA_PRODOTTO%", $categorie[$cat-1]->nome_categoria, $frammento_pieno);
+                                $frammento_pieno = str_replace("%TIPOLOGIA_PRODOTTO%",$tipi[$lista_prodotti[$i]->id_tipo - 1]->nome_tipo, $frammento_pieno);
+                                $frammento_pieno = str_replace("%PREZZO_PRODOTTO%",$prezzo, $frammento_pieno);
 
+                                // Se il prodotto ha un'offerta speciale in corso mostro il paragrafo adeguato
+                                if ( $lista_prodotti[$i]->offerta_speciale != NULL )
+                                {
+                                    // Verifico validita' del periodo associato all'offerta
+                                    $data_inizio = strtotime($lista_prodotti[$i]->offerta_speciale->data_inizio);
+                                    $data_fine = strtotime($lista_prodotti[$i]->offerta_speciale->data_fine);
+
+                                    if ( $data_oggi >= $data_inizio && $data_oggi <= $data_fine )
+                                    {
+                                        $frammento_pieno = str_replace("%DISPLAY_OFFERTA_SPECIALE%", 'block', $frammento_pieno);
+                                        $frammento_pieno = str_replace("%PREZZO_PRODOTTO_OFFERTA%", 
+                                                                applicaSconto($lista_prodotti[$i]->prezzo_listino, $lista_prodotti[$i]->offerta_speciale->percentuale), 
+                                                                $frammento_pieno);
+                                    }
+                                    else // Offerta scaduta
+                                        $frammento_pieno = str_replace("%DISPLAY_OFFERTA_SPECIALE%", 'none', $frammento_pieno);    
+                                }
+                                else
+                                    $frammento_pieno = str_replace("%DISPLAY_OFFERTA_SPECIALE%", 'none', $frammento_pieno);
+                                
                                 $contenuto_html .= $frammento_pieno . "\n";
                             }
 

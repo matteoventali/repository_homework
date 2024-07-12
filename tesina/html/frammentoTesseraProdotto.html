@@ -1,12 +1,13 @@
 <div class="tesseraProdotto" onclick="this.children[2].submit()">
     <div>
-        <img src="../img/immagini_prodotti/macbook.jpeg" alt="immagine di %NOME_PRODOTTO%" />
+        <img src="%PATH_IMMAGINE%" alt="immagine di %NOME_PRODOTTO%" />
     </div>
     <div>
-        <p>%NOME_PRODOTTO%</p>
-        <p><span>Categoria: %CATEGORIA_PRODOTTO%</span><span>Tipologia: %CATEGORIA_PRODOTTO%</span></p>
-        <p>Prezzo: %PREZZO_PRODOTTO% crediti</p>
-        <p style="color:red; display: %DISPLAY_OFFERTA_SPECIALE%;">Offerta speciale: %PREZZO_PRODOTTO_OFFERTA% crediti</p>
+        <p class="nomeProdotto">%NOME_PRODOTTO%</p>
+        <p class="informazioni">Categoria: %CATEGORIA_PRODOTTO%</p>
+        <p class="informazioni">Tipologia: %TIPOLOGIA_PRODOTTO%</p>
+        <p class="informazioni">Prezzo: %PREZZO_PRODOTTO% crediti</p>
+        <p class="informazioni" style="background-color:red; font-size: 150%; text-align: center; font-weight:bold; display: %DISPLAY_OFFERTA_SPECIALE%;">Offerta speciale: %PREZZO_PRODOTTO_OFFERTA% crediti!</p>
     </div>
 
     <form action="dettaglioProdotto.php" method="post">

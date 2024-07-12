@@ -4,7 +4,7 @@
     <prodotto id="1" id_categoria="1" id_tipo="1">
         <nome>APPLE MacBook Air</nome>
         <prezzo_listino>170</prezzo_listino>
-        <percorso_immagine>../img/immagine_mac</percorso_immagine>
+        <percorso_immagine>../img/immagini_prodotti/macbook.jpeg</percorso_immagine>
         <specifiche>
             Risoluzione: 2560 x 1600 Pixel
             Touchscreen: No
@@ -23,7 +23,7 @@
     <prodotto id="2" id_categoria="3" id_tipo="1">
         <nome>Samsung TV UE50CU7090UXZT</nome>
         <prezzo_listino>74</prezzo_listino>
-        <percorso_immagine>../img/immagine_tvSamsung</percorso_immagine>
+        <percorso_immagine>../img/immagini_prodotti/samsung.jpg</percorso_immagine>
         <specifiche>
             Dimensioni schermo: 50 Pollici
             Marchio: Samsung
@@ -41,9 +41,9 @@
             Tecnologia PurColor per una resa cromatica precisa con una vasta gamma di colori. 
             Design elegante e raffinato senza cornice su 3 lati.
         </descrizione>
-        <offerta_speciale percentuale="10" crediti="2">
+        <offerta_speciale percentuale="15" crediti="2">
             <data_inizio>2024-06-01</data_inizio>
-            <data_fine>2024-06-30</data_fine>
+            <data_fine>2024-10-30</data_fine>
         </offerta_speciale>
     </prodotto>
 </catalogo>

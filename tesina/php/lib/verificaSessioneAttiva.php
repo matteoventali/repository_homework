@@ -13,6 +13,8 @@
     // Se questo controllo non fosse eseguito in questo modo 
     // l'utente con account disattivato rimarrebbe loggato e la disattivazione
     // sarebbe effettiva solo se effettua il logout.
+    // Inoltre viene effettua la sincronizzazione della reputazione utile
+    // per il calcolo di sconti fissi nel catalogo.
     if ( isset($_SESSION["id_utente"]) )
     {
         // La sessione esiste
@@ -25,7 +27,7 @@
         if ( $connessione )
         {
             $id = $_SESSION["id_utente"];
-            $q = "select stato from UTENTI where id=$id"; // Query da eseguire
+            $q = "select stato, reputazione from UTENTI where id=$id"; // Query da eseguire
 
             // Esecuzione della query
             try
@@ -35,7 +37,10 @@
                 if ( $riga = $rs->fetch_row() ) // Corrispondenza trovata
                 {
                     if ( $riga[0] == 'A' )
+                    {
                         $sessione_attiva = true;
+                        $_SESSION['reputazione'] = $riga[1];
+                    }
                 }
                
                 $rs->close();
