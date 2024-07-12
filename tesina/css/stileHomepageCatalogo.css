@@ -50,7 +50,7 @@
     flex-direction: row;
     justify-content: center;
     align-items: center;
-    font-size: 170%;
+    font-size: 140%;
     background-color: #11999E;
     box-shadow: 21px 27px 31px -2px black;
     color:white;
@@ -100,7 +100,6 @@ fieldset select
     align-items: center;
     border-radius: 15px;
     flex: 0 0 30%;
-    
 }
 
 .categoria:hover

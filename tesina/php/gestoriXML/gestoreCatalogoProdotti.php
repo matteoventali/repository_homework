@@ -85,6 +85,73 @@
             
             return $prodotto;
         }
+
+        // Metodo per ottenere i prodotti in base ai parametri di ricerca
+        // categoria, tipo, contenuto testo
+        function ricercaProdotti($id_categoria, $id_tipologia, $contenuto_testo)
+        {
+            // Verifico se posso usare il file
+            if ( !$this->checkValidita() )
+                return null;
+
+            // Lista di prodotti che soddisfano i criteri di ricerca
+            $lista_prodotti = [];
+
+            // Ottengo la lista di figli della radice, ovvero la lista dei prodotti
+            $figli = $this->oggettoDOM->documentElement->childNodes;
+            $n_figli = $this->oggettoDOM->documentElement->childElementCount;
+
+            // Per ogni figlio, ovvero un prodotto, verifico corrispondenza con id ricevuto
+            $trovato = false;
+            for ( $i=0; $i<$n_figli && !$trovato; $i++ )
+            {
+                // Prelevo le informazioni del prodotto
+                $prodotto = new ProdottoCatalogo();
+                
+                // Fill della struttura prodotto
+                $prodotto->id = $figli[$i]->getAttribute('id_prodotto');
+                $prodotto->id_tipo = $figli[$i]->getAttribute('id_tipo');
+                $prodotto->id_categoria = $figli[$i]->getAttribute('id_categoria');
+                $prodotto->nome = $figli[$i]->firstChild->textContent;
+                $prodotto->prezzo_listino = $figli[$i]->firstChild->nextSibling->textContent;
+                $prodotto->percorso_immagine = $figli[$i]->firstChild->nextSibling->nextSibling->textContent;
+                $prodotto->specifiche = $figli[$i]->firstChild->nextSibling->nextSibling->nextSibling->textContent;
+                $prodotto->descrizione = $figli[$i]->firstChild->nextSibling->nextSibling->nextSibling->nextSibling->textContent;
+
+                // Se esiste un'offerta speciale per quel prodotto
+                $offerta_speciale_xml = $figli[$i]->getElementsByTagName('offerta_speciale');
+                if ( count($offerta_speciale_xml) > 0 )
+                {
+                    // Fill dell'offerta speciale
+                    $offerta = new OffertaSpeciale();
+                    $offerta->data_inizio = $offerta_speciale_xml[0]->firstChild->textContent;
+                    $offerta->data_fine = $offerta_speciale_xml[0]->lastChild->textContent;
+                    $offerta->percentuale = $offerta_speciale_xml[0]->getAttribute('percentuale');
+                    $offerta->crediti = $offerta_speciale_xml[0]->getAttribute('crediti');
+                    $prodotto->offerta_speciale = $offerta;
+                }
+                else
+                    $prodotto->offerta_speciale = null;
+
+                // Filtro per categoria e eventuale tipologia
+                if ( 
+                    ( $id_categoria == '' ) ||
+                    ( $id_categoria != '' && $id_tipologia == '' && $prodotto->id_categoria == $id_categoria) ||
+                    ( $id_tipologia != '' && $prodotto->id_categoria == $id_categoria && $prodotto->id_tipo == $id_tipologia)
+                )
+                {
+                    // Filtro per eventuale testo nel nome del prodotto
+                    $flag = str_contains(strtolower($prodotto->nome), strtolower($contenuto_testo));
+                    if ( $contenuto_testo == '' || ( $contenuto_testo != '' && $flag) )
+                    {
+                        // Aggiungo il prodotto corrente alla lista prodotti
+                        array_push($lista_prodotti, $prodotto);
+                    }
+                }
+            }
+
+            return $lista_prodotti;
+        }
     }
 
 ?>

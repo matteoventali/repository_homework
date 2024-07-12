@@ -1,31 +1,160 @@
-#sezioneCatalogo
+body
+{overflow: auto;}
+
+#sezioneCentrale
 {
-  height: 85%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background-position: center;
-  background-repeat: no-repeat; 
-  background-size: cover;
+    width: 100%;
+    height: 80%;
+    margin-top: 50px;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    gap: 5%;
+    padding-bottom: 50px;
 }
 
-#sezioneCatalogo form
+#sezioneRicerca
 {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  backdrop-filter: blur(0px);
-  width: 100%;
-  height: 100%;
+    width: 90%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
-#sezioneCatalogo fieldset
+#sezioneRisultati
 {
-  width: 25%;
-  font-size: 200%;
+    width: 90%;
+    border-style: solid;
+    background-color: #11999E;
+    box-shadow: 21px 27px 31px -2px black;
+    color:white;
+    border-radius: 15px;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
 }
 
-#sezioneCatalogo input
+#sezioneRisultati > p
 {
-  width: 100%;
+    font-size: 150%;
+}
+
+#sezioneRicerca form
+{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    border-style: solid;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    font-size: 140%;
+    background-color: #11999E;
+    box-shadow: 21px 27px 31px -2px black;
+    color:white;
+    border-radius: 15px;
+    padding-left: 20px;
+    padding-right: 20px;
+    overflow-x: auto;
+}
+
+#sezioneRicerca form fieldset
+{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: 2%;
+    flex: 2.5;
+}
+
+#sezioneRicerca form fieldset:nth-child(3)
+{
+    flex: 10;
+}
+
+#sezioneRicerca form fieldset input[type="text"]
+{
+    width: 100%;
+    font-size: 100%;
+    min-width: 150px;
+    text-align: center;
+}
+
+#sezioneRicerca form fieldset select
+{
+    font-size: 70%;
+    text-align: center;
+}
+
+#sezioneOrdinamento
+{
+    display: flex;
+    flex-direction: row-reverse;
+    align-items: center;
+    font-size: 130%;
+}
+
+#sezioneOrdinamento form fieldset:nth-child(1)
+{
+    display: none;
+}
+
+#sezioneProdotti
+{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-evenly;
+    padding-bottom: 10px;
+}
+
+.tesseraProdotto
+{
+    border-style: solid;
+    flex: 0 0 40%;
+    flex-direction: row;
+    display: flex;
+    box-shadow: 21px 27px 31px -2px black;
+    border-radius: 15px;
+    gap: 15px;
+    padding: 20px;
+    overflow-x: auto;
+}
+
+.tesseraProdotto:hover
+{
+    background-color: #30E3CA;
+    cursor: pointer;
+    color: black;
+}
+
+.tesseraProdotto div:nth-child(1)
+{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.tesseraProdotto div:nth-child(1) img
+{
+    height: 256px;
+    width: 256px;
+    border-style: solid;
+    color: black;
+    border-radius: 15px;
+}
+
+.tesseraProdotto div:nth-child(2)
+{
+    border-style: solid;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.tesseraProdotto form
+{
+    display: none;
 }

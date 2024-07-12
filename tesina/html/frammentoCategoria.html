@@ -1,7 +1,7 @@
-<div class="categoria">
+<div class="categoria" onclick="this.children[2].submit()">
     <img alt="Icona %NOME_CATEGORIA%" src="%PATH_ICONA%" />
     <p>%NOME_CATEGORIA%</p>
-    <form action="" method="post">
+    <form action="catalogo.php" method="post">
         <fieldset>
             <input type="hidden" name="id_categoria" value="%ID_CATEGORIA%" />
         </fieldset>

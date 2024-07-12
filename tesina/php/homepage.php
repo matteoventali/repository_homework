@@ -19,7 +19,7 @@
     <head>
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <link rel="stylesheet" href="../css/stileLayout.css" type="text/css" />
-        <link rel="stylesheet" href="../css/stileCatalogo.css" type="text/css" />
+        <link rel="stylesheet" href="../css/stileAccessoCatalogo.css" type="text/css" />
         <link rel="stylesheet" href="../css/stileSidebar.css" type="text/css" />
         <link rel="icon" type="image/x-icon" href="../img/logo.png" />
         <script type="text/javascript" src="../js/utility.js"></script>

@@ -1,7 +1,6 @@
 <?php
-    require 'gestoriXML/gestoreCategorie.php';
+    require 'gestoriXML/gestoreCatalogoProdotti.php';
 
-    $g = new GestoreCategorie();
-    var_dump($g->ottieniCategorie());
-    var_dump($g->ottieniTipi("3"));
+    $g = new GestoreCatalogoProdotti();
+    var_dump($g->ricercaProdotti('1', '', ''));
 ?>

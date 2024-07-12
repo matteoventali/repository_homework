@@ -2,10 +2,39 @@
     require_once 'lib/verificaSessioneAttiva.php';
     require_once 'lib/libreria.php';
     require_once 'gestoriXML/gestoreCategorie.php';
+    require_once 'gestoriXML/gestoreCatalogoProdotti.php';
 
-    // Gestore per popolare categorie e tipi
+    // Gestore categorie
     $gestoreCategorie = new GestoreCategorie();
 
+    // Variabili utili all'identificazione dell'errore
+    $mostraPopup = false; $msg = ''; $err = true;
+
+    // Verifico la consistenza dei parametri di ricerca ricevuti
+    $id_categoria = '';
+    $id_tipologia = '';
+    $contenuto_ricerca = '';
+    if ( isset($_POST["id_categoria"]) && $_POST["id_categoria"] != '0' )
+        $id_categoria = $_POST["id_categoria"];
+    if ( isset($_POST["id_tipologia"]) && $_POST["id_tipologia"] != '0')
+        $id_tipologia = $_POST["id_tipologia"];
+    if ( isset($_POST["contenutoRicerca"]) )
+        $contenuto_ricerca = trim($_POST["contenutoRicerca"]);
+
+    // Verifico che i parametri di ricerca non siano vuoti
+    if ( $id_categoria == '' && $id_tipologia == '' && $contenuto_ricerca == '' )
+    {
+        // Qui bisogna mostrare il popup
+        $mostraPopup = true;
+        $msg = 'Parametri di ricerca non specificati';
+    }
+    else
+    {
+        // Eseguo la ricerca tramite apposita metodo
+        $gestore_catalogo = new GestoreCatalogoProdotti();
+        $lista_prodotti = $gestore_catalogo->ricercaProdotti($id_categoria, $id_tipologia, $contenuto_ricerca);
+    }
+    
     echo '<?xml version = "1.0" encoding="UTF-8" ?>';
 ?>
 
@@ -15,7 +44,8 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <link rel="stylesheet" href="../css/stileLayout.css" type="text/css" />
         <link rel="stylesheet" href="../css/stileSidebar.css" type="text/css" />
-        <link rel="stylesheet" href="../css/stileHomepageCatalogo.css" type="text/css" />
+        <link rel="stylesheet" href="../css/stileCatalogo.css" type="text/css" />
+        <link rel="stylesheet" href="../css/stilePopup.css" type="text/css" />
         <link rel="icon" type="image/x-icon" href="../img/logo.png" />
         <script type="text/javascript" src="../js/utility.js"></script>
         <title>UNI-TECNO</title>
@@ -62,6 +92,11 @@
         ?>
 
         <div id="sezioneCentrale">
+            <?php 
+                // Stampo il popup se necessario
+                echo creaPopup($mostraPopup, $msg, $err) . "\n";
+            ?>
+
             <div id="sezioneRicerca">
                 <form id="ricercaProdotti" action="catalogo.php" method="post">
                     <fieldset><p>Categoria</p>
@@ -84,7 +119,7 @@
                     </fieldset>
                     <fieldset><p>Tipologia</p>
                         <select name="id_tipologia" id="tendinaTipologia">
-                            <option  selected="selected">Seleziona tipologia</option>
+                            <option value='0' selected="selected">Seleziona tipologia</option>
                         </select> 
                     </fieldset>
                     <fieldset><p>Ricerca</p><input type="text" name="contenutoRicerca" /></fieldset>
@@ -92,24 +127,54 @@
                     <fieldset><input type="reset" name="btnIndietro" onclick="azzeraRicercaProdotti();" value="Reset &#8634;" /></fieldset>
                 </form>
             </div>
-            <div id="sezioneCategorie">
-                <?php
-                    $categorie_html = '';
 
-                    // Frammento categoria vuoto
-                    $frammento_vuoto = file_get_contents('../html/frammentoCategoria.html');
+            <div id="sezioneRisultati">
+                <div id="sezioneOrdinamento">
+                    <form id="formOrdinamento" action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post">
+                        <fieldset>
+                            <input type="hidden" name="id_categoria" value="" />
+                            <input type="hidden" name="id_tipologia" value="" />
+                            <input type="hidden" name="contenutoRicerca" value="" />
+                        </fieldset>
+                        <fieldset>
+                            <p>
+                                Ordina per:     
+                                <input type="radio" name="ordinamento" value="crescente" />
+                                prezzo crescente
+                                <input type="radio" name="ordinamento" value="decrescente" />
+                                prezzo decrescente
+                                <input type="radio" name="ordinamento" value="no" />
+                                nessun ordinamento
+                            </p>
+                        </fieldset>
+                    </form>
+                </div>
 
-                    // Per ogni categoria creo un div
-                    for ( $i=0; $i<$n_categorie; $i++ )
-                    {
-                        $frammento_pieno = str_replace("%NOME_CATEGORIA%", $categorie[$i]->nome_categoria, $frammento_vuoto);
-                        $frammento_pieno = str_replace("%ID_CATEGORIA%", $categorie[$i]->id_categoria, $frammento_pieno);
-                        $frammento_pieno = str_replace("%PATH_ICONA%", ottieniPathIcona($categorie[$i]->id_categoria), $frammento_pieno);
-                        $categorie_html .= $frammento_pieno . "\n";
-                    }
+                <div id="sezioneProdotti">
+                    <?php
+                        // Composizione dei risultati della ricerca
+                        $n_prodotti = count($lista_prodotti);
+                        if ( $n_prodotti == 0 )
+                            echo '<p style="font-size: 150%; width:100%; text-align:center;">Nessun prodotto soddisfa i criteri di ricerca</p>';
+                        else
+                        {
+                            $contenuto_html = '';
+                            $frammento_vuoto = file_get_contents('../html/frammentoTesseraProdotto.html');
+                            
+                            // Creazione di una tessera per ogni prodotto
+                            for ( $i=0; $i < $n_prodotti; $i++ )
+                            {
+                                // Fill del frammento
+                                $frammento_pieno = str_replace("%NOME_PRODOTTO%", $lista_prodotti[$i]->nome, $frammento_vuoto);
+                                $frammento_pieno = str_replace("%ID_PRODOTTO%", $lista_prodotti[$i]->id, $frammento_pieno);
 
-                    echo $categorie_html . "\n";
-                ?>
+                                $contenuto_html .= $frammento_pieno . "\n";
+                            }
+
+                            echo $contenuto_html . "\n";
+                        }
+                    ?>
+                </div>
             </div>
         </div>
     </body>

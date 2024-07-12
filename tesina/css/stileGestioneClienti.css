@@ -29,8 +29,8 @@
     gap: 50px;
     padding: 20px;   
     border-radius: 15px;
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
+    display: flex;
+    flex-wrap: wrap;
 }
 
 #parteTessere > p
@@ -97,7 +97,7 @@ fieldset input[type="checkbox"]
     color:white;
     border-radius: 15px;
     overflow: auto;
-    flex: 1;
+    flex: 0 0 30%;
     justify-content: center;
     align-items: center;
 }

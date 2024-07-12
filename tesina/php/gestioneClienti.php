@@ -120,11 +120,11 @@
                     }
 
                     if ( $n_clienti == 0 )
-                        $contenuto_html = '<p>Nessun cliente soddisfa i criteri di ricerca</p>';
+                        $contenuto_html = '<p style="width:100%; text-align:center;">Nessun cliente soddisfa i criteri di ricerca</p>';
 
                     echo $contenuto_html . "\n";
                 ?>
-            </div>        
+            </div>
         </div>
     </body>
 </html>
