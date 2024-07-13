@@ -101,7 +101,6 @@
             $sidebar = file_get_contents("../html/strutturaSidebar.html");
             $sidebar = str_replace("%OPERAZIONI_UTENTE%", ottieniOpzioniMenu($_SESSION["ruolo"]), $sidebar);
             echo $sidebar . "\n";
-            
         ?>
 
         <div id="sezioneCentrale">

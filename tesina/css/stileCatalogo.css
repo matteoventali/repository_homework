@@ -32,6 +32,7 @@ body
     padding: 20px;
     display: flex;
     flex-direction: column;
+    gap: 30px;
 }
 
 #sezioneRisultati > p
@@ -90,12 +91,20 @@ body
 #sezioneOrdinamento
 {
     display: flex;
-    flex-direction: row-reverse;
+    flex-direction: row;
+    justify-content: space-between;
     align-items: center;
     font-size: 130%;
+    padding-left: 20px;
+    overflow-x: auto;
 }
 
-#sezioneOrdinamento form fieldset:nth-child(1)
+#sezioneOpzioni
+{
+    display: flex;
+}
+
+#formOrdinamento fieldset:nth-child(1)
 {
     display: none;
 }
@@ -106,6 +115,8 @@ body
     flex-direction: row;
     justify-content: space-evenly;
     padding-bottom: 10px;
+    flex-wrap: wrap;
+    gap: 30px;
 }
 
 .tesseraProdotto
@@ -163,11 +174,11 @@ body
     font-weight: bold;
     font-size: 150%;
     text-align: center;
+    width: 100%;
 }
 
 .informazioni
 {
     font-size: 125%;
-    
 }
 

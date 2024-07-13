@@ -131,20 +131,40 @@
 
             <div id="sezioneRisultati">
                 <div id="sezioneOrdinamento">
+                    <div id="sezioneOpzioni">
+                        <form action="homepageCatalogo.php" method="post">
+                            <fieldset><input type="submit" name="btnIndietro" value="Indietro &#8617;" /></fieldset>
+                        </form>
+
+                        <?php
+                            // Se il ruolo e' gestore stampo il form per andare sulla pagina
+                            // di inserimento nuovo prodotto
+                            if ( $sessione_attiva && $_SESSION['ruolo'] == 'G')
+                                echo "<form id=\"formVaiAInserisci\" action=\"inserisciProdotto.php\" method=\"post\">
+                                        <fieldset><input type=\"submit\" name=\"btnVaiAInserisci\" value=\"Inserisci prodotto\" /></fieldset></form>";
+                        ?>
+                    </div>
+
                     <form id="formOrdinamento" action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post">
                         <fieldset>
-                            <input type="hidden" name="id_categoria" value="" />
-                            <input type="hidden" name="id_tipologia" value="" />
-                            <input type="hidden" name="contenutoRicerca" value="" />
+                            <input type="hidden" name="id_categoria" value="<?php echo $id_categoria; ?>" />
+                            <input type="hidden" name="id_tipologia" value="<?php echo $id_tipologia; ?>" />
+                            <input type="hidden" name="contenutoRicerca" value="<?php echo $contenuto_ricerca; ?>" />
                         </fieldset>
                         <fieldset>
                             <p>
                                 Ordina per:     
-                                <input type="radio" name="ordinamento" value="crescente" />
-                                prezzo crescente
-                                <input type="radio" name="ordinamento" value="decrescente" />
+                                <input type="radio" onchange="applicaOrdinamento('formOrdinamento')" name="ordinamento" 
+                                                    <?php if(isset($_POST["ordinamento"]) && $_POST["ordinamento"] == "crescente") echo 'checked="checked"' ?>
+                                                                    value="crescente" />
+                                prezzo crescente 
+                                <input type="radio" onchange="applicaOrdinamento('formOrdinamento')" 
+                                                    <?php if(isset($_POST["ordinamento"]) && $_POST["ordinamento"] == "decrescente") echo 'checked="checked"' ?>
+                                                                    name="ordinamento" value="decrescente" />
                                 prezzo decrescente
-                                <input type="radio" name="ordinamento" value="no" />
+                                <input type="radio" onchange="applicaOrdinamento('formOrdinamento')" 
+                                                    <?php if(!isset($_POST["ordinamento"]) || $_POST["ordinamento"] == "no") echo 'checked="checked"' ?>
+                                                    name="ordinamento" value="no" />
                                 nessun ordinamento
                             </p>
                         </fieldset>
@@ -167,11 +187,20 @@
                             // Calcolo della percentuale di sconto fisso per il cliente (vedi documento)
                             // In caso invece non siamo loggati o si utilizza un account gestore/admin
                             // viene mostrato il prezzo di listino
-                            if ( $sessione_attiva && ($_SESSION["ruolo"] == 'A' || $_SESSION["ruolo"] == 'B')
+                            if ( $sessione_attiva && ($_SESSION["ruolo"] == 'A' || $_SESSION["ruolo"] == 'G')
                                         || !$sessione_attiva )
                                 $sconto_fisso = 0;
                             else
                                 $sconto_fisso = calcolaScontoFisso($_SESSION['id_utente'], $_SESSION['reputazione'], $_SESSION['data_registrazione']);
+                            
+                            // Ordino i prodotti se ordinamento richiesto
+                            if ( isset($_POST["ordinamento"]) )
+                            {
+                                if ( $_POST["ordinamento"] == "crescente" )
+                                    $lista_prodotti = ordinaProdottiPrezzoCrescente($lista_prodotti);
+                                else if ( $_POST["ordinamento"] == "decrescente" )
+                                    $lista_prodotti = ordinaProdottiPrezzoDecrescente($lista_prodotti);
+                            }
                             
                             // Creazione di una tessera per ogni prodotto
                             for ( $i=0; $i < $n_prodotti; $i++ )

@@ -345,3 +345,12 @@ function azzeraRicercaProdotti()
     contenutoRic.innerHTML = '';
     svuotaTendinaTipologie();
 }
+
+function applicaOrdinamento(form_ordinamento)
+{
+    // Prendo il riferimento al form
+    form = document.getElementById(form_ordinamento);
+
+    // Eseguo il submit del form per applicare l'ordinamento
+    form.submit();
+}

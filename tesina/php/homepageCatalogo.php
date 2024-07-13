@@ -84,7 +84,7 @@
                     </fieldset>
                     <fieldset><p>Tipologia</p>
                         <select name="id_tipologia" id="tendinaTipologia">
-                            <option  selected="selected">Seleziona tipologia</option>
+                            <option value='0' selected="selected">Seleziona tipologia</option>
                         </select> 
                     </fieldset>
                     <fieldset><p>Ricerca</p><input type="text" name="contenutoRicerca" /></fieldset>
@@ -92,24 +92,36 @@
                     <fieldset><input type="reset" name="btnIndietro" onclick="azzeraRicercaProdotti();" value="Reset &#8634;" /></fieldset>
                 </form>
             </div>
-            <div id="sezioneCategorie">
-                <?php
-                    $categorie_html = '';
 
-                    // Frammento categoria vuoto
-                    $frammento_vuoto = file_get_contents('../html/frammentoCategoria.html');
+            <div id="sezioneRicercheVeloci">
+                    <div id="sezioneOpzioni">
+                        <?php
+                            // Se il ruolo e' gestore stampo il form per andare sulla pagina
+                            // di inserimento nuovo prodotto
+                            if ( $sessione_attiva && $_SESSION['ruolo'] == 'G')
+                                echo '<form id="formVaiAInserisci" action="inserisciProdotto.php" method="post">
+                                        <fieldset><input type="submit" name="btnVaiAInserisci" value="Inserisci prodotto" /></fieldset></form>';
+                        ?>
+                    </div>
+                    <div id="sezioneCategorie">
+                        <?php
+                            $categorie_html = '';
 
-                    // Per ogni categoria creo un div
-                    for ( $i=0; $i<$n_categorie; $i++ )
-                    {
-                        $frammento_pieno = str_replace("%NOME_CATEGORIA%", $categorie[$i]->nome_categoria, $frammento_vuoto);
-                        $frammento_pieno = str_replace("%ID_CATEGORIA%", $categorie[$i]->id_categoria, $frammento_pieno);
-                        $frammento_pieno = str_replace("%PATH_ICONA%", ottieniPathIcona($categorie[$i]->id_categoria), $frammento_pieno);
-                        $categorie_html .= $frammento_pieno . "\n";
-                    }
+                            // Frammento categoria vuoto
+                            $frammento_vuoto = file_get_contents('../html/frammentoCategoria.html');
 
-                    echo $categorie_html . "\n";
-                ?>
+                            // Per ogni categoria creo un div
+                            for ( $i=0; $i<$n_categorie; $i++ )
+                            {
+                                $frammento_pieno = str_replace("%NOME_CATEGORIA%", $categorie[$i]->nome_categoria, $frammento_vuoto);
+                                $frammento_pieno = str_replace("%ID_CATEGORIA%", $categorie[$i]->id_categoria, $frammento_pieno);
+                                $frammento_pieno = str_replace("%PATH_ICONA%", ottieniPathIcona($categorie[$i]->id_categoria), $frammento_pieno);
+                                $categorie_html .= $frammento_pieno . "\n";
+                            }
+
+                            echo $categorie_html . "\n";
+                        ?>
+                    </div>
             </div>
         </div>
     </body>

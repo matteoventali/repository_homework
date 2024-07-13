@@ -18,7 +18,7 @@
     align-items: center;
 }
 
-#sezioneCategorie
+#sezioneRicercheVeloci
 {
     width: 90%;
     overflow: auto;
@@ -26,8 +26,24 @@
     background-color: #11999E;
     box-shadow: 21px 27px 31px -2px black;
     color:white;
-    gap: 50px;
+    display: flex;
+    flex-direction: column;
     border-radius: 15px;
+    padding-left: 20px;
+    padding-right: 20px;
+}
+
+#sezioneOpzioni
+{
+    display: flex;
+    flex-direction: row-reverse;
+    padding-top: 10px;
+    font-size: 150%;
+}
+
+#sezioneCategorie
+{
+    gap: 50px;
     padding: 20px;
     overflow: auto;
     display: flex;

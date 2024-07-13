@@ -152,5 +152,50 @@
 
             return $lista_prodotti;
         }
+
+        // Metodo per inserire un nuovo prodotto
+        function inserisciProdotto($nome, $id_categoria, $id_tipologia, $prezzo_listino, $path_immagine, $specifiche, $descrizione)
+        {
+            // Verifico se posso usare il file
+            if ( !$this->checkValidita() )
+                return false;
+
+            // Ottengo l'id dell'ultimo figlio della radice, ovvero dell'ultimo prodotto
+            $id_nuovo_prodotto = 1;
+            $ultimo = $this->oggettoDOM->documentElement->lastElementChild;
+            if ( $ultimo != null ) // Ci sono altre domande
+            {
+                $id_ultimo = $ultimo->getAttribute('id');
+                $id_ultimo = intval($id_ultimo);
+                $id_nuovo_prodotto = ++$id_ultimo;
+                $id_nuovo_prodotto = strval($id_nuovo_prodotto);
+            }
+
+            // Creazione della nuova domanda
+            $nuovo_prodotto = $this->oggettoDOM->createElement("prodotto");
+            $nuovo_prodotto->setAttribute('id', $id_nuovo_prodotto);
+            $nuovo_prodotto->setAttribute('id_categoria', $id_categoria);
+            $nuovo_prodotto->setAttribute('id_tipo', $id_tipologia);
+
+            $tag_nome = $this->oggettoDOM->createElement("nome", $nome);
+            $tag_prezzoListino = $this->oggettoDOM->createElement("prezzo_listino", $prezzo_listino);
+            $tag_path = $this->oggettoDOM->createElement("percorso_immagine", $path_immagine);
+            $tag_spec = $this->oggettoDOM->createElement("specifiche", $specifiche);
+            $tag_desc = $this->oggettoDOM->createElement("descrizione", $descrizione);
+
+            $nuovo_prodotto->appendChild($tag_nome);
+            $nuovo_prodotto->appendChild($tag_prezzoListino);
+            $nuovo_prodotto->appendChild($tag_path);
+            $nuovo_prodotto->appendChild($tag_spec);
+            $nuovo_prodotto->appendChild($tag_desc);
+            
+            // Aggancio del prodotto
+            $this->oggettoDOM->documentElement->appendChild($nuovo_prodotto); 
+
+            // Salvo i cambiamenti sul file
+            $this->salvaXML($this->pathname);
+
+            return true;
+        }
     }
 ?>

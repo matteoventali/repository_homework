@@ -63,7 +63,7 @@
                 break;
             
             case 'G':
-                $ris = '<li class="liSidebar"><a href="gestioneClienti.php">Visualizza clienti</a>';
+                $ris = '<li class="liSidebar"><a href="gestioneClienti.php">Visualizza clienti</a></li>';
                 break;
             
             case 'C':
@@ -223,5 +223,67 @@
             $sconto_fisso = 20;
 
         return $sconto_fisso;
+    }
+
+    // Funzione per ordinare il vettore dei prodotti in base al prezzo decrescente
+    function ordinaProdottiPrezzoDecrescente($prodotti)
+    {
+        // Applico l'algoritmo bubblesort di ordinamento
+        $scambi = true; $k = 0;
+        $dim = count($prodotti);
+
+        while ( $scambi )
+        {
+            // Set degli scambi a false
+            $scambi = false;
+
+            // Scansione del vettore e ordinamento per prezzo
+            // Alla fine di ogni iterazione, in ultima posizione
+            // ci sara' l'elemento corretto
+            for ( $i=0; $i < $dim - $k - 1; $i++ )
+            {
+                // Verifico se effettuare lo scambio
+                if ( $prodotti[$i]->prezzo_listino < $prodotti[$i+1]->prezzo_listino )
+                {
+                    $app = $prodotti[$i];
+                    $prodotti[$i] = $prodotti[$i+1];
+                    $prodotti[$i+1] = $app;
+                    $scambi = true;
+                }
+            }
+        }
+
+        return $prodotti;
+    }
+
+    // Funzione per ordinare il vettore dei prodotti in base al prezzo crescente
+    function ordinaProdottiPrezzoCrescente($prodotti)
+    {
+        // Applico l'algoritmo bubblesort di ordinamento
+        $scambi = true; $k = 0;
+        $dim = count($prodotti);
+
+        while ( $scambi )
+        {
+            // Set degli scambi a false
+            $scambi = false;
+
+            // Scansione del vettore e ordinamento per prezzo
+            // Alla fine di ogni iterazione, in ultima posizione
+            // ci sara' l'elemento corretto
+            for ( $i=0; $i < $dim - $k - 1; $i++ )
+            {
+                // Verifico se effettuare lo scambio
+                if ( $prodotti[$i]->prezzo_listino > $prodotti[$i+1]->prezzo_listino )
+                {
+                    $app = $prodotti[$i];
+                    $prodotti[$i] = $prodotti[$i+1];
+                    $prodotti[$i+1] = $app;
+                    $scambi = true;
+                }
+            }
+        }
+
+        return $prodotti;
     }
 ?>
