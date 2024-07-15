@@ -3,6 +3,7 @@
     require_once 'lib/libreriaDB.php';
     require_once 'lib/verificaSessioneAttiva.php';
     require_once 'gestoriXML/gestoreCatalogoProdotti.php';
+    require_once 'gestoriXML/gestoreRecensioni.php';
     
     // Verifico se sia pervenuto l'id del prodotto da visualizzare
     // dal post
@@ -159,6 +160,26 @@
                                         <input type=\"submit\" value=\"Aggiungi al carrello\" name=\"btnAggiungiCarrello\" />
                                     </fieldset>
                                 </form>";
+                    ?>
+                </div>
+
+                <div id="sezioneRecensioni" class="riga">
+                    <h2>Recensioni</h2>
+                    <?php
+                        $frammento_vuoto = file_get_contents('../html/frammentoIntervento.html');
+                        $contenuto_html = '';
+
+                        // Alloco il gestore recensioni
+                        $gestoreRecensioni = new GestoreRecensioni();
+                        $recensioni = $gestoreRecensioni->ottieniRecensioni($prodotto->id);
+                        $n_recensioni = count($recensioni);
+                        
+                        for ( $i=0; $i < $n_recensioni; $i++ )
+                        {
+                            /****************/
+                        }
+
+                        echo $contenuto_html . "\n";
                     ?>
                 </div>
             </div>

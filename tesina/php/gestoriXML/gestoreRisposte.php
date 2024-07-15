@@ -70,6 +70,7 @@
                         $nuova_valutazione = new ValutazioneRisposta();
                         $nuova_valutazione->peso = $valutazioni[$j]->getAttribute('peso');
                         $nuova_valutazione->rating = $valutazioni[$j]->getAttribute('rating');
+                        $nuova_valutazione->id_utente = $valutazioni[$j]->getAttribute('id_utente');
 
                         // Aggiungo la valutazione alla lista delle valutazioni
                         array_push($lista_valutazioni, $nuova_valutazione);

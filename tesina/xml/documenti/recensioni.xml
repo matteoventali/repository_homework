@@ -1,21 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <recensioni xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../schema/schemaRecensioni.xsd">
 
-    <recensione id_cliente="10" id_prodotto="1" data="2024-06-07">
+    <recensione id_cliente="3" id_prodotto="1" data="2024-06-07">
         <contenuto>
             Bellissimo computer, con ottime caratteristiche.
         </contenuto>
         <valutazioni></valutazioni>
     </recensione>
 
-    <recensione id_cliente="11" id_prodotto="2" data="2024-06-06">
+    <recensione id_cliente="4" id_prodotto="1" data="2024-06-06">
         <contenuto>
             Il televisore presenta un'ottima risoluzione e numerosi servizi.
         </contenuto>
         <valutazioni>
-            <valutazione peso="23" id_utente="10" rating="5"/>
-            <valutazione peso="48" id_utente="12" rating="4"/>
-            <valutazione peso="92" id_utente="13" rating="2"/>
+            <valutazione peso="23" id_utente="3" rating="5"/>
+            <valutazione peso="48" id_utente="5" rating="4"/>
+            <valutazione peso="92" id_utente="6" rating="2"/>
         </valutazioni>
     </recensione>
 </recensioni>
