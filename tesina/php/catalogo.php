@@ -214,6 +214,9 @@
 
                                 $frammento_pieno = str_replace("%NOME_PRODOTTO%", $lista_prodotti[$i]->nome, $frammento_vuoto);
                                 $frammento_pieno = str_replace("%ID_PRODOTTO%", $lista_prodotti[$i]->id, $frammento_pieno);
+                                $frammento_pieno = str_replace("%ID_CATEGORIA%", $id_categoria, $frammento_pieno);
+                                $frammento_pieno = str_replace("%ID_TIPOLOGIA%", $id_tipologia, $frammento_pieno);
+                                $frammento_pieno = str_replace("%CONTENUTO_RICERCA%", $contenuto_ricerca, $frammento_pieno);
                                 $frammento_pieno = str_replace("%PATH_IMMAGINE%", $lista_prodotti[$i]->percorso_immagine, $frammento_pieno);
                                 $frammento_pieno = str_replace("%CATEGORIA_PRODOTTO%", $categorie[$cat-1]->nome_categoria, $frammento_pieno);
                                 $frammento_pieno = str_replace("%TIPOLOGIA_PRODOTTO%",$tipi[$lista_prodotti[$i]->id_tipo - 1]->nome_tipo, $frammento_pieno);

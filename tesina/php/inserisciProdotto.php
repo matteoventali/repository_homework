@@ -138,7 +138,7 @@
                     </select> 
                 </fieldset>
 
-                <fieldset>  <p>Specifiche:          </p>  <textarea rows="6" cols="45" name="specifiche"><?php if($err) echo $specifiche;?></textarea> </fieldset>
+                <fieldset>  <p>Specifiche:          </p>  <textarea id="prova" rows="6" cols="45" name="specifiche"><?php if($err) echo $specifiche;?></textarea> </fieldset>
                 <fieldset>  <p>Descrizione:         </p>  <textarea rows="6" cols="45" name="descrizione"><?php if($err) echo $descrizione;?></textarea> </fieldset>
                 <fieldset>  <p>Immagine:            </p>  <input type="file" name="immagine" accept="image/png, image/jpeg"/></fieldset>
                 <fieldset style="border-style: none; box-shadow: none;">
