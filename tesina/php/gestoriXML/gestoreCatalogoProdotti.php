@@ -225,6 +225,10 @@
                     // Elimino le recensioni associate al prodotto
                     $gestoreRecensioni = new GestoreRecensioni();
                     $gestoreRecensioni->rimuoviRecensioni($id_prodotto);
+
+                    // Elimino l'immagine associata al prodotto
+                    $percorso_immagine = $figli[$i]->firstChild->nextSibling->nextSibling->textContent;
+                    unlink($percorso_immagine);
                     
                     // Elimino il prodotto
                     $this->oggettoDOM->documentElement->removeChild($figli[$i]);
