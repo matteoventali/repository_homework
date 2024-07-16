@@ -8,9 +8,9 @@
     // Verifico se sia pervenuto l'id del prodotto da visualizzare
     // dal post
     $prodotto = null;
-    if ( isset($_POST["id_prodotto"]) )
+    if ( isset($_GET["id_prodotto"]) )
     {
-        $id_prodotto = $_POST["id_prodotto"];
+        $id_prodotto = $_GET["id_prodotto"];
 
         // Prelevo le informazioni del prodotto dal catalogo
         $gestoreCatalogo = new GestoreCatalogoProdotti();
@@ -44,7 +44,7 @@
         <?php
             // Bisogna controllare se l'utente è loggato oppure no
             // In base a questo avrà diversi tipi di visualizzazione
-            if($sessione_attiva)
+            if( $sessione_attiva )
             {
                 // In questo caso l'utente è loggato
 
@@ -59,10 +59,18 @@
                 $sidebar = str_replace("%OPERAZIONI_UTENTE%", ottieniOpzioniMenu($_SESSION["ruolo"]), $sidebar);
                 echo $sidebar . "\n";
 
-                // L'opzione di aggiungere una nuova faq deve essere fornita
-                // esclusivamente ad admin e gestori
-                if ( $_SESSION["ruolo"] == "A" || $_SESSION["ruolo"] == "G" )
-                    $visibilita_bottone = "block";
+                // Genero due paragrafi nascosti per memorizzare nella pagina
+                // l'id dell'utente e la sua reputazione in modo da effettuare la valutazione
+                // La reputazione potrebbe essere cambiata dal momento in cui l'utente si e' loggato
+                // pertanto e' opportuno effettuare una nuova query al database
+                require 'lib/connection.php';
+                if ( $connessione )
+                {
+                    $utente = ottieniUtente($_SESSION['id_utente'], $handleDB);
+                    echo '<p style="display:none;" id="id_utente">' . $_SESSION['id_utente'] . '</p>' . "\n";
+                    echo '<p style="display:none;" id="reputazione_utente">' . $utente->reputazione . '</p>' . "\n";
+                    $handleDB->close();
+                }
             }
             else 
             {
@@ -77,7 +85,6 @@
                 $sidebar = str_replace("%OPERAZIONI_UTENTE%", ottieniOpzioniMenu('V'), $sidebar);
                 echo $sidebar . "\n";
             }
-            
         ?>
 
         <div id="sezioneDettagli">
@@ -85,9 +92,9 @@
                 <form action="catalogo.php" method="post">
                     <fieldset><input type="submit" value="Indietro &#8617;" name="btnIndietro" /></fieldset>
                     <fieldset>
-                        <input type="hidden" name="id_categoria" value="<?php echo $_POST["id_categoria"]; ?>" />
-                        <input type="hidden" name="id_tipologia" value="<?php echo $_POST["id_tipologia"]; ?>" />
-                        <input type="hidden" name="contenutoRicerca" value="<?php echo $_POST["contenutoRicerca"]; ?>" />
+                        <input type="hidden" name="id_categoria" value="<?php echo $_GET["id_categoria"]; ?>" />
+                        <input type="hidden" name="id_tipologia" value="<?php echo $_GET["id_tipologia"]; ?>" />
+                        <input type="hidden" name="contenutoRicerca" value="<?php echo $_GET["contenutoRicerca"]; ?>" />
                     </fieldset>
                 </form>
 
@@ -145,21 +152,37 @@
                     <?php 
                         // Se l'utente e' loggato come gestore mostro il form con le 3 opzioni di modifica, eliminazione e inserimento offerta speciale
                         if ( $_SESSION["ruolo"] == 'G' )
-                            echo "<form id=\"formOpzioni\" action=\"modificaCliente.php\" method=\"post\" style=\"$visibilita_bottone\">
+                            echo "<form id=\"formOpzioni\" action=\"modificaProdotto.php\" method=\"post\">
                                     <fieldset>
-                                        <input type=\"hidden\" value=\"$prodotto->id\" name=\"id_cliente\" />
+                                        <input type=\"hidden\" value=\"$prodotto->id\" name=\"id_prodotto\" />
                                         <input type=\"submit\" value=\"Modifica prodotto\" name=\"btnModifica\" />
-                                        <input type=\"submit\" value=\"Elimina prodotto\" name=\"btnElimina\" />
-                                        <input type=\"submit\" value=\"Aggiungi offerta speciale\" name=\"btnAggiungiOffertaSpeciale\" />
                                     </fieldset>
-                                </form>";
+                                    </form>". "\n\n". 
+                                    "<form id=\"formOpzioni\" action=\"eliminaProdotto.php\" method=\"post\">
+                                        <fieldset>
+                                            <input type=\"hidden\" value=\"$prodotto->id\" name=\"id_prodotto\" />
+                                            <input type=\"submit\" value=\"Elimina prodotto\" name=\"btnElimina\" />
+                                        </fieldset>
+                                    </form>" . "\n\n" .
+                                    "<form id=\"formOpzioni\" action=\"aggiungiOffertaSpeciale.php\" method=\"post\">
+                                        <fieldset>
+                                            <input type=\"hidden\" value=\"$prodotto->id\" name=\"id_prodotto\" />
+                                            <input type=\"submit\" value=\"Aggiungi offerta speciale\" name=\"btnAggiungiOffertaSpeciale\" />
+                                        </fieldset>
+                                    </form>";
                         else if ( $_SESSION["ruolo"] == 'C' ) // Fornisco l'opportunita' al cliente di aggiungere al carrello il prodotto
-                        echo "<form id=\"formOpzioni\" action=\"modificaCliente.php\" method=\"post\" style=\"$visibilita_bottone\">
+                            echo "<form id=\"formOpzioni\" action=\"aggiungiAlCarrello.php\" method=\"post\">
                                     <fieldset>
-                                        <input type=\"hidden\" value=\"$prodotto->id\" name=\"id_cliente\" />
+                                        <input type=\"hidden\" value=\"$prodotto->id\" name=\"id_prodotto\" />
                                         <input type=\"submit\" value=\"Aggiungi al carrello\" name=\"btnAggiungiCarrello\" />
                                     </fieldset>
-                                </form>";
+                                    </form>" . "\n\n". 
+                                    "<form id=\"formOpzioni\" action=\"aggiungiRecensione.php\" method=\"post\">
+                                        <fieldset>
+                                            <input type=\"hidden\" value=\"$prodotto->id\" name=\"id_prodotto\" />
+                                            <input type=\"submit\" value=\"Aggiungi recensione\" name=\"btnAggiungiCarrello\" />
+                                        </fieldset>
+                                    </form>";
                     ?>
                 </div>
 
@@ -178,11 +201,11 @@
                             $recensioni = $gestoreRecensioni->ottieniRecensioni($prodotto->id);
                             $n_recensioni = count($recensioni);
                             $id_intervento = 1;
-                            
+
                             for ( $i=0; $i < $n_recensioni; $i++ )
                             {
                                 // Prelevo le informazioni dell'utente tramite il database
-                                $utente = ottieniUtente($risposte[$i]->id_utente, $handleDB);
+                                $utente = ottieniUtente($recensioni[$i]->id_utente, $handleDB);
                                 $container_padre = 'int_' . $id_intervento;
                                 $frammento_stelline_statiche = initStelline(calcolaMediaRating($recensioni[$i]->valutazioni), '#00FFFF', false, $container_padre);
                                 $frammento_stelline_dinamiche = initStelline(0, '#00FFFF', true, $container_padre);
@@ -194,7 +217,7 @@
                                 $recensione_html = str_replace("%STELLINE_STATICHE%", $frammento_stelline_statiche, $recensione_html);
                                 $recensione_html = str_replace("%ID_INTERVENTO%", $id_intervento, $recensione_html);
                                 $recensione_html = str_replace("%ID_INTERVENTO_XML%", $recensioni[$i]->id, $recensione_html);
-                                $recensione_html = str_replace("%TIPO_INTERVENTO%", 'risposta', $recensione_html);
+                                $recensione_html = str_replace("%TIPO_INTERVENTO%", 'recensione', $recensione_html);
                                 $recensione_html = str_replace("%OPZIONE_FAQ%", 'none', $recensione_html);
 
                                 // Se l'utente e' loggato come gestore o admin fornisco l'opzione di eliminare la recensione
@@ -229,6 +252,7 @@
                             }
 
                             echo $contenuto_html . "\n";
+                            $handleDB->close();
                         }
                     ?>
                 </div>

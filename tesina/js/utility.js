@@ -168,7 +168,7 @@ function inserisciValutazione(id_intervento, stella_premuta)
                             + "&id_intervento_xml=" + id_intervento_xml + "&tipo_intervento=" + tipo_intervento
                             + "&stella_premuta=" + stella_premuta;
     
-    // Oggetto per connessione mediante tecnologia AJAX
+                            // Oggetto per connessione mediante tecnologia AJAX
     xhr = new XMLHttpRequest();
     xhr.open("POST", "inserisciValutazione.php");
     xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");

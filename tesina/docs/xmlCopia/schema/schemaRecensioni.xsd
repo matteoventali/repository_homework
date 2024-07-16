@@ -15,6 +15,7 @@
                 <xsd:element ref="valutazioni" minOccurs="1" maxOccurs="1" />
             </xsd:sequence>
 
+            <xsd:attribute name="id" type="xsd:integer" use="required" />
             <xsd:attribute name="id_cliente" type="xsd:integer" use="required" />
             <xsd:attribute name="id_prodotto" type="xsd:integer" use="required" />
             <xsd:attribute name="data" type="xsd:date" use="required" />

@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <recensioni xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../schema/schemaRecensioni.xsd">
 
-    <recensione id_cliente="10" id_prodotto="1" data="2024-06-07">
+    <recensione id="1" id_cliente="10" id_prodotto="1" data="2024-06-07">
         <contenuto>
             Bellissimo computer, con ottime caratteristiche.
         </contenuto>
         <valutazioni></valutazioni>
     </recensione>
 
-    <recensione id_cliente="11" id_prodotto="2" data="2024-06-06">
+    <recensione id="2" id_cliente="11" id_prodotto="2" data="2024-06-06">
         <contenuto>
             Il televisore presenta un'ottima risoluzione e numerosi servizi.
         </contenuto>

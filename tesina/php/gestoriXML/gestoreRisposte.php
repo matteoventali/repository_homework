@@ -280,7 +280,7 @@
                 $i--;
 
                 // Verifico che non vi sia una valutazione gia' inserita 
-                // dall'utente per la domanda trovata
+                // dall'utente per la risposta trovata
                 if ( $this->ottieniValutazione($id_risposta, $id_utente) == null ) // Sono sicuro che non c'e'
                 {
                     // Posso procedere all'inserimento della valutazione
@@ -292,7 +292,7 @@
                     $nuova_valutazione->setAttribute('peso', $peso);
                     $nuova_valutazione->setAttribute('rating', $rating);
 
-                    // Aggiungo la nuova valutazione alla lista di valutazioni della domanda
+                    // Aggiungo la nuova valutazione alla lista di valutazioni della risposta
                     $figli[$i]->lastChild->appendChild($nuova_valutazione);
 
                     // Salvo le modifiche sul file xml

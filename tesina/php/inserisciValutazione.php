@@ -33,6 +33,7 @@
 
             case 'recensione':
                 $gestore = new GestoreRecensioni();
+                $intervento = $gestore->ottieniRecensione($_POST["id_intervento_xml"]);
                 break;
             
             default:

@@ -103,18 +103,12 @@ body
     border-style: solid;
 }
 
-#sezioneOpzioni form
-{
-    width: 100%;
-    display: flex;
-}
-
-#sezioneOpzioni form fieldset
+#sezioneOpzioni
 {
     display: flex;
-    width: 100%;
     justify-content: right;
-    gap: 30px;
+    padding: 0;
+    gap: 0px;
 }
 
 #sezioneRecensioni
@@ -122,6 +116,13 @@ body
     display: flex;
     flex-direction: column;
     gap: 20px;
+}
+
+#sezioneRecensioni h2
+{
+    border-bottom: solid;
+    width: 60%;
+    text-align: center;
 }
 
 .intervento

@@ -60,7 +60,7 @@
                     // Estraggo le informazioni dalla recensione
                     $recensione->id = $figli[$i]->getAttribute("id");
                     $recensione->data = $figli[$i]->getAttribute("data");
-                    $recensione->id_utente = $figli[$i]->getAttribute("id_utente");
+                    $recensione->id_utente = $figli[$i]->getAttribute("id_cliente");
                     $recensione->contenuto = $figli[$i]->firstChild->textContent;
                     
                     // Estraggo le valutazioni dalla recensione
@@ -114,7 +114,7 @@
                     $nuova_recensione = new Recensione();
                     $nuova_recensione->id = $rec->getAttribute('id');
                     $nuova_recensione->data = $rec->getAttribute('data');
-                    $nuova_recensione->id_utente = $rec->getAttribute('id_utente');
+                    $nuova_recensione->id_utente = $rec->getAttribute('id_cliente');
                     $nuova_recensione->contenuto = $rec->firstChild->textContent;
 
                     // Prelevo le valutazioni della nuova recensione
@@ -176,6 +176,99 @@
             }
 
             return $val;
+        }
+
+        // Metodo per inserire una valutazione nel file recensioni
+        // Riceve il cliente che effettua la valutazione, l'id della recensione, il peso e il rating
+        function inserisciNuovaValutazione($id_recensione, $id_cliente, $peso, $rating)
+        {
+            // Esito dell'operazione
+            $esito = false;
+            
+            // Verifico se posso usare il file
+            if ( !$this->checkValidita() )
+                return $esito;
+
+            // Flag per indicare se ho raggiunto la recensione
+            $trovata = false;
+            
+            // Ottengo la lista di figli della radice, ovvero la lista delle recensioni
+            $figli = $this->oggettoDOM->documentElement->childNodes;
+            $n_figli = $this->oggettoDOM->documentElement->childElementCount;
+            for ( $i=0; $i<$n_figli && !$trovata; $i++ )
+            {
+                // Verifico se ho raggiunto la risposta
+                if ( $figli[$i]->getAttribute('id') == $id_recensione )
+                    $trovata = true;
+            }
+
+            // Se ho trovato la recensione
+            if ( $trovata )
+            {
+                $i--;
+
+                // Verifico che non vi sia una valutazione gia' inserita 
+                // dall'utente per la recensione trovata
+                if ( $this->ottieniValutazione($id_recensione, $id_cliente) == null ) // Sono sicuro che non c'e'
+                {
+                    // Posso procedere all'inserimento della valutazione
+                    $esito = true;
+
+                    // Creo un nuovo elemento valutazione
+                    $nuova_valutazione = $this->oggettoDOM->createElement('valutazione');
+                    $nuova_valutazione->setAttribute('id_utente', $id_cliente);
+                    $nuova_valutazione->setAttribute('peso', $peso);
+                    $nuova_valutazione->setAttribute('rating', $rating);
+
+                    // Aggiungo la nuova valutazione alla lista di valutazioni della recensione
+                    $figli[$i]->lastChild->appendChild($nuova_valutazione);
+
+                    // Salvo le modifiche sul file xml
+                    $this->salvaXML($this->pathname);
+                }
+            }
+
+            return $esito;
+        }
+
+        // Metodo per inserire una nuova recensione
+        // Riceve il contenuto, l'utente che effettua la recensione,
+        // l'id del prodotto coinvolto
+        function inserisciRecensione($cont, $id_cliente, $id_prodotto)
+        {
+            // Verifico se posso usare il file
+            if ( !$this->checkValidita() )
+                return null;
+
+            // Ottengo l'id dell'ultimo figlio della radice, ovvero dell'ultima recensione
+            $id_nuova_recensione = 1;
+            $ultima = $this->oggettoDOM->documentElement->lastElementChild;
+            if ( $ultima != null ) // Ci sono altre recensioni
+            {
+                $id_ultima = $ultima->getAttribute('id');
+                $id_ultima = intval($id_ultima);
+                $id_nuova_recensione = ++$id_ultima;
+                $id_nuova_recensione = strval($id_nuova_recensione);
+            }
+
+            // Creazione della nuova recensioni
+            $nuova_recensione = $this->oggettoDOM->createElement("recensione");
+            $nuova_recensione->setAttribute("id", $id_nuova_recensione);
+            $nuova_recensione->setAttribute("data", date("Y-m-d"));
+            $nuova_recensione->setAttribute("id_cliente", $id_cliente);
+            $nuova_recensione->setAttribute("id_prodotto", $id_prodotto);
+            $contenuto_nuova_recensione = $this->oggettoDOM->createElement("contenuto", $cont);
+            $lista_valutazioni_nuova_recensione = $this->oggettoDOM->createElement("valutazioni");
+
+            // Inserisco il contenuto e la lista vuota di valutazioni come figli della recensioni
+            $nuova_recensione->appendChild($contenuto_nuova_recensione);
+            $nuova_recensione->appendChild($lista_valutazioni_nuova_recensione);
+
+            // Aggancio della recensione
+            $this->oggettoDOM->documentElement->appendChild($nuova_recensione); 
+
+            // Salvo i cambiamenti sul file
+            $this->salvaXML($this->pathname);
         }
     }
 

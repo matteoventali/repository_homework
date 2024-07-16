@@ -1,43 +1,49 @@
 <?php
     require_once 'lib/libreria.php';
     require_once 'lib/verificaSessioneAttiva.php';
-    require_once 'gestoriXML/gestoreDomande.php';
+    require_once 'gestoriXML/gestoreRecensioni.php';
+    require_once 'gestoriXML/gestoreCatalogoProdotti.php';
 
     // Inizializzazione variabili per gestione popup
     $mostraPopup = false; $err = false; $msg = "";
+    $prodotto = null;
 
     // Verifico che vi sia una sessione attiva per un cliente
-    // altrimenti ridireziono sulla homepage
     if (!($sessione_attiva && $_SESSION["ruolo"] == 'C'))
         header("Location: homepage.php");
-    else if ( isset($_POST["domanda"]) ) // Verifico se vi sia una richiesta di inserimento nuova domanda
+    else if ( isset($_POST["id_prodotto"]) ) 
     {
-        // Devo mostrare l'esito della richiesta
-        $mostraPopup = true; $err = true; $msg = 'Campi vuoti';
-        
-        // Effettuo il controllo sui campi
-        $domanda = trim($_POST["domanda"]);
-        
-        if ( strlen($domanda) > 0 )
+        // Verifico se vi sia da evadere una richiesta o meno
+        if ( isset($_POST["btnAggiungi"]) && isset($_POST["recensione"]) )
         {
-            // Procedo all'inserimento della domanda
-            // ponendo il flag faq a false
-            $gestore_domande = new GestoreDomande();
-
-            $id_domanda = $gestore_domande->inserisciDomanda($domanda, $_SESSION["id_utente"], "false");
-            
-            if ( $id_domanda != null )
+            // Verifico la consistenza dei dati
+            $recensione = trim($_POST["recensione"]);
+            if ( strlen($recensione) > 0 )
             {
-                $err = false;
-                
-                // Ridireziono l'utente sulla pagina del prospetto domande
-                header("Location: domande.php");
+                // Alloco il gestore recensioni e procedo ad inserire la nuova recensione
+                $gestoreRecensioni = new GestoreRecensioni();
+                $gestoreRecensioni->inserisciRecensione($recensione, $_SESSION["id_utente"], $_POST["id_prodotto"]);
+
+                // Redireziono l'utente alla pagina del prodotto
+                header("Location: dettaglioProdotto.php?id_prodotto=" . $_POST["id_prodotto"]);
             }
             else
-                $msg = "Errore nell'inserimento della domanda"; // Errore generico causato dai file XML
+            {
+                // Errore, recensione non presente
+                $mostraPopup = true;
+                $err = true;
+                $msg = 'Campi vuoti';
+            }
         }
+        else
+        {
+            // Prelevo le informazioni del prodotto per comporre il titolo
+            // del form
+            $gestoreCatalogo = new GestoreCatalogoProdotti();
+            $prodotto = $gestoreCatalogo->ottieniProdotto($_POST["id_prodotto"]);
+        }    
     }
-
+    
     // Verifico se c'e' da gestire una richiesta di registrazione o meno
     echo '<?xml version = "1.0" encoding="UTF-8"?>';
 ?>
@@ -48,7 +54,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <link rel="stylesheet" href="../css/stileLayout.css" type="text/css" />
         <link rel="stylesheet" href="../css/stileSidebar.css" type="text/css" />
-        <link rel="stylesheet" href="../css/stileInserisciDomanda.css" type="text/css" />
+        <link rel="stylesheet" href="../css/stileInserisciRecensione.css" type="text/css" />
         <link rel="stylesheet" href="../css/stilePopup.css" type="text/css" />
         <link rel="icon" type="image/x-icon" href="../img/logo.png" />
         <script type="text/javascript" src="../js/utility.js"></script>
@@ -77,12 +83,13 @@
             
             <form id="parteCentrale" action="<?php echo $_SERVER["PHP_SELF"]; ?>" method="post">
                 <fieldset>
-                    <p>Domanda:</p>
-                    <textarea rows="6" cols="45" name="domanda"><?php if($err) echo $domanda;?></textarea>
+                    <p>Nuova recensione per: <strong><?php if($prodotto != null) echo $prodotto->nome; ?></strong></p>
+                    <textarea rows="6" cols="45" name="recensione"><?php if($err) echo $recensione;?></textarea>
+                    <input type="hidden" name="id_prodotto" value="<?php echo $_POST["id_prodotto"]; ?>" />
                 </fieldset>
                     
                 <div class="parteButton">
-                        <input type="submit" value="Aggiungi domanda" name="btnAggiungi" />
+                    <input type="submit" value="Aggiungi recensione" name="btnAggiungi" />
                 </div>
             </form>
         </div>
