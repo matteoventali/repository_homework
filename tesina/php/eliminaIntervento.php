@@ -31,6 +31,8 @@
 
             case 'recensione':
                 $gestore = new GestoreRecensioni();
+                // Elimino la recensione
+                $esito_operazione = $gestore->rimuoviRecensione($_POST["id_intervento"]);
                 break;
             
             default:

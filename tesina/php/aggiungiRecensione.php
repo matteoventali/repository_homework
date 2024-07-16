@@ -25,7 +25,10 @@
                 $gestoreRecensioni->inserisciRecensione($recensione, $_SESSION["id_utente"], $_POST["id_prodotto"]);
 
                 // Redireziono l'utente alla pagina del prodotto
-                header("Location: dettaglioProdotto.php?id_prodotto=" . $_POST["id_prodotto"]);
+                $id_categoria = $_POST['id_categoria']; $id_tipologia = $_POST['id_tipologia'];
+                $contenuto_ricerca = $_POST['contenutoRicerca']; $id_prodotto = $_POST["id_prodotto"];
+                $query_string = "id_prodotto=$id_prodotto&id_categoria=$id_categoria&id_tipologia=$id_tipologia&contenutoRicerca=$contenuto_ricerca";
+                header("Location: dettaglioProdotto.php?$query_string");
             }
             else
             {
@@ -89,6 +92,9 @@
                 </fieldset>
                     
                 <div class="parteButton">
+                    <input type="hidden" value="<?php echo $_POST['id_categoria']; ?>" name="id_categoria" />
+                    <input type="hidden" value="<?php echo $_POST['id_tipologia']; ?>" name="id_tipologia" />
+                    <input type="hidden" value="<?php echo $_POST['contenutoRicerca']; ?>" name="contenutoRicerca" />
                     <input type="submit" value="Aggiungi recensione" name="btnAggiungi" />
                 </div>
             </form>

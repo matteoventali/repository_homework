@@ -1,5 +1,6 @@
 <?php
     require_once 'gestoreXMLDOM.php';
+    require_once 'gestoreRecensioni.php';
 
     class ProdottoCatalogo
     {
@@ -196,6 +197,43 @@
             $this->salvaXML($this->pathname);
 
             return true;
+        }
+
+        // Metodo per rimuovere un prodotto
+        function rimuoviProdotto($id_prodotto)
+        {
+            // Verifico se posso usare il file
+            if ( !$this->checkValidita() )
+                return false;
+
+            // Variabile per ottimizzare il ciclo
+            $esito = false;
+
+            // Ottengo la lista di figli della radice, ovvero la lista dei prodotti
+            $figli = $this->oggettoDOM->documentElement->childNodes;
+            $n_figli = $this->oggettoDOM->documentElement->childElementCount;
+
+            // Per ogni figlio, ovvero un prodotto, verifico se l'id
+            // corrisponde a quello passato come parametro
+            for ( $i=0; $i<$n_figli && !$esito; $i++ )
+            {
+                // Verifico se l'id del prodotto corrisponde
+                // a quello passato
+                $id = $figli[$i]->getAttribute("id");
+                if ( $id == $id_prodotto )
+                {
+                    // Elimino le recensioni associate al prodotto
+                    $gestoreRecensioni = new GestoreRecensioni();
+                    $gestoreRecensioni->rimuoviRecensioni($id_prodotto);
+                    
+                    // Elimino il prodotto
+                    $this->oggettoDOM->documentElement->removeChild($figli[$i]);
+                    $this->salvaXML($this->pathname);
+                    $esito = true;
+                }
+            }
+
+            return $esito;
         }
     }
 ?>

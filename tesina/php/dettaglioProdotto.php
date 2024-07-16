@@ -150,23 +150,34 @@
 
                 <div id="sezioneOpzioni" class="riga">
                     <?php 
+                        // Campi hidden che contengono informazioni nascoste per permettere il flusso
+                        // corretto all'interno dell'applicazione
+                        $id_categoria = $_GET['id_categoria']; $id_tipologia = $_GET['id_tipologia'];
+                        $contenuto_ricerca = $_GET['contenutoRicerca'];
+                        $campi_hidden = "<input type=\"hidden\" value=\"$id_categoria\" name=\"id_categoria\" />
+                                            <input type=\"hidden\" value=\"$id_tipologia\" name=\"id_tipologia\" />
+                                            <input type=\"hidden\" value=\"$contenuto_ricerca\" name=\"contenutoRicerca\" />";
+                        
                         // Se l'utente e' loggato come gestore mostro il form con le 3 opzioni di modifica, eliminazione e inserimento offerta speciale
                         if ( $_SESSION["ruolo"] == 'G' )
                             echo "<form id=\"formOpzioni\" action=\"modificaProdotto.php\" method=\"post\">
                                     <fieldset>
                                         <input type=\"hidden\" value=\"$prodotto->id\" name=\"id_prodotto\" />
+                                        $campi_hidden
                                         <input type=\"submit\" value=\"Modifica prodotto\" name=\"btnModifica\" />
                                     </fieldset>
                                     </form>". "\n\n". 
                                     "<form id=\"formOpzioni\" action=\"eliminaProdotto.php\" method=\"post\">
                                         <fieldset>
                                             <input type=\"hidden\" value=\"$prodotto->id\" name=\"id_prodotto\" />
+                                            $campi_hidden
                                             <input type=\"submit\" value=\"Elimina prodotto\" name=\"btnElimina\" />
                                         </fieldset>
                                     </form>" . "\n\n" .
                                     "<form id=\"formOpzioni\" action=\"aggiungiOffertaSpeciale.php\" method=\"post\">
                                         <fieldset>
                                             <input type=\"hidden\" value=\"$prodotto->id\" name=\"id_prodotto\" />
+                                            $campi_hidden
                                             <input type=\"submit\" value=\"Aggiungi offerta speciale\" name=\"btnAggiungiOffertaSpeciale\" />
                                         </fieldset>
                                     </form>";
@@ -174,12 +185,14 @@
                             echo "<form id=\"formOpzioni\" action=\"aggiungiAlCarrello.php\" method=\"post\">
                                     <fieldset>
                                         <input type=\"hidden\" value=\"$prodotto->id\" name=\"id_prodotto\" />
+                                        $campi_hidden
                                         <input type=\"submit\" value=\"Aggiungi al carrello\" name=\"btnAggiungiCarrello\" />
                                     </fieldset>
                                     </form>" . "\n\n". 
                                     "<form id=\"formOpzioni\" action=\"aggiungiRecensione.php\" method=\"post\">
                                         <fieldset>
                                             <input type=\"hidden\" value=\"$prodotto->id\" name=\"id_prodotto\" />
+                                            $campi_hidden
                                             <input type=\"submit\" value=\"Aggiungi recensione\" name=\"btnAggiungiCarrello\" />
                                         </fieldset>
                                     </form>";
