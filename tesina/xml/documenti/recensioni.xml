@@ -8,7 +8,7 @@
         <valutazioni></valutazioni>
     </recensione>
 
-    <recensione id_cliente="4" id_prodotto="1" data="2024-06-06">
+    <recensione id_cliente="4" id_prodotto="5" data="2024-06-06">
         <contenuto>
             Il televisore presenta un'ottima risoluzione e numerosi servizi.
         </contenuto>

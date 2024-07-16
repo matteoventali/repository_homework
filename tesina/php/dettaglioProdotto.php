@@ -166,20 +166,70 @@
                 <div id="sezioneRecensioni" class="riga">
                     <h2>Recensioni</h2>
                     <?php
-                        $frammento_vuoto = file_get_contents('../html/frammentoIntervento.html');
-                        $contenuto_html = '';
-
-                        // Alloco il gestore recensioni
-                        $gestoreRecensioni = new GestoreRecensioni();
-                        $recensioni = $gestoreRecensioni->ottieniRecensioni($prodotto->id);
-                        $n_recensioni = count($recensioni);
-                        
-                        for ( $i=0; $i < $n_recensioni; $i++ )
+                        // Connessione al database
+                        require 'lib/connection.php';
+                        if ( $connessione )
                         {
-                            /****************/
-                        }
+                            $frammento_vuoto = file_get_contents('../html/frammentoIntervento.html');
+                            $contenuto_html = '';
 
-                        echo $contenuto_html . "\n";
+                            // Alloco il gestore recensioni
+                            $gestoreRecensioni = new GestoreRecensioni();
+                            $recensioni = $gestoreRecensioni->ottieniRecensioni($prodotto->id);
+                            $n_recensioni = count($recensioni);
+                            $id_intervento = 1;
+                            
+                            for ( $i=0; $i < $n_recensioni; $i++ )
+                            {
+                                // Prelevo le informazioni dell'utente tramite il database
+                                $utente = ottieniUtente($risposte[$i]->id_utente, $handleDB);
+                                $container_padre = 'int_' . $id_intervento;
+                                $frammento_stelline_statiche = initStelline(calcolaMediaRating($recensioni[$i]->valutazioni), '#00FFFF', false, $container_padre);
+                                $frammento_stelline_dinamiche = initStelline(0, '#00FFFF', true, $container_padre);
+                                
+                                // Replace delle informazioni all'interno del frammento
+                                $recensione_html = str_replace("%CONTENUTO%", $recensioni[$i]->contenuto, $frammento_vuoto);
+                                $recensione_html = str_replace("%DATA_INTERVENTO%", date('d-m-Y', strtotime($recensioni[$i]->data)), $recensione_html);
+                                $recensione_html = str_replace("%USERNAME%", $utente->username, $recensione_html);
+                                $recensione_html = str_replace("%STELLINE_STATICHE%", $frammento_stelline_statiche, $recensione_html);
+                                $recensione_html = str_replace("%ID_INTERVENTO%", $id_intervento, $recensione_html);
+                                $recensione_html = str_replace("%ID_INTERVENTO_XML%", $recensioni[$i]->id, $recensione_html);
+                                $recensione_html = str_replace("%TIPO_INTERVENTO%", 'risposta', $recensione_html);
+                                $recensione_html = str_replace("%OPZIONE_FAQ%", 'none', $recensione_html);
+
+                                // Se l'utente e' loggato come gestore o admin fornisco l'opzione di eliminare la recensione
+                                if ( $_SESSION["ruolo"] == 'G' || $_SESSION["ruolo"] == 'A' )
+                                    $recensione_html = str_replace("%OPZIONE_DISPLAY_ELIMINA%", 'block', $recensione_html);
+                                else
+                                    $recensione_html = str_replace("%OPZIONE_DISPLAY_ELIMINA%", 'none', $recensione_html);
+
+                                // Le stelline dinamiche per valutare la recensione sono visibili
+                                // se l'utente e' loggato e non e' il proprietario della recensione
+                                $opt_display_dinamiche = "none";
+                                if ( $sessione_attiva && $_SESSION["id_utente"] != $recensioni[$i]->id_utente )
+                                {
+                                    // Verifico se esiste gia' una valutazione effettuata da quell'utente
+                                    $val = $gestoreRecensioni->ottieniValutazione($recensioni[$i]->id, $_SESSION["id_utente"]);
+                                    if ( $val != null ) // L'ho trovata
+                                    {
+                                        $frammento_stelline_statiche = initStelline($val->rating, '#00FFFF', false, $container_padre);
+                                        $recensione_html = str_replace("%STELLINE_DINAMICHE%", $frammento_stelline_statiche, $recensione_html);
+                                    }
+                                    else
+                                        $recensione_html = str_replace("%STELLINE_DINAMICHE%", $frammento_stelline_dinamiche, $recensione_html);
+                                    
+                                    $opt_display_dinamiche = "block";
+                                }
+                                    
+                                $recensione_html = str_replace("%VISUALIZZA_DINAMICHE%", $opt_display_dinamiche, $recensione_html);
+
+                                
+                                $contenuto_html .= $recensione_html . "\n";
+                                $id_intervento++;
+                            }
+
+                            echo $contenuto_html . "\n";
+                        }
                     ?>
                 </div>
             </div>
