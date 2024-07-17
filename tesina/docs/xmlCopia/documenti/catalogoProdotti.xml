@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <catalogo xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../schema/schemaCatalogoProdotti.xsd">
 
-    <prodotto id="1" id_categoria="1" id_tipo="1">
+    <prodotto mostra="true" id="1" id_categoria="1" id_tipo="1">
         <nome>APPLE MacBook Air</nome>
         <prezzo_listino>170</prezzo_listino>
         <percorso_immagine>../img/immagine_mac</percorso_immagine>
@@ -20,7 +20,7 @@
         </descrizione>
     </prodotto>
 
-    <prodotto id="2" id_categoria="3" id_tipo="1">
+    <prodotto mostra="false" id="2" id_categoria="3" id_tipo="1">
         <nome>Samsung TV UE50CU7090UXZT</nome>
         <prezzo_listino>74</prezzo_listino>
         <percorso_immagine>../img/immagine_tvSamsung</percorso_immagine>

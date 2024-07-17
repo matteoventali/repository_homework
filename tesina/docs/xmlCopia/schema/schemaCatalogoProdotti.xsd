@@ -3,7 +3,7 @@
     <xsd:element name="catalogo">
         <xsd:complexType>
             <xsd:sequence>
-                <xsd:element ref="prodotto" minOccurs="1" maxOccurs="unbounded" />  
+                <xsd:element ref="prodotto" minOccurs="0" maxOccurs="unbounded" />  
             </xsd:sequence>
         </xsd:complexType>
     </xsd:element>
@@ -19,6 +19,7 @@
                <xsd:element ref="offerta_speciale" minOccurs="0" maxOccurs="1" />
             </xsd:sequence>
 
+            <xsd:attribute name="mostra" type="xsd:boolean" use="required"/>
             <xsd:attribute name="id_tipo" type="xsd:integer" use="required"/>
             <xsd:attribute name="id_categoria" type="xsd:integer" use="required"/>
             <xsd:attribute name="id" type="xsd:integer" use="required"/>

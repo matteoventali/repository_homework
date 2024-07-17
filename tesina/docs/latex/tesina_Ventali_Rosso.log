@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.24 (TeX Live 2022/Debian) (preloaded format=pdflatex 2023.12.5)  16 JUL 2024 17:24
+This is pdfTeX, Version 3.141592653-2.6-1.40.24 (TeX Live 2022/Debian) (preloaded format=pdflatex 2023.12.5)  17 JUL 2024 09:33
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -534,13 +534,13 @@ LaTeX Font Info:    External font `cmex10' loaded for size
  [3] [4] [5] [6] [7] [8] [9] [10] [11] [12]
 [13] [14] [15] [16]
 LaTeX Font Info:    Trying to load font information for T1+cmtt on input line 6
-76.
+77.
  (/usr/share/texlive/texmf-dist/tex/latex/base/t1cmtt.fd
 File: t1cmtt.fd 2022/07/10 v2.5l Standard LaTeX font definitions
 )
 [17]
 Package hyperref Info: bookmark level for unknown lstlisting defaults to 0 on i
-nput line 700.
+nput line 701.
  (../xmlCopia/documenti/categorieProdotti.xml [18])
 (../xmlCopia/grammatiche/grammaticaCategorieProdotti.dtd)
 (../xmlCopia/documenti/tagliRicarica.xml) [19]
@@ -563,10 +563,10 @@ Package rerunfilecheck Info: File `tesina_Ventali_Rosso.out' has not changed.
 (rerunfilecheck)             Checksum: 8E0CDAF41DC317E3093E6C39BFE4A292;6955.
  ) 
 Here is how much of TeX's memory you used:
- 14250 strings out of 478040
- 224647 string characters out of 5840467
- 1972330 words of memory out of 5000000
- 33308 multiletter control sequences out of 15000+600000
+ 14253 strings out of 478040
+ 224682 string characters out of 5840467
+ 1974330 words of memory out of 5000000
+ 33310 multiletter control sequences out of 15000+600000
  527456 words of font info for 61 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
  75i,7n,77p,367b,2340s stack positions out of 10000i,1000n,20000p,200000b,200000s
@@ -588,10 +588,10 @@ cm/cmmi8.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr1
 2.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb></
 usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/sh
 are/texlive/texmf-dist/fonts/type1/public/eurosym/feymr10.pfb>
-Output written on tesina_Ventali_Rosso.pdf (36 pages, 366316 bytes).
+Output written on tesina_Ventali_Rosso.pdf (36 pages, 366694 bytes).
 PDF statistics:
- 1752 PDF objects out of 2073 (max. 8388607)
- 1348 compressed objects within 14 object streams
- 806 named destinations out of 1000 (max. 500000)
+ 1754 PDF objects out of 2073 (max. 8388607)
+ 1350 compressed objects within 14 object streams
+ 807 named destinations out of 1000 (max. 500000)
  382 words of extra memory for PDF output out of 10000 (max. 10000000)
 

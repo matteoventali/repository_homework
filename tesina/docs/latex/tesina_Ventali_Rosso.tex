@@ -350,7 +350,7 @@
 					$ g = P \cdot \frac{W}{100} $
 				\end{center}
 
-		\subsection{Casi d'uso}
+		\subsection{Casi d'uso} \label{CasiUso}
 			\subsubsection{Registrazione}
 				\textbf{Precondizioni}
 				\begin{itemize}
@@ -544,14 +544,14 @@
 			\begin{enumerate}
 				\item il gestore seleziona il prodotto da gestire;
 				\item il gestore viene reindirizzato alla pagina del prodotto;
-				\item il gestore sceglie l'opzione di eliminazione o modifica del prodotto;
+				\item il gestore sceglie l'opzione per mostrare/nascondere o per modificare il prodotto;
 				\item in caso di modifica, il gestore viene reindirizzato ad una pagina con una form precompilata con i dettagli del prodotto;
 				\item in caso di modifica, il gestore apporta le modifiche desiderate;
 				\item in caso di modifica, il gestore sottomette le modifiche apportate.
 			\end{enumerate}
 			\textbf{Postcondizioni}
 			\begin{itemize}
-				\item il prodotto non è visibile nel catalogo. In caso di modifica il prodotto è visibile con le modifiche apportate.
+				\item il prodotto non è visibile oppure è visibile nel catalogo. In caso di modifica il prodotto assume le modifiche apportate.
 			\end{itemize}
 		
 			\bigskip
@@ -653,6 +653,7 @@
 				\item la FAQ è visibile nella sezione del sito dedicata.
 			\end{itemize}
 
+		
 		\subsection{Strutture dati}
 			\subsubsection{Utenti}
 				I dati degli utenti registrati (clienti, gestori, admin) vengono memorizzati in una tabella SQL con i seguenti campi:
@@ -766,6 +767,7 @@ create table UTENTI(
 			\subsubsection{Catalogo prodotti} 
 				\begin{itemize}
 					\item \textbf{catalogo $\rightarrow$ prodotto[id\_categoria , id\_tipo] } gli attributi id\_categoria e id\_tipo dell'elemento prodotto permettono di specificare la macro-categoria e il tipo specifico di dispositivo (\ref{Introduzione});
+					\item \textbf{catalogo $\rightarrow$ prodotto[mostra] } l'attributo mostra dell'elemento prodotto permette di specificare se il prodotto debba essere mostrato nel catalogo (caso d'uso 1.3.10 \ref{CasiUso});
 					\item \textbf{catalogo $\rightarrow$ prodotto $\rightarrow$ percorso\_immagine } l'elemento percorso\_immagine dell'elemento prodotto permette di memorizzare il pathname (sul server) dell'immagine associata al prodotto
 					(\ref{Introduzione});
 					\item \textbf{catalogo $\rightarrow$ prodotto $\rightarrow$ offerta\_speciale } l'elemento offerta\_speciale dell'elemento prodotto permette di definire un'eventuale offerta speciale associata al prodotto

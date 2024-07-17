@@ -7,6 +7,7 @@
         public $id;
         public $id_tipo;
         public $id_categoria;
+        public $mostra;
         public $nome;
         public $prezzo_listino;
         public $percorso_immagine;
@@ -61,6 +62,7 @@
                     $prodotto->id = $id_prodotto;
                     $prodotto->id_tipo = $figli[$i]->getAttribute('id_tipo');
                     $prodotto->id_categoria = $figli[$i]->getAttribute('id_categoria');
+                    $prodotto->mostra = $figli[$i]->getAttribute('mostra');
                     $prodotto->nome = $figli[$i]->firstChild->textContent;
                     $prodotto->prezzo_listino = $figli[$i]->firstChild->nextSibling->textContent;
                     $prodotto->percorso_immagine = $figli[$i]->firstChild->nextSibling->nextSibling->textContent;
@@ -113,6 +115,7 @@
                 $prodotto->id = $figli[$i]->getAttribute('id');
                 $prodotto->id_tipo = $figli[$i]->getAttribute('id_tipo');
                 $prodotto->id_categoria = $figli[$i]->getAttribute('id_categoria');
+                $prodotto->mostra = $figli[$i]->getAttribute('mostra');
                 $prodotto->nome = $figli[$i]->firstChild->textContent;
                 $prodotto->prezzo_listino = $figli[$i]->firstChild->nextSibling->textContent;
                 $prodotto->percorso_immagine = $figli[$i]->firstChild->nextSibling->nextSibling->textContent;
@@ -155,6 +158,7 @@
         }
 
         // Metodo per inserire un nuovo prodotto
+        // Quando un prodotto viene inserito viene mostrato nel catalogo
         function inserisciProdotto($nome, $id_categoria, $id_tipologia, $prezzo_listino, $path_immagine, $specifiche, $descrizione)
         {
             // Verifico se posso usare il file
@@ -177,6 +181,7 @@
             $nuovo_prodotto->setAttribute('id', $id_nuovo_prodotto);
             $nuovo_prodotto->setAttribute('id_categoria', $id_categoria);
             $nuovo_prodotto->setAttribute('id_tipo', $id_tipologia);
+            $nuovo_prodotto->setAttribute('mostra', 'true');
 
             $tag_nome = $this->oggettoDOM->createElement("nome", $nome);
             $tag_prezzoListino = $this->oggettoDOM->createElement("prezzo_listino", $prezzo_listino);
@@ -199,8 +204,8 @@
             return true;
         }
 
-        // Metodo per rimuovere un prodotto
-        function rimuoviProdotto($id_prodotto)
+        // Metodo per nascondere un prodotto
+        function nascondiProdotto($id_prodotto)
         {
             // Verifico se posso usare il file
             if ( !$this->checkValidita() )
@@ -222,18 +227,45 @@
                 $id = $figli[$i]->getAttribute("id");
                 if ( $id == $id_prodotto )
                 {
-                    // Elimino le recensioni associate al prodotto
-                    $gestoreRecensioni = new GestoreRecensioni();
-                    $gestoreRecensioni->rimuoviRecensioni($id_prodotto);
-
-                    // Elimino l'immagine associata al prodotto
-                    $percorso_immagine = $figli[$i]->firstChild->nextSibling->nextSibling->textContent;
-                    unlink($percorso_immagine);
+                    // Nascondo il prodotto
+                    $figli[$i]->setAttribute('mostra', 'false');
                     
-                    // Elimino il prodotto
-                    $this->oggettoDOM->documentElement->removeChild($figli[$i]);
+                    // Salvo i cambiamenti
                     $this->salvaXML($this->pathname);
-                    $esito = true;
+                }
+            }
+
+            return $esito;
+        }
+
+        // Metodo per mostrare un prodotto
+        function mostraProdotto($id_prodotto)
+        {
+            // Verifico se posso usare il file
+            if ( !$this->checkValidita() )
+                return false;
+
+            // Variabile per ottimizzare il ciclo
+            $esito = false;
+
+            // Ottengo la lista di figli della radice, ovvero la lista dei prodotti
+            $figli = $this->oggettoDOM->documentElement->childNodes;
+            $n_figli = $this->oggettoDOM->documentElement->childElementCount;
+
+            // Per ogni figlio, ovvero un prodotto, verifico se l'id
+            // corrisponde a quello passato come parametro
+            for ( $i=0; $i<$n_figli && !$esito; $i++ )
+            {
+                // Verifico se l'id del prodotto corrisponde
+                // a quello passato
+                $id = $figli[$i]->getAttribute("id");
+                if ( $id == $id_prodotto )
+                {
+                    // Mostro il prodotto
+                    $figli[$i]->setAttribute('mostra', 'true');
+
+                    // Salvo i cambiamenti
+                    $this->salvaXML($this->pathname);
                 }
             }
 

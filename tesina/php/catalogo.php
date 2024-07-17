@@ -201,51 +201,66 @@
                                 else if ( $_POST["ordinamento"] == "decrescente" )
                                     $lista_prodotti = ordinaProdottiPrezzoDecrescente($lista_prodotti);
                             }
+
+                            // Flag per segnalare la stampa di almeno un prodotto
+                            $almenoUno = false;
                             
                             // Creazione di una tessera per ogni prodotto
                             for ( $i=0; $i < $n_prodotti; $i++ )
                             {
-                                // Applico lo sconto fisso
-                                $prezzo = applicaSconto($lista_prodotti[$i]->prezzo_listino, $sconto_fisso);
-
-                                // Fill del frammento
-                                $cat = $lista_prodotti[$i]->id_categoria;
-                                $tipi = $gestoreCategorie->ottieniTipi($cat);
-
-                                $frammento_pieno = str_replace("%NOME_PRODOTTO%", $lista_prodotti[$i]->nome, $frammento_vuoto);
-                                $frammento_pieno = str_replace("%ID_PRODOTTO%", $lista_prodotti[$i]->id, $frammento_pieno);
-                                $frammento_pieno = str_replace("%ID_CATEGORIA%", $id_categoria, $frammento_pieno);
-                                $frammento_pieno = str_replace("%ID_TIPOLOGIA%", $id_tipologia, $frammento_pieno);
-                                $frammento_pieno = str_replace("%CONTENUTO_RICERCA%", $contenuto_ricerca, $frammento_pieno);
-                                $frammento_pieno = str_replace("%PATH_IMMAGINE%", $lista_prodotti[$i]->percorso_immagine, $frammento_pieno);
-                                $frammento_pieno = str_replace("%CATEGORIA_PRODOTTO%", $categorie[$cat-1]->nome_categoria, $frammento_pieno);
-                                $frammento_pieno = str_replace("%TIPOLOGIA_PRODOTTO%",$tipi[$lista_prodotti[$i]->id_tipo - 1]->nome_tipo, $frammento_pieno);
-                                $frammento_pieno = str_replace("%PREZZO_PRODOTTO%",$prezzo, $frammento_pieno);
-
-                                // Se il prodotto ha un'offerta speciale in corso mostro il paragrafo adeguato
-                                if ( $lista_prodotti[$i]->offerta_speciale != NULL )
+                                // Mostro il prodotto se il prodotto ha flag mostra attivo
+                                // oppure se il flag non e' attivo ma si e' loggati come gestore
+                                // (in questo modo poi il gestore potra' attivarlo dal suo dettaglio)
+                                if ( $lista_prodotti[$i]->mostra == 'true' || ($lista_prodotti[$i]->mostra == 'false' && $_SESSION["ruolo"] == 'G'))
                                 {
-                                    // Verifico validita' del periodo associato all'offerta
-                                    $data_inizio = strtotime($lista_prodotti[$i]->offerta_speciale->data_inizio);
-                                    $data_fine = strtotime($lista_prodotti[$i]->offerta_speciale->data_fine);
+                                    $almenoUno = true;
+                                    
+                                    // Applico lo sconto fisso
+                                    $prezzo = applicaSconto($lista_prodotti[$i]->prezzo_listino, $sconto_fisso);
 
-                                    if ( $data_oggi >= $data_inizio && $data_oggi <= $data_fine )
+                                    // Fill del frammento
+                                    $cat = $lista_prodotti[$i]->id_categoria;
+                                    $tipi = $gestoreCategorie->ottieniTipi($cat);
+
+                                    $frammento_pieno = str_replace("%NOME_PRODOTTO%", $lista_prodotti[$i]->nome, $frammento_vuoto);
+                                    $frammento_pieno = str_replace("%ID_PRODOTTO%", $lista_prodotti[$i]->id, $frammento_pieno);
+                                    $frammento_pieno = str_replace("%ID_CATEGORIA%", $id_categoria, $frammento_pieno);
+                                    $frammento_pieno = str_replace("%ID_TIPOLOGIA%", $id_tipologia, $frammento_pieno);
+                                    $frammento_pieno = str_replace("%CONTENUTO_RICERCA%", $contenuto_ricerca, $frammento_pieno);
+                                    $frammento_pieno = str_replace("%PATH_IMMAGINE%", $lista_prodotti[$i]->percorso_immagine, $frammento_pieno);
+                                    $frammento_pieno = str_replace("%CATEGORIA_PRODOTTO%", $categorie[$cat-1]->nome_categoria, $frammento_pieno);
+                                    $frammento_pieno = str_replace("%TIPOLOGIA_PRODOTTO%",$tipi[$lista_prodotti[$i]->id_tipo - 1]->nome_tipo, $frammento_pieno);
+                                    $frammento_pieno = str_replace("%PREZZO_PRODOTTO%",$prezzo, $frammento_pieno);
+
+                                    // Se il prodotto ha un'offerta speciale in corso mostro il paragrafo adeguato
+                                    if ( $lista_prodotti[$i]->offerta_speciale != NULL )
                                     {
-                                        $frammento_pieno = str_replace("%DISPLAY_OFFERTA_SPECIALE%", 'block', $frammento_pieno);
-                                        $frammento_pieno = str_replace("%PREZZO_PRODOTTO_OFFERTA%", 
-                                                                applicaSconto($lista_prodotti[$i]->prezzo_listino, $lista_prodotti[$i]->offerta_speciale->percentuale), 
-                                                                $frammento_pieno);
+                                        // Verifico validita' del periodo associato all'offerta
+                                        $data_inizio = strtotime($lista_prodotti[$i]->offerta_speciale->data_inizio);
+                                        $data_fine = strtotime($lista_prodotti[$i]->offerta_speciale->data_fine);
+
+                                        if ( $data_oggi >= $data_inizio && $data_oggi <= $data_fine )
+                                        {
+                                            $frammento_pieno = str_replace("%DISPLAY_OFFERTA_SPECIALE%", 'block', $frammento_pieno);
+                                            $frammento_pieno = str_replace("%PREZZO_PRODOTTO_OFFERTA%", 
+                                                                    applicaSconto($lista_prodotti[$i]->prezzo_listino, $lista_prodotti[$i]->offerta_speciale->percentuale), 
+                                                                    $frammento_pieno);
+                                        }
+                                        else // Offerta scaduta
+                                            $frammento_pieno = str_replace("%DISPLAY_OFFERTA_SPECIALE%", 'none', $frammento_pieno);    
                                     }
-                                    else // Offerta scaduta
-                                        $frammento_pieno = str_replace("%DISPLAY_OFFERTA_SPECIALE%", 'none', $frammento_pieno);    
+                                    else
+                                        $frammento_pieno = str_replace("%DISPLAY_OFFERTA_SPECIALE%", 'none', $frammento_pieno);
+                                    
+                                    $contenuto_html .= $frammento_pieno . "\n";
                                 }
-                                else
-                                    $frammento_pieno = str_replace("%DISPLAY_OFFERTA_SPECIALE%", 'none', $frammento_pieno);
-                                
-                                $contenuto_html .= $frammento_pieno . "\n";
                             }
 
-                            echo $contenuto_html . "\n";
+                            // Se non ho stampato nessun prodotto fornisco il messaggio di errore
+                            if ( $almenoUno )
+                                echo $contenuto_html . "\n";    
+                            else 
+                                echo '<p style="font-size: 150%; width:100%; text-align:center;">Nessun prodotto soddisfa i criteri di ricerca</p>';
                         }
                     ?>
                 </div>
