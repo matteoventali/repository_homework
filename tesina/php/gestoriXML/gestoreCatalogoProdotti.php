@@ -320,5 +320,40 @@
             
             return $trovato;
         }
+
+        // Metodo per modificare un prodotto
+        function modificaProdotto($id_prodotto, $nome, $prezzo_listino, $specifiche, $descrizione)
+        {
+            // Verifico se posso usare il file
+            if ( !$this->checkValidita() )
+                return null;
+
+            // Ottengo la lista di figli della radice, ovvero la lista dei prodotti
+            $figli = $this->oggettoDOM->documentElement->childNodes;
+            $n_figli = $this->oggettoDOM->documentElement->childElementCount;
+
+            // Per ogni figlio, ovvero un prodotto, verifico corrispondenza con id ricevuto
+            $trovato = false;
+            for ( $i=0; $i<$n_figli && !$trovato; $i++ )
+            {
+                $id = $figli[$i]->getAttribute('id');
+               
+                if ( $id_prodotto == $id )
+                {
+                    $trovato = true;
+
+                    // Modifica delle informazioni associate al prodotto
+                    $figli[$i]->firstChild->nodeValue = $nome;
+                    $figli[$i]->firstChild->nextSibling->nodeValue = $prezzo_listino;
+                    $figli[$i]->firstChild->nextSibling->nextSibling->nextSibling->nodeValue = $specifiche;
+                    $figli[$i]->firstChild->nextSibling->nextSibling->nextSibling->nextSibling->nodeValue = $descrizione;
+
+                    // Salvo i cambiamenti sul file xml
+                    $this->salvaXML($this->pathname);
+                } 
+            }
+
+            return $trovato;
+        }
     }
 ?>
