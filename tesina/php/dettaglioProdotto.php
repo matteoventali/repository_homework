@@ -182,7 +182,7 @@
                                             $campo_attivazione
                                         </fieldset>
                                     </form>" . "\n\n" .
-                                    "<form id=\"formOpzioni\" action=\"aggiungiOffertaSpeciale.php\" method=\"post\">
+                                    "<form id=\"formOpzioni\" action=\"inserisciOffertaSpeciale.php\" method=\"post\">
                                         <fieldset>
                                             <input type=\"hidden\" value=\"$prodotto->id\" name=\"id_prodotto\" />
                                             $campi_hidden

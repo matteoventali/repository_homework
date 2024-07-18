@@ -135,7 +135,7 @@
                     ?>
                     <fieldset class="risposta">
                         <p>Scrivi qui la risposta:</p>
-                        <textarea rows=10 name="text_risposta"><?php if($err) echo $risposta;?></textarea>
+                        <textarea rows=10 cols=70 name="text_risposta"><?php if($err) echo $risposta;?></textarea>
                         <input type="hidden" value="<?php echo $_POST["id_domanda"]; ?>" name="id_domanda" />
                     </fieldset>
                 </form>

@@ -27,11 +27,10 @@ body
     font-size: 100%;
     overflow: auto;
     color: whitesmoke;
-    max-width: 80%;
-    min-width: 60%;
     display: flex;
     flex-direction: column;
     gap: 20px;
+    width: 90%;
 }
 
 #sezioneCentrale form:nth-child(1)

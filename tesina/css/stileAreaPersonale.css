@@ -1,3 +1,8 @@
+body
+{
+    overflow: auto;
+}
+
 #sezioneDati
 {
     width: 100%;
@@ -7,7 +12,6 @@
     align-items: center;
     gap: 40px;
     margin-top: 2%;
-    overflow: auto;
 }
 
 .riquadroInformazioni

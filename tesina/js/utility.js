@@ -354,3 +354,23 @@ function applicaOrdinamento(form_ordinamento)
     // Eseguo il submit del form per applicare l'ordinamento
     form.submit();
 }
+
+function azzeraFormInserimentoProdotto()
+{
+    // Azzeramento campi form
+    document.getElementsByName('nome')[0].value   = "";
+    document.getElementsByName('prezzoListino')[0].value   = "";
+    document.getElementsByName('id_categoria')[0].value   = 0;
+    document.getElementsByName('id_tipologia')[0].value   = 0;
+    document.getElementsByName('specifiche')[0].value   = "";
+    document.getElementsByName('immagine')[0].value   = null;
+}
+
+function azzeraFormOffertaSpeciale()
+{
+    // Azzeramento campi form
+    document.getElementsByName('dataInizio')[0].value   = "";
+    document.getElementsByName('dataFine')[0].value   = "";
+    document.getElementsByName('percentuale')[0].value   = "";
+    document.getElementsByName('crediti')[0].value   = "";
+}

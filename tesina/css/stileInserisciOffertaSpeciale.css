@@ -14,29 +14,44 @@ body
     align-items: center;
 }
 
-#sezioneCentrale form
+#sezioneForm
 {
-    width: 85%;
-    min-height: 80%;
     display: flex;
     justify-content: center;
     align-items: center;
-    flex-wrap: wrap;
     border-style: solid;
+    flex-direction: column;
     background-color: #11999E;
     box-shadow: 21px 27px 31px -2px black;
     color:white;
     gap: 20px;
     padding: 20px;
-    overflow-y: auto;
     border-radius: 15px;
+    width: 85%;
 }
 
-#sezioneCentrale form fieldset 
+#formIndietro
+{
+    width: 100%;
+    display: flex;
+    justify-content: right;
+    padding-right: 50px;
+}
+
+#formInserisciOfferta
+{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+#formInserisciOfferta fieldset 
 {
     display: flex;
     flex-direction: row;
-    width: 45%;
+    flex: 0 0 45%;
     align-items: center;
     justify-content: center;
     overflow: hidden;
@@ -51,6 +66,7 @@ body
 {
     display: flex;
     font-size: 130%;
+    flex: 0 0 45%;
 }
 
 #sezioneCentrale form fieldset input[type="text"],
@@ -76,15 +92,5 @@ body
 #sezioneCentrale form fieldset input[type="button"]
 {
     display: inline-block;
-    font-size: 120%;
-}
-
-select, input[type="file"]
-{
-    font-size: 120%;
-}
-
-textarea
-{
     font-size: 120%;
 }

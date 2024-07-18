@@ -111,7 +111,7 @@
                 echo creaPopup($mostraPopup, $msg, $err) . "\n";
             ?>
 
-            <form id="formRegistrazione" method="post" action="<?php echo $_SERVER["PHP_SELF"] ?>" enctype="multipart/form-data">
+            <form id="formInserimentoProdotto" method="post" action="<?php echo $_SERVER["PHP_SELF"] ?>" enctype="multipart/form-data">
                 <fieldset>  <p>Nome:                </p>  <input type="text" name="nome" <?php if($err) echo 'value="'. $nome . '"';?>/>    </fieldset>
                 <fieldset>  <p>Prezzo di listino:   </p>  <input type="text" name="prezzoListino" <?php if($err) echo 'value="'. $prezzo . '"';?>/> </fieldset>
                 <fieldset>  <p>Categoria</p>
@@ -143,7 +143,7 @@
                 <fieldset>  <p>Immagine:            </p>  <input type="file" name="immagine" accept="image/png, image/jpeg"/></fieldset>
                 <fieldset style="border-style: none; box-shadow: none;">
                     <input type="submit" value="Indietro &#8617;" name="btnIndietro" />
-                    <input type="button" value="Cancella" name="btnCancella" onclick="azzeraFormRegistrazione();" />
+                    <input type="button" value="Cancella" name="btnCancella" onclick="azzeraFormInserimentoProdotto();" />
                     <input type="submit" value="Inserisci" name="btnInserisci" /> 
                 </fieldset>
             </form>

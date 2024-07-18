@@ -271,5 +271,54 @@
 
             return $esito;
         }
+
+        // Metodo per inserire un'offerta speciale in un prodotto
+        // Nel caso in cui l'offerta e' gia' presente viene sovrascritta
+        function inserisciOffertaSpeciale($id_prodotto, $data_inizio, $data_fine, $crediti, $percentuale)
+        {
+            // Verifico se posso usare il file
+            if ( !$this->checkValidita() )
+                return null;
+
+            // Ottengo la lista di figli della radice, ovvero la lista dei prodotti
+            $figli = $this->oggettoDOM->documentElement->childNodes;
+            $n_figli = $this->oggettoDOM->documentElement->childElementCount;
+
+            // Per ogni figlio, ovvero un prodotto, verifico corrispondenza con id ricevuto
+            $trovato = false;
+            for ( $i=0; $i<$n_figli && !$trovato; $i++ )
+            {
+                $id = $figli[$i]->getAttribute('id');
+               
+                if ( $id_prodotto == $id ) // Ho trovato il prodotto
+                {
+                    $trovato = true;
+
+                    // Se l'offerta speciale non esiste ne viene creata una vuota
+                    $offerta_speciale_xml = $figli[$i]->getElementsByTagName('offerta_speciale');
+                    if ( count($offerta_speciale_xml) == 0 )
+                    {
+                        $nuova_offerta_speciale = $this->oggettoDOM->createElement('offerta_speciale');
+                        $nuova_offerta_speciale->appendChild($this->oggettoDOM->createElement('data_inizio', ''));
+                        $nuova_offerta_speciale->appendChild($this->oggettoDOM->createElement('data_fine', ''));
+
+                        // Aggancio la nuova offerta al prodotto
+                        $figli[$i]->appendChild($nuova_offerta_speciale);
+                        $offerta_speciale_xml = $figli[$i]->getElementsByTagName('offerta_speciale');
+                    }
+
+                    // Riempimento dell'offerta speciale
+                    $offerta_speciale_xml[0]->firstChild->nodeValue = $data_inizio;
+                    $offerta_speciale_xml[0]->lastChild->nodeValue = $data_fine;
+                    $offerta_speciale_xml[0]->setAttribute('percentuale', $percentuale);
+                    $offerta_speciale_xml[0]->setAttribute('crediti', $crediti);
+
+                    // Salvo i cambiamenti sul file xml
+                    $this->salvaXML($this->pathname);
+                } 
+            }
+            
+            return $trovato;
+        }
     }
 ?>
