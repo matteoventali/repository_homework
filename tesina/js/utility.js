@@ -260,7 +260,7 @@ function callbackEliminaIntervento(xhr, tipo)
     // Notifica tramite alert in caso di errore
     if ( !xhr.responseText )
         alert("Eliminazione intervento fallita");
-    
+
     // Se e' stata eliminata una domanda ritorno alla pagina di resoconto domande
     // altrimenti refresh della pagina
     if (tipo != 'domanda')

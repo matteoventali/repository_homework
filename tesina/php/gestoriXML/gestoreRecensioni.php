@@ -303,32 +303,5 @@
 
             return $esito;
         }
-
-        // Metodo per rimuovere le recensioni associate ad un prodotto
-        function rimuoviRecensioni($id_prodotto)
-        {
-            if ( !$this->checkValidita() )
-                return false;
-
-            // Ottengo la lista di figli della radice, ovvero la lista delle recensioni
-            $figli = $this->oggettoDOM->documentElement->childNodes;
-            $n_figli = $this->oggettoDOM->documentElement->childElementCount;
-
-            // Per ogni figlio, ovvero una recensione, verifico se l'id del prodotto
-            // corrisponde a quello passato come parametro
-            for ( $i=0; $i<$n_figli; $i++ )
-            {
-                // Verifico se l'id del prodotto corrisponde
-                // a quello passato
-                $id = $figli[$i]->getAttribute("id_prodotto");
-                if ( $id == $id_prodotto )
-                    // Elimino la recensione associata al prodotto
-                    $this->oggettoDOM->documentElement->removeChild($figli[$i]);
-            }
-
-            // Salvo i cambiamenti sul file
-            $this->salvaXML($this->pathname);
-            return true;
-        }
     }
 ?>

@@ -348,14 +348,21 @@
 
             // Per ogni figlio, ovvero una risposta, verifico se l'id della domanda
             // corrisponde a quello passato come parametro
-            for ( $i=0; $i<$n_figli; $i++ )
+            $i = 0;
+            while ( $i < $n_figli )
             {
                 // Verifico se l'id della domanda corrisponde
                 // a quello passato
                 $id = $figli[$i]->getAttribute("id_domanda");
+
                 if ( $id == $id_domanda )
+                {
                     // Elimino la risposta associata alla domanda
                     $this->oggettoDOM->documentElement->removeChild($figli[$i]);
+                    $n_figli--;
+                }
+                else
+                    $i++;
             }
 
             // Salvo i cambiamenti sul file
