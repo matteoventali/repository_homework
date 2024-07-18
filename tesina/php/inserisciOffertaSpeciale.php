@@ -193,7 +193,7 @@
                     </fieldset>
                 </form>
 
-                <form id="formInserisciOfferta" method="post"  enctype="multipart/form-data">
+                <form id="formInserisciOfferta" method="post" action="<?php echo $_SERVER["PHP_SELF"] ?>">
                     <fieldset>  <p>Data inizio (DD-MM-YYYY): </p>  <input type="text" name="dataInizio" <?php if($err || $popolazione_preliminare) echo 'value="'. $data_inizio . '"';?>/>    </fieldset>
                     <fieldset>  <p>Data fine (DD-MM-YYYY):   </p>  <input type="text" name="dataFine" <?php if($err || $popolazione_preliminare) echo 'value="'. $data_fine . '"';?>/> </fieldset>
                     <fieldset>  <p>Percentuale sconto:       </p>  <input type="text" name="percentuale" <?php if($err || $popolazione_preliminare) echo 'value="'. $percentuale . '"';?>/> </fieldset>
