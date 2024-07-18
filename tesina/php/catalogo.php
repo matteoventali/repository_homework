@@ -28,6 +28,7 @@
         // Qui bisogna mostrare il popup
         $mostraPopup = true;
         $msg = 'Parametri di ricerca non specificati';
+        $lista_prodotti = [];
     }
     else
     {
@@ -177,7 +178,7 @@
                         $n_prodotti = count($lista_prodotti);
                         $data_oggi = strtotime(date('Y-m-d'));
 
-                        if ( $n_prodotti == 0 )
+                        if ( $n_prodotti == 0 || $mostraPopup )
                             echo '<p style="font-size: 150%; width:100%; text-align:center;">Nessun prodotto soddisfa i criteri di ricerca</p>';
                         else
                         {

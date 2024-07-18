@@ -25,11 +25,11 @@ function gestisciSidebar(param)
 function nascondiPopup()
 {
     // Prendo il riferimento alla finestra popup
-    popup = document.getElementById("sezioneErrore");
+    popup = document.getElementById("popupErrore");
 
     // Nascondo il popup
-    popup.firstElementChild.style.marginRight = "-100%";
-    
+    popup.style.marginRight = "-100%";
+
     // Tolgo la sezione errore al termine dell'animazione
     setTimeout(function(){popup.style.display = "none";}, 300);
 }

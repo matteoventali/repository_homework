@@ -159,7 +159,7 @@
                                             <input type=\"hidden\" value=\"$contenuto_ricerca\" name=\"contenutoRicerca\" />";
                         
                         // Se l'utente e' loggato come gestore mostro il form con le 3 opzioni di modifica, eliminazione e inserimento offerta speciale
-                        if ( $_SESSION["ruolo"] == 'G' )
+                        if ( $sessione_attiva && $_SESSION["ruolo"] == 'G' )
                         {
                             // Se il prodotto e' mostrato fornisco l'opzione per nasconderlo, e viceversa
                             if ( $prodotto->mostra == 'true')
@@ -190,7 +190,7 @@
                                         </fieldset>
                                     </form>";
                         }
-                        else if ( $_SESSION["ruolo"] == 'C' ) // Fornisco l'opportunita' al cliente di aggiungere al carrello il prodotto
+                        else if ( $sessione_attiva && $_SESSION["ruolo"] == 'C' ) // Fornisco l'opportunita' al cliente di aggiungere al carrello il prodotto
                             echo "<form id=\"formOpzioni\" action=\"aggiungiAlCarrello.php\" method=\"post\">
                                     <fieldset>
                                         <input type=\"hidden\" value=\"$prodotto->id\" name=\"id_prodotto\" />
@@ -243,7 +243,7 @@
                                 $recensione_html = str_replace("%OPZIONE_FAQ%", 'none', $recensione_html);
 
                                 // Se l'utente e' loggato come gestore o admin fornisco l'opzione di eliminare la recensione
-                                if ( $_SESSION["ruolo"] == 'G' || $_SESSION["ruolo"] == 'A' )
+                                if ( $sessione_attiva && ($_SESSION["ruolo"] == 'G' || $_SESSION["ruolo"] == 'A') )
                                     $recensione_html = str_replace("%OPZIONE_DISPLAY_ELIMINA%", 'block', $recensione_html);
                                 else
                                     $recensione_html = str_replace("%OPZIONE_DISPLAY_ELIMINA%", 'none', $recensione_html);

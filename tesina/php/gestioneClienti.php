@@ -2,6 +2,7 @@
     require_once 'lib/libreria.php';
     require_once 'lib/libreriaDB.php';
     require_once 'lib/verificaSessioneAttiva.php';
+    require_once 'lib/parametriStile.php';
     
     // Parametri per mostrare le tessere dei clienti in maniera appropriata
     // Di default si mostrano tutti i clienti (attivi/bannati)
@@ -106,12 +107,12 @@
                         if ( $cliente->stato == "A" )
                         {
                             $stato = "ATTIVO";
-                            $colore_stato = "#7CFC00";
+                            $colore_stato = $colore_background_popup_verde;
                         }
                         else if ( $cliente->stato == 'B' ) 
                         {
                             $stato = "BANNATO";
-                            $colore_stato = "red";
+                            $colore_stato = $colore_background_popup_rosso;
                         } 
                         $nuova_tessera = str_replace("%COLORE_STATO%", $colore_stato, $nuova_tessera);
                         $nuova_tessera = str_replace("%STATO%", $stato, $nuova_tessera);
