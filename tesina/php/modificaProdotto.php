@@ -113,7 +113,7 @@
         <link rel="stylesheet" href="../css/stileLayout.css" type="text/css" />
         <link rel="stylesheet" href="../css/stileSidebar.css" type="text/css" />
         <link rel="stylesheet" href="../css/stilePopup.css" type="text/css" />
-        <link rel="stylesheet" href="../css/stileInserisciProdotto.css" type="text/css" />
+        <link rel="stylesheet" href="../css/stileModificaProdotto.css" type="text/css" />
         <link rel="icon" type="image/x-icon" href="../img/logo.png" />
         <script type="text/javascript" src="../js/utility.js"></script>
         <title>UNI-TECNO</title>

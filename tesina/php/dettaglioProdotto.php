@@ -183,21 +183,21 @@
                                 $campo_attivazione =  "<input type=\"submit\" value=\"Mostra prodotto\" name=\"btnMostra\" />";
 
                             
-                            echo "<form id=\"formOpzioni\" action=\"modificaProdotto.php\" method=\"post\">
+                            echo "<form id=\"formModifica\" action=\"modificaProdotto.php\" method=\"post\">
                                     <fieldset>
                                         <input type=\"hidden\" value=\"$prodotto->id\" name=\"id_prodotto\" />
                                         $campi_hidden
                                         <input type=\"submit\" value=\"Modifica prodotto\" name=\"btnModifica\" />
                                     </fieldset>
                                     </form>". "\n\n". 
-                                    "<form id=\"formOpzioni\" action=\"attivaDisattivaProdotto.php\" method=\"post\">
+                                    "<form id=\"formAttivazione\" action=\"attivaDisattivaProdotto.php\" method=\"post\">
                                         <fieldset>
                                             <input type=\"hidden\" value=\"$prodotto->id\" name=\"id_prodotto\" />
                                             $campi_hidden
                                             $campo_attivazione
                                         </fieldset>
                                     </form>" . "\n\n" .
-                                    "<form id=\"formOpzioni\" action=\"inserisciOffertaSpeciale.php\" method=\"post\">
+                                    "<form id=\"formOffertaSpeciale\" action=\"inserisciOffertaSpeciale.php\" method=\"post\">
                                         <fieldset>
                                             <input type=\"hidden\" value=\"$prodotto->id\" name=\"id_prodotto\" />
                                             $campi_hidden
@@ -206,14 +206,14 @@
                                     </form>";
                         }
                         else if ( $sessione_attiva && $_SESSION["ruolo"] == 'C' ) // Fornisco l'opportunita' al cliente di aggiungere al carrello il prodotto
-                            echo "<form id=\"formOpzioni\" action=\"aggiungiAlCarrello.php\" method=\"post\">
+                            echo "<form id=\"formCarrello\" action=\"aggiungiAlCarrello.php\" method=\"post\">
                                     <fieldset>
                                         <input type=\"hidden\" value=\"$prodotto->id\" name=\"id_prodotto\" />
                                         $campi_hidden
                                         <input type=\"submit\" value=\"Aggiungi al carrello\" name=\"btnAggiungiCarrello\" />
                                     </fieldset>
                                     </form>" . "\n\n". 
-                                    "<form id=\"formOpzioni\" action=\"inserisciRecensione.php\" method=\"post\">
+                                    "<form id=\"formRecensione\" action=\"inserisciRecensione.php\" method=\"post\">
                                         <fieldset>
                                             <input type=\"hidden\" value=\"$prodotto->id\" name=\"id_prodotto\" />
                                             $campi_hidden

@@ -50,23 +50,26 @@
 
     <body onload="">
         <?php
-            // Import della navbar
-            $nav = file_get_contents("../html/strutturaNavbarUtenti.html");
-            $nav = str_replace("%NOME_UTENTE%", $_SESSION["nome"] . " " . $_SESSION["cognome"], $nav);
-            echo $nav ."\n";
-            
-            // Import del frammento di accesso al catalogo
-            echo creaPopup($mostraPopup, $msg, $err) . "\n\n";
-            
-            $cat = file_get_contents("../html/frammentoAccessoCatalogo.html");
-            $cat = str_replace("%URL_SFONDO_CASUALE%", ottieniURLSfondo(), $cat);
-            echo $cat . "\n";
+            if ( $sessione_attiva )
+            {
+                // Import della navbar
+                $nav = file_get_contents("../html/strutturaNavbarUtenti.html");
+                $nav = str_replace("%NOME_UTENTE%", $_SESSION["nome"] . " " . $_SESSION["cognome"], $nav);
+                echo $nav ."\n";
+                
+                // Import del frammento di accesso al catalogo
+                echo creaPopup($mostraPopup, $msg, $err) . "\n\n";
+                
+                $cat = file_get_contents("../html/frammentoAccessoCatalogo.html");
+                $cat = str_replace("%URL_SFONDO_CASUALE%", ottieniURLSfondo(), $cat);
+                echo $cat . "\n";
 
-            // Import della sidebar e mostro le opzioni per l'utente loggato
-            // Il ruolo dell'utente e' prelevato dalle variabili di sessione
-            $sidebar = file_get_contents("../html/strutturaSidebar.html");
-            $sidebar = str_replace("%OPERAZIONI_UTENTE%", ottieniOpzioniMenu($_SESSION["ruolo"]), $sidebar);
-            echo $sidebar . "\n";
+                // Import della sidebar e mostro le opzioni per l'utente loggato
+                // Il ruolo dell'utente e' prelevato dalle variabili di sessione
+                $sidebar = file_get_contents("../html/strutturaSidebar.html");
+                $sidebar = str_replace("%OPERAZIONI_UTENTE%", ottieniOpzioniMenu($_SESSION["ruolo"]), $sidebar);
+                echo $sidebar . "\n";
+            }
         ?>
     </body>
 </html>

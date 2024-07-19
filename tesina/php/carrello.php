@@ -41,13 +41,16 @@
             echo $sidebar . "\n";
         ?>
 
-        <div id="sezioneCentrale">
-            <div id="sezioneCarrello">
-                <form id="formCarrello" action="finalizzaAcquisto.php" method="post">
+        <div id="sezioneCarrello">
+            <form id="formCarrello" action="finalizzaAcquisto.php" method="post">
+                <div id="sezioneProdotti">
                     <?php
                         // Prelevo i prodotti dal carrello dell'utente loggato
                         if ( $sessione_attiva && $_SESSION["ruolo"] == 'C' )
                         {
+                            // Variabile per tenere traccia del totale provvisorio del carrello
+                            $totale_provvisorio = 0;
+                            
                             // Gestore carrelli
                             $gestoreCarrelli = new GestoreCarrelli();
                             $lista_prodotti = $gestoreCarrelli->ottieniProdottiCarrello($_SESSION["id_utente"]);
@@ -58,6 +61,9 @@
                             // Per ogni prodotto nel carrello compongo un frammento da mostrare
                             $frammento_vuoto = file_get_contents('../html/frammentoProdottoCarrello.html');
                             $n_prod = count($lista_prodotti);
+
+                            // Flag per segnalare la presenza di prodotti nel carrello (si considerano solo quelli non nascosti)
+                            $prod_presenti = false;
 
                             // Calcolo lo sconto fisso per il cliente loggato
                             $sconto_fisso = calcolaScontoFisso($_SESSION['id_utente'], $_SESSION['reputazione'], $_SESSION['data_registrazione']);
@@ -73,6 +79,9 @@
                                 // attualmente nel catalogo
                                 if ( $prod->mostra == 'true' )
                                 {
+                                    // Almeno un prodotto e' presente
+                                    $prod_presenti = true;
+                                    
                                     // Frammento prodotto
                                     $frammento = str_replace('%NOME_PRODOTTO%', $prod->nome, $frammento_vuoto);
                                     $frammento = str_replace('%ID_PRODOTTO%', $prod->id, $frammento);
@@ -94,20 +103,30 @@
                                     $frammento = str_replace('%PREZZO_ACQUISTO%', $prezzo_da_mostrare, $frammento);
                                     $frammento = str_replace('%CREDITI_BONUS%', $crediti_bonus, $frammento);
 
+                                    // Incremento del totale provvisorio
+                                    $totale_provvisorio += intval($prezzo_da_mostrare);
+
                                     $contenuto_html .= $frammento . "\n";
                                 }
                             }
 
+                            // Se il numero di prodotti e' nullo messaggio di notifica all'utente
+                            if ( !$prod_presenti )
+                                $contenuto_html = '<p style="font-weight: bold; text-align:center; font-size: 130%;">Nessun prodotto nel carrello!</p>';
+                            
                             echo $contenuto_html . "\n\n";
                         }
                     ?>
+                </div>
 
-                    <fieldset>
-                        <p>Totale provvisorio: <?php ?></p>
-                        <input type="submit" name="btnFinalizza" value="Procedi all'acquisto" />
-                    </fieldset>
-                </form>
-            </div>
+                <fieldset>
+                    <p>Totale provvisorio: <?php if(isset($totale_provvisorio)) echo $totale_provvisorio; ?></p>
+                    <?php
+                        if ( isset($prod_presenti) && $prod_presenti > 0 )
+                            echo '<input type="submit" name="btnFinalizza" value="Procedi all\'acquisto" />';
+                    ?>
+                </fieldset>
+            </form>
         </div>
     </body>
 </html>
