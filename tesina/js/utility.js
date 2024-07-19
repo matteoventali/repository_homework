@@ -374,3 +374,27 @@ function azzeraFormOffertaSpeciale()
     document.getElementsByName('percentuale')[0].value   = "";
     document.getElementsByName('crediti')[0].value   = "";
 }
+
+function rimuoviProdottoDaCarrello(id_cliente, id_prodotto)
+{
+    // Composizione della query string
+    query_string = 'id_cliente=' + id_cliente + "&id_prodotto=" + id_prodotto;
+
+    // Richiesta AJAX per eliminare il prodotto dal carrello
+    xhr = new XMLHttpRequest();
+    xhr.open("POST", "eliminaProdottoDaCarrello.php");
+    xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+    xhr.onload = function(){ callbackEliminaProdottoDaCarrello(xhr) }; // Definisco una funzione di callback implicita che chiama quella sotto
+    xhr.send(query_string);
+}
+
+function callbackEliminaProdottoDaCarrello(xhr)
+{
+    // Ricevo vero o falso a seconda della riuscita dell'operazione
+    // Notifica tramite alert in caso di errore
+    if ( !xhr.responseText )
+        alert("Eliminazione intervento fallita");
+
+    // A prescindere refresh della pagina
+    location.reload();
+}

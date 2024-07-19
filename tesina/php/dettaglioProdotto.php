@@ -4,6 +4,18 @@
     require_once 'lib/verificaSessioneAttiva.php';
     require_once 'gestoriXML/gestoreCatalogoProdotti.php';
     require_once 'gestoriXML/gestoreRecensioni.php';
+
+    // Variabili di gestione popup
+    $mostraPopup = false; $msg = ''; $err = false;
+
+    // Verifico se provengo dall'inserimento al carrello del prodotto
+    if ( isset($_GET["esito_carrello"]) && $_GET["esito_carrello"] == 'true' )
+    {
+        // Inizializzo le variabili per il popup in modo che venga mostrato il messaggio di conferma
+        $mostraPopup = true;
+        $msg = 'Prodotto aggiunto al carrello!';
+        $err = false;
+    }
     
     // Verifico se sia pervenuto l'id del prodotto da visualizzare
     // dal post
@@ -71,6 +83,9 @@
                     echo '<p style="display:none;" id="reputazione_utente">' . $utente->reputazione . '</p>' . "\n";
                     $handleDB->close();
                 }
+
+                // Mostro il popup
+                echo creaPopup($mostraPopup, $msg, $err) . "\n\n";
             }
             else 
             {

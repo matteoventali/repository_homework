@@ -1,0 +1,50 @@
+body
+{
+    overflow: auto;
+}
+
+#sezioneCentrale
+{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 2%;
+}
+
+#sezioneCarrello
+{
+    display: flex;
+    flex-direction: row;
+    width: 90%;
+    border-style: solid;
+    border-color: white;
+    background-color: #11999E;
+    box-shadow: 21px 27px 31px -2px black;
+    border-radius: 15px;
+    font-size: 130%;
+    color: black;
+    padding: 30px;
+}
+
+.prodottoCarrello
+{
+    display: flex;
+    justify-content: space-evenly;
+    border-style: solid;
+    border-color: white;
+    background-color: #11999E;
+    box-shadow: 21px 27px 31px -2px black;
+    color:white;
+    border-radius: 15px;
+    color: black;
+    align-items: center;
+    padding: 30px;
+}
+
+.prodottoCarrello div:first-child img
+{
+    width: 256px;
+    height: 256px;
+    border-style: solid;
+}

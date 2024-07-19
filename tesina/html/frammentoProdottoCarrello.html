@@ -1,0 +1,16 @@
+<div class="prodottoCarrello">
+    <div>
+        <img src="%PATH_IMMAGINE%" alt="immagine di %NOME_PRODOTTO%" />
+    </div>
+    <div>
+        <p>%NOME_PRODOTTO%</p>
+        <p>Prezzo: %PREZZO_PRODOTTO% crediti</p>
+    </div>
+
+    <fieldset>
+        <input type="button" name="btnRimuovi" value="Rimuovi prodotto" onclick="rimuoviProdottoDaCarrello('%ID_CLIENTE%','%ID_PRODOTTO%');" />
+        <input type="hidden" name="id_prodotto[]" value="%ID_PRODOTTO%" />
+        <input type="hidden" name="prezzo_di_acquisto[]" value="%PREZZO_ACQUISTO%" />
+        <input type="hidden" name="crediti_bonus[]" value="%CREDITI_BONUS%" />
+    </fieldset>
+</div>
