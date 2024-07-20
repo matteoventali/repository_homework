@@ -49,9 +49,10 @@ body
     display: flex;
     border-style: solid;
     flex-direction: row;
+    flex-wrap: wrap;
     justify-content: center;
     align-items: center;
-    font-size: 170%;
+    font-size: 150%;
     background-color: #11999E;
     box-shadow: 21px 27px 31px -2px black;
     color:white;
@@ -80,6 +81,7 @@ fieldset input[type="text"]
 {
     width: 100%;
     font-size: 100%;
+    min-width: 150px;
     text-align: center;
 }
 
@@ -100,7 +102,6 @@ fieldset input[type="checkbox"]
     box-shadow: 21px 27px 31px -2px black;
     color:white;
     border-radius: 15px;
-    overflow: auto;
     flex: 0 0 30%;
     justify-content: center;
     align-items: center;

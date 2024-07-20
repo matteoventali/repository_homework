@@ -38,20 +38,21 @@ button:hover, input[type="submit"]:hover, input[type="reset"]:hover, input[type=
     position: sticky;
     display: flex;
     flex-direction: row;
+    flex-wrap: wrap;
     top: 0;
     width: 100%;
-    height: 15%;
+    min-height: 15%;
+    max-height: 30%;
     background-color: #11999E;
     align-items: center;
     box-shadow: 21px 18px 31px -2px black;
-    overflow: hidden;
+    overflow: auto;
 }
 
 .navbar div
 {
     display: flex;
     text-align: center;
-    height: 100%;
     justify-content: center;
     align-items: center;
 }
@@ -60,21 +61,29 @@ button:hover, input[type="submit"]:hover, input[type="reset"]:hover, input[type=
 {
     flex: 1;
     font-size: 30px;
+    padding-top: 10px;
+    padding-bottom: 10px;
 }
 
 .opzioneLogo
 {
     flex: 3;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .opzioneLogo a
 {
-    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .opzioneLogo a img
 {
-    height: 100%;
+    width: 128px;
+    height: 128px;
 }
 
 .opzioneBottone1

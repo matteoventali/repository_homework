@@ -132,7 +132,7 @@
                     $domanda_html = str_replace("%OPZIONE_DISPLAY_ELIMINA%", $visibilita_elimina, $domanda_html);
 
                     // Verifico se l'utente e' loggato come admin/gestore e che la domanda non sia elevata a faq
-                    if ( ($_SESSION["ruolo"] == "A" || $_SESSION["ruolo"] == "G") && $domanda->faq == "false")
+                    if ( $sessione_attiva && ($_SESSION["ruolo"] == "A" || $_SESSION["ruolo"] == "G") && $domanda->faq == "false")
                         $domanda_html = str_replace("%OPZIONE_FAQ%", 'block', $domanda_html);
                     else
                         $domanda_html = str_replace("%OPZIONE_FAQ%", 'none', $domanda_html);

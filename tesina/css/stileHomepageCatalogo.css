@@ -1,12 +1,17 @@
+body
+{
+    overflow: auto;
+}
+
 #sezioneCentrale
 {
     width: 100%;
-    height: 80%;
+    min-height: 80%;
     display: flex;
     align-items: center;
     flex-direction: column;
     justify-content: center;
-    gap: 5%;
+    gap: 50px;
     padding-bottom: 50px;
 }
 
@@ -21,7 +26,6 @@
 #sezioneRicercheVeloci
 {
     width: 90%;
-    overflow: auto;
     border-style: solid;
     background-color: #11999E;
     box-shadow: 21px 27px 31px -2px black;
@@ -45,7 +49,6 @@
 {
     gap: 50px;
     padding: 20px;
-    overflow: auto;
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
@@ -66,14 +69,14 @@
     flex-direction: row;
     justify-content: center;
     align-items: center;
-    font-size: 140%;
+    font-size: 150%;
     background-color: #11999E;
+    flex-wrap: wrap;
     box-shadow: 21px 27px 31px -2px black;
     color:white;
     border-radius: 15px;
     padding-left: 20px;
     padding-right: 20px;
-    overflow-x: auto;
 }
 
 fieldset
