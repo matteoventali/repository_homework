@@ -71,36 +71,31 @@
         ?>
 
         <div id="sezioneForm">
-            <div id="sezionePopup">
-                <?php 
+            <?php 
                     // Stampo il popup se necessario
                     echo creaPopup($mostraPopup, $msg, $err) . "\n";
-                ?>
-            </div>
-            
-            <div id="parteCentrale">
-                <form action="<?php echo $_SERVER["PHP_SELF"]; ?>" method="post">
-                    <fieldset>
-                        <p>Seleziona taglio:</p>
-                        <select name="creditiRichiesti">
-                            <option value="0">Taglio</option>
-                            <?php
-                                for ( $i=0; $i<$n_tagli; $i++ )
-                                {
-                                    // Creo una nuova opzione
-                                    echo '<option value="' . $tagli[$i]->crediti. '">' . "\n";
-                                    echo $tagli[$i]->importo . "&euro; &rarr; " . $tagli[$i]->crediti . " crediti\n";
-                                    echo '</option>';
-                                }
-                            ?>
-                        </select>
-                    </fieldset>
-                        
-                    <div class="parteButton">
-                            <input type="submit" value="Invia" name="btnInvia" />
-                    </div>
-                </form>
-            </div>
+            ?>
+            <form action="<?php echo $_SERVER["PHP_SELF"]; ?>" method="post">
+                <fieldset>
+                    <p>Seleziona taglio:</p>
+                    <select name="creditiRichiesti">
+                        <option value="0">Taglio</option>
+                        <?php
+                            for ( $i=0; $i<$n_tagli; $i++ )
+                            {
+                                // Creo una nuova opzione
+                                echo '<option value="' . $tagli[$i]->crediti. '">' . "\n";
+                                echo $tagli[$i]->importo . "&euro; &rarr; " . $tagli[$i]->crediti . " crediti\n";
+                                echo '</option>';
+                            }
+                        ?>
+                    </select>
+                </fieldset>
+                    
+                <div class="parteButton">
+                        <input type="submit" value="Invia" name="btnInvia" />
+                </div>
+            </form>
         </div>
     </body>
 </html>
