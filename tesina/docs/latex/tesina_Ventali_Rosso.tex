@@ -811,6 +811,8 @@ create table UTENTI(
 			\begin{itemize}
 				\item \textbf{acquisti $\rightarrow$ acquisto[id\_cliente] } l'attributo id\_cliente dell'elemento acquisto permette di specificare il cliente che ha effettuato l'acquisto (\ref{Introduzione});
 				\item \textbf{acquisti $\rightarrow$ acquisto[crediti\_bonus\_ricevuti] } l'attributo crediti\_bonus\_ricevuti dell'elemento acquisto permette di specificare l'ammontare di crediti bonus ricevuti dal cliente dopo l'acquisto (\ref{PortBonus});
+				\item \textbf{acquisti $\rightarrow$ acquisto[crediti\_bonus\_utilizzati] } l'attributo crediti\_bonus\_utilizzati dell'elemento acquisto permette di specificare l'ammontare di crediti bonus utilizzati dal cliente al momento dell'acquisto (\ref{PortBonus});
+				\item \textbf{acquisti $\rightarrow$ acquisto[totale\_effettivo] } l'attributo totale\_effettivo dell'elemento acquisto permette di specificare l'ammontare di crediti totali spesi dal cliente per l'acquisto. Con l'utilizzo di crediti bonus il totale effettivo può differire dalla somma dei prezzi relativi ai prodotti coinvolti nell'acquisto. (\ref{PortBonus});
 				\item \textbf{acquisti $\rightarrow$ acquisto $\rightarrow$ prodotti } l'elemento prodotti dell'elemento acquisto permette di specificare la lista di prodotti (con almeno un prodotto) coinvolti nell'acquisto (\ref{Introduzione});
 				\item \textbf{acquisti $\rightarrow$ acquisto $\rightarrow$ indirizzo\_consegna } l'elemento indirizzo\_consegna dell'elemento acquisto permette di specificare l'indirizzo di consegna relativo all'acquisto (sezione Clienti di \ref{CategorieUtenti}).
 			\end{itemize}

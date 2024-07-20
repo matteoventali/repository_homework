@@ -9,6 +9,7 @@
         public $crediti_bonus_ricevuti;
         public $crediti_bonus_utilizzati;
         public $indirizzo_consegna;
+        public $totale_effettivo;
         public $prodotti;
     }
 
@@ -63,6 +64,7 @@
                     $acquisto->id_cliente = $figli[$i]->getAttribute("id_cliente");
                     $acquisto->crediti_bonus_ricevuti = $figli[$i]->getAttribute("crediti_bonus_ricevuti");
                     $acquisto->crediti_bonus_utilizzati = $figli[$i]->getAttribute("crediti_bonus_utilizzati");
+                    $acquisto->totale_effettivo = $figli[$i]->getAttribute("totale_effettivo");
                     $acquisto->indirizzo_consegna = $figli[$i]->lastChild->textContent;
                     
                     // Estraggo i prodotti dell'acquisto
@@ -121,6 +123,7 @@
                     $nuovo_acquisto->id_cliente = $figli[$i]->getAttribute("id_cliente");
                     $nuovo_acquisto->crediti_bonus_ricevuti = $figli[$i]->getAttribute("crediti_bonus_ricevuti");
                     $nuovo_acquisto->crediti_bonus_utilizzati = $figli[$i]->getAttribute("crediti_bonus_utilizzati");
+                    $nuovo_acquisto->totale_effettivo = $figli[$i]->getAttribute("totale_effettivo");
                     $nuovo_acquisto->indirizzo_consegna = $figli[$i]->lastChild->textContent;
                     
                     // Estraggo i prodotti
@@ -170,21 +173,11 @@
             {
                 // Acquisto corrente
                 $acquisto = $acquisti[$i];
-                $totale = 0; // Totale riferito all'acquisto corrente
                 
-                // Estraggo i prodotti dall'acquisto
-                $lista_prodotti = $acquisto->prodotti;
-                $n_prodotti = count($lista_prodotti);
-                for ( $j=0; $j<$n_prodotti; $j++ )
-                {
-                    $somma = $lista_prodotti[$j]->prezzo;
-                    $totale = $totale + $somma;
-                }
-
                 // Incremento n e eventualmente anche m
-                $n += $totale;
+                $n += $acquisto->totale_effettivo;
                 if ( date('Y', strtotime($acquisto->data)) == $anno_corrente )
-                    $m += $totale;
+                    $m += $acquisto->totale_effettivo;
             }
 
             // I valori vengono ritornati in una lista

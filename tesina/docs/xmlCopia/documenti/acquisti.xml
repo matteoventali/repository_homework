@@ -1,21 +1,21 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <acquisti xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../schema/schemaAcquisti.xsd" >
        
-    <acquisto id="1" id_cliente="10" data="2024-06-08" crediti_bonus_ricevuti="3">
+    <acquisto id="1" id_cliente="3" data="2024-06-08" crediti_bonus_utilizzati="0" totale_effettivo="170" crediti_bonus_ricevuti="3">
         <prodotti>
             <prodotto id_prodotto="1" prezzo="170"/>
         </prodotti>
         <indirizzo_consegna>Via Rossi 15 Latina 04100</indirizzo_consegna>
     </acquisto>
     
-    <acquisto id="2" id_cliente="50" data="2024-06-10" crediti_bonus_ricevuti="3">
+    <acquisto id="2" id_cliente="3" data="2024-06-10" crediti_bonus_utilizzati="0" totale_effettivo="67" crediti_bonus_ricevuti="3">
         <prodotti>
             <prodotto id_prodotto="2" prezzo="67"/>
         </prodotti>
         <indirizzo_consegna>Via Verdi 1 Roma 00042</indirizzo_consegna>
     </acquisto>
 
-    <acquisto id="3" id_cliente="23" data="2024-06-15" crediti_bonus_ricevuti="6">
+    <acquisto id="3" id_cliente="4" data="2024-06-15" crediti_bonus_utilizzati="0" totale_effettivo="237" crediti_bonus_ricevuti="6">
         <prodotti>
             <prodotto id_prodotto="1" prezzo="170"/>
             <prodotto id_prodotto="2" prezzo="67"/>

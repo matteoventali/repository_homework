@@ -19,7 +19,8 @@
             <xsd:attribute name="id_cliente" type="xsd:integer" use="required" />
             <xsd:attribute name="data" type="xsd:date" use="required" />
             <xsd:attribute name="crediti_bonus_ricevuti" type="xsd:integer" use="required" />
-            <xsd:attribute name="crediti_bonus_utilizzati" type="xsd:integer" />
+            <xsd:attribute name="crediti_bonus_utilizzati" type="xsd:integer" use="required"/>
+            <xsd:attribute name="totale_effettivo" type="xsd:integer" use="required"/>
         </xsd:complexType>
     </xsd:element>
 

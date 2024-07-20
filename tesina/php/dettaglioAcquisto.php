@@ -65,7 +65,8 @@
                 <p> 
                     <span> <span>Data acquisto: </span><?php echo date('d-m-Y', strtotime($acquisto->data));?></span> 
                     <span> <span>Crediti bonus ricevuti: </span><?php echo $acquisto->crediti_bonus_ricevuti;?></span> 
-                    <span> <span>Totale acquisto: </span><?php echo calcolaTotaleAcquisto($id_acquisto)?></span> 
+                    <span> <span>Crediti bonus utilizzati: </span><?php echo $acquisto->crediti_bonus_utilizzati;?></span> 
+                    <span> <span>Totale acquisto: </span><?php echo $acquisto->totale_effettivo;?></span> 
                 </p>
             </div>
 
