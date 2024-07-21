@@ -10,6 +10,11 @@ function gestisciSidebar(param)
     // Verifico se la sidebar e' mostrata o meno tramite il testo 
     if ( param == 0 ) // Mostro la sidebar
     {
+        // Prelevo l'altezza (in px) dell'intestazione in modo che 
+        // a tutti i livelli di zoom venga mostrata 
+        // sotto la navbar
+        altezza = document.getElementById('navbar').clientHeight;
+        sidebar.style.top = altezza + 'px';
         sidebar.style.left = "0%";
         btn1.style.display = "none";
         btn2.style.display = "block";
