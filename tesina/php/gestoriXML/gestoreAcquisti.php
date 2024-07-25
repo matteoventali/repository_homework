@@ -1,6 +1,9 @@
 <?php
     require_once 'gestoreXMLDOM.php';
-
+    require_once 'gestoreCarrelli.php';
+    require_once 'gestoreCatalogoProdotti.php';
+    require_once 'gestorePortafogliBonus.php';
+    
     class Acquisto
     {
         public $id;
@@ -186,6 +189,95 @@
             array_push($risultati, $m);
 
             return $risultati;
+        }
+
+        // Metodo per inserire un nuovo acquisto effettuato da un cliente
+        // riceve anche l'ammontare di crediti bonus che il cliente vuole sfruttare
+        // per beneficiare dello sconto variabile
+        function inserisciAcquisto($id_cliente, $crediti_bonus, $indirizzo_consegna)
+        {
+            require 'lib/libreriaDB.php';
+            require 'lib/configurazione.php';
+            require 'lib/connection.php';
+            
+            // Esito dell'operazione
+            // 1 -> successo
+            // 2 -> crediti bonus passati superiore ai massimi consentiti
+            // 3 -> crediti del portafoglio standard insufficienti
+            $esito = 1;
+            
+            // Verifico se posso usare il file e sono connesso al database
+            if ( !$this->checkValidita() || !$connessione )
+                return false;
+
+            // Gestori utili
+            $gestoreCarrelli = new GestoreCarrelli();
+            $gestoreCatalogo = new GestoreCatalogoProdotti();
+            $gestorePortafogliBonus = new GestorePortafogliBonus();
+
+            // Prelevo i dati dell'utente
+            $utente = ottieniUtente($id_cliente, $handleDB);
+            
+            // Calcolo lo sconto fisso per il cliente che effettua l'acquisto
+            $sconto_fisso = calcolaScontoFisso($utente->id_utente, $utente->reputazione, $utente->data_registrazione);
+
+            // Calcolo il totale del carrello e il totale dei prodotti non in offerta speciale
+            $prodotti = $gestoreCarrelli->ottieniProdottiCarrello($id_cliente);
+            $n_prodotti = 0;
+            if ( $prodotti != null )
+                $n_prodotti = count($prodotti);
+
+            $totale = 0; $totale_senza_offerte = 0;
+
+            for ( $i=0; $i < $n_prodotti; $i++ )
+            {
+                // Ottengo il prodotto i-esimo del carrello
+                $prodotto = $gestoreCatalogo->ottieniProdotto($prodotti[$i]);
+                
+                // Incremento il totale
+                if ( $prodotto->offerta_speciale != null && strtotime($prodotto->offerta_speciale->data_fine) + 86400 >= time() )
+                    $prezzo = applicaSconto($prodotto->prezzo_listino, $prodotto->offerta_speciale->percentuale);
+                else
+                {
+                    $prezzo = applicaSconto($prodotto->prezzo_listino, $sconto_fisso);
+                    $totale_senza_offerte += $prezzo;
+                }
+                    
+                $totale += $prezzo;
+            }
+            
+            // Verifico che i crediti bonus non superino il massimo applicabile
+            $crediti_max = $gestorePortafogliBonus->ottieniCreditiMassimi($id_cliente, $totale_senza_offerte);
+            if ( $crediti_bonus <= $crediti_max )
+            {
+                // Verifico che il totale dei crediti - crediti bonus siano disponibili
+                // nel portafoglio standard del cliente
+                $totale_effettivo = $totale - $crediti_bonus;
+                
+                if ( $totale_effettivo <= intval($utente->saldo_standard) )
+                {
+                    // Finalizzo l'acquisto
+                    // Ottengo l'id dell'ultimo figlio della radice, ovvero dell'ultimo acquisto
+                    $id_nuovo_acquisto = 1;
+                    $ultimo = $this->oggettoDOM->documentElement->lastElementChild;
+                    if ( $ultimo != null ) // Ci sono altre domande
+                    {
+                        $id_ultimo = $ultimo->getAttribute('id');
+                        $id_ultimo = intval($id_ultimo);
+                        $id_nuovo_acquisto = ++$id_ultimo;
+                        $id_nuovo_acquisto = strval($id_nuovo_acquisto);
+                    }
+
+                    // Creazione del nuovo acquisto
+                    //$nuovo_aqcuisto = $this->oggettoDOM->createElement('acquisto');
+                }
+                else
+                    $esito = 3;
+            }
+            else
+                $esito = 2;
+
+            return $esito; 
         }
     }
 

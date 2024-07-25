@@ -27,7 +27,7 @@
         if ( $connessione )
         {
             $id = $_SESSION["id_utente"];
-            $q = "select stato, reputazione from UTENTI where id=$id"; // Query da eseguire
+            $q = "select stato, reputazione, indirizzo from UTENTI where id=$id"; // Query da eseguire
 
             // Esecuzione della query
             try
@@ -40,6 +40,7 @@
                     {
                         $sessione_attiva = true;
                         $_SESSION['reputazione'] = $riga[1];
+                        $_SESSION['indirizzo'] = $riga[2];
                     }
                 }
                

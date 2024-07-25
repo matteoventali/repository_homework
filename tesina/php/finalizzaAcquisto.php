@@ -4,17 +4,56 @@
     require_once 'gestoriXML/gestoreCatalogoProdotti.php';
     require_once 'gestoriXML/gestorePortafogliBonus.php';
     require_once 'gestoriXML/gestoreCarrelli.php';
+    require_once 'gestoriXML/gestoreAcquisti.php';
+
+    // Gestori
+    $gestoreCatalogo = new GestoreCatalogoProdotti();
+    $gestoreCarrelli = new GestoreCarrelli();
+    $gestorePortafogliBonus = new GestorePortafogliBonus();
+    $gestoreAcquisti = new GestoreAcquisti();
+
+    $indirizzo_consegna = '';
 
     // A questa pagina possono accedervi solo i clienti
     // Nel caso in cui l'utente non fosse cliente o fosse bannato,
     // viene ridirezionato
     if ( !$sessione_attiva || $_SESSION["ruolo"] != "C"  )
         header("Location: homepage.php");
+    else
+    {
+        // Indirizzo di consegna dell'utente
+        $indirizzo_consegna = $_SESSION['indirizzo'];
+        
+        // Verifico se vi e' una richiesta d'acquisto
+        if ( isset($_POST["btnAcquista"]) && isset($_POST["creditiBonus"]) && isset($_POST["indirizzoConsegna"]))
+        {
+            // Prelevo i crediti dal post
+            if ( trim($_POST["creditiBonus"]) == "" )
+                $crediti = 0;
+            else if ( is_numeric($_POST["creditiBonus"]) )
+                $crediti = intval($_POST["creditiBonus"]);
+            else
+                $crediti = -1;
 
-    // Gestori
-    $gestoreCatalogo = new GestoreCatalogoProdotti();
-    $gestoreCarrelli = new GestoreCarrelli();
-    $gestorePortafogliBonus = new GestorePortafogliBonus();
+            // Verifico che sia specificato indirizzo di consegna
+            $indirizzo_consegna = trim($_POST["indirizzoConsegna"]);
+
+            if ( strlen($indirizzo_consegna) > 0 )
+            {
+                // Se i crediti sono validi tento di eseguire l'acquisto
+                if ( $crediti > -1 )
+                    $esito = $gestoreAcquisti->inserisciAcquisto($_SESSION["id_utente"], $crediti, $indirizzo_consegna);
+            }
+            else
+            {
+
+            }
+            
+
+            // Controllo dell'esito
+            echo $esito;
+        }
+    }
 
     // Verifico se c'è da gestire una richiesta di registrazione o meno
     echo '<?xml version = "1.0" encoding="UTF-8"?>';
@@ -112,6 +151,11 @@
                                 </fieldset>" . "\n\n";
                             }
                         ?>
+
+                        <fieldset>
+                            <p>Indirizzo di consegna:</p>
+                            <input type="text" name="indirizzoConsegna" value="<?php echo $indirizzo_consegna; ?>"/> 
+                        </fieldset>
                         
                         <h2> 
                             Totale: <span id="totale"><?php echo $totale_provvisorio; ?></span>
