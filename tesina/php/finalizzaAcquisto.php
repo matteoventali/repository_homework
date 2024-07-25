@@ -6,6 +6,9 @@
     require_once 'gestoriXML/gestoreCarrelli.php';
     require_once 'gestoriXML/gestoreAcquisti.php';
 
+    // Inizializzazione variabili per gestione popup
+    $mostraPopup = false; $err = false; $msg = "";
+
     // Gestori
     $gestoreCatalogo = new GestoreCatalogoProdotti();
     $gestoreCarrelli = new GestoreCarrelli();
@@ -25,15 +28,16 @@
         $indirizzo_consegna = $_SESSION['indirizzo'];
         
         // Verifico se vi e' una richiesta d'acquisto
-        if ( isset($_POST["btnAcquista"]) && isset($_POST["creditiBonus"]) && isset($_POST["indirizzoConsegna"]))
+        if ( isset($_POST["btnAcquista"]) && isset($_POST["indirizzoConsegna"]))
         {
-            // Prelevo i crediti dal post
-            if ( trim($_POST["creditiBonus"]) == "" )
+            // Prelevo i crediti dal post se presenti altrimenti vengono posti a 0
+            $crediti_validi = true;
+            if ( !isset($_POST["creditiBonus"]) || trim($_POST["creditiBonus"]) == "" )
                 $crediti = 0;
             else if ( is_numeric($_POST["creditiBonus"]) )
                 $crediti = intval($_POST["creditiBonus"]);
             else
-                $crediti = -1;
+                $crediti_validi = false;
 
             // Verifico che sia specificato indirizzo di consegna
             $indirizzo_consegna = trim($_POST["indirizzoConsegna"]);
@@ -41,17 +45,39 @@
             if ( strlen($indirizzo_consegna) > 0 )
             {
                 // Se i crediti sono validi tento di eseguire l'acquisto
-                if ( $crediti > -1 )
+                $esito = array(0, 0);
+                if ( $crediti_validi )
                     $esito = $gestoreAcquisti->inserisciAcquisto($_SESSION["id_utente"], $crediti, $indirizzo_consegna);
+
+                // Controllo dell'esito
+                if ( $esito[0] > 1 ) // Si e' verificato un errore
+                {
+                    $err = true; $mostraPopup = true;
+                    
+                    if ( $esito[0] == 2 ) // Saldo portafoglio standard insufficiente
+                        $msg = 'Ammontare di crediti bonus non valido';
+                    else if ( $esito[0] == 3 ) // Crediti bonus oltre il limite massimo
+                        $msg = 'Crediti insufficienti';
+                }
+                else if ( $esito[0] == 1 ) // Acquisto inserito con successo
+                {
+                    // Ridireziono l'utente alla sua area personale dove puo' visualizzare la lista degli acquisti
+                    // effettuati
+                    header("Location: areaPersonale.php");
+                }
+                else if ( $esito == 0 ) // Crediti inseriti non valido (non valore numerico)
+                {
+                    $err = true; $mostraPopup = true;
+                    $msg = 'Ammontare di crediti bonus non valido';
+                }
             }
-            else
+            else // Indirizzo di consegna non presente
             {
-
+                $err = true;
+                $msg = 'Indirizzo di consegna non specificato';
+                $mostraPopup = true;
+                $indirizzo_consegna = $_SESSION["indirizzo"];
             }
-            
-
-            // Controllo dell'esito
-            echo $esito;
         }
     }
 
@@ -87,7 +113,16 @@
         ?>
 
         <div id="sezioneCentrale">
+            <?php 
+                // Stampo il popup se necessario
+                echo creaPopup($mostraPopup, $msg, $err) . "\n";
+            ?>
+
             <div id="riquadro">
+                <form id="sezioneIndietro" action="carrello.php" method="post">
+                    <input type="submit" name="btnIndietro" value="Indietro &#8617;" />
+                </form>
+            
                 <div id="sezioneRiepilogo">
                     <h2>Riepilogo</h2>
                     <ul>
@@ -137,12 +172,12 @@
                 
                 <form id="sezioneAcquisto" method="post" action="<?php echo $_SERVER["PHP_SELF"]; ?>"> 
                         <?php
+                            $id_cliente = $_SESSION['id_utente'];
                             if ( $sconto_variabile )
                             {
                                 // Ottengo l'ammontare massimo di crediti utilizzabili
                                 $crediti_massimi = $gestorePortafogliBonus->ottieniCreditiMassimi($_SESSION["id_utente"], $totale_provvisorio_senza_offerte);
-                                $id_cliente = $_SESSION['id_utente'];
-
+                                
                                 echo "
                                 <h2> Sub-totale: $totale_provvisorio </h2>
                                 <fieldset>

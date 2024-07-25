@@ -68,17 +68,9 @@
                 if ( $figli[$i]->getAttribute('id_cliente') == $id_cliente )
                 {
                     $trovata = true;
-
-                    // Ogni figlio del portafoglio e' un saldo relativo ad un certo anno
-                    $saldi = $figli[$i]->childNodes; $n_saldi = count($saldi);
-                    for ( $j=0; $j < $n_saldi; $j++ )
-                    {
-                        // Aggiungo i crediti al saldo
-                        $saldo += $saldi[$j]->textContent;
-                    }
+                    $saldo = $figli[$i]->getAttribute('totale');
                 }
             }
-
             return $saldo;
         }
 
@@ -172,6 +164,78 @@
             }
 
             return $crediti_max;
+        }
+
+        // Metodo per aggionare il portafoglio bonus di un cliente a seguito di un acquisto
+        function aggiornaPortafoglioBonus($id_cliente, $crediti_da_scalare, $crediti_da_aggiungere)
+        {
+            // Verifico che il file sia utilizzabile
+            if ( !$this->checkValidita() )
+                return 0;
+
+            // Ottengo la lista di figli della radice, ovvero la lista dei portafogli
+            $figli = $this->oggettoDOM->documentElement->childNodes;
+            $n_figli = $this->oggettoDOM->documentElement->childElementCount;
+
+            // Scorro il file finche' non raggiungo il portafoglio da aggiornare
+            $trovata = false;
+            for ( $i=0; $i<$n_figli && !$trovata; $i++ )
+            {
+                if ( $figli[$i]->getAttribute('id_cliente') == $id_cliente )
+                    $trovata = true;
+            }
+
+            if ( $trovata )
+            {
+                $i--;
+
+                // Saldo totale del portafoglio
+                $saldo_totale = intval($figli[$i]->getAttribute('totale'));
+
+                // Prelevo i saldi associati al portafoglio
+                $indice_saldo = 0;
+                $saldi = $figli[$i]->childNodes;
+
+                // Scalo i crediti in modo progressivo dai saldi partendo dal meno recente
+                if ( $crediti_da_scalare <= $saldo_totale )
+                {
+                    // Calcolo il nuovo totale dei crediti
+                    $saldo_totale = $saldo_totale - $crediti_da_scalare + $crediti_da_aggiungere;
+                    
+                    while ( $crediti_da_scalare > 0 )
+                    {
+                        if ( intval($saldi[$indice_saldo]->textContent) <= $crediti_da_scalare )
+                        {
+                            // Rimuovo il saldo corrente e scalo i crediti
+                            $crediti_da_scalare -= $saldi[$indice_saldo]->textContent;
+                            $figli[$i]->removeChild($saldi[$indice_saldo]);
+                        }
+                        else
+                        {
+                            $saldi[$indice_saldo]->textContent = intval($saldi[$indice_saldo]->textContent) - $crediti_da_scalare;
+                            $crediti_da_scalare = 0;
+                        }
+                    }
+
+                    // Aggiungo i crediti erogati a seguito dell'acquisto
+                    $ultimo_saldo = $figli[$i]->lastChild;
+                    if ( $ultimo_saldo == null || $ultimo_saldo->getAttribute('anno') != date('Y') )
+                    {
+                        // Creo il saldo per l'anno corrente
+                        $nuovo_saldo = $this->oggettoDOM->createElement('saldo', '0');
+                        $nuovo_saldo->setAttribute('anno', date('Y'));
+                        $figli[$i]->appendChild($nuovo_saldo);
+                        $ultimo_saldo = $nuovo_saldo;
+                    }
+
+                    // Aggiornamento dei saldi
+                    $ultimo_saldo->nodeValue = intval(intval($ultimo_saldo->textContent) + $crediti_da_aggiungere);
+                    $figli[$i]->setAttribute('totale', intval($saldo_totale));
+
+                    // Salvo i cambiamenti
+                    $this->salvaXML($this->pathname);
+                }
+            }
         }
     }
 ?>

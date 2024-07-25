@@ -262,4 +262,25 @@
  
         return $esito;
     }
+
+    // Funzione per aggiornare il saldo del portafogio standard associato ad un cliente
+    // a seguito di un acquisto
+    function aggiornaSaldoStandard($handleDB, $id_cliente, $nuovo_saldo)
+    {
+        global $tb_utenti;
+        $esito = false;
+        
+        // Query di aggiornamento
+        $q = "update $tb_utenti set saldo_standard=$nuovo_saldo where id=$id_cliente and ruolo='C'";
+
+        // Esecuzione della query
+        try
+        {
+            // Eseguo la query
+            $esito = $handleDB->query($q);
+        }
+        catch (Exception $e){}
+ 
+        return $esito;
+    }
 ?>

@@ -120,19 +120,19 @@
 
                     for ( $i=0; $i<$dim_lista; $i++ )
                     {
-                        $id_acquisto = $lista_acquisti[$i]->id;
+                        $id_acquisto = $lista_acquisti[$dim_lista - 1 - $i]->id;
 
-                        $acquisto_pieno = str_replace("%DATA%", date("d-m-Y", strtotime($lista_acquisti[$i]->data)), $acquisto_vuoto);
-                        $acquisto_pieno = str_replace("%CREDITI_BONUS_RICEVUTI%", $lista_acquisti[$i]->crediti_bonus_ricevuti, $acquisto_pieno);
-                        $acquisto_pieno = str_replace("%CREDITI_BONUS_UTILIZZATI%", $lista_acquisti[$i]->crediti_bonus_utilizzati, $acquisto_pieno);
-                        $acquisto_pieno = str_replace("%CREDITI_SPESI%", $lista_acquisti[$i]->totale_effettivo, $acquisto_pieno);
+                        $acquisto_pieno = str_replace("%DATA%", date("d-m-Y", strtotime($lista_acquisti[$dim_lista - 1 - $i]->data)), $acquisto_vuoto);
+                        $acquisto_pieno = str_replace("%CREDITI_BONUS_RICEVUTI%", $lista_acquisti[$dim_lista - 1 - $i]->crediti_bonus_ricevuti, $acquisto_pieno);
+                        $acquisto_pieno = str_replace("%CREDITI_BONUS_UTILIZZATI%", $lista_acquisti[$dim_lista - 1 - $i]->crediti_bonus_utilizzati, $acquisto_pieno);
+                        $acquisto_pieno = str_replace("%CREDITI_SPESI%", $lista_acquisti[$dim_lista - 1 - $i]->totale_effettivo, $acquisto_pieno);
                         $acquisto_pieno = str_replace("%ID_ACQUISTO%", $id_acquisto, $acquisto_pieno);
 
                         // Popoliamo ora la parte relativa ai prodotti
                         $dettaglio_acquisti .= $acquisto_pieno . "\n";
                     }
                         
-                        // Mostro la lista delle domande
+                        // Mostro la lista degli acquisti
                         echo $dettaglio_acquisti . "\n";
                     ?>
 

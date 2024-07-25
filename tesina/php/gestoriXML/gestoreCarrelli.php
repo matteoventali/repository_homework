@@ -149,5 +149,39 @@
 
             return $esito;
         }
+
+        // Metodo per svuotare il carrello di un cliente
+        function svuotaCarrello($id_cliente)
+        {
+            // Verifico se posso usare il file
+            if ( !$this->checkValidita() )
+                return false;
+
+            // Variabile per ottimizzare il ciclo
+            $esito = false;
+
+            // Ottengo la lista di figli della radice, ovvero la lista dei carrelli
+            $figli = $this->oggettoDOM->documentElement->childNodes;
+            $n_figli = $this->oggettoDOM->documentElement->childElementCount;
+
+            // Per ogni figlio, ovvero un carrello, verifico se l'id del cliente
+            // corrisponde a quello passato come parametro
+            for ( $i=0; $i<$n_figli && !$esito; $i++ )
+            {
+                if ( $figli[$i]->getAttribute('id_cliente') == $id_cliente )
+                {
+                    // Rimuovo tutti i prodotti dal carrello
+                    $prodotti = $figli[$i]->childNodes;
+                    $n_prodotti = $figli[$i]->childElementCount;
+
+                    for ( $j=0; $j < $n_prodotti; $j++ )
+                        $figli[$i]->removeChild($prodotti[$j]);
+                }
+
+                $this->salvaXML($this->pathname);
+            }
+
+            return $esito;
+        }
     } 
 ?>

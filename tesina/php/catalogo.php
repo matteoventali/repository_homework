@@ -242,17 +242,24 @@
 
                                         if ( $data_oggi >= $data_inizio && $data_oggi <= $data_fine )
                                         {
+                                            $frammento_pieno = str_replace("%DISPLAY_PREZZO_LISTINO%", 'none', $frammento_pieno);
                                             $frammento_pieno = str_replace("%DISPLAY_OFFERTA_SPECIALE%", 'block', $frammento_pieno);
                                             $frammento_pieno = str_replace("%PREZZO_PRODOTTO_OFFERTA%", 
                                                                     applicaSconto($lista_prodotti[$i]->prezzo_listino, $lista_prodotti[$i]->offerta_speciale->percentuale), 
                                                                     $frammento_pieno);
                                         }
                                         else // Offerta scaduta
-                                            $frammento_pieno = str_replace("%DISPLAY_OFFERTA_SPECIALE%", 'none', $frammento_pieno);    
+                                        {
+                                            $frammento_pieno = str_replace("%DISPLAY_OFFERTA_SPECIALE%", 'none', $frammento_pieno); 
+                                            $frammento_pieno = str_replace("%DISPLAY_PREZZO_LISTINO%", 'block', $frammento_pieno);   
+                                        }
                                     }
                                     else
+                                    {
                                         $frammento_pieno = str_replace("%DISPLAY_OFFERTA_SPECIALE%", 'none', $frammento_pieno);
-                                    
+                                        $frammento_pieno = str_replace("%DISPLAY_PREZZO_LISTINO%", 'block', $frammento_pieno);  
+                                    }
+                                        
                                     $contenuto_html .= $frammento_pieno . "\n";
                                 }
                             }

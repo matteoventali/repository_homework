@@ -204,7 +204,9 @@
             // 1 -> successo
             // 2 -> crediti bonus passati superiore ai massimi consentiti
             // 3 -> crediti del portafoglio standard insufficienti
-            $esito = 1;
+            // L'esito e' passato nella prima cella di un vettore
+            // La seconda cella serve per l'eventuale id del nuovo acquisto appena registrato
+            $esito = array(1, 0);
             
             // Verifico se posso usare il file e sono connesso al database
             if ( !$this->checkValidita() || !$connessione )
@@ -228,6 +230,7 @@
                 $n_prodotti = count($prodotti);
 
             $totale = 0; $totale_senza_offerte = 0;
+            $bonus_speciale = 0; $bonus_fisso = 0;
 
             for ( $i=0; $i < $n_prodotti; $i++ )
             {
@@ -236,7 +239,10 @@
                 
                 // Incremento il totale
                 if ( $prodotto->offerta_speciale != null && strtotime($prodotto->offerta_speciale->data_fine) + 86400 >= time() )
+                {
                     $prezzo = applicaSconto($prodotto->prezzo_listino, $prodotto->offerta_speciale->percentuale);
+                    $bonus_speciale += intval($prodotto->offerta_speciale->crediti);
+                }
                 else
                 {
                     $prezzo = applicaSconto($prodotto->prezzo_listino, $sconto_fisso);
@@ -244,11 +250,14 @@
                 }
                     
                 $totale += $prezzo;
+
+                // Calcolo del bonus fisso
+                $bonus_fisso = 0.015 * $totale;
             }
             
             // Verifico che i crediti bonus non superino il massimo applicabile
             $crediti_max = $gestorePortafogliBonus->ottieniCreditiMassimi($id_cliente, $totale_senza_offerte);
-            if ( $crediti_bonus <= $crediti_max )
+            if ( $crediti_bonus >= 0 && $crediti_bonus <= $crediti_max )
             {
                 // Verifico che il totale dei crediti - crediti bonus siano disponibili
                 // nel portafoglio standard del cliente
@@ -268,42 +277,59 @@
                         $id_nuovo_acquisto = strval($id_nuovo_acquisto);
                     }
 
+                    // Aggiornamento del portafoglio bonus
+                    $gestorePortafogliBonus->aggiornaPortafoglioBonus($id_cliente, $crediti_bonus, $bonus_fisso + $bonus_speciale);
+
+                    // Aggiornamento del portafoglio standard
+                    aggiornaSaldoStandard($handleDB, $id_cliente, intval($utente->saldo_standard) - $totale_effettivo);
+                    
                     // Creazione del nuovo acquisto
-                    //$nuovo_aqcuisto = $this->oggettoDOM->createElement('acquisto');
+                    $esito[1] = $id_nuovo_acquisto;
+                    $nuovo_acquisto = $this->oggettoDOM->createElement('acquisto');
+                    $nuovo_acquisto->setAttribute('id', $id_nuovo_acquisto);
+                    $nuovo_acquisto->setAttribute('id_cliente', $id_cliente);
+                    $nuovo_acquisto->setAttribute('data', date('Y-m-d'));
+                    $nuovo_acquisto->setAttribute('crediti_bonus_ricevuti', intval($bonus_fisso + $bonus_speciale));
+                    $nuovo_acquisto->setAttribute('crediti_bonus_utilizzati', $crediti_bonus);
+                    $nuovo_acquisto->setAttribute('totale_effettivo', $totale);
+
+                    // Creazione della lista di prodotti e indirizzo di consegna da associare all'acquisto
+                    $lista_prodotti = $this->oggettoDOM->createElement('prodotti');
+                    $indirizzo_consegna_xml = $this->oggettoDOM->createElement('indirizzo_consegna', $indirizzo_consegna);
+                    $nuovo_acquisto->appendChild($lista_prodotti);
+                    $nuovo_acquisto->appendChild($indirizzo_consegna_xml);
+
+                    for ( $j=0; $j < $n_prodotti; $j++ )
+                    {
+                        // Ottengo il prodotto i-esimo del carrello
+                        $prodotto = $gestoreCatalogo->ottieniProdotto($prodotti[$j]);
+                        
+                        // Incremento il totale
+                        if ( $prodotto->offerta_speciale != null && strtotime($prodotto->offerta_speciale->data_fine) + 86400 >= time() )
+                            $prezzo = applicaSconto($prodotto->prezzo_listino, $prodotto->offerta_speciale->percentuale);
+                        else
+                            $prezzo = applicaSconto($prodotto->prezzo_listino, $sconto_fisso);
+
+                        // Creo un nuovo tag prodotto e aggancio alla lista dei prodotti
+                        $nuovo_prodotto = $this->oggettoDOM->createElement('prodotto');
+                        $nuovo_prodotto->setAttribute('id_prodotto', $prodotto->id);
+                        $nuovo_prodotto->setAttribute('prezzo', $prezzo);
+                        $lista_prodotti->appendChild($nuovo_prodotto);
+                    }
+
+                    // Chiusura della connessione al database e salvataggio dei cambiamenti e svuotamento del carrello
+                    $gestoreCarrelli->svuotaCarrello($id_cliente);
+                    $this->oggettoDOM->documentElement->appendChild($nuovo_acquisto);
+                    $handleDB->close();
+                    $this->salvaXML($this->pathname);
                 }
                 else
-                    $esito = 3;
+                    $esito[0] = 3;
             }
             else
-                $esito = 2;
+                $esito[0] = 2;
 
             return $esito; 
         }
-    }
-
-    // Funzione che permette di calcolare il totale dell'acquisto
-    // Riceve come parametro l'id dell'acquisto
-    function calcolaTotaleAcquisto($id_acquisto)
-    {
-        $totale = 0;
-
-        $acq = new GestoreAcquisti();
-
-        $acquisto = new Acquisto();
-
-        // Ricerco l'acquisto interessato
-        $acquisto = $acq->ottieniAcquisto($id_acquisto);
-
-        // Estraggo i prodotti dall'acquisto
-        $lista_prodotti = $acquisto->prodotti;
-        $n_prodotti = count($lista_prodotti);
-        for ( $i=0; $i<$n_prodotti; $i++ )
-        {
-            $somma = $lista_prodotti[$i]->prezzo;
-            $totale = $totale + $somma;
-        }
-
-        // Restituisco il totale
-        return $totale;
     }
 ?>

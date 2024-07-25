@@ -2,5 +2,5 @@
     require 'gestoriXML/gestorePortafogliBonus.php';
 
     $g = new GestorePortafogliBonus();
-    var_dump($g->ottieniCreditiMassimi('3', '100'));
+    $g->aggiornaPortafoglioBonus('4', 5, 2);
 ?>

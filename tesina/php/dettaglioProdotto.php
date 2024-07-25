@@ -140,12 +140,9 @@
                         
                             // Applico lo sconto fisso
                             $prezzo = applicaSconto($prodotto->prezzo_listino, $sconto_fisso);
-                        ?>
-
-                        <p>Prezzo: <?php echo $prezzo . " "; ?>crediti</p>
-
-                        <?php
-                            // Se presente un'offerta speciale la mostro
+                        
+                            // Se presente un'offerta speciale la mostro altrimenti mostro il prezzo
+                            // con applicato lo sconto fisso
                             if ( $prodotto->offerta_speciale != null )
                             {
                                 // Verifico validita' del periodo associato all'offerta
@@ -158,7 +155,11 @@
                                     $offerta = applicaSconto($prodotto->prezzo_listino, $prodotto->offerta_speciale->percentuale);
                                     echo "<p style=\"background-color:red; color:white; text-align: center;\">Offerta speciale: $offerta crediti!</p>";    
                                 }
+                                else
+                                    echo "<p>Prezzo: $prezzo crediti</p>";
                             }
+                            else
+                                echo "<p>Prezzo: $prezzo crediti</p>";
                         ?>
                     </div>
                 </div>
