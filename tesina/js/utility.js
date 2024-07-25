@@ -403,3 +403,36 @@ function callbackEliminaProdottoDaCarrello(xhr)
     // A prescindere refresh della pagina
     location.reload();
 }
+
+function aggiornaTotale(id_cliente)
+{
+    // Riferimento alla casella crediti
+    input_crediti = document.getElementById('casellaCrediti');
+    
+    // Composizione della query string
+    query_string = 'id_cliente=' + id_cliente + '&crediti_utilizzati=' + input_crediti.value.trim();
+
+    // Richiesta AJAX per ottenere il totale aggiornato se la casella non e' vuota
+    if ( input_crediti.value.trim() != "" )
+    {
+        xhr = new XMLHttpRequest();
+        xhr.open("POST", "ottieniTotaleAggiornato.php");
+        xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+        xhr.onload = function(){ callbackAggiornaTotale(xhr, input_crediti) }; // Definisco una funzione di callback implicita che chiama quella sotto
+        xhr.send(query_string);
+    }
+}
+
+function callbackAggiornaTotale(xhr, casella_input)
+{
+    // Ricevo vero o falso a seconda della riuscita dell'operazione
+    // Notifica tramite alert in caso di errore
+    if ( !xhr.responseText )
+        alert("Applicazione crediti fallita");
+    else
+    {
+        // Cambio il valore del totale da mostrare all'utente
+        container_totale = document.getElementById('totale');
+        container_totale.innerHTML = xhr.responseText;
+    }
+}

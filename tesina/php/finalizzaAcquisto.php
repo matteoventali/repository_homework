@@ -1,18 +1,20 @@
 <?php
     require_once 'lib/libreria.php';
     require_once 'lib/verificaSessioneAttiva.php';
-    require_once 'gestoriXML/gestoreCarrelli.php';
     require_once 'gestoriXML/gestoreCatalogoProdotti.php';
-    
+    require_once 'gestoriXML/gestorePortafogliBonus.php';
+    require_once 'gestoriXML/gestoreCarrelli.php';
+
     // A questa pagina possono accedervi solo i clienti
     // Nel caso in cui l'utente non fosse cliente o fosse bannato,
     // viene ridirezionato
-    // L'utente viene riderizionato se non e' presente un acquisto da finalizzare
-    if ( !$sessione_attiva || $_SESSION["ruolo"] != "C" || !(isset($_POST["id_prodotto"])) )
+    if ( !$sessione_attiva || $_SESSION["ruolo"] != "C"  )
         header("Location: homepage.php");
 
     // Gestori
     $gestoreCatalogo = new GestoreCatalogoProdotti();
+    $gestoreCarrelli = new GestoreCarrelli();
+    $gestorePortafogliBonus = new GestorePortafogliBonus();
 
     // Verifico se c'è da gestire una richiesta di registrazione o meno
     echo '<?xml version = "1.0" encoding="UTF-8"?>';
@@ -51,20 +53,43 @@
                     <h2>Riepilogo</h2>
                     <ul>
                         <?php
+                            // Calcolo lo sconto fisso per il cliente loggato
+                            $sconto_fisso = calcolaScontoFisso($_SESSION['id_utente'], $_SESSION['reputazione'], $_SESSION['data_registrazione']);
+
+                            // Flag per indicare la presenza di almeno un prodotto
+                            // NON in offerta speciale su cui poter poi applicare i crediti bonus
+                            // a discrezione dell'utente (sconto variabile, vedi documento)
+                            $sconto_variabile = false;
+
                             // Popolazione lista di riepilogo
-                            // e calcolo del totale provissorio
-                            $prodotti = $_POST["id_prodotto"];
+                            // e calcolo del totale provvisorio
+                            // Prelevo i prodotti dal carrello associato all'utente
+                            $prodotti = $gestoreCarrelli->ottieniProdottiCarrello($_SESSION["id_utente"]);
                             $n_prodotti = 0;
                             if ( $prodotti != null )
                                 $n_prodotti = count($prodotti);
 
                             $totale_provvisorio = 0;
+                            $totale_provvisorio_senza_offerte = 0;
 
                             for ( $i=0; $i < $n_prodotti; $i++ )
                             {
-                                $nome = $gestoreCatalogo->ottieniProdotto($prodotti[$i])->nome;
-                                echo "<li>$nome</li>\n";
-                                $totale_provvisorio += $_POST["prezzo_di_acquisto"][$i];
+                                // Ottengo il prodotto i-esimo del carrello
+                                $prodotto = $gestoreCatalogo->ottieniProdotto($prodotti[$i]);
+                                
+                                echo "<li>$prodotto->nome</li>\n";
+                                
+                                // Incremento il totale provvisorio
+                                if ( $prodotto->offerta_speciale != null && strtotime($prodotto->offerta_speciale->data_fine) + 86400 >= time() )
+                                    $prezzo = applicaSconto($prodotto->prezzo_listino, $prodotto->offerta_speciale->percentuale);
+                                else
+                                {
+                                    $prezzo = applicaSconto($prodotto->prezzo_listino, $sconto_fisso);
+                                    $sconto_variabile = true;
+                                    $totale_provvisorio_senza_offerte += $prezzo;
+                                }
+
+                                $totale_provvisorio += $prezzo;
                             }
                         ?>
                     </ul>
@@ -72,12 +97,27 @@
 
                 
                 <form id="sezioneAcquisto" method="post" action="<?php echo $_SERVER["PHP_SELF"]; ?>"> 
-                        <h2> Sub-totale: <?php echo $totale_provvisorio; ?> </h2>
-                        <fieldset>
-                            <p>Crediti bonus aggiuntivi (max 9999): </p>
-                            <input type="text" name="creditiBonus" /> 
-                        </fieldset>
-                        <h2> Totale: </h2>
+                        <?php
+                            if ( $sconto_variabile )
+                            {
+                                // Ottengo l'ammontare massimo di crediti utilizzabili
+                                $crediti_massimi = $gestorePortafogliBonus->ottieniCreditiMassimi($_SESSION["id_utente"], $totale_provvisorio_senza_offerte);
+                                $id_cliente = $_SESSION['id_utente'];
+
+                                echo "
+                                <h2> Sub-totale: $totale_provvisorio </h2>
+                                <fieldset>
+                                    <p>Crediti bonus aggiuntivi (max $crediti_massimi): </p>
+                                    <input type=\"text\" id=\"casellaCrediti\" name=\"creditiBonus\" /> 
+                                </fieldset>" . "\n\n";
+                            }
+                        ?>
+                        
+                        <h2> 
+                            Totale: <span id="totale"><?php echo $totale_provvisorio; ?></span>
+                                    <span onclick="aggiornaTotale(<?php echo $id_cliente ?>);" style="cursor:pointer;">&#10227;</span>
+                        </h2>
+                        
                         <fieldset>
                             <input type="submit" value="Acquista" name="btnAcquista" />
                         </fieldset>

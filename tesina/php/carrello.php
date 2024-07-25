@@ -90,18 +90,13 @@
 
                                     // Se vi e' un'offerta speciale mostro il prezzo dell'offerta
                                     // altrimenti viene mostrato quello di listino applicando lo sconto fisso (vedi documento)
-                                    $prezzo_da_mostrare = 0; $crediti_bonus = 0;
-                                    if ( $prod->offerta_speciale != null && strtotime($prod->offerta_speciale->data_fine) >= time() )
-                                    {
+                                    $prezzo_da_mostrare = 0; 
+                                    if ( $prod->offerta_speciale != null && strtotime($prod->offerta_speciale->data_fine) + 86400 >= time() )
                                         $prezzo_da_mostrare = applicaSconto($prod->prezzo_listino, $prod->offerta_speciale->percentuale);
-                                        $crediti_bonus = $prod->offerta_speciale->crediti;
-                                    }
                                     else
                                         $prezzo_da_mostrare = applicaSconto($prod->prezzo_listino, $sconto_fisso);
 
                                     $frammento = str_replace('%PREZZO_PRODOTTO%', $prezzo_da_mostrare, $frammento);
-                                    $frammento = str_replace('%PREZZO_ACQUISTO%', $prezzo_da_mostrare, $frammento);
-                                    $frammento = str_replace('%CREDITI_BONUS%', $crediti_bonus, $frammento);
 
                                     // Incremento del totale provvisorio
                                     $totale_provvisorio += intval($prezzo_da_mostrare);

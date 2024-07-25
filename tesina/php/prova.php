@@ -1,6 +1,6 @@
 <?php
-    require 'gestoriXML/gestoreCatalogoProdotti.php';
+    require 'gestoriXML/gestorePortafogliBonus.php';
 
-    $g = new GestoreCatalogoProdotti();
-    var_dump($g->ricercaProdotti('1', '', ''));
+    $g = new GestorePortafogliBonus();
+    var_dump($g->ottieniCreditiMassimi('3', '100'));
 ?>
