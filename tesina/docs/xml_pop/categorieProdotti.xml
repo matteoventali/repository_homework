@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE categorie SYSTEM "../xml/grammatiche/grammaticaCategorieProdotti.dtd" >
+
+<categorie>
+    <categoria id="1">
+        <nome>Informatica</nome>    
+        <tipi_dispositivo>
+            <tipo id="1">Computer portatili</tipo>
+            <tipo id="2">Computer fissi</tipo>
+            <tipo id="3">Tablet</tipo>
+            <tipo id="4">Stampanti</tipo>
+            <tipo id="5">Accessori</tipo>
+        </tipi_dispositivo>
+    </categoria>
+
+    <categoria id="2">
+        <nome>Telefonia</nome>    
+        <tipi_dispositivo>
+            <tipo id="1">Smartphone e cellulari</tipo>
+            <tipo id="2">Telefoni fissi</tipo>
+            <tipo id="3">Accessori</tipo>
+        </tipi_dispositivo>
+    </categoria>
+
+    <categoria id="3">
+        <nome>TV e home</nome>    
+        <tipi_dispositivo>
+            <tipo id="1">Televisori</tipo>
+            <tipo id="2">Accessori</tipo>
+        </tipi_dispositivo>
+    </categoria>
+
+    <categoria id="4">
+        <nome>Elettrodomestici</nome>    
+        <tipi_dispositivo>
+            <tipo id="1">Lavatrici</tipo>
+            <tipo id="2">Frigoriferi</tipo>
+            <tipo id="3">Lavastoviglie</tipo>
+            <tipo id="4">Piani cottura</tipo>
+            <tipo id="5">Forni</tipo>
+            <tipo id="6">Condizionatori</tipo>
+            <tipo id="7">Accessori</tipo>
+        </tipi_dispositivo>
+    </categoria>
+
+    <categoria id="5">
+        <nome>Tempo libero</nome>    
+        <tipi_dispositivo>
+            <tipo id="1">Cuffie e auricolari</tipo>
+            <tipo id="2">Fotocamere e videocamere</tipo>
+            <tipo id="3">Console da gioco</tipo>
+            <tipo id="4">Accessori</tipo>
+        </tipi_dispositivo>
+    </categoria>
+</categorie>

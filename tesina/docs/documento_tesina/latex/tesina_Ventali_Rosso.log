@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.24 (TeX Live 2022/Debian) (preloaded format=pdflatex 2023.12.5)  26 JUL 2024 10:10
+This is pdfTeX, Version 3.141592653-2.6-1.40.24 (TeX Live 2022/Debian) (preloaded format=pdflatex 2023.12.5)  26 JUL 2024 11:43
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -559,14 +559,8 @@ nput line 696.
 (../xmlCopia/schema/schemaRichiesteRicariche.xsd [31])
 (../xmlCopia/documenti/carrelli.xml) (../xmlCopia/schema/schemaCarrelli.xsd)
 [32] [33] [34] [35] [36] (./tesina_Ventali_Rosso.aux)
-
-Package rerunfilecheck Warning: File `tesina_Ventali_Rosso.out' has changed.
-(rerunfilecheck)                Rerun to get outlines right
-(rerunfilecheck)                or use package `bookmark'.
-
-Package rerunfilecheck Info: Checksums for `tesina_Ventali_Rosso.out':
-(rerunfilecheck)             Before: 8E0CDAF41DC317E3093E6C39BFE4A292;6955
-(rerunfilecheck)             After:  55864A98AB367391B85BCEEFA73CE789;7008.
+Package rerunfilecheck Info: File `tesina_Ventali_Rosso.out' has not changed.
+(rerunfilecheck)             Checksum: 55864A98AB367391B85BCEEFA73CE789;7008.
  ) 
 Here is how much of TeX's memory you used:
  14254 strings out of 478040
@@ -594,7 +588,7 @@ cm/cmmi8.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr1
 2.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb></
 usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/sh
 are/texlive/texmf-dist/fonts/type1/public/eurosym/feymr10.pfb>
-Output written on tesina_Ventali_Rosso.pdf (36 pages, 366953 bytes).
+Output written on tesina_Ventali_Rosso.pdf (36 pages, 366982 bytes).
 PDF statistics:
  1755 PDF objects out of 2073 (max. 8388607)
  1351 compressed objects within 14 object streams
