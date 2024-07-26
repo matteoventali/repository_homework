@@ -32,7 +32,8 @@
 
             // Ottengo l'id dell'ultimo figlio della radice, ovvero dell'ultima richiesta di ricarica
             $id_nuova_ricarica = 1;
-            $ultima = $this->oggettoDOM->documentElement->lastElementChild;
+            $figli = $this->oggettoDOM->documentElement->childNodes;
+            $ultima = $figli[count($figli) - 1];
             if ( $ultima != null ) // Ci sono altre domande
             {
                 $id_ultima = $ultima->getAttribute('id');
@@ -73,7 +74,7 @@
 
             // Ottengo la lista di figli della radice, ovvero la lista delle richieste
             $figli = $this->oggettoDOM->documentElement->childNodes;
-            $n_figli = $this->oggettoDOM->documentElement->childElementCount;
+            $n_figli = count($figli);
 
             // Per ogni figlio, ovvero una richiesta, estraggo le informazioni
             for ( $i=0; $i<$n_figli; $i++ )
@@ -110,7 +111,7 @@
 
             // Ottengo la lista di figli della radice, ovvero la lista delle richieste
             $figli = $this->oggettoDOM->documentElement->childNodes;
-            $n_figli = $this->oggettoDOM->documentElement->childElementCount;
+            $n_figli = count($figli);
 
             // Scorro il file finche' non raggiungo la richiesta da aggiornare
             $trovata = false;

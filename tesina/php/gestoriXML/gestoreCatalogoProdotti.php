@@ -46,7 +46,7 @@
 
             // Ottengo la lista di figli della radice, ovvero la lista dei prodotti
             $figli = $this->oggettoDOM->documentElement->childNodes;
-            $n_figli = $this->oggettoDOM->documentElement->childElementCount;
+            $n_figli = count($figli);
 
             // Per ogni figlio, ovvero un prodotto, verifico corrispondenza con id ricevuto
             $trovato = false;
@@ -102,7 +102,7 @@
 
             // Ottengo la lista di figli della radice, ovvero la lista dei prodotti
             $figli = $this->oggettoDOM->documentElement->childNodes;
-            $n_figli = $this->oggettoDOM->documentElement->childElementCount;
+            $n_figli = count($figli);
 
             // Per ogni figlio, ovvero un prodotto, verifico corrispondenza con id ricevuto
             $trovato = false;
@@ -167,7 +167,8 @@
 
             // Ottengo l'id dell'ultimo figlio della radice, ovvero dell'ultimo prodotto
             $id_nuovo_prodotto = 1;
-            $ultimo = $this->oggettoDOM->documentElement->lastElementChild;
+            $figli = $this->oggettoDOM->documentElement->childNodes;
+            $ultimo = $figli[count($figli) - 1];
             if ( $ultimo != null ) // Ci sono altre domande
             {
                 $id_ultimo = $ultimo->getAttribute('id');
@@ -216,7 +217,7 @@
 
             // Ottengo la lista di figli della radice, ovvero la lista dei prodotti
             $figli = $this->oggettoDOM->documentElement->childNodes;
-            $n_figli = $this->oggettoDOM->documentElement->childElementCount;
+            $n_figli = count($figli);
 
             // Per ogni figlio, ovvero un prodotto, verifico se l'id
             // corrisponde a quello passato come parametro
@@ -250,7 +251,7 @@
 
             // Ottengo la lista di figli della radice, ovvero la lista dei prodotti
             $figli = $this->oggettoDOM->documentElement->childNodes;
-            $n_figli = $this->oggettoDOM->documentElement->childElementCount;
+            $n_figli = count($figli);
 
             // Per ogni figlio, ovvero un prodotto, verifico se l'id
             // corrisponde a quello passato come parametro
@@ -282,7 +283,7 @@
 
             // Ottengo la lista di figli della radice, ovvero la lista dei prodotti
             $figli = $this->oggettoDOM->documentElement->childNodes;
-            $n_figli = $this->oggettoDOM->documentElement->childElementCount;
+            $n_figli = count($figli);
 
             // Per ogni figlio, ovvero un prodotto, verifico corrispondenza con id ricevuto
             $trovato = false;
@@ -330,7 +331,7 @@
 
             // Ottengo la lista di figli della radice, ovvero la lista dei prodotti
             $figli = $this->oggettoDOM->documentElement->childNodes;
-            $n_figli = $this->oggettoDOM->documentElement->childElementCount;
+            $n_figli = count($figli);
 
             // Per ogni figlio, ovvero un prodotto, verifico corrispondenza con id ricevuto
             $trovato = false;

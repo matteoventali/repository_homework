@@ -50,7 +50,7 @@
 
             // Ottengo la lista di figli della radice, ovvero la lista dei carrelli
             $figli = $this->oggettoDOM->documentElement->childNodes;
-            $n_figli = $this->oggettoDOM->documentElement->childElementCount;
+            $n_figli = count($figli);
 
             for ( $i=0; $i < $n_figli && !$trovato; $i++ )
             {
@@ -84,7 +84,7 @@
 
             // Ottengo la lista di figli della radice, ovvero la lista dei carrelli
             $figli = $this->oggettoDOM->documentElement->childNodes;
-            $n_figli = $this->oggettoDOM->documentElement->childElementCount;
+            $n_figli = count($figli);
 
             for ( $i=0; $i < $n_figli && !$trovato; $i++ )
             {
@@ -119,7 +119,7 @@
 
             // Ottengo la lista di figli della radice, ovvero la lista dei carrelli
             $figli = $this->oggettoDOM->documentElement->childNodes;
-            $n_figli = $this->oggettoDOM->documentElement->childElementCount;
+            $n_figli = count($figli);
 
             // Per ogni figlio, ovvero un carrello, verifico se l'id del cliente
             // corrisponde a quello passato come parametro
@@ -162,7 +162,7 @@
 
             // Ottengo la lista di figli della radice, ovvero la lista dei carrelli
             $figli = $this->oggettoDOM->documentElement->childNodes;
-            $n_figli = $this->oggettoDOM->documentElement->childElementCount;
+            $n_figli = count($figli);
 
             // Per ogni figlio, ovvero un carrello, verifico se l'id del cliente
             // corrisponde a quello passato come parametro

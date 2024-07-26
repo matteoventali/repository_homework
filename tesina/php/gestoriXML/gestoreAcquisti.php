@@ -47,7 +47,7 @@
 
             // Ottengo la lista di figli della radice, ovvero la lista degli acquisti
             $figli = $this->oggettoDOM->documentElement->childNodes;
-            $n_figli = $this->oggettoDOM->documentElement->childElementCount;
+            $n_figli = count($figli);
 
             // Per ogni figlio, ovvero un acquisto, verifico se l'id
             // corrisponde a quello passato come parametro
@@ -107,7 +107,7 @@
 
             // Ottengo la lista di figli della radice, ovvero la lista degli acquisti
             $figli = $this->oggettoDOM->documentElement->childNodes;
-            $n_figli = $this->oggettoDOM->documentElement->childElementCount;
+            $n_figli = count($figli);
 
             // Per ogni figlio, ovvero un acquisto, verifico se si riferisce al cliente
             // in oggetto
@@ -268,7 +268,8 @@
                     // Finalizzo l'acquisto
                     // Ottengo l'id dell'ultimo figlio della radice, ovvero dell'ultimo acquisto
                     $id_nuovo_acquisto = 1;
-                    $ultimo = $this->oggettoDOM->documentElement->lastElementChild;
+                    $figli = $this->oggettoDOM->documentElement->childNodes;
+                    $ultimo = $figli[count($figli) - 1];
                     if ( $ultimo != null ) // Ci sono altre domande
                     {
                         $id_ultimo = $ultimo->getAttribute('id');

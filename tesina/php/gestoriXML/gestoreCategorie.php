@@ -36,7 +36,7 @@
 
             // Ottengo la lista di figli della radice, ovvero la lista delle categorie
             $figli = $this->oggettoDOM->documentElement->childNodes;
-            $n_figli = $this->oggettoDOM->documentElement->childElementCount;
+            $n_figli = count($figli);
 
             // Per ogni figlio, ovvero una categoria, estraggo id e nome
             for ( $i=0; $i<$n_figli; $i++ )
@@ -62,7 +62,7 @@
 
             // Ottengo la lista di figli della radice, ovvero la lista delle categorie
             $figli = $this->oggettoDOM->documentElement->childNodes;
-            $n_figli = $this->oggettoDOM->documentElement->childElementCount;
+            $n_figli = count($figli);
 
             // Per ogni figlio, ovvero una categoria, verifico che la categoria
             // corrisponde a quella ricevuta come parametro

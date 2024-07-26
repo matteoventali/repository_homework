@@ -30,7 +30,7 @@
 
             // Ottengo la lista di figli della radice, ovvero la lista dei tagli
             $figli = $this->oggettoDOM->documentElement->childNodes;
-            $n_figli = $this->oggettoDOM->documentElement->childElementCount;
+            $n_figli = count($figli);
 
             // Per ogni figlio, ovvero un taglio di ricarica, estraggo importo e crediti
             for ( $i=0; $i<$n_figli; $i++ )

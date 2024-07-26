@@ -59,7 +59,7 @@
 
             // Ottengo la lista di figli della radice, ovvero la lista dei portafogli
             $figli = $this->oggettoDOM->documentElement->childNodes;
-            $n_figli = $this->oggettoDOM->documentElement->childElementCount;
+            $n_figli = count($figli);
 
             // Scorro il file finche' non raggiungo il portafoglio da aggiornare
             $trovata = false;
@@ -88,7 +88,7 @@
 
             // Ottengo la lista di figli della radice, ovvero la lista dei portafogli
             $figli = $this->oggettoDOM->documentElement->childNodes;
-            $n_figli = $this->oggettoDOM->documentElement->childElementCount;
+            $n_figli = count($figli);
 
             // Scorro il file finche' non raggiungo il portafoglio da analizzare
             $trovata = false;
@@ -175,7 +175,7 @@
 
             // Ottengo la lista di figli della radice, ovvero la lista dei portafogli
             $figli = $this->oggettoDOM->documentElement->childNodes;
-            $n_figli = $this->oggettoDOM->documentElement->childElementCount;
+            $n_figli = count($figli);
 
             // Scorro il file finche' non raggiungo il portafoglio da aggiornare
             $trovata = false;

@@ -39,7 +39,7 @@
             // Ottengo la lista dei risposte
             $lista_risposte = [];
             $risposte = $this->oggettoDOM->documentElement->childNodes;
-            $n_risposte = $this->oggettoDOM->documentElement->childElementCount;
+            $n_risposte = count($risposte);
 
             // Scansiono le risposte e filtro solo quelle relative alla domanda
             for ( $i=0; $i<$n_risposte; $i++ )
@@ -103,7 +103,7 @@
 
             // Ottengo la lista di figli della radice, ovvero la lista delle risposte
             $figli = $this->oggettoDOM->documentElement->childNodes;
-            $n_figli = $this->oggettoDOM->documentElement->childElementCount;
+            $n_figli = count($figli);
 
             // Per ogni figlio, ovvero una risposta, verifico se l'id
             // corrisponde a quello passato come parametro
@@ -159,7 +159,8 @@
 
             // Ottengo l'id dell'ultimo figlio della radice, ovvero dell'ultima risposta
             $id_nuova_risposta = 1;
-            $ultima = $this->oggettoDOM->documentElement->lastElementChild;
+            $figli = $this->oggettoDOM->documentElement->childNodes;
+            $ultima = $figli[count($figli) - 1];
             if ( $ultima != null ) // Ci sono altre domande
             {
                 $id_ultima = $ultima->getAttribute('id');
@@ -266,7 +267,7 @@
             
             // Ottengo la lista di figli della radice, ovvero la lista delle risposte
             $figli = $this->oggettoDOM->documentElement->childNodes;
-            $n_figli = $this->oggettoDOM->documentElement->childElementCount;
+            $n_figli = count($figli);
             for ( $i=0; $i<$n_figli && !$trovata; $i++ )
             {
                 // Verifico se ho raggiunto la risposta
@@ -315,7 +316,7 @@
 
             // Ottengo la lista di figli della radice, ovvero la lista delle risposte
             $figli = $this->oggettoDOM->documentElement->childNodes;
-            $n_figli = $this->oggettoDOM->documentElement->childElementCount;
+            $n_figli = count($figli);
 
             // Per ogni figlio, ovvero una risposta, verifico se l'id
             // corrisponde a quello passato come parametro
@@ -344,7 +345,7 @@
 
             // Ottengo la lista di figli della radice, ovvero la lista delle risposte
             $figli = $this->oggettoDOM->documentElement->childNodes;
-            $n_figli = $this->oggettoDOM->documentElement->childElementCount;
+            $n_figli = count($figli);
 
             // Per ogni figlio, ovvero una risposta, verifico se l'id della domanda
             // corrisponde a quello passato come parametro
@@ -382,7 +383,7 @@
 
             // Ottengo la lista di figli della radice, ovvero la lista delle risposte
             $figli = $this->oggettoDOM->documentElement->childNodes;
-            $n_figli = $this->oggettoDOM->documentElement->childElementCount;
+            $n_figli = count($figli);
 
             // Per ogni figlio, ovvero una risposta, verifico se l'id
             // corrisponde a quello passato come parametro

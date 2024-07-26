@@ -43,7 +43,7 @@
 
             // Ottengo la lista di figli della radice, ovvero la lista delle recensioni
             $figli = $this->oggettoDOM->documentElement->childNodes;
-            $n_figli = $this->oggettoDOM->documentElement->childElementCount;
+            $n_figli = count($figli);
 
             // Per ogni figlio, ovvero una recensione, verifico se l'id
             // corrisponde a quello passato come parametro
@@ -99,7 +99,7 @@
             // Ottengo la lista delle recensioni
             $lista_prodotti = [];
             $recensioni = $this->oggettoDOM->documentElement->childNodes;
-            $n_recensioni = $this->oggettoDOM->documentElement->childElementCount;
+            $n_recensioni = count($recensioni);
 
             // Scansiono le recensioni e filtro solo quelle relative al prodotto
             for ( $i=0; $i<$n_recensioni; $i++ )
@@ -194,7 +194,7 @@
             
             // Ottengo la lista di figli della radice, ovvero la lista delle recensioni
             $figli = $this->oggettoDOM->documentElement->childNodes;
-            $n_figli = $this->oggettoDOM->documentElement->childElementCount;
+            $n_figli = count($figli);
             for ( $i=0; $i<$n_figli && !$trovata; $i++ )
             {
                 // Verifico se ho raggiunto la risposta
@@ -242,7 +242,8 @@
 
             // Ottengo l'id dell'ultimo figlio della radice, ovvero dell'ultima recensione
             $id_nuova_recensione = 1;
-            $ultima = $this->oggettoDOM->documentElement->lastElementChild;
+            $figli = $this->oggettoDOM->documentElement->childNodes;
+            $ultima = $figli[count($figli) - 1];
             if ( $ultima != null ) // Ci sono altre recensioni
             {
                 $id_ultima = $ultima->getAttribute('id');
@@ -283,7 +284,7 @@
 
             // Ottengo la lista di figli della radice, ovvero la lista delle recensioni
             $figli = $this->oggettoDOM->documentElement->childNodes;
-            $n_figli = $this->oggettoDOM->documentElement->childElementCount;
+            $n_figli = count($figli);
 
             // Per ogni figlio, ovvero una recensione, verifico se l'id
             // corrisponde a quello passato come parametro
