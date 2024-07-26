@@ -59,3 +59,6 @@
 \contentsline {subsection}{\numberline {2.9}Gestione clienti}{45}{subsection.2.9}%
 \contentsline {subsection}{\numberline {2.10}Gestione FAQ}{46}{subsection.2.10}%
 \contentsline {section}{\numberline {3}Programmazione}{47}{section.3}%
+\contentsline {subsection}{\numberline {3.1}Librerie}{47}{subsection.3.1}%
+\contentsline {subsubsection}{\numberline {3.1.1}Installazione}{47}{subsubsection.3.1.1}%
+\contentsline {subsubsection}{\numberline {3.1.2}Interfacciamento col database}{47}{subsubsection.3.1.2}%

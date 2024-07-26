@@ -97,7 +97,6 @@
 	\newpage
 	\begin{flushleft}
 		
-	% Sezione 1
 	\section{Introduzione e descrizione dei dati}
 		\subsection{Introduzione} \label{Introduzione}
 			L'applicazione web UNITECNO ha come obiettivo la realizzazione di un negozio virtuale finalizzato alla vendita di dispositivi tecnologici, tramite un processo di fidelizzazione dei clienti.
@@ -1032,6 +1031,52 @@ create table UTENTI(
 				\end{figure}
 		\newpage
 	\section{Programmazione}
+		In questo capitolo si effettua un'analisi degli script che costituiscono il sistema.
+		\subsection{Librerie}
+			Le librerie sono presenti all'interno della directory \textit{'php/lib/'}. \\
+			\subsubsection{Installazione}
+			Gli script che permettono di effettuare l'installazione del sistema sono:
+				\begin{itemize}
+					\item \textit{install.php}, \textit{installDB.php} e \textit{installXML.php} $\rightarrow$ si occupano di effettuare la prima 
+									installazione del sistema;
+					\item \textit{popolazioneIntermedia.php} $\rightarrow$ si occupa di caricare un 'set' di dati utili per testare le funzionalità del
+									sistema.
+				\end{itemize}
+			
+			\subsubsection{Interfacciamento col database}
+			Gli script che permettono di interagire con il database sono:
+				\begin{itemize}
+					\item \textit{configurazione.php} e \textit{connection.php} $\rightarrow$ permettono di collegarsi al database;
+					\item \textit{libreriaDB.php} $\rightarrow$ contiene funzioni utilizzate dagli altri script dell'applicazione per
+																inserire/modificare/eliminare informazioni dal database
+					\item \textit{cambiaStatoCliente.php} $\rightarrow$ permette di attivare/disattivare l'account di un cliente;
+					\item \textit{verificaSessioneAttiva.php} $\rightarrow$ utilizzato ricorrentemente nell'applicazione per verificare
+						se esista una sessione valida per un utente del sistema. La verifica viene fatta sfruttando le variabili di sessione ed eseguendo la query mostrata qui di seguito.
+						\begin{lstlisting}
+<?php
+	$id = $_SESSION["id_utente"];
+	$q = "select stato, reputazione, indirizzo from UTENTI where id=$id"; 
+	
+	try
+	{
+		$rs = $handleDB->query($q);
+		
+		if ( $riga = $rs->fetch_row() ) 
+		{
+			if ( $riga[0] == 'A' )
+			{
+				$sessione_attiva = true;
+				$_SESSION['reputazione'] = $riga[1];
+				$_SESSION['indirizzo'] = $riga[2];
+			}
+		}
+		$rs->close();
+	}
+	catch (Exception $e){}
+?>
+						\end{lstlisting}	
+				\end{itemize}
+		
 		
 	\end{flushleft}
 \end{document}
