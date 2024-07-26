@@ -16,7 +16,7 @@ create table UTENTI(
     mail        varchar(50) not null,
     password    char(64) not null,
     ruolo   char(1) default 'C',
-    saldo_standard float(10, 2),
+    saldo_standard integer default 0,
     primary key (id),
     unique (mail),
     unique (username)

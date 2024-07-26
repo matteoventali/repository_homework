@@ -116,7 +116,7 @@
                     $dim_lista = count($lista_acquisti);
 
                     if($dim_lista == 0)
-                        echo "<p style=\"font-size: 100%;\"> Nessun acquisto effettuato </p>";
+                        echo "<p style=\"font-size: 130%; color: white;\"> Nessun acquisto effettuato </p>";
 
                     for ( $i=0; $i<$dim_lista; $i++ )
                     {

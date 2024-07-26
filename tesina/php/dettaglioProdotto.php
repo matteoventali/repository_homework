@@ -240,6 +240,9 @@
                             $n_recensioni = count($recensioni);
                             $id_intervento = 1;
 
+                            if ( $n_recensioni == 0 )
+                                echo '<p>Nessuna recensione presente</p>';
+
                             for ( $i=0; $i < $n_recensioni; $i++ )
                             {
                                 // Prelevo le informazioni dell'utente tramite il database

@@ -57,6 +57,8 @@
             else
                 $mostraPopup  = true;
         }
+        else
+            $err = false;
         
         if (isset($_POST["id_domanda"]))
         {
@@ -135,7 +137,7 @@
                     ?>
                     <fieldset class="risposta">
                         <p>Scrivi qui la risposta:</p>
-                        <textarea rows=10 cols=70 name="text_risposta"><?php if($err) echo $risposta;?></textarea>
+                        <textarea rows=10 cols=70 name="text_risposta"><?php if($err) echo $risposta_text;?></textarea>
                         <input type="hidden" value="<?php echo $_POST["id_domanda"]; ?>" name="id_domanda" />
                     </fieldset>
                 </form>

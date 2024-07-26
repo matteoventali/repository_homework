@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.24 (TeX Live 2022/Debian) (preloaded format=pdflatex 2023.12.5)  20 JUL 2024 21:24
+This is pdfTeX, Version 3.141592653-2.6-1.40.24 (TeX Live 2022/Debian) (preloaded format=pdflatex 2023.12.5)  26 JUL 2024 10:10
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -534,13 +534,13 @@ LaTeX Font Info:    External font `cmex10' loaded for size
  [3] [4] [5] [6] [7] [8] [9] [10] [11] [12]
 [13] [14] [15] [16]
 LaTeX Font Info:    Trying to load font information for T1+cmtt on input line 6
-77.
+72.
  (/usr/share/texlive/texmf-dist/tex/latex/base/t1cmtt.fd
 File: t1cmtt.fd 2022/07/10 v2.5l Standard LaTeX font definitions
 )
 [17]
 Package hyperref Info: bookmark level for unknown lstlisting defaults to 0 on i
-nput line 701.
+nput line 696.
  (../xmlCopia/documenti/categorieProdotti.xml [18])
 (../xmlCopia/grammatiche/grammaticaCategorieProdotti.dtd)
 (../xmlCopia/documenti/tagliRicarica.xml) [19]
@@ -559,12 +559,18 @@ nput line 701.
 (../xmlCopia/schema/schemaRichiesteRicariche.xsd [31])
 (../xmlCopia/documenti/carrelli.xml) (../xmlCopia/schema/schemaCarrelli.xsd)
 [32] [33] [34] [35] [36] (./tesina_Ventali_Rosso.aux)
-Package rerunfilecheck Info: File `tesina_Ventali_Rosso.out' has not changed.
-(rerunfilecheck)             Checksum: 8E0CDAF41DC317E3093E6C39BFE4A292;6955.
+
+Package rerunfilecheck Warning: File `tesina_Ventali_Rosso.out' has changed.
+(rerunfilecheck)                Rerun to get outlines right
+(rerunfilecheck)                or use package `bookmark'.
+
+Package rerunfilecheck Info: Checksums for `tesina_Ventali_Rosso.out':
+(rerunfilecheck)             Before: 8E0CDAF41DC317E3093E6C39BFE4A292;6955
+(rerunfilecheck)             After:  55864A98AB367391B85BCEEFA73CE789;7008.
  ) 
 Here is how much of TeX's memory you used:
- 14256 strings out of 478040
- 224748 string characters out of 5840467
+ 14254 strings out of 478040
+ 224734 string characters out of 5840467
  1974330 words of memory out of 5000000
  33312 multiletter control sequences out of 15000+600000
  527456 words of font info for 61 fonts, out of 8000000 for 9000
@@ -588,10 +594,10 @@ cm/cmmi8.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr1
 2.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb></
 usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/sh
 are/texlive/texmf-dist/fonts/type1/public/eurosym/feymr10.pfb>
-Output written on tesina_Ventali_Rosso.pdf (36 pages, 366990 bytes).
+Output written on tesina_Ventali_Rosso.pdf (36 pages, 366953 bytes).
 PDF statistics:
- 1757 PDF objects out of 2073 (max. 8388607)
- 1353 compressed objects within 14 object streams
- 808 named destinations out of 1000 (max. 500000)
+ 1755 PDF objects out of 2073 (max. 8388607)
+ 1351 compressed objects within 14 object streams
+ 806 named destinations out of 1000 (max. 500000)
  382 words of extra memory for PDF output out of 10000 (max. 10000000)
 

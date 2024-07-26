@@ -54,6 +54,14 @@ span
     color: white;
 }
 
+.riquadroAcquisti span
+{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
 p 
 {
     margin: 10px;

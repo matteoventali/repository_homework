@@ -170,12 +170,8 @@
             {
                 if ( $figli[$i]->getAttribute('id_cliente') == $id_cliente )
                 {
-                    // Rimuovo tutti i prodotti dal carrello
-                    $prodotti = $figli[$i]->childNodes;
-                    $n_prodotti = $figli[$i]->childElementCount;
-
-                    for ( $j=0; $j < $n_prodotti; $j++ )
-                        $figli[$i]->removeChild($prodotti[$j]);
+                    while( $figli[$i]->childElementCount > 0 )
+                        $figli[$i]->removeChild($figli[$i]->firstChild);
                 }
 
                 $this->salvaXML($this->pathname);
@@ -183,5 +179,5 @@
 
             return $esito;
         }
-    } 
+    }
 ?>

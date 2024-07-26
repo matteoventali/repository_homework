@@ -38,7 +38,7 @@
                 $img = $_FILES["immagine"];
 
                 // Verifico che i campi siano compilati
-                if ( strlen($nome) > 0  && strlen($prezzo) > 0 && strlen($specifiche) > 0
+                if ( strlen($nome) > 0  && strlen($prezzo) > 0 && strlen($specifiche) > 0 && strlen($descrizione) > 0
                         && $categoria != '0' && $tipologia != '0' && $img["size"] > 0 )
                 {
                     // Verifico che il prezzo sia un numero intero (unita' di misura crediti)

@@ -374,21 +374,20 @@
 			\subsubsection{Accesso e gestione profilo}
 			\textbf{Precondizioni}
 			\begin{itemize}
-				\item l'utente ha effettuato il login come admin/gestore/cliente.
+				\item l'utente ha effettuato il login come cliente.
 			\end{itemize}
 			\textbf{Eventi}
 			\begin{enumerate}
-				\item l'utente accede alla propria area personale;
-				\item l'utente visualizza:
+				\item il cliente accede alla propria area personale;
+				\item il cliente visualizza:
 					\begin{itemize}
 						\item i dati personali;
 						\item gli acquisti effettuati;
-						\item gli acquisti in corso; 
 						\item il saldo del portafoglio standard;
 						\item il saldo del portafoglio bonus; 
 						\item la propria reputazione.
 					\end{itemize} 
-				\item l'utente ha facoltà di modificare i propri dati personali. Viene reindirizzato 
+				\item il cliente ha facoltà di modificare i propri dati personali. Viene reindirizzato 
 					  in una pagina con una form precompilata in cui può modificare i campi voluti.
 			\end{enumerate}
 			\textbf{Postcondizioni}
@@ -417,7 +416,7 @@
 			\end{enumerate}
 			\textbf{Postcondizioni}
 			\begin{itemize}
-				\item in caso di acquisto effettuato con successo l'utente viene reindirizzato in una pagina di riepilogo;
+				\item in caso di acquisto effettuato con successo l'utente viene reindirizzato alla sua area personale dove potrà visualizzare la lista degli acquisti;
 				\item in caso di acquisto non effettuato con successo l'utente ritorna alla fase 4.
 			\end{itemize}
 		
@@ -484,8 +483,7 @@
 			\end{itemize}
 			\textbf{Eventi}
 			\begin{enumerate}
-				\item l'utente seleziona l'intervento che desidera valutare;
-				\item l'utente viene reindirizzato alla pagina dell'intervento selezionato;
+				\item l'utente raggiunge l'intervento che desidera valutare;
 				\item l'utente giudica l'intervento mediante le stelline. In caso di admin o gestore ha la facoltà di eliminare l'intervento.
 				\item l'utente sottomette la valutazione o procede all'eliminazione.
 			\end{enumerate}
@@ -499,18 +497,16 @@
 			\textbf{Precondizioni}
 			\begin{itemize}
 				\item l'utente ha effettuato il login come cliente;
-				\item il cliente ha acceduto alla sua area personale.
+				\item il cliente accede alla pagina di richiesta ricarica.
 			\end{itemize}
 			\textbf{Eventi}
 			\begin{enumerate}
-				\item il cliente seleziona l'opzione di ricarica accanto al saldo del portafoglio standard;
 				\item il cliente viene reindirizzato alla pagina di ricarica in cui è mostrata una form da compilare;
 				\item il cliente compila la form selezionando il taglio di ricarica desiderato;
 				\item il cliente sottomette la richiesta di ricarica.
 			\end{enumerate}
 			\textbf{Postcondizioni}
 			\begin{itemize}
-				\item il cliente viene reindirizzato alla sua area personale;
 				\item la richiesta di ricarica è visibile agli admin per accettazione/diniego.
 			\end{itemize}
 		
@@ -555,7 +551,7 @@
 			\end{itemize}
 		
 			\bigskip
-			\subsubsection{Inserimento sconti}
+			\subsubsection{Inserimento offerta speciale}
 			\textbf{Precondizioni}
 			\begin{itemize}
 				\item l'utente ha effettuato il login come gestore;
@@ -563,11 +559,10 @@
 			\end{itemize}
 			\textbf{Eventi}
 			\begin{enumerate}
-				\item il gestore seleziona l'opzione di inserimento sconto per il prodotto;
+				\item il gestore seleziona l'opzione di inserimento offerta speciale per il prodotto;
 				\item il gestore viene reindirizzato ad una pagina con una form da compilare;
-				\item il gestore compila la form con i dettagli dello sconto. Nel caso in cui lo sconto è già presente la form sarà precompilata 
-					  per permettere la sua modifica;
-				\item il gestore sottomette lo sconto.
+				\item il gestore compila la form con i dettagli dell'offerta speciale. Nel caso in cui l'offerta è già presente la form sarà precompilata per permettere la sua modifica;
+				\item il gestore sottomette l'offerta speciale.
 			\end{enumerate}
 			\textbf{Postcondizioni}
 			\begin{itemize}
@@ -655,7 +650,7 @@
 
 		
 		\subsection{Strutture dati}
-			\subsubsection{Utenti}
+				\subsubsection{Utenti}
 				I dati degli utenti registrati (clienti, gestori, admin) vengono memorizzati in una tabella SQL con i seguenti campi:
 				\begin{itemize}
 					\item id $\rightarrow$ chiave primaria della tabella generata in maniera automatica dal dbms;
@@ -689,7 +684,7 @@ create table UTENTI(
 	mail        varchar(50) not null,
 	password    char(64) not null,
 	ruolo   char(1) default 'C',
-	saldo_standard float(10, 2),
+	saldo_standard integer default 0,
 	primary key (id),
 	unique (mail),
 	unique (username)

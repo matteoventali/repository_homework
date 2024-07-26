@@ -68,7 +68,7 @@ body
 #sezioneSpecifichePrezzo
 {
     display: flex;
-    font-size: 110%;
+    font-size: 100%;
     justify-content: space-around;
 }
 
@@ -76,6 +76,7 @@ body
 {
     border-left: solid;
     padding-left: 10px;
+    max-width: 60%;
 }
 
 #prezzo

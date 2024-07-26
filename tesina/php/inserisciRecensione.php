@@ -13,6 +13,11 @@
         header("Location: homepage.php");
     else if ( isset($_POST["id_prodotto"]) ) 
     {
+        // Prelevo le informazioni del prodotto per comporre il titolo
+        // del form
+        $gestoreCatalogo = new GestoreCatalogoProdotti();
+        $prodotto = $gestoreCatalogo->ottieniProdotto($_POST["id_prodotto"]);
+        
         // Verifico se vi sia da evadere una richiesta o meno
         if ( isset($_POST["btnAggiungi"]) && isset($_POST["recensione"]) )
         {
@@ -38,13 +43,6 @@
                 $msg = 'Campi vuoti';
             }
         }
-        else
-        {
-            // Prelevo le informazioni del prodotto per comporre il titolo
-            // del form
-            $gestoreCatalogo = new GestoreCatalogoProdotti();
-            $prodotto = $gestoreCatalogo->ottieniProdotto($_POST["id_prodotto"]);
-        }    
     }
     
     // Verifico se c'e' da gestire una richiesta di registrazione o meno

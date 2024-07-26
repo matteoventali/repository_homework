@@ -19,7 +19,7 @@
 \contentsline {subsubsection}{\numberline {1.3.8}Ricarica portafoglio standard}{13}{subsubsection.1.3.8}%
 \contentsline {subsubsection}{\numberline {1.3.9}Inserimento prodotti}{14}{subsubsection.1.3.9}%
 \contentsline {subsubsection}{\numberline {1.3.10}Gestione prodotti}{14}{subsubsection.1.3.10}%
-\contentsline {subsubsection}{\numberline {1.3.11}Inserimento sconti}{15}{subsubsection.1.3.11}%
+\contentsline {subsubsection}{\numberline {1.3.11}Inserimento offerta speciale}{15}{subsubsection.1.3.11}%
 \contentsline {subsubsection}{\numberline {1.3.12}Gestione clienti}{15}{subsubsection.1.3.12}%
 \contentsline {subsubsection}{\numberline {1.3.13}Gestione ricariche}{16}{subsubsection.1.3.13}%
 \contentsline {subsubsection}{\numberline {1.3.14}Inserimento FAQ}{16}{subsubsection.1.3.14}%
