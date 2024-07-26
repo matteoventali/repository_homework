@@ -17,6 +17,7 @@
 
 \usepackage{listings}
 \usepackage{color}
+\usepackage[export]{adjustbox}
 \definecolor{dkgreen}{rgb}{0,0.6,0}
 \definecolor{gray}{rgb}{0.5,0.5,0.5}
 \definecolor{mauve}{rgb}{0.58,0,0.82}
@@ -841,5 +842,196 @@ create table UTENTI(
 				\item \textbf{carrelli $\rightarrow$ carrello[id\_cliente] } l'attributo id\_cliente dell'elemento carrello permette di specificare il cliente a cui si riferisce il carrello (sezione Clienti di \ref{CategorieUtenti});
 				\item \textbf{carrelli $\rightarrow$ carrello $\rightarrow$ prodotto} l'elemento prodotto dell'elemento carrello permette di specificare il prodotto inserito nel carrello (sezione Clienti di \ref{CategorieUtenti});
 			\end{itemize}
+		\newpage
+		
+	
+	\section{Manuale utente}
+		\graphicspath{{"./img/"}}
+		In questo capitolo vengono descritte le modalità di utilizzo delle funzionalità offerte agli utenti del sistema, come riportato nei casi d'uso. \ref{CasiUso}
+			\subsection{Registrazione}
+				La pagina di registrazione consente al visitatore del sito di iscriversi e diventare quindi un cliente.
+				Vengono richieste le seguenti informazioni:
+				\begin{itemize}
+					\item nome;
+					\item cognome;
+					\item indirizzo;
+					\item città;
+					\item CAP (codice numerico di 5 cifre);
+					\item username;
+					\item mail (stringa di caratteri alfanumerici che rispetta il formato standard);
+					\item password.
+				\end{itemize}
+				\begin{figure}[H]
+					\includegraphics[width=\textwidth, frame=2pt]{"screenRegistrazione.png"}
+				\end{figure}
+
+			
+			\subsection{Accesso e gestione profilo}		
+				L'area personale consente al cliente di visualizzare gli acquisti effettuati e i propri dati:
+				\begin{itemize}
+					\item nome;
+					\item cognome;
+					\item indirizzo;
+					\item città;
+					\item CAP (codice numerico di 5 cifre);
+					\item data registrazione;
+					\item reputazione;
+					\item saldo del portafoglio standard;										
+					\item saldo del portafoglio bonus;
+					\item username;
+					\item mail (stringa di caratteri alfanumerici che rispetta il formato standard);
+				\end{itemize}
+				\begin{figure}[H]
+					\includegraphics[width=\textwidth, frame=2pt]{"screenAreaPersonale.png"}
+				\end{figure}
+
+				
+				Tramite il pulsante "\textit{Modifica dati}" viene data la possibilità all'utente di modificare i seguenti dati:
+				\begin{itemize}
+					\item nome;
+					\item cognome;
+					\item indirizzo;
+					\item città;
+					\item CAP (codice numerico di 5 cifre);
+				\end{itemize}
+				\begin{figure}[H]
+					\includegraphics[width=\textwidth, frame=2pt]{"screenModificaDati.png"}
+				\end{figure}
+
+				
+			\subsection{Acquisto}
+				Il cliente visualizza i prodotti in base ai criteri di ricerca inseriti.
+				\begin{figure}[H]
+					\includegraphics[width=\textwidth, frame=2pt]{"screenCatalogo.png"}	
+				\end{figure}
+				Successivamente, il cliente ha la possibilità di accedere al dettaglio di un singolo prodotto selezionando
+				uno dei risultati ottenuti.
+				\begin{figure}[H]
+					\centering
+					\includegraphics[height=6cm, frame=2pt]{"screenProdotto.png"}	
+				\end{figure}
+				Tramite il pulsante \textit{"Aggiungi al carrello"} il cliente può inserire il prodotto in oggetto nel carrello
+				\begin{figure}[H]
+					\includegraphics[width=\textwidth, frame=2pt]{"screenCarrello.png"}	
+				\end{figure}
+				In seguito, il cliente può finalizzare l'acquisto relativo ai prodotti presenti nel carrello.
+				Qui il cliente ha la facoltà di sfruttare i crediti bonus del suo portafoglio e modificare l'indirizzo di consegna.
+				\begin{figure}[H]
+					\centering
+					\includegraphics[width=10cm, height=6.5cm, frame=2pt]{"screenFinalizzaAcquisto.png"}	
+				\end{figure}
+			
+			\subsection{Inserimento recensioni}
+				Il cliente, nella pagina di un prodotto, ha la possibilità di inserire una recensione.
+				\begin{figure}[H]
+					\centering
+					\includegraphics[height=4.5cm, frame=2pt]{"screenRecensioni.png"}	
+				\end{figure}
+			\subsection{Inserimento domande e risposte}
+				Nella sezione domande, il cliente visualizza l'elenco delle domande.
+				\begin{figure}[H]
+					\centering
+					\includegraphics[width=\textwidth, frame=2pt]{"screenDomande.png"}	
+				\end{figure}
+				Il cliente ha la facoltà di inserire una nuova domanda
+				\begin{figure}[H]
+					\centering
+					\includegraphics[height=7cm, frame=2pt]{"screenInserimentoDomanda.png"}	
+				\end{figure}
+				o di selezionare una tra quelle già presenti. Una volta acceduto alla pagina della domanda selezionata,
+				visualizza le risposte associate ad essa.
+				\begin{figure}[H]
+					\centering
+					\includegraphics[width=\textwidth, frame=2pt]{"screenDomanda.png"}	
+				\end{figure}
+				Inoltre, giunto a questo punto, può inserire la sua risposta alla domanda.
+				\begin{figure}[H]
+					\centering
+					\includegraphics[height=7cm, frame=2pt]{"screenInserimentoRisposta.png"}	
+				\end{figure}
+			\subsection{Valutazioni interventi}
+				Ogni utente ha la possibilità di valutare domande, risposte e recensioni mediante le stelline.
+				\begin{figure}[H]
+					\centering
+					\includegraphics[width=\textwidth, frame=2pt]{"screenValutazione.png"}	
+				\end{figure}
+			\subsection{Ricariche portafoglio standard}
+				Il cliente nella pagina di richieste ricarica può inoltrare agli admin una nuova richiesta di ricarica.
+				\begin{figure}[H]
+					\centering
+					\includegraphics[width=\textwidth, frame=2pt]{"screenRichiestaRicarica.png"}	
+				\end{figure}
+				A seguito di questa operazione, la richiesta è visualizzabile e gestibile, nella pagina di gestione delle richieste, dagli admin.
+				\begin{figure}[H]
+					\centering
+					\includegraphics[width=\textwidth, frame=2pt]{"screenGestioneRicariche.png"}	
+				\end{figure}
+			\subsection{Gestione prodotti}
+				Il gestore, una volta acceduto al catalogo, ha la possibilità di aggiungere un nuovo prodotto.
+				\begin{figure}[H]
+					\centering
+					\includegraphics[width=\textwidth, frame=2pt]{"screenInserimentoCatalogo.png"}	
+				\end{figure}
+				Per effettuare l'inserimento del prodotto vengono richiesti le seguenti informazioni:
+					\begin{itemize}
+						\item nome;
+						\item prezzo di listino;
+						\item categoria e tipologia;
+						\item specifiche e descrizione;
+						\item immagine.
+					\end{itemize}
+				\begin{figure}[H]
+					\centering
+					\includegraphics[width=\textwidth, frame=2pt]{"screenInserimentoProdotto.png"}	
+				\end{figure}
+				Per un prodotto nel catalogo, il gestore può:
+					\begin{itemize}
+						\item modificare le informazioni;
+						\item nascondere/rendere visibile il prodotto;
+						\item aggiungere un'offerta speciale.
+					\end{itemize}
+				\begin{figure}[H]
+					\centering
+					\includegraphics[width=\textwidth, frame=2pt]{"screenProdottoGestore.png"}	
+				\end{figure}
+				\begin{figure}[H]
+					\centering
+					\includegraphics[width=\textwidth, frame=2pt]{"screenModificaProdotto.png"}	
+				\end{figure}
+				\begin{figure}[H]
+					\centering
+					\includegraphics[width=\textwidth, frame=2pt]{"screenInserimentoOffertaSpeciale.png"}	
+				\end{figure}
+			
+			\subsection{Gestione clienti}
+				Gli admin e i gestori hanno la possibilità di visualizzare l'elenco dei clienti registrati nel sistema.
+				\begin{figure}[H]
+					\centering
+					\includegraphics[width=\textwidth, frame=2pt]{"screenClienti.png"}	
+				\end{figure}
+				Possono visualizzare in dettaglio le informazioni di ogni cliente.
+				\begin{figure}[H]
+					\centering
+					\includegraphics[width=\textwidth, frame=2pt]{"screenDettaglioCliente.png"}	
+				\end{figure}
+				L'admin ha la facoltà di modificare i dati di un cliente e di attivare/disattivare l'account.	
+				\begin{figure}[H]
+					\centering
+					\includegraphics[width=\textwidth, frame=2pt]{"screenModificaCliente.png"}	
+				\end{figure}
+			\subsection{Gestione FAQ}
+				Gli admin e i gestori hanno la possibilità di inserire nuove FAQ
+				\begin{figure}[H]
+					\centering
+					\includegraphics[height=6cm, frame=2pt]{"screenInserimentoFaq.png"}	
+				\end{figure}
+				o elevare una domanda esistente a FAQ
+				\begin{figure}[H]
+					\centering
+					\includegraphics[width=\textwidth, frame=2pt]{"screenElevaFaq.png"}	
+				\end{figure}
+		\newpage
+	\section{Programmazione}
+		
 	\end{flushleft}
 \end{document}
