@@ -61,6 +61,21 @@
 	morekeywords={xmlns,xsi,noNamespaceSchemaLocation,type,id,x,y,source,target,version,tool,transRef,roleRef,objective,eventually}% list your attributes here
 }
 
+\lstdefinelanguage{JavaScript}{
+	keywords={typeof, new, true, false, catch, function, return, null, catch, switch, var, if, in, while, do, else, case, break},
+	keywordstyle=\color{blue}\bfseries,
+	ndkeywords={class, export, boolean, throw, implements, import, this},
+	ndkeywordstyle=\color{darkgray}\bfseries,
+	identifierstyle=\color{black},
+	sensitive=false,
+	comment=[l]{//},
+	morecomment=[s]{/*}{*/},
+	commentstyle=\color{purple}\ttfamily,
+	stringstyle=\color{red}\ttfamily,
+	morestring=[b]',
+	morestring=[b]"
+}
+
 % Info documento
 \date{A.A. 2023/2024}
 \pagestyle{headings}
@@ -847,6 +862,23 @@ create table UTENTI(
 	\section{Manuale utente}
 		\graphicspath{{"./img/"}}
 		In questo capitolo vengono descritte le modalità di utilizzo delle funzionalità offerte agli utenti del sistema, come riportato nei casi d'uso. \ref{CasiUso}
+			\subsection{Layout}
+				Ogni pagina dell'applicazione condivide la stessa struttura costituita da:
+				\begin{itemize}
+					\item navbar;
+					\item sidebar con meccanismo di comparsa/scomparsa.
+				\end{itemize}
+				\begin{figure}[H]
+					\centering
+					\includegraphics[height=7.5cm, frame=2pt]{"screenHomepage.png"}
+				\end{figure}
+				La sidebar compare/scompare al click del bottone in alto a sinistra e mostra le opzioni possibili
+				in base al tipo di utente loggato.
+				\begin{figure}[H]
+					\centering
+					\includegraphics[height=7.5cm, frame=2pt]{"screenHomepageCliente.png"}
+				\end{figure}
+				
 			\subsection{Registrazione}
 				La pagina di registrazione consente al visitatore del sito di iscriversi e diventare quindi un cliente.
 				Vengono richieste le seguenti informazioni:
@@ -946,7 +978,7 @@ create table UTENTI(
 				Inoltre, giunto a questo punto, può inserire la sua risposta alla domanda.
 				\begin{figure}[H]
 					\centering
-					\includegraphics[height=7cm, frame=2pt]{"screenInserimentoRisposta.png"}	
+					\includegraphics[height=6cm, frame=2pt]{"screenInserimentoRisposta.png"}	
 				\end{figure}
 			\subsection{Valutazioni interventi}
 				Ogni utente ha la possibilità di valutare domande, risposte e recensioni mediante le stelline.
@@ -958,7 +990,7 @@ create table UTENTI(
 				Il cliente nella pagina di richieste ricarica può inoltrare agli admin una nuova richiesta di ricarica.
 				\begin{figure}[H]
 					\centering
-					\includegraphics[width=\textwidth, frame=2pt]{"screenRichiestaRicarica.png"}	
+					\includegraphics[height=4cm, frame=2pt]{"screenRichiestaRicarica.png"}	
 				\end{figure}
 				A seguito di questa operazione, la richiesta è visualizzabile e gestibile, nella pagina di gestione delle richieste, dagli admin.
 				\begin{figure}[H]
@@ -1022,7 +1054,7 @@ create table UTENTI(
 				Gli admin e i gestori hanno la possibilità di inserire nuove FAQ
 				\begin{figure}[H]
 					\centering
-					\includegraphics[height=6cm, frame=2pt]{"screenInserimentoFaq.png"}	
+					\includegraphics[height=5cm, frame=2pt]{"screenInserimentoFaq.png"}	
 				\end{figure}
 				o elevare una domanda esistente a FAQ
 				\begin{figure}[H]
@@ -1052,31 +1084,246 @@ create table UTENTI(
 					\item \textit{cambiaStatoCliente.php} $\rightarrow$ permette di attivare/disattivare l'account di un cliente;
 					\item \textit{verificaSessioneAttiva.php} $\rightarrow$ utilizzato ricorrentemente nell'applicazione per verificare
 						se esista una sessione valida per un utente del sistema. La verifica viene fatta sfruttando le variabili di sessione ed eseguendo la query mostrata qui di seguito.
-						\begin{lstlisting}
-<?php
-	$id = $_SESSION["id_utente"];
-	$q = "select stato, reputazione, indirizzo from UTENTI where id=$id"; 
+						\begin{lstlisting}[backgroundcolor=\color{coloreSfondoGrammatiche}]
+$id = $_SESSION["id_utente"];
+$q = "select stato, reputazione, indirizzo from UTENTI where id=$id"; 
+
+try
+{
+	$rs = $handleDB->query($q);
 	
-	try
+	if ( $riga = $rs->fetch_row() ) 
 	{
-		$rs = $handleDB->query($q);
-		
-		if ( $riga = $rs->fetch_row() ) 
+		if ( $riga[0] == 'A' )
 		{
-			if ( $riga[0] == 'A' )
-			{
-				$sessione_attiva = true;
-				$_SESSION['reputazione'] = $riga[1];
-				$_SESSION['indirizzo'] = $riga[2];
-			}
+			$sessione_attiva = true;
+			$_SESSION['reputazione'] = $riga[1];
+			$_SESSION['indirizzo'] = $riga[2];
 		}
-		$rs->close();
 	}
-	catch (Exception $e){}
-?>
+	$rs->close();
+}
+catch (Exception $e){}
 						\end{lstlisting}	
 				\end{itemize}
 		
+			\subsubsection{Libreria generale}
+				All'interno dello script \textit{libreria.php} sono presenti diverse funzioni utilizzate frequentemente
+				negli altri script che costituiscono l'applicazione.
+				Tra queste funzioni risaltano:
+				\begin{itemize}
+					\item \textit{ottieniOpzioniMenu()} $\rightarrow$ funzione utile al popolamento della sidebar in base al ruolo dell'utente;
+					\item \textit{creaPopup()} $\rightarrow$ funzione utile a mostrare un popup di notifica all'utente, a seguito
+					di un determinato evento (successo/errore). Per realizzare il popup in maniera modulare, esso viene costituito dinamicamente in base all'evento accaduto; per fare ciò viene richiamato un frammento di codice html in cui si inseriscono i valori che il popup deve avere.
+					\begin{lstlisting}[language=XML]
+<div id="popupErrore" style="margin-right:%MARGINE_DESTRO_POPUP%; 
+				display:%OPZIONE_DISPLAY_POPUP%; 
+				background-color:%COLORE_SFONDO_POPUP%;">
+	<p onclick="nascondiPopup();">&times;</p>
+	<p>%CONTENUTO_FINESTRA_POPUP%</p>
+</div>
+					\end{lstlisting}
+					L'inserimento dei valori nel frammento avviene nel seguente modo:
+					\begin{lstlisting}[backgroundcolor=\color{coloreSfondoGrammatiche}]
+$popup = file_get_contents("../html/popupErrore.html");
+$popup = str_replace("%CONTENUTO_FINESTRA_POPUP%", 
+								$contenuto, $popup);
+$popup = str_replace("%OPZIONE_DISPLAY_POPUP%", 
+								$opzione_display_popup_mostra, $popup);
+$popup = str_replace("%MARGINE_DESTRO_POPUP%", 
+								$margine_popup_mostra, $popup);
+
+if ($errore)
+	$popup = str_replace("%COLORE_SFONDO_POPUP%", 
+								$colore_background_popup_rosso, $popup);
+else 
+	$popup = str_replace("%COLORE_SFONDO_POPUP%", 
+								$colore_background_popup_verde, $popup);
+					\end{lstlisting}
+					\item \textit{ordinaProdottiPrezzoDecrescente()} e \textit{ordinaProdottiPrezzoCrescente()} $\rightarrow$ funzioni che implementano gli algoritmi di ordinamento per visualizzare i prodotti nel catalogo secondo un ordinamento crescente/decrescente sul prezzo.
+				\end{itemize}
+		\subsection{Gestori}
+			Per gestire i file XML utilizzati sono stati sviluppati script appositi secondo il paradigma della programmazione ad oggetti.
+			I gestori dei file XML sono presenti all'interno della directory \textit{'php/gestoriXML'}.
+			Esiste un gestore specifico per ogni file XML utilizzato. Tutti i gestori specifici ereditano le caratteristiche comuni dalla classe
+			\textit{gestoreXMLDOM}. I metodi della classe padre che vengono sfruttati dalle classi figlie sono:
+			\begin{itemize}
+				\item \textit{\_\_construct()} $\rightarrow$ metodo costruttore che si occupa di aprire e validare il file XML passato come parametro. La validazione può avvenire mediante schema o grammatica dtd;
+				\begin{lstlisting}[backgroundcolor=\color{coloreSfondoGrammatiche}]
+function __construct($file, $modalita_validazione, $pathname_schema)
+{
+	if ( file_exists($file) )
+	{
+		$this->pathname = $file;
+		$xmlString = "";
+		foreach ( file($file) as $node )
+		$xmlString .= trim($node);
+		
+		$this->oggettoDOM = new DOMDocument();
+		$this->oggettoDOM->loadXML($xmlString);
+		
+		if (($modalita_validazione == 0 && $this->oggettoDOM->validate()) ||
+		($modalita_validazione == 1 && file_exists($pathname_schema) && $this->oggettoDOM->schemaValidate($pathname_schema)))
+		$this->errori = false;
+	}
+}
+				\end{lstlisting}
+				\item \textit{salvaXML()} $\rightarrow$ metodo per salvare le modifiche sul file XML.
+				\begin{lstlisting}[backgroundcolor=\color{coloreSfondoGrammatiche}]
+function salvaXML($path)
+{
+	if ( $this->checkValidita() )
+	{
+		if ( strlen($path) == 0 )
+		$path = $this->pathname;
+		$this->oggettoDOM->save($path);
+	}
+}
+				\end{lstlisting}
+			\end{itemize}
+		
+			\bigskip
+			
+			In ogni gestore specifico è sempre presente uno o più metodi per estrarre le informazioni dai file XML.
+			L'estrazione delle informazioni avviene mediante istruzioni di questo tipo:
+			\begin{lstlisting}[backgroundcolor=\color{coloreSfondoGrammatiche}]
+$figli = $this->oggettoDOM->documentElement->childNodes;
+$n_figli = count($figli);
+
+for ( $i=0; $i<$n_figli; $i++ )
+{
+	$nuova_categoria = new Categoria();
+	$nuova_categoria->id_categoria = $figli[$i]->getAttribute('id');
+	$nuova_categoria->nome_categoria = $figli[$i]->firstChild->textContent;
+	array_push($lista_categorie, $nuova_categoria);
+}
+			\end{lstlisting}
+			
+			Inoltre, in diversi gestori sono presenti metodi di inserimento e eliminazione di informazioni dai file XML.
+			\begin{itemize}
+				\item l'inserimento di nuove informazioni avviene mediante istruzioni di questo tipo:
+				\begin{lstlisting}[backgroundcolor=\color{coloreSfondoGrammatiche}]
+$nuova_ricarica = $this->oggettoDOM->createElement('ricarica');
+$nuova_ricarica->setAttribute('id', $id_nuova_ricarica);
+$nuova_ricarica->setAttribute('id_cliente', $id_cliente);
+$nuova_ricarica->setAttribute('stato', 'W');
+$data_richiesta = $this->oggettoDOM->createElement('data_richiesta', 
+											date('Y-m-d'));
+$crediti_richiesti = $this->oggettoDOM->createElement('crediti_richiesti', 
+											$crediti);
+$nuova_ricarica->appendChild($data_richiesta);
+$nuova_ricarica->appendChild($crediti_richiesti);
+
+$this->oggettoDOM->documentElement->appendChild($nuova_ricarica);
+
+$this->salvaXML($this->pathname);
+				\end{lstlisting}				
+				\item l'eliminazione di informazioni avviene mediante istruzioni di questo tipo:
+				\begin{lstlisting}[backgroundcolor=\color{coloreSfondoGrammatiche}]
+$figli = $this->oggettoDOM->documentElement->childNodes;
+$n_figli = count($figli);
+
+for ( $i=0; $i<$n_figli && !$esito; $i++ )
+{
+	if ( $figli[$i]->getAttribute('id_cliente') == $id_cliente )
+	{
+		while( count($figli[$i]->childNodes) > 0 )
+		$figli[$i]->removeChild($figli[$i]->firstChild);
+	}
+	
+	$this->salvaXML($this->pathname);
+}
+				\end{lstlisting}
+			\end{itemize}
+		\subsection{Altri aspetti}
+			Nella directory \textit{'php/'} sono presenti tutti gli altri script che costituiscono l'applicazione,
+			i quali si appoggiano sugli script descritti nelle sezioni precedenti. \\
+			Le pagine dell'applicazione vengono costruite mediante il meccanismo dei frammenti, come già descritto per il popup.\\
+			I frammenti sfruttati dagli script sono collocati all'interno della directory \textit{'html/'}.
+			Tra questi script si evidenzia il meccanismo di controllo dati utilizzato per validare le informazioni
+			che l'utente inserisce mediante form. \\
+			In caso di errore, viene mostrato il popup all'utente (vedi sezione precedente).\\
+			Questo meccanismo viene implementato mediante istruzioni di questo tipo: \newpage
+			\begin{lstlisting}[backgroundcolor=\color{coloreSfondoGrammatiche}]
+$domanda = trim($_POST["domanda"]);
+if ( strlen($domanda) > 0 )
+{
+	$gestore_domande = new GestoreDomande();
+	$id_domanda = $gestore_domande->inserisciDomanda($domanda, 
+								$_SESSION["id_utente"], "false");
+	
+	if ( $id_domanda != null )
+	{
+		$err = false;
+		header("Location: domande.php");
+	}
+	else
+	$msg = "Errore nell'inserimento della domanda";
+}
+			\end{lstlisting}
+			\medskip
+			Inoltre, all'interno di questa directory, sono presenti degli script che vengono eseguiti mediante tecnologia AJAX.
+			Questi script sono:
+			\begin{itemize}
+				\item \textit{inserisciValutazione.php};
+				\item \textit{cambiaStatoCliente.php};
+				\item \textit{eliminaIntervento.php};
+				\item \textit{ottieniTipologiePerCategoria.php};
+				\item \textit{eliminaProdottoDaCarrello.php};
+				\item \textit{ottieniTotaleAggiornato.php}.
+			\end{itemize}
+		\subsection{Lato client}
+			All'interno della directory \textit{'js/'} è presente il file javascript \textit{'utility.js'}.
+			Qui troviamo le funzioni javascript che vengono chiamate all'interno delle pagine dell'applicazione.
+			Tra esse evidenziamo due categorie fondamentali:
+			\begin{itemize}
+				\item funzioni per modificare parametri di stile css. La modifica avviene mediante istruzioni del tipo:
+				\begin{lstlisting}[backgroundcolor=\color{coloreSfondoGrammatiche}, language=javascript]
+function nascondiPopup()
+{
+	popup = document.getElementById("popupErrore");
+	popup.style.marginRight = "-100%";
+	setTimeout(function(){popup.style.display = "none";}, 300);
+}
+				\end{lstlisting}
+				\item funzioni per chiamare in maniera asincrona script lato server, sfruttando la tecnologia AJAX. Ad ogni chiamata corrispondono due funzioni:
+					\begin{itemize}
+						\item funzione per invocare script lato server:
+						\begin{lstlisting}[backgroundcolor=\color{coloreSfondoGrammatiche}, language=javascript]
+function aggiornaTotale(id_cliente)
+{
+	input_crediti = document.getElementById('casellaCrediti');
+	
+	query_string = 'id_cliente=' + id_cliente 
+					+ '&crediti_utilizzati=' + input_crediti.value.trim();
+	
+	if ( input_crediti.value.trim() != "" )
+	{
+		xhr = new XMLHttpRequest();
+		xhr.open("POST", "ottieniTotaleAggiornato.php");
+		xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+		xhr.onload = function(){ callbackAggiornaTotale(xhr) };
+		xhr.send(query_string);
+	}
+}
+						\end{lstlisting}
+						\item funzione per interpretare il risultato proveniente dal server (funzione di callback):
+						\begin{lstlisting}[backgroundcolor=\color{coloreSfondoGrammatiche}, language=javascript]
+function callbackAggiornaTotale(xhr)
+{
+	if ( !xhr.responseText )
+		alert("Applicazione crediti fallita");
+	else
+	{
+		container_totale = document.getElementById('totale');
+		container_totale.innerHTML = xhr.responseText;
+	}
+}
+						\end{lstlisting}
+					\end{itemize}
+			\end{itemize}
+			\newpage
+	\section{Procedure d'installazione e elenco credenziali}
 		
 	\end{flushleft}
 \end{document}

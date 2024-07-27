@@ -170,7 +170,7 @@
             {
                 if ( $figli[$i]->getAttribute('id_cliente') == $id_cliente )
                 {
-                    while( $figli[$i]->childElementCount > 0 )
+                    while( count($figli[$i]->childNodes) > 0 )
                         $figli[$i]->removeChild($figli[$i]->firstChild);
                 }
 

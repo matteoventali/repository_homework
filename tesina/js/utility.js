@@ -418,12 +418,12 @@ function aggiornaTotale(id_cliente)
         xhr = new XMLHttpRequest();
         xhr.open("POST", "ottieniTotaleAggiornato.php");
         xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-        xhr.onload = function(){ callbackAggiornaTotale(xhr, input_crediti) }; // Definisco una funzione di callback implicita che chiama quella sotto
+        xhr.onload = function(){ callbackAggiornaTotale(xhr) }; // Definisco una funzione di callback implicita che chiama quella sotto
         xhr.send(query_string);
     }
 }
 
-function callbackAggiornaTotale(xhr, casella_input)
+function callbackAggiornaTotale(xhr)
 {
     // Ricevo vero o falso a seconda della riuscita dell'operazione
     // Notifica tramite alert in caso di errore
