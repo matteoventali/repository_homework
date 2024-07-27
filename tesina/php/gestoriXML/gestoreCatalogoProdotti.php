@@ -145,8 +145,8 @@
                 )
                 {
                     // Filtro per eventuale testo nel nome del prodotto
-                    $flag = str_contains(strtolower($prodotto->nome), strtolower($contenuto_testo));
-                    if ( $contenuto_testo == '' || ( $contenuto_testo != '' && $flag) )
+                    $flag = strpos(strtolower($prodotto->nome), strtolower($contenuto_testo));
+                    if ( $contenuto_testo == '' || ( $contenuto_testo != '' && !($flag === false)) )
                     {
                         // Aggiungo il prodotto corrente alla lista prodotti
                         array_push($lista_prodotti, $prodotto);
