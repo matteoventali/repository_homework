@@ -79,7 +79,7 @@
                             // Nuovo frammento
                             $frammento = str_replace("%CREDITI%", $richiesta->crediti_richiesti . " crediti", $frammento_richiesta_vuoto);
                             $frammento = str_replace("%CLIENTE%", $utente->nome . " " . $utente->cognome, $frammento);
-                            $frammento = str_replace("%DATA_RICHIESTA%", $richiesta->data, $frammento);
+                            $frammento = str_replace("%DATA_RICHIESTA%", date("d-m-Y", strtotime($richiesta->data)), $frammento);
                             $frammento = str_replace("%ID_RICHIESTA_XML%", $richiesta->id_richiesta, $frammento);
                             $frammento = str_replace("%AZIONE_FORM%", $_SERVER['PHP_SELF'], $frammento);
 
