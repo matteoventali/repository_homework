@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.24 (TeX Live 2022/Debian) (preloaded format=pdflatex 2023.12.5)  27 JUL 2024 11:22
+This is pdfTeX, Version 3.141592653-2.6-1.40.24 (TeX Live 2022/Debian) (preloaded format=pdflatex 2023.12.5)  27 JUL 2024 11:58
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -546,7 +546,7 @@ File: epstopdf-sys.cfg 2010/07/13 v1.3 Configuration of (r)epstopdf for TeX Liv
 e
 ))
 \c@lstlisting=\count308
-<./img//logo.png, id=277, 2730.2pt x 1134.2375pt>
+<./img//logo.png, id=289, 2730.2pt x 1134.2375pt>
 File: ./img//logo.png Graphic file (type png)
 <use ./img//logo.png>
 Package pdftex.def Info: ./img//logo.png  used on input line 101.
@@ -602,19 +602,19 @@ nput line 711.
 (../xmlCopia/schema/schemaRichiesteRicariche.xsd [31])
 (../xmlCopia/documenti/carrelli.xml) (../xmlCopia/schema/schemaCarrelli.xsd)
 [32] [33] [34] [35] [36]
-<./img//screenHomepage.png, id=1293, 1921.1775pt x 932.48375pt>
+<./img//screenHomepage.png, id=1308, 1921.1775pt x 932.48375pt>
 File: ./img//screenHomepage.png Graphic file (type png)
 <use ./img//screenHomepage.png>
 Package pdftex.def Info: ./img//screenHomepage.png  used on input line 873.
 (pdftex.def)             Requested size: 439.63362pt x 213.39566pt.
-<./img//screenHomepageCliente.png, id=1294, 1921.1775pt x 932.48375pt>
+<./img//screenHomepageCliente.png, id=1309, 1921.1775pt x 932.48375pt>
 File: ./img//screenHomepageCliente.png Graphic file (type png)
 <use ./img//screenHomepageCliente.png>
 Package pdftex.def Info: ./img//screenHomepageCliente.png  used on input line 8
 79.
 (pdftex.def)             Requested size: 439.63362pt x 213.39566pt.
  [37 <./img//screenHomepage.png> <./img//screenHomepageCliente.png>]
-<./img//screenRegistrazione.png, id=1302, 1710.39pt x 703.62875pt>
+<./img//screenRegistrazione.png, id=1317, 1710.39pt x 703.62875pt>
 File: ./img//screenRegistrazione.png Graphic file (type png)
 <use ./img//screenRegistrazione.png>
 Package pdftex.def Info: ./img//screenRegistrazione.png  used on input line 896
@@ -626,7 +626,7 @@ Overfull \hbox (4.0pt too wide) in paragraph at lines 896--897
  []
 
 [38 <./img//screenRegistrazione.png>]
-<./img//screenAreaPersonale.png, id=1308, 1824.8175pt x 700.6175pt>
+<./img//screenAreaPersonale.png, id=1323, 1824.8175pt x 700.6175pt>
 File: ./img//screenAreaPersonale.png Graphic file (type png)
 <use ./img//screenAreaPersonale.png>
 Package pdftex.def Info: ./img//screenAreaPersonale.png  used on input line 916
@@ -637,7 +637,7 @@ Overfull \hbox (4.0pt too wide) in paragraph at lines 916--917
 [][] 
  []
 
-<./img//screenModificaDati.png, id=1309, 1713.40125pt x 702.625pt>
+<./img//screenModificaDati.png, id=1324, 1713.40125pt x 702.625pt>
 File: ./img//screenModificaDati.png Graphic file (type png)
 <use ./img//screenModificaDati.png>
 Package pdftex.def Info: ./img//screenModificaDati.png  used on input line 929.
@@ -648,7 +648,7 @@ Overfull \hbox (4.0pt too wide) in paragraph at lines 929--930
 [][] 
  []
 
-<./img//screenCatalogo.png, id=1310, 1803.73875pt x 618.31pt>
+<./img//screenCatalogo.png, id=1325, 1803.73875pt x 618.31pt>
 File: ./img//screenCatalogo.png Graphic file (type png)
 <use ./img//screenCatalogo.png>
 Package pdftex.def Info: ./img//screenCatalogo.png  used on input line 936.
@@ -659,12 +659,12 @@ Overfull \hbox (4.0pt too wide) in paragraph at lines 936--937
  []
 
 [39 <./img//screenAreaPersonale.png> <./img//screenModificaDati.png>]
-<./img//screenProdotto.png, id=1317, 1788.6825pt x 692.5875pt>
+<./img//screenProdotto.png, id=1332, 1788.6825pt x 692.5875pt>
 File: ./img//screenProdotto.png Graphic file (type png)
 <use ./img//screenProdotto.png>
 Package pdftex.def Info: ./img//screenProdotto.png  used on input line 942.
 (pdftex.def)             Requested size: 440.89212pt x 170.71652pt.
-<./img//screenCarrello.png, id=1318, 1746.525pt x 606.265pt>
+<./img//screenCarrello.png, id=1333, 1746.525pt x 606.265pt>
 File: ./img//screenCarrello.png Graphic file (type png)
 <use ./img//screenCarrello.png>
 Package pdftex.def Info: ./img//screenCarrello.png  used on input line 946.
@@ -674,7 +674,7 @@ Overfull \hbox (4.0pt too wide) in paragraph at lines 946--947
 [][] 
  []
 
-<./img//screenFinalizzaAcquisto.png, id=1319, 1075.01625pt x 723.70375pt>
+<./img//screenFinalizzaAcquisto.png, id=1334, 1075.01625pt x 723.70375pt>
 File: ./img//screenFinalizzaAcquisto.png Graphic file (type png)
 <use ./img//screenFinalizzaAcquisto.png>
 Package pdftex.def Info: ./img//screenFinalizzaAcquisto.png  used on input line
@@ -682,12 +682,12 @@ Package pdftex.def Info: ./img//screenFinalizzaAcquisto.png  used on input line
 (pdftex.def)             Requested size: 284.51707pt x 184.94507pt.
 [40 <./img//screenCatalogo.png> <./img//screenProdotto.png> <./img//screenCarre
 llo.png>]
-<./img//screenRecensioni.png, id=1327, 847.165pt x 481.8pt>
+<./img//screenRecensioni.png, id=1342, 847.165pt x 481.8pt>
 File: ./img//screenRecensioni.png Graphic file (type png)
 <use ./img//screenRecensioni.png>
 Package pdftex.def Info: ./img//screenRecensioni.png  used on input line 959.
 (pdftex.def)             Requested size: 225.13106pt x 128.0374pt.
-<./img//screenDomande.png, id=1328, 962.3955pt x 264.99pt>
+<./img//screenDomande.png, id=1343, 962.3955pt x 264.99pt>
 File: ./img//screenDomande.png Graphic file (type png)
 <use ./img//screenDomande.png>
 Package pdftex.def Info: ./img//screenDomande.png  used on input line 965.
@@ -697,7 +697,7 @@ Overfull \hbox (4.0pt too wide) in paragraph at lines 965--966
  [][] 
  []
 
-<./img//screenInserimentoDomanda.png, id=1329, 471.56175pt x 269.20575pt>
+<./img//screenInserimentoDomanda.png, id=1344, 471.56175pt x 269.20575pt>
 File: ./img//screenInserimentoDomanda.png Graphic file (type png)
 <use ./img//screenInserimentoDomanda.png>
 Package pdftex.def Info: ./img//screenInserimentoDomanda.png  used on input lin
@@ -705,7 +705,7 @@ e 970.
 (pdftex.def)             Requested size: 348.87827pt x 199.16928pt.
 [41 <./img//screenFinalizzaAcquisto.png> <./img//screenRecensioni.png> <./img//
 screenDomande.png>]
-<./img//screenDomanda.png, id=1337, 950.3505pt x 329.43076pt>
+<./img//screenDomanda.png, id=1352, 950.3505pt x 329.43076pt>
 File: ./img//screenDomanda.png Graphic file (type png)
 <use ./img//screenDomanda.png>
 Package pdftex.def Info: ./img//screenDomanda.png  used on input line 976.
@@ -715,13 +715,13 @@ Overfull \hbox (4.0pt too wide) in paragraph at lines 976--977
  [][] 
  []
 
-<./img//screenInserimentoRisposta.png, id=1338, 475.7775pt x 337.26pt>
+<./img//screenInserimentoRisposta.png, id=1353, 475.7775pt x 337.26pt>
 File: ./img//screenInserimentoRisposta.png Graphic file (type png)
 <use ./img//screenInserimentoRisposta.png>
 Package pdftex.def Info: ./img//screenInserimentoRisposta.png  used on input li
 ne 981.
 (pdftex.def)             Requested size: 240.83562pt x 170.71652pt.
-<./img//screenValutazione.png, id=1339, 1616.0375pt x 271.0125pt>
+<./img//screenValutazione.png, id=1354, 1616.0375pt x 271.0125pt>
 File: ./img//screenValutazione.png Graphic file (type png)
 <use ./img//screenValutazione.png>
 Package pdftex.def Info: ./img//screenValutazione.png  used on input line 987.
@@ -733,13 +733,13 @@ Overfull \hbox (4.0pt too wide) in paragraph at lines 987--988
 
 [42 <./img//screenInserimentoDomanda.png> <./img//screenDomanda.png> <./img//sc
 reenInserimentoRisposta.png>]
-<./img//screenRichiestaRicarica.png, id=1347, 572.73975pt x 157.7895pt>
+<./img//screenRichiestaRicarica.png, id=1362, 572.73975pt x 157.7895pt>
 File: ./img//screenRichiestaRicarica.png Graphic file (type png)
 <use ./img//screenRichiestaRicarica.png>
 Package pdftex.def Info: ./img//screenRichiestaRicarica.png  used on input line
  993.
 (pdftex.def)             Requested size: 413.1064pt x 113.81102pt.
-<./img//screenGestioneRicariche.png, id=1348, 967.2135pt x 91.542pt>
+<./img//screenGestioneRicariche.png, id=1363, 967.2135pt x 91.542pt>
 File: ./img//screenGestioneRicariche.png Graphic file (type png)
 <use ./img//screenGestioneRicariche.png>
 Package pdftex.def Info: ./img//screenGestioneRicariche.png  used on input line
@@ -750,7 +750,7 @@ Overfull \hbox (4.0pt too wide) in paragraph at lines 998--999
  [][] 
  []
 
-<./img//screenInserimentoCatalogo.png, id=1349, 1062.97125pt x 337.86224pt>
+<./img//screenInserimentoCatalogo.png, id=1364, 1062.97125pt x 337.86224pt>
 File: ./img//screenInserimentoCatalogo.png Graphic file (type png)
 <use ./img//screenInserimentoCatalogo.png>
 Package pdftex.def Info: ./img//screenInserimentoCatalogo.png  used on input li
@@ -763,7 +763,7 @@ Overfull \hbox (4.0pt too wide) in paragraph at lines 1004--1005
 
 [43 <./img//screenValutazione.png> <./img//screenRichiestaRicarica.png> <./img/
 /screenGestioneRicariche.png> <./img//screenInserimentoCatalogo.png>]
-<./img//screenInserimentoProdotto.png, id=1359, 1019.60925pt x 412.54124pt>
+<./img//screenInserimentoProdotto.png, id=1374, 1019.60925pt x 412.54124pt>
 File: ./img//screenInserimentoProdotto.png Graphic file (type png)
 <use ./img//screenInserimentoProdotto.png>
 Package pdftex.def Info: ./img//screenInserimentoProdotto.png  used on input li
@@ -774,7 +774,7 @@ Overfull \hbox (4.0pt too wide) in paragraph at lines 1016--1017
  [][] 
  []
 
-<./img//screenProdottoGestore.png, id=1360, 1055.142pt x 430.60875pt>
+<./img//screenProdottoGestore.png, id=1375, 1055.142pt x 430.60875pt>
 File: ./img//screenProdottoGestore.png Graphic file (type png)
 <use ./img//screenProdottoGestore.png>
 Package pdftex.def Info: ./img//screenProdottoGestore.png  used on input line 1
@@ -785,7 +785,7 @@ Overfull \hbox (4.0pt too wide) in paragraph at lines 1026--1027
  [][] 
  []
 
-<./img//screenModificaProdotto.png, id=1361, 1020.81375pt x 413.1435pt>
+<./img//screenModificaProdotto.png, id=1376, 1020.81375pt x 413.1435pt>
 File: ./img//screenModificaProdotto.png Graphic file (type png)
 <use ./img//screenModificaProdotto.png>
 Package pdftex.def Info: ./img//screenModificaProdotto.png  used on input line 
@@ -796,7 +796,7 @@ Overfull \hbox (4.0pt too wide) in paragraph at lines 1030--1031
  [][] 
  []
 
-<./img//screenInserimentoOffertaSpeciale.png, id=1362, 1022.01825pt x 253.54726
+<./img//screenInserimentoOffertaSpeciale.png, id=1377, 1022.01825pt x 253.54726
 pt>
 File: ./img//screenInserimentoOffertaSpeciale.png Graphic file (type png)
 <use ./img//screenInserimentoOffertaSpeciale.png>
@@ -809,7 +809,7 @@ Overfull \hbox (4.0pt too wide) in paragraph at lines 1034--1035
  []
 
 [44 <./img//screenInserimentoProdotto.png> <./img//screenProdottoGestore.png>]
-<./img//screenClienti.png, id=1369, 1069.596pt x 265.59225pt>
+<./img//screenClienti.png, id=1384, 1069.596pt x 265.59225pt>
 File: ./img//screenClienti.png Graphic file (type png)
 <use ./img//screenClienti.png>
 Package pdftex.def Info: ./img//screenClienti.png  used on input line 1041.
@@ -819,7 +819,7 @@ Overfull \hbox (4.0pt too wide) in paragraph at lines 1041--1042
  [][] 
  []
 
-<./img//screenDettaglioCliente.png, id=1370, 690.78075pt x 293.29575pt>
+<./img//screenDettaglioCliente.png, id=1385, 690.78075pt x 293.29575pt>
 File: ./img//screenDettaglioCliente.png Graphic file (type png)
 <use ./img//screenDettaglioCliente.png>
 Package pdftex.def Info: ./img//screenDettaglioCliente.png  used on input line 
@@ -832,7 +832,7 @@ Overfull \hbox (4.0pt too wide) in paragraph at lines 1046--1047
 
 [45 <./img//screenModificaProdotto.png> <./img//screenInserimentoOffertaSpecial
 e.png> <./img//screenClienti.png>]
-<./img//screenModificaCliente.png, id=1378, 1017.8025pt x 407.72325pt>
+<./img//screenModificaCliente.png, id=1393, 1017.8025pt x 407.72325pt>
 File: ./img//screenModificaCliente.png Graphic file (type png)
 <use ./img//screenModificaCliente.png>
 Package pdftex.def Info: ./img//screenModificaCliente.png  used on input line 1
@@ -843,13 +843,13 @@ Overfull \hbox (4.0pt too wide) in paragraph at lines 1051--1052
  [][] 
  []
 
-<./img//screenInserimentoFaq.png, id=1379, 388.45125pt x 316.7835pt>
+<./img//screenInserimentoFaq.png, id=1394, 388.45125pt x 316.7835pt>
 File: ./img//screenInserimentoFaq.png Graphic file (type png)
 <use ./img//screenInserimentoFaq.png>
 Package pdftex.def Info: ./img//screenInserimentoFaq.png  used on input line 10
 57.
 (pdftex.def)             Requested size: 174.4458pt x 142.26378pt.
-<./img//screenElevaFaq.png, id=1380, 949.146pt x 364.36125pt>
+<./img//screenElevaFaq.png, id=1395, 949.146pt x 364.36125pt>
 File: ./img//screenElevaFaq.png Graphic file (type png)
 <use ./img//screenElevaFaq.png>
 Package pdftex.def Info: ./img//screenElevaFaq.png  used on input line 1062.
@@ -866,13 +866,13 @@ LaTeX Font Info:    Font shape `T1/cmtt/bx/n' in size <10.95007> not available
 (Font)              Font shape `T1/cmtt/m/n' tried instead on input line 1282.
  [52] [53] [54] (./tesina_Ventali_Rosso.aux)
 Package rerunfilecheck Info: File `tesina_Ventali_Rosso.out' has not changed.
-(rerunfilecheck)             Checksum: C4B08E48ABF9A592D87809FEF1BA4BCD;10155.
+(rerunfilecheck)             Checksum: 93DED4FD778ECE39A55DD19E4807E7C8;10673.
  ) 
 Here is how much of TeX's memory you used:
- 15791 strings out of 478040
- 255900 string characters out of 5840467
+ 15799 strings out of 478040
+ 256004 string characters out of 5840467
  1974330 words of memory out of 5000000
- 34598 multiletter control sequences out of 15000+600000
+ 34601 multiletter control sequences out of 15000+600000
  527456 words of font info for 61 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
  75i,9n,77p,421b,2349s stack positions out of 10000i,1000n,20000p,200000b,200000s
@@ -894,10 +894,10 @@ cm/cmmi8.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr1
 2.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb></
 usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/sh
 are/texlive/texmf-dist/fonts/type1/public/eurosym/feymr10.pfb>
-Output written on tesina_Ventali_Rosso.pdf (54 pages, 6499477 bytes).
+Output written on tesina_Ventali_Rosso.pdf (54 pages, 6501802 bytes).
 PDF statistics:
- 2270 PDF objects out of 2487 (max. 8388607)
- 1716 compressed objects within 18 object streams
- 1006 named destinations out of 1200 (max. 500000)
- 685 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 2291 PDF objects out of 2487 (max. 8388607)
+ 1735 compressed objects within 18 object streams
+ 1011 named destinations out of 1200 (max. 500000)
+ 709 words of extra memory for PDF output out of 10000 (max. 10000000)
 

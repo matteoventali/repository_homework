@@ -1324,6 +1324,41 @@ function callbackAggiornaTotale(xhr)
 			\end{itemize}
 			\newpage
 	\section{Procedure d'installazione e elenco credenziali}
+		L'installazione si articola in due fasi:
+		\begin{itemize}
+			\item installazione preliminare;
+			\item installazione intermedia.
+		\end{itemize}
+	
+		\subsection{Installazione preliminare}
+		I passaggi per eseguire l'installazione preliminare sono:
+		\begin{enumerate}
+			\item modificare i parametri di connessione al database nel file \textit{'php/lib/configurazione.php'};
+			\item lanciare dal browser lo script di installazione \textit{'php/lib/install.php'}.
+		\end{enumerate}
+		Alla fine dell'installazione preliminare tutti i file XML sono \underline{vuoti} ed esistono solamente gli 
+		account di un admin e di un gestore (vedi credenziali sotto).
 		
+		\subsection{Installazione intermedia}
+		Per eseguire l'installazione intermedia bisogna lanciare dal browser lo script di installazione \textit{'php/lib/popolazioneIntermedia.php'}.
+		Alla fine dell'installazione intermedia i file XML saranno popolati con alcune informazioni (prodotti, acquisti, interventi ...) e saranno presenti due account di tipo cliente (vedi credenziali sotto).
+		
+		\subsection{Elenco credenziali}
+		Le credenziali utilizzate nel sistema sono: \\
+		\begin{center}
+		\begin{tabular}{ | c | c | c| }
+			\hline
+				\textbf{Username} & \textbf{Password}  & \textbf{Tipo account} \\
+			\hline
+				matteo.ventali & unitecno & admin \\
+			\hline
+				stefano.rosso & unitecno & gestore \\
+			\hline
+				lionel.messi & unitecno & cliente \\
+			\hline
+				cristiano.ronaldo & unitecno & cliente \\
+			\hline
+		\end{tabular}
+		\end{center}
 	\end{flushleft}
 \end{document}
