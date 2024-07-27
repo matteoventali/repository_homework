@@ -212,7 +212,7 @@
                                 // Mostro il prodotto se il prodotto ha flag mostra attivo
                                 // oppure se il flag non e' attivo ma si e' loggati come gestore
                                 // (in questo modo poi il gestore potra' attivarlo dal suo dettaglio)
-                                if ( $lista_prodotti[$i]->mostra == 'true' || ($lista_prodotti[$i]->mostra == 'false' && $_SESSION["ruolo"] == 'G'))
+                                if ( $lista_prodotti[$i]->mostra == 'true' || ($lista_prodotti[$i]->mostra == 'false' && $sessione_attiva && $_SESSION["ruolo"] == 'G'))
                                 {
                                     $almenoUno = true;
                                     
