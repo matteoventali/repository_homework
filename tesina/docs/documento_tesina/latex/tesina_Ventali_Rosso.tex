@@ -244,7 +244,7 @@
 				\item elevare una domanda dei clienti alle FAQ, con relativa risposta.
 			\end{itemize}
 		
-		\subsection{Note}
+			\subsection{Note}
 			\subsubsection{Portafogli} \label{Portafogli}
 				Nell'applicazione, associati ad ogni cliente, verranno gestiti due portafogli:
 				\begin{itemize}
@@ -365,7 +365,7 @@
 					$ g = P \cdot \frac{W}{100} $
 				\end{center}
 
-		\subsection{Casi d'uso} \label{CasiUso}
+			\subsection{Casi d'uso} \label{CasiUso}
 			\subsubsection{Registrazione}
 				\textbf{Precondizioni}
 				\begin{itemize}
@@ -426,7 +426,8 @@
 				\item il cliente accede al carrello;
 				\item il cliente sceglie l'ammontare di crediti bonus (se possibile) da utilizzare per usufruire dello sconto aggiuntivo
 				      sul totale del carrello (senza prendere in considerazione i prodotti in offerta speciale);
-				\item il cliente modifica eventualmente l'indirizzo di consegna;
+				\item il cliente modifica eventualmente l'indirizzo di consegna. Per default viene utilizzato quello di residenza (inserito 
+					  in fase di registrazione);
 				\item il cliente finalizza l'acquisto.
 			\end{enumerate}
 			\textbf{Postcondizioni}
@@ -570,7 +571,7 @@
 			\textbf{Precondizioni}
 			\begin{itemize}
 				\item l'utente ha effettuato il login come gestore;
-				\item il gestore ha acceduto al catalogo e selezionato un prodotto;
+				\item il gestore ha acceduto al catalogo e selezionato un prodotto.
 			\end{itemize}
 			\textbf{Eventi}
 			\begin{enumerate}
@@ -595,7 +596,7 @@
 				\item l'utente accede all'elenco degli utenti;
 				\item l'utente seleziona il cliente che intende visualizzare;
 				\item l'utente viene reindirizzato alla pagina specifica del cliente dove visiona i suoi dati.
-					  L'admin ha facoltà di bannare (o riattivare se già bannato) il cliente in oggetto.
+					  L'admin ha facoltà di disattivare (o riattivare se già disattivato) l'account del cliente in oggetto.
 					  L'admin ha facoltà di modificare i dati del cliente;
 				\item in caso di modifica dei dati, l'admin viene reindirizzato ad una pagina con una form precompilata
 					  da modificare;
@@ -671,7 +672,7 @@
 					\item id $\rightarrow$ chiave primaria della tabella generata in maniera automatica dal dbms;
 					\item nome $\rightarrow$ nome dell'utente;
 					\item cognome $\rightarrow$ cognome dell'utente;
-					\item indirizzo $\rightarrow$ indirizzo di residenza dell'utente;
+					\item indirizzo $\rightarrow$ indirizzo di residenza dell'utente; 
 					\item citta $\rightarrow$ città di residenza dell'utente;
 					\item cap $\rightarrow$ cap della città di residenza dell'utente;
 					\item reputazione $\rightarrow$ punteggio di reputazione dell'utente;
@@ -854,14 +855,14 @@ create table UTENTI(
 			\subsubsection{Carrelli} 
 			\begin{itemize}
 				\item \textbf{carrelli $\rightarrow$ carrello[id\_cliente] } l'attributo id\_cliente dell'elemento carrello permette di specificare il cliente a cui si riferisce il carrello (sezione Clienti di \ref{CategorieUtenti});
-				\item \textbf{carrelli $\rightarrow$ carrello $\rightarrow$ prodotto} l'elemento prodotto dell'elemento carrello permette di specificare il prodotto inserito nel carrello (sezione Clienti di \ref{CategorieUtenti});
+				\item \textbf{carrelli $\rightarrow$ carrello $\rightarrow$ prodotto} l'elemento prodotto dell'elemento carrello permette di specificare il prodotto inserito nel carrello (sezione Clienti di \ref{CategorieUtenti}).
 			\end{itemize}
 		\newpage
 		
 	
 	\section{Manuale utente}
 		\graphicspath{{"./img/"}}
-		In questo capitolo vengono descritte le modalità di utilizzo delle funzionalità offerte agli utenti del sistema, come riportato nei casi d'uso. \ref{CasiUso}
+		In questo capitolo vengono descritte le modalità di utilizzo delle funzionalità offerte agli utenti del sistema, come riportato nei casi d'uso (\ref{CasiUso}).
 			\subsection{Layout}
 				Ogni pagina dell'applicazione condivide la stessa struttura costituita da:
 				\begin{itemize}
@@ -872,8 +873,8 @@ create table UTENTI(
 					\centering
 					\includegraphics[height=7.5cm, frame=2pt]{"screenHomepage.png"}
 				\end{figure}
-				La sidebar compare/scompare al click del bottone in alto a sinistra e mostra le opzioni possibili
-				in base al tipo di utente loggato.
+				La sidebar compare/scompare al click del bottone in alto a sinistra e mostra le opzioni disponibili,
+				che variano in base al tipo di utente loggato (\ref{CategorieUtenti}).
 				\begin{figure}[H]
 					\centering
 					\includegraphics[height=7.5cm, frame=2pt]{"screenHomepageCliente.png"}
@@ -910,20 +911,19 @@ create table UTENTI(
 					\item saldo del portafoglio standard;										
 					\item saldo del portafoglio bonus;
 					\item username;
-					\item mail (stringa di caratteri alfanumerici che rispetta il formato standard);
+					\item mail (stringa di caratteri alfanumerici che rispetta il formato standard).
 				\end{itemize}
 				\begin{figure}[H]
 					\includegraphics[width=\textwidth, frame=2pt]{"screenAreaPersonale.png"}
 				\end{figure}
 
-				
 				Tramite il pulsante "\textit{Modifica dati}" viene data la possibilità all'utente di modificare i seguenti dati:
 				\begin{itemize}
 					\item nome;
 					\item cognome;
 					\item indirizzo;
 					\item città;
-					\item CAP (codice numerico di 5 cifre);
+					\item CAP (codice numerico di 5 cifre).
 				\end{itemize}
 				\begin{figure}[H]
 					\includegraphics[width=\textwidth, frame=2pt]{"screenModificaDati.png"}
@@ -941,7 +941,7 @@ create table UTENTI(
 					\centering
 					\includegraphics[height=6cm, frame=2pt]{"screenProdotto.png"}	
 				\end{figure}
-				Tramite il pulsante \textit{"Aggiungi al carrello"} il cliente può inserire il prodotto in oggetto nel carrello
+				Tramite il pulsante \textit{"Aggiungi al carrello"} il cliente può inserire il prodotto in oggetto nel carrello.
 				\begin{figure}[H]
 					\includegraphics[width=\textwidth, frame=2pt]{"screenCarrello.png"}	
 				\end{figure}
@@ -958,8 +958,9 @@ create table UTENTI(
 					\centering
 					\includegraphics[height=4.5cm, frame=2pt]{"screenRecensioni.png"}	
 				\end{figure}
+			
 			\subsection{Inserimento domande e risposte}
-				Nella sezione domande, il cliente visualizza l'elenco delle domande.
+				Nella sezione \textit{Domande}, il cliente visualizza l'elenco delle domande.
 				\begin{figure}[H]
 					\centering
 					\includegraphics[width=\textwidth, frame=2pt]{"screenDomande.png"}	
@@ -980,12 +981,14 @@ create table UTENTI(
 					\centering
 					\includegraphics[height=6cm, frame=2pt]{"screenInserimentoRisposta.png"}	
 				\end{figure}
+			
 			\subsection{Valutazioni interventi}
 				Ogni utente ha la possibilità di valutare domande, risposte e recensioni mediante le stelline.
 				\begin{figure}[H]
 					\centering
 					\includegraphics[width=\textwidth, frame=2pt]{"screenValutazione.png"}	
 				\end{figure}
+			
 			\subsection{Ricariche portafoglio standard}
 				Il cliente nella pagina di richieste ricarica può inoltrare agli admin una nuova richiesta di ricarica.
 				\begin{figure}[H]
@@ -997,13 +1000,14 @@ create table UTENTI(
 					\centering
 					\includegraphics[width=\textwidth, frame=2pt]{"screenGestioneRicariche.png"}	
 				\end{figure}
+			
 			\subsection{Gestione prodotti}
 				Il gestore, una volta acceduto al catalogo, ha la possibilità di aggiungere un nuovo prodotto.
 				\begin{figure}[H]
 					\centering
 					\includegraphics[width=\textwidth, frame=2pt]{"screenInserimentoCatalogo.png"}	
 				\end{figure}
-				Per effettuare l'inserimento del prodotto vengono richiesti le seguenti informazioni:
+				Per effettuare l'inserimento del prodotto vengono richieste le seguenti informazioni:
 					\begin{itemize}
 						\item nome;
 						\item prezzo di listino;
@@ -1050,13 +1054,14 @@ create table UTENTI(
 					\centering
 					\includegraphics[width=\textwidth, frame=2pt]{"screenModificaCliente.png"}	
 				\end{figure}
+			
 			\subsection{Gestione FAQ}
 				Gli admin e i gestori hanno la possibilità di inserire nuove FAQ
 				\begin{figure}[H]
 					\centering
 					\includegraphics[height=5cm, frame=2pt]{"screenInserimentoFaq.png"}	
 				\end{figure}
-				o elevare una domanda esistente a FAQ
+				o elevare una domanda esistente a FAQ.
 				\begin{figure}[H]
 					\centering
 					\includegraphics[width=\textwidth, frame=2pt]{"screenElevaFaq.png"}	
@@ -1080,7 +1085,7 @@ create table UTENTI(
 				\begin{itemize}
 					\item \textit{configurazione.php} e \textit{connection.php} $\rightarrow$ permettono di collegarsi al database;
 					\item \textit{libreriaDB.php} $\rightarrow$ contiene funzioni utilizzate dagli altri script dell'applicazione per
-																inserire/modificare/eliminare informazioni dal database
+																inserire/modificare/eliminare informazioni dal database;
 					\item \textit{cambiaStatoCliente.php} $\rightarrow$ permette di attivare/disattivare l'account di un cliente;
 					\item \textit{verificaSessioneAttiva.php} $\rightarrow$ utilizzato ricorrentemente nell'applicazione per verificare
 						se esista una sessione valida per un utente del sistema. La verifica viene fatta sfruttando le variabili di sessione ed eseguendo la query mostrata qui di seguito.
@@ -1340,7 +1345,7 @@ function callbackAggiornaTotale(xhr)
 		account di un admin e di un gestore (vedi credenziali sotto).
 		
 		\subsection{Installazione intermedia}
-		Per eseguire l'installazione intermedia bisogna lanciare dal browser lo script di installazione \textit{'php/lib/popolazioneIntermedia.php'}.
+		Per eseguire l'installazione intermedia bisogna lanciare dal browser lo script di installazione \textit{'php/lib/popolazioneIntermedia.php'}, \underline{dopo} aver eseguito l'installazione preliminare.\\
 		Alla fine dell'installazione intermedia i file XML saranno popolati con alcune informazioni (prodotti, acquisti, interventi ...) e saranno presenti due account di tipo cliente (vedi credenziali sotto).
 		
 		\subsection{Elenco credenziali}
