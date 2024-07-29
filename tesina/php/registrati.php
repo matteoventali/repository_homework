@@ -39,7 +39,7 @@
                 // Verifico che i dati siano corretti
 
                 // Regex per il controllo della mail e del cap
-                $regex_mail = '/^([a-z]+)(_|[.]|-){0,1}(([a-z]|\d)+)@([a-z])*[.]([a-z])*$/';
+                $regex_mail = '/^([a-z]+)((_|[.]|-)(([a-z]|\d)+)){0,1}@([a-z])*[.]([a-z])*$/';
                 $regex_cap = '/^\d\d\d\d\d$/';
                 $email_valida = preg_match($regex_mail, $_POST["mail"]);
                 $cap_valido = preg_match($regex_cap, $_POST["cap"]);
